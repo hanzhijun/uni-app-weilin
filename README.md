@@ -1,2 +1,2 @@
-# nui-app-weilin
-nui-app-weilin
+# uni-app-weilin
+uni-app-weilin
