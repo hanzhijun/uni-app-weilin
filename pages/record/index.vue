@@ -471,7 +471,7 @@
         width: 700rpx;
         height: 60rpx;
         background-color: #eee;
-        margin: 0 25rpx;
+        margin: 20upx 25upx 0;
         border: 1px solid #eee;
         text-align: center;
     }
@@ -492,7 +492,7 @@
     .record-liebiao-ul {
         display: block;
         width: 700rpx;
-        margin: 20rpx 25rpx 50rpx;
+        margin: 0 25rpx 50rpx;
         overflow: hidden;
         border: 1px solid #eee;
     }
@@ -551,16 +551,19 @@
     }
 
     .qiun-title-bar {
-        width: 96%;
-        padding: 10upx 2%;
+        width: 710upx;
+        padding: 30upx 0 20upx;
         flex-wrap: nowrap;
+        border-bottom: 1upx solid #f5f5f5;
+        margin: 0 auto;
     }
 
     .qiun-title-dot-light {
-        border-left: 10upx solid #0ea391;
+        border-left: 10upx solid #0099e9;
         padding-left: 10upx;
         font-size: 32upx;
-        color: #000000
+        color: #333;
+        line-height: 40upx;
     }
 
     /* 通用样式 */
