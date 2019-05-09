@@ -1,0 +1,51 @@
+
+.code-outside .login-line {
+    overflow: hidden;
+    padding: 100rpx 0 20rpx;
+}
+.code-outside .section-title {
+    display: inline-block;
+    width: 200rpx;
+    line-height: 68rpx;
+    float: left;
+    font-size: 14px;
+    text-align: right;
+}
+.code-outside .text-note {
+    text-align: center;
+    font-size: 22rpx;
+    color: #999;
+}
+.code-outside .section-input {
+    display: inline-block;
+    width: 300rpx;
+    height: 66rpx;
+    line-height: 66rpx;
+    border: 1px solid #0099e9;
+    border-radius: 3px;
+    float: left;
+    font-size: 14px;
+    padding-left: 20rpx;
+}
+.code-outside .section-code {
+    width: 66rpx;
+    height: 66rpx;
+    float: left;
+    margin-left: 30rpx;
+}
+.code-outside .section-center {
+    text-align: center;
+    padding-top: 350rpx;
+}
+.code-outside .section-post {
+    display: inline-block;
+    width: 500rpx;
+    font-size: 16px;
+    background-color: #0099e9;
+    color: #fff;
+    margin: 0 auto;
+}
+.code-outside .section-post:active {
+    background-color: #0082c5;
+}
+

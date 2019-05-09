@@ -1,0 +1,127 @@
+
+page {
+    height: auto;
+}
+view {
+    display: block;
+    text-align: center;
+}
+.xin-outbar {
+    width: 440rpx;
+    height: 440rpx;
+    margin: 120rpx auto 0;
+    position: relative;
+}
+.xin-outbar .bj-img {
+    width: 440rpx;
+    height: 440rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.xin-outbar .bpm {
+    width: 440rpx;
+    line-height: 44rpx;
+    font-size: 26rpx;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 80rpx;
+    z-index: 2;
+}
+.xin-outbar .text-xintiao {
+    width: 220rpx;
+    height: 60rpx;
+    font-size: 54rpx;
+    color: #fff;
+    text-align: right;
+    position: absolute;
+    left: 0;
+    top: 102rpx;
+    z-index: 2;
+}
+.xin-outbar .icon-xin {
+    width: 36rpx;
+    height: 36rpx;
+    position: absolute;
+    left: 236rpx;
+    top: 135rpx;
+    z-index: 2;
+}
+.xin-outbar .text-huxi {
+    width: 220rpx;
+    height: 60rpx;
+    font-size: 54rpx;
+    color: #fff;
+    text-align: right;
+    position: absolute;
+    left: 0;
+    top: 235rpx;
+    z-index: 2;
+}
+.xin-outbar .icon-huxi {
+    width: 36rpx;
+    height: 36rpx;
+    position: absolute;
+    left: 236rpx;
+    top: 264rpx;
+    z-index: 2;
+}
+.xin-outbar .ci {
+    width: 440rpx;
+    line-height: 44rpx;
+    font-size: 26rpx;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 315rpx;
+    z-index: 2;
+}
+.bed-outbar .bed-state {
+    font-size: 30rpx;
+    color: #0099e9;
+    padding: 50rpx 0 40rpx;
+    overflow: hidden;
+}
+.bed-outbar image {
+    width: 400rpx;
+    height: 278rpx;
+}
+.btn-bar {
+    width: 750rpx;
+    height: 120rpx;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+}
+.btn-bar .btn-k {
+    width: 300rpx;
+    height: 80rpx;
+    border-radius: 80rpx;
+    background-color: #0099e9;
+    float: left;
+    margin-left: 50rpx;
+    overflow: hidden;
+}
+.btn-bar .btn-k:active {
+    opacity: 0.7;
+}
+.btn-bar .btn-k image {
+    width: 40rpx;
+    height: 40rpx;
+    float: left;
+    margin: 20rpx 20rpx 0 56rpx;
+}
+.btn-bar .btn-k text {
+    line-height: 40rpx;
+    display: inline-block;
+    font-size: 32rpx;
+    color: #ffdc9e;
+    float: left;
+    margin-top: 20rpx;
+}
+
+

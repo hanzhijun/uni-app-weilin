@@ -1,0 +1,71 @@
+
+.set-outside {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ededed;
+    overflow-y: auto;
+}
+.set-outside .image {
+    width: 650rpx;
+    height: 600rpx;
+    margin: 100rpx auto 0;
+}
+.setting-section {
+    width: 730rpx;
+    overflow: hidden;
+    background-color: #fff;
+    margin: 0 10rpx 10rpx;
+}
+.setting-section .setting-auto {
+    height: 80rpx;
+    border-bottom: 1px solid #eee;
+}
+.setting-section .setting-auto text {
+    display: inline-block;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #000;
+    border-left: 3px solid #0099e9;
+    float: left;
+    margin: 20rpx 0 0 10rpx;
+    padding-left: 20rpx;
+}
+.setting-section .wx-switch-input {
+    float: right;
+    margin: 10rpx 20rpx 0 0;
+    width: 82rpx !important;
+    height: 40rpx !important;
+}
+.setting-section .wx-switch-input::before {
+    width: 80rpx !important;
+    height: 36rpx !important;
+}
+.setting-section .wx-switch-input::after {
+    width: 38rpx !important;
+    height: 36rpx !important;
+}
+.uni-list {
+    position: static;
+}
+.warn-note {
+    display: block;
+    padding: 10rpx 12rpx 10rpx 26rpx;
+    font-size: 22rpx;
+    color: #999;
+    line-height: 36rpx;
+}
+.input-num {
+    width: 200rpx;
+    height: 36rpx;
+    border: 1rpx solid #f5f5f5;
+    font-size: 24rpx;
+    padding-left: 15rpx;
+    line-height: 36rpx;
+    margin-left: 15rpx;
+}
+.uni-list-cell-left {
+    font-size: 24rpx;
+    min-width: 180rpx;
+}
+

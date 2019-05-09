@@ -1,0 +1,31 @@
+
+.detail_outside .logo {
+    text-align: center;
+    padding: 150rpx 0 0 0;
+}
+.detail_outside image {
+    width: 120rpx;
+    height: 120rpx;
+    margin: 0 auto;
+}
+.detail_outside ._ul,
+.detail_outside ._li {
+    display: block;
+    font-size: 24rpx;
+    line-height: 40rpx;
+    text-align: center;
+}
+.detail_outside ._ul {
+    padding: 460rpx 0 0 0;
+}
+.text-b {
+    display: block;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 15rpx;
+    font-size: 18rpx;
+    color: #999;
+    text-align: center;
+}
+

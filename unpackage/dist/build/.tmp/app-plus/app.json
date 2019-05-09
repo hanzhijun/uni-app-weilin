@@ -1,0 +1,24 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/index",
+    "pages/code/index",
+    "pages/detail/index",
+    "pages/record/index",
+    "pages/setting/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "微麟守护者",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "微麟守护者",
+  "compilerVersion": "1.9.4",
+  "usingComponents": {}
+}
