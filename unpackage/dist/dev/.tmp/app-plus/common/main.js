@@ -82,7 +82,7 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch() {
-    console.log('App Launch', " at App.vue:4");
+    // console.log('App Launch');
 
     // 锁定屏幕方向
     plus.screen.lockOrientation('portrait-primary'); //锁定
@@ -95,7 +95,7 @@ __webpack_require__.r(__webpack_exports__);
         imei: plus.device.imei },
 
       success: function success(res) {
-        console.log('success', res, " at App.vue:17");
+        // console.log('success', res);
         if (res.statusCode == 200 && res.data.isUpdate) {
           var openUrl = plus.os.name === 'iOS' ? res.data.iOS : res.data.Android;
           // 提醒用户更新
@@ -114,10 +114,10 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   onShow: function onShow() {
-    console.log('App Show', " at App.vue:36");
+    // console.log('App Show')
   },
   onHide: function onHide() {
-    console.log('App Hide', " at App.vue:39");
+    // console.log('App Hide')
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

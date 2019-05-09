@@ -23,9 +23,9 @@
     width: 100%;
     position: fixed;
     left: 0;
-    bottom: 10px;
-    font-size: 20rpx;
+    bottom: 15rpx;
+    font-size: 18rpx;
     color: #999;
-    text-align: center
+    text-align: center;
 }
 

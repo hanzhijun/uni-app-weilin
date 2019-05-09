@@ -13,6 +13,12 @@
         	}
         },
         {
+        	"path": "pages/code/index",
+        	"style": {
+        		"navigationBarTitleText": "添加设备"
+        	}
+        },
+        {
         	"path": "pages/detail/index", 
         	"style": {
         		"navigationBarTitleText": "微麟守护"

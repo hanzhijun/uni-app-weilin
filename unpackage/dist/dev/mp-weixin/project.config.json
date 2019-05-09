@@ -1,33 +1,32 @@
 {
-	"description": "项目配置文件。",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"postcss": true,
-		"newFeature": true
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.6.4",
-	"appid": "wxf5ccbd7ab42822e7",
-	"projectname": "%E5%BE%AE%E9%BA%9F%E5%AE%88%E6%8A%A4%E8%80%85",
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": []
-		}
-	}
+  "description": "项目配置文件。",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "postcss": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.6.4",
+  "appid": "wxf5ccbd7ab42822e7",
+  "projectname": "微麟守护者",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": []
+    }
+  }
 }

@@ -66,5 +66,6 @@
 }
 .uni-list-cell-left {
     font-size: 24rpx;
+    min-width: 180rpx;
 }
 
