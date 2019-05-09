@@ -3,6 +3,9 @@
     overflow: hidden;
     padding: 20rpx 0;
 }
+.login-line-first {
+    padding-top: 100rpx;
+}
 .section-title {
     display: inline-block;
     width: 200rpx;

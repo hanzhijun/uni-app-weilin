@@ -1,6 +1,6 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
 
-/***/ "../../../../work/uni-app-weilin/common/util.js":
+/***/ "../../../../../work/uni-app-weilin/common/util.js":
 /*!*********************************************!*\
   !*** D:/work/uni-app-weilin/common/util.js ***!
   \*********************************************/
@@ -10,10 +10,11 @@
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {var baseHost = 'https://api.darma.cn/mattress';
 var imgUrl = 'http://www.hanjiaxin.cn/images/';
-var deviceNos = '641743000773';
+// var deviceNos = '641743000773'
+
 /**
-                                 * 报警规则初始化值
-                                 */
+ * 报警规则初始化值
+ */
 var warnRule = {
   device: false, // 是否监控离床
   deviceTimes: '10', // 离床持续时间
@@ -29,10 +30,11 @@ var warnRule = {
   motionTimes: '5', // 大幅体动持续时间
   motionStart: '0:00', // 体动监控时段开始
   motionEnd: '23:59' // 体动监控时段结束
-};
-/**
-    * 报警状态记录
-    */
+
+
+  /**
+   * 报警状态记录
+   */ };
 var warnState = {
   warnNing: 0, // 是否正在报警
   warnNo: null, // 报警类型 0离床、1心率、2呼吸率、3体动
@@ -41,86 +43,14 @@ var warnState = {
   warnBreathTime: null, // 心率报警记录点时间戳
   warnMotionTime: null, // 心率报警记录点时间戳
   warningText: '' // 报警提示语
-};
-
-function formatTime(time) {
-  if (typeof time !== 'number' || time < 0) {
-    return time;
-  }
-
-  var hour = parseInt(time / 3600);
-  time = time % 3600;
-  var minute = parseInt(time / 60);
-  time = time % 60;
-  var second = time;
-
-  return [hour, minute, second].map(function (n) {
-    n = n.toString();
-    return n[1] ? n : '0' + n;
-  }).join(':');
-}
-
-function formatLocation(longitude, latitude) {
-  if (typeof longitude === 'string' && typeof latitude === 'string') {
-    longitude = parseFloat(longitude);
-    latitude = parseFloat(latitude);
-  }
-
-  longitude = longitude.toFixed(2);
-  latitude = latitude.toFixed(2);
-
-  return {
-    longitude: longitude.toString().split('.'),
-    latitude: latitude.toString().split('.') };
-
-}
-var dateUtils = {
-  UNITS: {
-    '年': 31557600000,
-    '月': 2629800000,
-    '天': 86400000,
-    '小时': 3600000,
-    '分钟': 60000,
-    '秒': 1000 },
-
-  humanize: function humanize(milliseconds) {
-    var humanize = '';
-    for (var key in this.UNITS) {
-      if (milliseconds >= this.UNITS[key]) {
-        humanize = Math.floor(milliseconds / this.UNITS[key]) + key + '前';
-        break;
-      }
-    }
-    return humanize || '刚刚';
-  },
-  format: function format(dateStr) {
-    var date = this.parse(dateStr);
-    var diff = Date.now() - date.getTime();
-    if (diff < this.UNITS['天']) {
-      return this.humanize(diff);
-    }
-    var _format = function _format(number) {
-      return number < 10 ? '0' + number : number;
-    };
-    return date.getFullYear() + '/' + _format(date.getMonth() + 1) + '/' + _format(date.getDay()) + '-' +
-    _format(date.getHours()) + ':' + _format(date.getMinutes());
-  },
-  parse: function parse(str) {//将"yyyy-mm-dd HH:MM:ss"格式的字符串，转化为一个Date对象
-    var a = str.split(/[^0-9]/);
-    return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
-  }
 
 
   /**
-     * 设置添加本地local storage缓存
-     * @param key
-     * @param value
-     */ };
+   * 设置添加本地local storage缓存
+   * @param key
+   * @param value
+   */ };
 function setCookie(key, value) {
-  uni.setStorageSync(key, value);
-}
-
-function setStorage(key, value) {
   uni.setStorageSync(key, value);
 }
 
@@ -130,10 +60,6 @@ function setStorage(key, value) {
    * @returns {*}
    */
 function getCookie(key) {
-  return uni.getStorageSync(key);
-}
-
-function getStorage(key) {
   return uni.getStorageSync(key);
 }
 
@@ -193,9 +119,10 @@ function myAjax2(type, url, data, res, reg) {
     } });
 
 }
+
 /**
    * 获取报警规则缓存
-   * @param {Object} that
+   * @param {Object} that 作用域
    */
 function getWarnCookie(that) {
   var warnRule = JSON.parse(getCookie('warnRule'));
@@ -217,7 +144,7 @@ function getWarnCookie(that) {
 
 /**
    * 设置报警规则缓存
-   * @param {Object} that
+   * @param {Object} that 作用域
    */
 function setWarnCookie(that) {
   var warnRule = {
@@ -241,8 +168,8 @@ function setWarnCookie(that) {
 
 /**
    * 关闭报警
-   * @param {Object} that
-   * @param {Object} backgroundAudioManager
+   * @param {Object} that 作用域
+   * @param {Object} backgroundAudioManager 背景音乐
    */
 function audioPause(that, backgroundAudioManager) {
   backgroundAudioManager.pause();
@@ -260,9 +187,10 @@ function audioPause(that, backgroundAudioManager) {
   warnState.warnNo = null;
   changeWarn(that);
 }
+
 /**
    * 同步报警状态值
-   * @param {Object} that
+   * @param {Object} that 作用域
    */
 function changeWarn(that) {
   that.warnNing = warnState.warnNing;
@@ -276,8 +204,8 @@ function changeWarn(that) {
 
 /**
    * toast提示弹窗
-   * @param {Object} that
-   * @param {Object} text
+   * @param {Object} that 作用域
+   * @param {Object} text 提示文字
    */
 function showToastBox(that, text) {
   that.toastTxt = text;
@@ -293,13 +221,8 @@ module.exports = {
   imgUrl: imgUrl,
   warnRule: warnRule,
   warnState: warnState,
-  formatTime: formatTime,
-  formatLocation: formatLocation,
-  dateUtils: dateUtils,
   setCookie: setCookie,
   getCookie: getCookie,
-  setStorage: setStorage,
-  getStorage: getStorage,
   myAjax: myAjax,
   myAjax2: myAjax2,
   getWarnCookie: getWarnCookie,
@@ -311,7 +234,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ "../../../../work/uni-app-weilin/components/wx-charts/wxcharts.js":
+/***/ "../../../../../work/uni-app-weilin/components/wx-charts/wxcharts.js":
 /*!***************************************************************!*\
   !*** D:/work/uni-app-weilin/components/wx-charts/wxcharts.js ***!
   \***************************************************************/
@@ -2917,7 +2840,7 @@ module.exports = Charts;
 
 /***/ }),
 
-/***/ "../../../../work/uni-app-weilin/main.js":
+/***/ "../../../../../work/uni-app-weilin/main.js":
 /*!**************************************!*\
   !*** D:/work/uni-app-weilin/main.js ***!
   \**************************************/
@@ -2925,9 +2848,9 @@ module.exports = Charts;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ "../../../../work/uni-app-weilin/pages.json");
+/* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ "../../../../../work/uni-app-weilin/pages.json");
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "../../../../work/uni-app-weilin/App.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "../../../../../work/uni-app-weilin/App.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 _vue.default.config.productionTip = false;
 
@@ -2950,7 +2873,7 @@ createApp(app).$mount();
 
 /***/ }),
 
-/***/ "../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Fcode%2Findex\"}":
+/***/ "../../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Fcode%2Findex\"}":
 /*!**********************************************************************!*\
   !*** D:/work/uni-app-weilin/main.js?{"page":"pages%2Fcode%2Findex"} ***!
   \**********************************************************************/
@@ -2958,16 +2881,16 @@ createApp(app).$mount();
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../work/uni-app-weilin/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../work/uni-app-weilin/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/code/index.vue */ "../../../../work/uni-app-weilin/pages/code/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/code/index.vue */ "../../../../../work/uni-app-weilin/pages/code/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Fdetail%2Findex\"}":
+/***/ "../../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Fdetail%2Findex\"}":
 /*!************************************************************************!*\
   !*** D:/work/uni-app-weilin/main.js?{"page":"pages%2Fdetail%2Findex"} ***!
   \************************************************************************/
@@ -2975,16 +2898,16 @@ createPage(_index.default);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../work/uni-app-weilin/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../work/uni-app-weilin/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/detail/index.vue */ "../../../../work/uni-app-weilin/pages/detail/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/detail/index.vue */ "../../../../../work/uni-app-weilin/pages/detail/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Findex%2Findex\"}":
+/***/ "../../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Findex%2Findex\"}":
 /*!***********************************************************************!*\
   !*** D:/work/uni-app-weilin/main.js?{"page":"pages%2Findex%2Findex"} ***!
   \***********************************************************************/
@@ -2992,16 +2915,16 @@ createPage(_index.default);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../work/uni-app-weilin/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../work/uni-app-weilin/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ "../../../../work/uni-app-weilin/pages/index/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ "../../../../../work/uni-app-weilin/pages/index/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Flogin%2Findex\"}":
+/***/ "../../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Flogin%2Findex\"}":
 /*!***********************************************************************!*\
   !*** D:/work/uni-app-weilin/main.js?{"page":"pages%2Flogin%2Findex"} ***!
   \***********************************************************************/
@@ -3009,16 +2932,16 @@ createPage(_index.default);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../work/uni-app-weilin/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../work/uni-app-weilin/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/login/index.vue */ "../../../../work/uni-app-weilin/pages/login/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/login/index.vue */ "../../../../../work/uni-app-weilin/pages/login/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Frecord%2Findex\"}":
+/***/ "../../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Frecord%2Findex\"}":
 /*!************************************************************************!*\
   !*** D:/work/uni-app-weilin/main.js?{"page":"pages%2Frecord%2Findex"} ***!
   \************************************************************************/
@@ -3026,16 +2949,16 @@ createPage(_index.default);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../work/uni-app-weilin/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../work/uni-app-weilin/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/record/index.vue */ "../../../../work/uni-app-weilin/pages/record/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/record/index.vue */ "../../../../../work/uni-app-weilin/pages/record/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Fsetting%2Findex\"}":
+/***/ "../../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Fsetting%2Findex\"}":
 /*!*************************************************************************!*\
   !*** D:/work/uni-app-weilin/main.js?{"page":"pages%2Fsetting%2Findex"} ***!
   \*************************************************************************/
@@ -3043,16 +2966,16 @@ createPage(_index.default);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../work/uni-app-weilin/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../work/uni-app-weilin/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/setting/index.vue */ "../../../../work/uni-app-weilin/pages/setting/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/setting/index.vue */ "../../../../../work/uni-app-weilin/pages/setting/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../work/uni-app-weilin/pages.json":
+/***/ "../../../../../work/uni-app-weilin/pages.json":
 /*!*****************************************!*\
   !*** D:/work/uni-app-weilin/pages.json ***!
   \*****************************************/

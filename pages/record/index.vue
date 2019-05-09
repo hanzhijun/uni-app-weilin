@@ -107,8 +107,6 @@ var canvaArea = null;
 var util = require('../../common/util.js');
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var getWarnCookie = util.getWarnCookie;
 var changeWarn = util.changeWarn;
 var myAjax2 = util.myAjax2;
@@ -163,8 +161,8 @@ export default {
             this.firstLoad = 1
         },2000);
     },
-    onLaunch: function() {},
-    onShow: function() {
+    onLaunch() {},
+    onShow() {
         let _this = this;
         let accessToken = util.getCookie('accessToken');
         let deviceNos = getCookie('deviceNos');
@@ -185,9 +183,9 @@ export default {
             _this.history();
         }
     },
-    onHide: function() {},
+    onHide() {},
     methods: {
-        linkToLogin: function() {
+        linkToLogin() {
             uni.redirectTo({
                 url: '../login/index'
             });
@@ -200,7 +198,7 @@ export default {
                 this.history();
             }
         },
-        getTime: function(page) {
+        getTime(page) {
             let timestamp = Date.parse(new Date());
             let result = null;
             if (page == '1') {
@@ -326,47 +324,6 @@ export default {
             let time = year + '/' + month + '/' + date + ' ' + '00:00:01';
             return new Date(time).getTime() / 1000;
         },
-        showLineA(canvasId, chartData) {
-            canvaLineA = new wxCharts({
-                $this: _self,
-                canvasId: canvasId,
-                type: 'line',
-                fontSize: 11,
-                legend: true,
-                background: '#FFFFFF',
-                pixelRatio: _self.pixelRatio,
-                categories: chartData.categories,
-                series: chartData.series,
-                animation: false,
-                enableScroll: false, //开启图表拖拽功能
-                xAxis: {
-                    disableGrid: false,
-                    type: 'grid',
-                    gridType: 'dash',
-                    itemCount: 4, //可不填写，配合enableScroll图表拖拽功能使用，x轴单屏显示数据的数量，默认为5个
-                    scrollShow: true //新增是否显示滚动条，默认false
-                    //scrollBackgroundColor:'#F7F7FF',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条背景颜色,默认为 #EFEBEF
-                    //scrollColor:'#DEE7F7',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条颜色,默认为 #A6A6A6
-                },
-                yAxis: {
-                    //disabled:true
-                    gridType: 'dash',
-                    splitNumber: 8,
-                    min: 0,
-                    max: 180,
-                    format: val => {
-                        return val.toFixed(0);
-                    } //如不写此方法，Y轴刻度默认保留两位小数
-                },
-                width: _self.cWidth * _self.pixelRatio,
-                height: _self.cHeight * _self.pixelRatio,
-                dataLabel: true,
-                dataPointShape: true,
-                extra: {
-                    lineStyle: 'straight'
-                }
-            });
-        },
         showLineB(canvasId, chartData) {
             canvaLineB = new wxCharts({
                 $this: _self,
@@ -383,9 +340,7 @@ export default {
                 xAxis: {
                     disableGrid: true
                 },
-                yAxis: {
-                    //disabled:true
-                },
+                yAxis: {},
                 width: _self.cWidth2 * _self.pixelRatio,
                 height: _self.cHeight2 * _self.pixelRatio,
                 dataLabel: false,
@@ -410,9 +365,7 @@ export default {
                 xAxis: {
                     disableGrid: true
                 },
-                yAxis: {
-                    //disabled:true
-                },
+                yAxis: {},
                 width: _self.cWidth * _self.pixelRatio,
                 height: _self.cHeight * _self.pixelRatio,
                 dataLabel: false,
@@ -429,21 +382,21 @@ export default {
             canvaLineA.scrollEnd(e);
             //下面是toolTip事件，如果滚动后不需要显示，可不填写
             canvaLineA.showToolTip(e, {
-                format: function(item, category) {
+                format(item, category) {
                     return category + ' ' + item.name + ':' + item.data;
                 }
             });
         },
         touchLineB(e) {
             canvaLineB.showToolTip(e, {
-                format: function(item, category) {
+                format(item, category) {
                     return category + ' ' + item.name + ':' + item.data;
                 }
             });
         },
         touchArea(e) {
             canvaArea.showToolTip(e, {
-                format: function(item, category) {
+                format(item, category) {
                     return category + ' ' + item.name + ':' + item.data;
                 }
             });
@@ -451,7 +404,7 @@ export default {
         /**
          * 关闭报警
          */
-        audioPause: function() {
+        audioPause() {
             util.audioPause(this, backgroundAudioManager);
         }
     }

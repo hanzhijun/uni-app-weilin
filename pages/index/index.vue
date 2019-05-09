@@ -17,8 +17,6 @@
 var util = require('../../common/util.js');
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 
 export default {
     data() {
@@ -51,17 +49,11 @@ export default {
             }
         }, 5000);
     },
-    onLaunch: function() {
-        // console.log('App Launch-2');
-    },
-    onShow: function() {
-        // console.log('App Show-2');
-    },
-    onHide: function() {
-        // console.log('App Hide-2');
-    },
+    onLaunch() {},
+    onShow() {},
+    onHide() {},
     methods: {
-        linkToLogin: function() {
+        linkToLogin() {
             uni.redirectTo({
                 url: '../login/index'
             });

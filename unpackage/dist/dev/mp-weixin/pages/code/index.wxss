@@ -1,9 +1,9 @@
 
-.login-line {
+.code-outside .login-line {
     overflow: hidden;
-    padding: 20rpx 0;
+    padding: 100rpx 0 20rpx;
 }
-.section-title {
+.code-outside .section-title {
     display: inline-block;
     width: 200rpx;
     line-height: 68rpx;
@@ -11,12 +11,12 @@
     font-size: 14px;
     text-align: right;
 }
-.text-note {
+.code-outside .text-note {
     text-align: center;
     font-size: 22rpx;
     color: #999;
 }
-.section-input {
+.code-outside .section-input {
     display: inline-block;
     width: 300rpx;
     height: 66rpx;
@@ -27,17 +27,17 @@
     font-size: 14px;
     padding-left: 20rpx;
 }
-.section-code {
+.code-outside .section-code {
     width: 66rpx;
     height: 66rpx;
     float: left;
     margin-left: 30rpx;
 }
-.section-center {
+.code-outside .section-center {
     text-align: center;
     padding-top: 350rpx;
 }
-.section-post {
+.code-outside .section-post {
     display: inline-block;
     width: 500rpx;
     font-size: 16px;
@@ -45,7 +45,7 @@
     color: #fff;
     margin: 0 auto;
 }
-.section-post:active {
+.code-outside .section-post:active {
     background-color: #0082c5;
 }
 

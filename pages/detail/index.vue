@@ -57,8 +57,8 @@
 var util = require('../../common/util.js');
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
+// var setStorage = util.setStorage;
+// var getStorage = util.getStorage;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
 var backgroundAudioManager = wx.getBackgroundAudioManager();
@@ -247,144 +247,144 @@ export default {
 </script>
 
 <style>
-page {
-    height: auto;
-}
-view {
-    display: block;
-    text-align: center;
-}
+    page {
+        height: auto;
+    }
+    view {
+        display: block;
+        text-align: center;
+    }
 
-.xin-outbar {
-    width: 440upx;
-    height: 440upx;
-    margin: 120upx auto 0;
-    position: relative;
-}
+    .xin-outbar {
+        width: 440upx;
+        height: 440upx;
+        margin: 120upx auto 0;
+        position: relative;
+    }
 
-.xin-outbar .bj-img {
-    width: 440upx;
-    height: 440upx;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
+    .xin-outbar .bj-img {
+        width: 440upx;
+        height: 440upx;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 
-.xin-outbar .bpm {
-    width: 440upx;
-    line-height: 44upx;
-    font-size: 26upx;
-    color: #fff;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    top: 80upx;
-    z-index: 2;
-}
+    .xin-outbar .bpm {
+        width: 440upx;
+        line-height: 44upx;
+        font-size: 26upx;
+        color: #fff;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        top: 80upx;
+        z-index: 2;
+    }
 
-.xin-outbar .text-xintiao {
-    width: 220upx;
-    height: 60upx;
-    font-size: 54upx;
-    color: #fff;
-    text-align: right;
-    position: absolute;
-    left: 0;
-    top: 102upx;
-    z-index: 2;
-}
+    .xin-outbar .text-xintiao {
+        width: 220upx;
+        height: 60upx;
+        font-size: 54upx;
+        color: #fff;
+        text-align: right;
+        position: absolute;
+        left: 0;
+        top: 102upx;
+        z-index: 2;
+    }
 
-.xin-outbar .icon-xin {
-    width: 36upx;
-    height: 36upx;
-    position: absolute;
-    left: 236upx;
-    top: 135upx;
-    z-index: 2;
-}
+    .xin-outbar .icon-xin {
+        width: 36upx;
+        height: 36upx;
+        position: absolute;
+        left: 236upx;
+        top: 135upx;
+        z-index: 2;
+    }
 
-.xin-outbar .text-huxi {
-    width: 220upx;
-    height: 60upx;
-    font-size: 54upx;
-    color: #fff;
-    text-align: right;
-    position: absolute;
-    left: 0;
-    top: 235upx;
-    z-index: 2;
-}
+    .xin-outbar .text-huxi {
+        width: 220upx;
+        height: 60upx;
+        font-size: 54upx;
+        color: #fff;
+        text-align: right;
+        position: absolute;
+        left: 0;
+        top: 235upx;
+        z-index: 2;
+    }
 
-.xin-outbar .icon-huxi {
-    width: 36upx;
-    height: 36upx;
-    position: absolute;
-    left: 236upx;
-    top: 264upx;
-    z-index: 2;
-}
+    .xin-outbar .icon-huxi {
+        width: 36upx;
+        height: 36upx;
+        position: absolute;
+        left: 236upx;
+        top: 264upx;
+        z-index: 2;
+    }
 
-.xin-outbar .ci {
-    width: 440upx;
-    line-height: 44upx;
-    font-size: 26upx;
-    color: #fff;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    top: 315upx;
-    z-index: 2;
-}
+    .xin-outbar .ci {
+        width: 440upx;
+        line-height: 44upx;
+        font-size: 26upx;
+        color: #fff;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        top: 315upx;
+        z-index: 2;
+    }
 
-.bed-outbar .bed-state {
-    font-size: 30upx;
-    color: #0099e9;
-    padding: 50upx 0 40upx;
-    overflow: hidden;
-}
+    .bed-outbar .bed-state {
+        font-size: 30upx;
+        color: #0099e9;
+        padding: 50upx 0 40upx;
+        overflow: hidden;
+    }
 
-.bed-outbar image {
-    width: 400upx;
-    height: 278upx;
-}
+    .bed-outbar image {
+        width: 400upx;
+        height: 278upx;
+    }
 
-.btn-bar {
-    width: 750upx;
-    height: 120upx;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    z-index: 2;
-}
+    .btn-bar {
+        width: 750upx;
+        height: 120upx;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 2;
+    }
 
-.btn-bar .btn-k {
-    width: 300upx;
-    height: 80upx;
-    border-radius: 80upx;
-    background-color: #0099e9;
-    float: left;
-    margin-left: 50upx;
-    overflow: hidden;
-}
+    .btn-bar .btn-k {
+        width: 300upx;
+        height: 80upx;
+        border-radius: 80upx;
+        background-color: #0099e9;
+        float: left;
+        margin-left: 50upx;
+        overflow: hidden;
+    }
 
-.btn-bar .btn-k:active {
-    opacity: 0.7;
-}
+    .btn-bar .btn-k:active {
+        opacity: 0.7;
+    }
 
-.btn-bar .btn-k image {
-    width: 40upx;
-    height: 40upx;
-    float: left;
-    margin: 20upx 20upx 0 56upx;
-}
+    .btn-bar .btn-k image {
+        width: 40upx;
+        height: 40upx;
+        float: left;
+        margin: 20upx 20upx 0 56upx;
+    }
 
-.btn-bar .btn-k text {
-    line-height: 40upx;
-    display: inline-block;
-    font-size: 32upx;
-    color: #ffdc9e;
-    float: left;
-    margin-top: 20upx;
-}
+    .btn-bar .btn-k text {
+        line-height: 40upx;
+        display: inline-block;
+        font-size: 32upx;
+        color: #ffdc9e;
+        float: left;
+        margin-top: 20upx;
+    }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <view class="login-outside">
-        <view class="login-line" style="padding-top: 100upx;">
+    <view class="code-outside">
+        <view class="login-line" style="">
             <view class="section-title">编码：</view>
             <input class="section-input" type="text" placeholder="输入设备编码" @input="bindCodeInput" v-model="inputCode" />
             <image class="section-code" src="/static/code.png" @click="bindScanCode"></image>
@@ -21,8 +21,6 @@
 var util = require('../../common/util.js');
 var setCookie = util.setCookie;
 var getCookie = util.getCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
 
@@ -38,19 +36,10 @@ export default {
             inputCode: ''
         };
     },
-    onLoad() {
-        // var timestamp = Date.parse(new Date())
-        // console.log(timestamp)
-    },
-    onLaunch: function() {
-        console.log('App Launch-login');
-    },
-    onShow: function() {
-        console.log('App Show-login');
-    },
-    onHide: function() {
-        console.log('App Hide-login');
-    },
+    onLoad() {},
+    onLaunch() {},
+    onShow() {},
+    onHide() {},
     methods: {
         bindScanCode() {
             // 只允许通过相机扫码
@@ -85,17 +74,17 @@ export default {
             };
             myAjax2(
                 'post',
-                '/device/physiology/actual',
+                '/device/deviceInfo',
                 obj,
                 function(res) {
-                    if (res.retCode == '10000' && res.successData != '') {
+                    if (res.retCode == '10000' && res.successData.length >0) {
                         setCookie('deviceNos', _this.inputCode);
                         util.showToastBox(_this, '设备添加成功，即将跳转！');
                         setTimeout(function() {
                             uni.redirectTo({
                                 url: '../detail/index'
                             });
-                        }, 3000);
+                        }, 2000);
                     } else {
                         util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
                     }
@@ -111,60 +100,60 @@ export default {
 </script>
 
 <style>
-.login-line {
-    overflow: hidden;
-    padding: 20upx 0;
-}
+    .code-outside .login-line {
+        overflow: hidden;
+        padding: 100upx 0 20upx;
+    }
 
-.section-title {
-    display: inline-block;
-    width: 200upx;
-    line-height: 68upx;
-    float: left;
-    font-size: 14px;
-    text-align: right;
-}
+    .code-outside .section-title {
+        display: inline-block;
+        width: 200upx;
+        line-height: 68upx;
+        float: left;
+        font-size: 14px;
+        text-align: right;
+    }
 
-.text-note {
-    text-align: center;
-    font-size: 22upx;
-    color: #999;
-}
+    .code-outside .text-note {
+        text-align: center;
+        font-size: 22upx;
+        color: #999;
+    }
 
-.section-input {
-    display: inline-block;
-    width: 300upx;
-    height: 66upx;
-    line-height: 66upx;
-    border: 1px solid #0099e9;
-    border-radius: 3px;
-    float: left;
-    font-size: 14px;
-    padding-left: 20upx;
-}
+    .code-outside .section-input {
+        display: inline-block;
+        width: 300upx;
+        height: 66upx;
+        line-height: 66upx;
+        border: 1px solid #0099e9;
+        border-radius: 3px;
+        float: left;
+        font-size: 14px;
+        padding-left: 20upx;
+    }
 
-.section-code {
-    width: 66upx;
-    height: 66upx;
-    float: left;
-    margin-left: 30upx;
-}
+    .code-outside .section-code {
+        width: 66upx;
+        height: 66upx;
+        float: left;
+        margin-left: 30upx;
+    }
 
-.section-center {
-    text-align: center;
-    padding-top: 350upx;
-}
+    .code-outside .section-center {
+        text-align: center;
+        padding-top: 350upx;
+    }
 
-.section-post {
-    display: inline-block;
-    width: 500upx;
-    font-size: 16px;
-    background-color: #0099e9;
-    color: #fff;
-    margin: 0 auto;
-}
+    .code-outside .section-post {
+        display: inline-block;
+        width: 500upx;
+        font-size: 16px;
+        background-color: #0099e9;
+        color: #fff;
+        margin: 0 auto;
+    }
 
-.section-post:active {
-    background-color: #0082c5;
-}
+    .code-outside .section-post:active {
+        background-color: #0082c5;
+    }
 </style>

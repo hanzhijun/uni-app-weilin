@@ -197,8 +197,6 @@ function getDate(type) {
 var util = require('../../common/util.js');
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var changeWarn = util.changeWarn;
 var getWarnCookie = util.getWarnCookie;
 var myAjax2 = util.myAjax2;
