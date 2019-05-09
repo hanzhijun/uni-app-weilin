@@ -118,6 +118,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
@@ -129,7 +134,9 @@ var myAjax = util.myAjax;var _default =
   data: function data() {
     return {
       title: '登录',
-      userInfo: '',
+      showToast: 0,
+      toastTxt: '',
+      userInfo: null,
       inputValue: '',
       inputPassWords: '' };
 
@@ -139,13 +146,13 @@ var myAjax = util.myAjax;var _default =
     // console.log(timestamp)
   },
   onLaunch: function onLaunch() {
-    console.log('App Launch-login', " at pages\\login\\index.vue:42");
+    console.log('App Launch-login', " at pages\\login\\index.vue:49");
   },
   onShow: function onShow() {
-    console.log('App Show-login', " at pages\\login\\index.vue:45");
+    console.log('App Show-login', " at pages\\login\\index.vue:52");
   },
   onHide: function onHide() {
-    console.log('App Hide-login', " at pages\\login\\index.vue:48");
+    console.log('App Hide-login', " at pages\\login\\index.vue:55");
   },
   methods: {
     bindKeyInput: function bindKeyInput(event) {
@@ -164,7 +171,7 @@ var myAjax = util.myAjax;var _default =
 
       _this.inputValue,inputPassWords = _this.inputPassWords;
       if (!inputValue || !inputPassWords) {
-        console.log('请输入用户名、密码!', " at pages\\login\\index.vue:67");
+        util.showToastBox(_this, '请输入用户名、密码!');
         return false;
       }
       var obj = {
@@ -173,23 +180,30 @@ var myAjax = util.myAjax;var _default =
 
 
       myAjax('post', '/user/authorize', obj, function (res) {
+        var deviceNos = getCookie('deviceNos');
         if (res.retCode == '10000') {
           _this.userInfo = res.successData;
           setCookie('accessToken', res.successData.accessToken);
           setCookie('username', res.successData.username);
-          uni.redirectTo({
-            url: '../detail/index' });
+          if (!deviceNos) {
+            uni.redirectTo({
+              url: '../code/index' });
 
+          } else {
+            uni.redirectTo({
+              url: '../detail/index' });
+
+          }
         } else if (res.retCode == '10007') {
-          console.log('用户名或密码错误', " at pages\\login\\index.vue:84");
+          util.showToastBox(_this, '用户名或密码错误!');
         } else if (res.retCode == '10008') {
-          console.log('token已过期，请重新登录', " at pages\\login\\index.vue:86");
+          util.showToastBox(_this, 'token已过期，请重新登录!');
         } else {
-          console.log('未知错误，请重新登录', " at pages\\login\\index.vue:88");
+          util.showToastBox(_this, '未知错误，请重新登录!');
         }
-        console.log(JSON.stringify(res), " at pages\\login\\index.vue:90");
+        console.log(JSON.stringify(res), " at pages\\login\\index.vue:104");
       }, function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\login\\index.vue:92");
+        console.log(JSON.stringify(reg), " at pages\\login\\index.vue:106");
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))

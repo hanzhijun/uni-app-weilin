@@ -275,37 +275,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 function getDate(type) {
   var date = new Date();
@@ -319,7 +288,7 @@ function getDate(type) {
   } else if (type === 'end') {
     year = year + 2;
   }
-  month = month > 9 ? month : '0' + month;;
+  month = month > 9 ? month : '0' + month;
   day = day > 9 ? day : '0' + day;
 
   return "".concat(year, "-").concat(month, "-").concat(day);
@@ -329,51 +298,65 @@ var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
 var setStorage = util.setStorage;
-var getStorage = util.getStorage;var _default =
+var getStorage = util.getStorage;
+var changeWarn = util.changeWarn;
+var getWarnCookie = util.getWarnCookie;
+var myAjax2 = util.myAjax2;
+var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
 {
   data: function data() {
     return {
       title: '系统设置',
-      device: false, // 是否监控离床
-      deviceTimes: '10', // 离床持续时间
-      deviceStart: '00:00', // 监控时段开始
-      deviceEnd: '23:59', // 监控时段结束
-      heart: false, // 是否监控心率
-      heartUp: '120', // 心率过快峰值
-      heartDown: '40', // 心率过慢峰值
-      breath: false, // 是否监控呼吸率
-      breathUp: '30', // 呼吸过快峰值
-      breathDown: '8', // 呼吸过慢峰值
-      motion: false, // 是否监控体动值
-      motionTimes: '5', // 大幅体动持续时间
-      motionStart: '0:00', // 体动监控时段开始
-      motionEnd: '23:59' // 体动监控时段结束
+      showToast: 0,
+      toastTxt: '',
+      userInfo: null,
+      deviceNos: '', // 设备号
+      accessToken: null
+      // device: true, // 是否监控离床
+      // deviceTimes: '10', // 离床持续时间
+      // deviceStart: '00:00', // 监控时段开始
+      // deviceEnd: '23:59', // 监控时段结束
+      // heart: false, // 是否监控心率
+      // heartUp: '120', // 心率过快峰值
+      // heartDown: '40', // 心率过慢峰值
+      // breath: false, // 是否监控呼吸率
+      // breathUp: '30', // 呼吸过快峰值
+      // breathDown: '8', // 呼吸过慢峰值
+      // motion: false, // 是否监控体动值
+      // motionTimes: '5', // 大幅体动持续时间
+      // motionStart: '0:00', // 体动监控时段开始
+      // motionEnd: '23:59' // 体动监控时段结束
     };
   },
-  onLoad: function onLoad() {
-
-  },
-  onLaunch: function onLaunch() {
-    console.log('App Launch-2', " at pages\\setting\\index.vue:257");
-  },
+  onLoad: function onLoad() {},
+  onLaunch: function onLaunch() {},
   onShow: function onShow() {
-    console.log('App Show-2', " at pages\\setting\\index.vue:260");
-  },
-  onHide: function onHide() {
-    console.log('App Hide-2', " at pages\\setting\\index.vue:263");
-  },
-  methods: {
-    linkToLogin: function linkToLogin() {
-      uni.redirectTo({
+    var _this = this;
+    var accessToken = util.getCookie('accessToken');
+    var deviceNos = getCookie('deviceNos');
+    if (!accessToken) {
+      wx.redirectTo({
         url: '../login/index' });
 
-    },
+    } else if (!deviceNos) {
+      uni.redirectTo({
+        url: '../code/index' });
+
+    } else {
+      _this.accessToken = accessToken;
+      _this.deviceNos = deviceNos;
+      changeWarn(_this, backgroundAudioManager);
+      getWarnCookie(_this);
+    }
+  },
+  onHide: function onHide() {},
+  methods: {
     bindPickerChange: function bindPickerChange(e) {
-      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\setting\\index.vue:272");
+      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\setting\\index.vue:255");
       this.index = e.target.value;
     },
     bindMultiPickerColumnChange: function bindMultiPickerColumnChange(e) {
-      console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value, " at pages\\setting\\index.vue:276");
+      console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value, " at pages\\setting\\index.vue:259");
       this.multiIndex[e.detail.column] = e.detail.value;
       this.$forceUpdate();
     },
@@ -382,6 +365,111 @@ var getStorage = util.getStorage;var _default =
     },
     bindTime02Change: function bindTime02Change(e) {
       this.deviceEnd = e.target.value;
+    },
+    /**
+        * 关闭报警
+        */
+    audioPause: function audioPause() {
+      util.audioPause(this, backgroundAudioManager);
+    },
+    switch1Change: function switch1Change(e) {
+      this.device = e.target.value;
+      util.setWarnCookie(this);
+    },
+    switch2Change: function switch2Change(e) {
+      this.heart = e.target.value;
+      util.setWarnCookie(this);
+    },
+    switch3Change: function switch3Change(e) {
+      this.breath = e.target.value;
+      util.setWarnCookie(this);
+    },
+    switch4Change: function switch4Change(e) {
+      this.motion = e.target.value;
+      util.setWarnCookie(this);
+    },
+    deviceTimesChange: function deviceTimesChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 300) {
+        value = 1;
+        util.showToastBox(this, '请输入1-300的数字');
+      }
+      this.deviceTimes = value;
+      util.setWarnCookie(this);
+    },
+    deviceStartChange: function deviceStartChange(e) {
+      this.deviceStart = e.target.value;
+      util.setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
+    },
+    deviceEndChange: function deviceEndChange(e) {
+      this.deviceEnd = e.target.value;
+      util.setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
+    },
+    heartDownChange: function heartDownChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 180) {
+        value = 1;
+        util.showToastBox(this, '请输入1-180的数字');
+      }
+      this.heartDown = value;
+      util.setWarnCookie(this);
+    },
+    heartUpChange: function heartUpChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 180) {
+        value = 1;
+        util.showToastBox(this, '请输入1-180的数字');
+      }
+      this.heartUp = value;
+      util.setWarnCookie(this);
+    },
+    breathDownChange: function breathDownChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 180) {
+        value = 1;
+        util.showToastBox(this, '请输入1-180的数字');
+      }
+      this.breathDown = value;
+      util.setWarnCookie(this);
+    },
+    breathUpChange: function breathUpChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 180) {
+        value = 1;
+        util.showToastBox(this, '请输入1-180的数字');
+      }
+      this.breathUp = value;
+      util.setWarnCookie(this);
+    },
+    motionTimesChange: function motionTimesChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 300) {
+        value = 1;
+        util.showToastBox(this, '请输入1-300的数字');
+      }
+      this.motionTimes = value;
+      // util.warnRule.motionTimes = value;
+      util.setWarnCookie(this);
+    },
+    motionEndChange: function motionEndChange(e) {
+      this.motionEnd = e.target.value;
+      util.setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
+    },
+    motionStartChange: function motionStartChange(e) {
+      this.motionStart = e.target.value;
+      util.setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

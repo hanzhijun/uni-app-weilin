@@ -153,14 +153,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
@@ -170,12 +162,13 @@ var getStorage = util.getStorage;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
 var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
+
 {
   data: function data() {
     return {
       title: '微麟守护者',
       userInfo: null,
-      deviceNos: '641743000773', // 设备号
+      deviceNos: '', // 设备号
       accessToken: null,
       breath: '--', // 呼吸值 -100_无效值，其他为正常值
       deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
@@ -185,35 +178,40 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       timer: null,
       toast: 0,
       toastTxt: '',
-      loading: 0,
-      warning: 0,
-      warningText: '',
-      leaveTime: null };
-
+      loading: 0
+      // warning: 1,
+      // warningText: '',
+      // leaveTime: null
+    };
   },
-  onLoad: function onLoad() {
-
-  },
+  onLoad: function onLoad() {},
   onLaunch: function onLaunch() {
     console.log('App Launch-detail');
   },
   onShow: function onShow() {
+    var _this = this;
     var accessToken = getCookie('accessToken');
+    var deviceNos = getCookie('deviceNos');
     var userInfo = getCookie('username');
     if (!accessToken) {
       uni.redirectTo({
         url: '../login/index' });
 
+    } else if (!deviceNos) {
+      uni.redirectTo({
+        url: '../code/index' });
+
     } else {
-      this.userInfo = userInfo;
-      this.accessToken = accessToken;
-      this.getActual();
-      this.setSocketTask();
-      var _this = this;
+      util.changeWarn(_this, backgroundAudioManager);
+      util.getWarnCookie(_this);
+      _this.userInfo = userInfo;
+      _this.accessToken = accessToken;
+      _this.deviceNos = deviceNos;
+      _this.getActual();
+      _this.setSocketTask();
       this.timer = setInterval(function () {
         _this.getActual();
       }, 10000);
-
     }
   },
   onHide: function onHide() {
@@ -221,14 +219,18 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
   },
   methods: {
     /**
-              * 03. 获取设备当前的状态/⼼率/呼吸/体动数据
+              * 03. 获取设备当前的状态/心率/呼吸/体动数据
               */
     getActual: function getActual() {
       var obj = {
         deviceNos: this.deviceNos };
 
       var _this = this;
-      myAjax2('post', '/device/physiology/actual', obj, function (res) {
+      myAjax2(
+      'post',
+      '/device/physiology/actual',
+      obj,
+      function (res) {
         if (res.retCode == '10000') {
           if (res.successData[0].deviceStatus == 3 && _this.leaveTime) {
             var time = Date.parse(new Date());
@@ -236,17 +238,15 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
               console.log(time - _this.leaveTime);
               _this.warningText = '离床报警已触发';
               _this.warning = 1;
-              // _this.audioCtx = uni.createAudioContext('myAudio')
-              // _this.audioCtx.setSrc('http://www.hanjiaxin.cn/images/warning.mp3')
-              // _this.audioCtx.play()
+
               backgroundAudioManager.title = '报警';
               backgroundAudioManager.epname = '报警';
               backgroundAudioManager.singer = '报警';
               backgroundAudioManager.coverImgUrl = '';
               // 设置了 src 之后会自动播放
-              backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
+              backgroundAudioManager.src = '/static/warning.mp3';
               backgroundAudioManager.onEnded(function () {
-                backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
+                backgroundAudioManager.src = '/static/warning.mp3?time=' + Date.parse(new Date());
               });
             }
           }
@@ -262,21 +262,18 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
           uni.redirectTo({
             url: '../login/index' });
 
-
         }
-      }, function (reg) {
+      },
+      function (reg) {
         console.log(JSON.stringify(reg));
       });
+
     },
     /**
         * 关闭报警
         */
     audioPause: function audioPause() {
-      // this.audioCtx.pause()
-      backgroundAudioManager.pause();
-      this.leaveTime = null,
-      this.warning = 0;
-
+      util.audioPause(this, backgroundAudioManager);
     },
     linkRecord: function linkRecord() {
       uni.navigateTo({
@@ -290,12 +287,11 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     },
     setSocketTask: function setSocketTask() {
       var accessToken = util.getCookie('accessToken');
-      var deviceNo = this.deviceNos;
       var _this = this;
       // 建立连接
       console.log('建立连接!');
       wx.connectSocket({
-        url: "ws://stream.darma.cn:17004/ws",
+        url: 'ws://stream.darma.cn:17004/ws',
         sluccess: function sluccess() {
           console.log('连接成功...');
         },
@@ -307,11 +303,11 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       wx.onSocketOpen(function () {
         console.log('连接成功!');
         var obj = {
-          // 消息类型msgType⽬前有 login（登录消息），deviceStatus（设备状态消息）healthData（⼼率呼吸数据消息），paramError（参数错误消息）
+          // 消息类型msgType前有 login（登录消息），deviceStatus（设备状态消息）healthData（心率呼吸数据消息），paramError（参数错误消息）
           msgType: 'login',
           data: {
             token: accessToken,
-            // 订阅类型subType有“ALL”,“SINGLETON”(区分⼤⼩写)
+            // 订阅类型subType有“ALL”,“SINGLETON”(区分大小写)
             // subType: 'SINGLETON', /*订阅所有的设备*/
             deviceNo: _this.deviceNos } };
 
@@ -323,8 +319,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       // 接收数据
       wx.onSocketMessage(function (data) {
         // heartBreathBcg、healthBreathData、deviceStatus
-        if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType ==
-        'deviceStatus') {
+        if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
           console.log(data.data);
           // uni.showToast({
           //     title: data.data,
@@ -341,7 +336,6 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
             console.log('解除离床报警计算数据');
           }
         }
-
       });
       //连接失败
       wx.onSocketError(function () {

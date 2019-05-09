@@ -1,7 +1,7 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch');
+			// console.log('App Launch');
 			// #ifdef APP-PLUS
 			// 锁定屏幕方向
 			plus.screen.lockOrientation('portrait-primary'); //锁定
@@ -14,7 +14,7 @@
 					imei: plus.device.imei
 				},
 				success: (res) => {
-					console.log('success', res);
+					// console.log('success', res);
 					if (res.statusCode == 200 && res.data.isUpdate) {
 						let openUrl = plus.os.name === 'iOS' ? res.data.iOS : res.data.Android;
 						// 提醒用户更新
@@ -30,13 +30,13 @@
 					}
 				}
 			})
-			// #endif
+			// #endif            
 		},
 		onShow: function() {
-			console.log('App Show')
+			// console.log('App Show')
 		},
 		onHide: function() {
-			console.log('App Hide')
+			// console.log('App Hide')
 		}
 	}
 </script>

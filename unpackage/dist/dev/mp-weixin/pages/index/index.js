@@ -113,14 +113,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
 var setStorage = util.setStorage;
 var getStorage = util.getStorage;var _default =
+
 {
   data: function data() {
     return {
@@ -129,11 +128,21 @@ var getStorage = util.getStorage;var _default =
   },
   onLoad: function onLoad() {
     var accessToken = getCookie('accessToken');
+    var deviceNos = getCookie('deviceNos');
+    var warnRule = getCookie('warnRule');
+    if (!warnRule) {
+      warnRule = util.warnRule;
+      setCookie('warnRule', JSON.stringify(warnRule));
+    }
     this.show = accessToken;
     setTimeout(function () {
       if (!accessToken) {
         uni.redirectTo({
           url: '../login/index' });
+
+      } else if (!deviceNos) {
+        uni.redirectTo({
+          url: '../code/index' });
 
       } else {
         uni.redirectTo({
@@ -143,13 +152,13 @@ var getStorage = util.getStorage;var _default =
     }, 5000);
   },
   onLaunch: function onLaunch() {
-    console.log('App Launch-2');
+    // console.log('App Launch-2');
   },
   onShow: function onShow() {
-    console.log('App Show-2');
+    // console.log('App Show-2');
   },
   onHide: function onHide() {
-    console.log('App Hide-2');
+    // console.log('App Hide-2');
   },
   methods: {
     linkToLogin: function linkToLogin() {

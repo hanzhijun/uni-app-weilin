@@ -181,6 +181,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _wxcharts = _interopRequireDefault(__webpack_require__(/*! ../../components/wx-charts/wxcharts.js */ "../../../../work/uni-app-weilin/components/wx-charts/wxcharts.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -263,7 +280,24 @@ var _wxcharts = _interopRequireDefault(__webpack_require__(/*! ../../components/
 //
 //
 //
-var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var getCookie = util.getCookie;var setCookie = util.setCookie;var setStorage = util.setStorage;var getStorage = util.getStorage;var myAjax2 = util.myAjax2;var _default = { data: function data() {return { title: '历史记录', userInfo: null, deviceNos: '641743000773', // 设备号
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var getCookie = util.getCookie;var setCookie = util.setCookie;var setStorage = util.setStorage;var getStorage = util.getStorage;var myAjax2 = util.myAjax2;var backgroundAudioManager = wx.getBackgroundAudioManager();var _default = { data: function data() {return { title: '历史记录', showToast: 0, toastTxt: '', userInfo: null, deviceNos: '', // 设备号
       accessToken: null, breath: '--', // 呼吸值 -100_无效值，其他为正常值
       deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
       heart: '--', // 心率值 65436_无效值，其他为正常值
@@ -274,13 +308,7 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       endTime: null, // 结束时间
       historyData: [], cWidth: '', cHeight: '', cWidth2: '', //横屏图表
       cHeight2: '', //横屏图表
-      pixelRatio: 1, serverData: '' };}, onLoad: function onLoad() {_self = this;this.cWidth = uni.upx2px(750);this.cHeight = uni.upx2px(500);this.cWidth2 = uni.upx2px(700);this.cHeight2 = uni.upx2px(1100);}, onLaunch: function onLaunch() {// console.log('App Launch-record')
-  }, onShow: function onShow() {// console.log('App Show-record')
-    var accessToken = util.getCookie('accessToken');var _this = this;if (!accessToken) {wx.redirectTo({ url: '../login/index' });} else {_this.getTime(1);_this.history();}}, onHide: function onHide() {// console.log('App Hide-record')
-  }, methods: { linkToLogin: function linkToLogin() {uni.redirectTo({ url: '../login/index' });}, changeNav: function changeNav(type) {var tabNum = this.tabNum;if (tabNum != type) {this.tabNum = type;this.getTime(type);this.history();}}, getTime: function getTime(page) {var timestamp = Date.parse(new Date());var result = null;if (page == '1') {result = this.getTodayStartTime();} else if (page == '2') {result = parseInt(timestamp / 1000) - 259200;} else if (page == '3') {
-        result = parseInt(timestamp / 1000) - 604798;
-      }
-      this.endTime = parseInt(timestamp / 1000);
+      pixelRatio: 1, serverData: '', firstLoad: 0 };}, onLoad: function onLoad() {_self = this;this.cWidth = uni.upx2px(750);this.cHeight = uni.upx2px(500);this.cWidth2 = uni.upx2px(700);this.cHeight2 = uni.upx2px(1100);setTimeout(function () {this.firstLoad = 1;}, 2000);}, onLaunch: function onLaunch() {}, onShow: function onShow() {var _this = this;var accessToken = util.getCookie('accessToken');var deviceNos = getCookie('deviceNos');if (!accessToken) {wx.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {_this.accessToken = accessToken;_this.deviceNos = deviceNos;util.changeWarn(_this, backgroundAudioManager);util.getWarnCookie(_this);_this.getTime(1);_this.history();}}, onHide: function onHide() {}, methods: { linkToLogin: function linkToLogin() {uni.redirectTo({ url: '../login/index' });}, changeNav: function changeNav(type) {var tabNum = this.tabNum;if (tabNum != type) {this.tabNum = type;this.getTime(type);this.history();}}, getTime: function getTime(page) {var timestamp = Date.parse(new Date());var result = null;if (page == '1') {result = this.getTodayStartTime();} else if (page == '2') {result = parseInt(timestamp / 1000) - 259200;} else if (page == '3') {result = parseInt(timestamp / 1000) - 604798;}this.endTime = parseInt(timestamp / 1000);
       this.startTime = result;
     },
     /**
@@ -294,17 +322,23 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
         endTime: this.endTime };
 
       var _this = this;
-      myAjax2('post', '/device/physiology/history', obj, function (res) {
+      myAjax2(
+      'post',
+      '/device/physiology/history',
+      obj,
+      function (res) {
         if (res.retCode == '10000') {
-          console.log('history请求成功', " at pages\\record\\index.vue:199");
+          console.log('history请求成功', " at pages\\record\\index.vue:231");
           _this.setHistoryData(res);
         } else {
-          console.log('history未知错误', " at pages\\record\\index.vue:202");
+          console.log('history未知错误', " at pages\\record\\index.vue:234");
         }
         // console.log(JSON.stringify(res))
-      }, function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\record\\index.vue:206");
+      },
+      function (reg) {
+        console.log(JSON.stringify(reg), " at pages\\record\\index.vue:239");
       });
+
     },
     /**
         * 转换列表类数据
@@ -337,23 +371,27 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       this.chartsTidong = chartsTidong;
       var LineA = {
         categories: chartsTime,
-        series: [{
+        series: [
+        {
           name: '心率',
           data: chartsHeart,
           color: '#1890ff' },
+
         {
           name: '呼吸率',
           data: chartsBreath,
           color: '#2fc25b' },
+
         {
           name: '体动值',
           data: chartsTidong,
           color: '#facc14' }] };
 
 
+
       if (LineA.categories.length > 0 && LineA.series.length > 0) {
-        _self.showLineB("canvasLineB", LineA);
-        _self.showArea("canvasArea", LineA);
+        _self.showLineB('canvasLineB', LineA);
+        _self.showArea('canvasArea', LineA);
       }
     },
     /**
@@ -373,7 +411,7 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       if (minute < 10) minute = '0' + minute;
       var second = now.getSeconds();
       if (second < 10) second = '0' + second;
-      return month + "-" + date + " " + hour + ":" + minute + ":" + second;
+      return month + '-' + date + ' ' + hour + ':' + minute + ':' + second;
     },
     /**
         * 根据当前时间获取今日开始时间点
@@ -383,7 +421,7 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       var year = now.getFullYear();
       var month = now.getMonth() + 1;
       var date = now.getDate();
-      var time = year + '/' + month + "/" + date + " " + '00:00:01';
+      var time = year + '/' + month + '/' + date + ' ' + '00:00:01';
       return new Date(time).getTime() / 1000;
     },
     showLineA: function showLineA(canvasId, chartData) {
@@ -507,6 +545,12 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
           return category + ' ' + item.name + ':' + item.data;
         } });
 
+    },
+    /**
+        * 关闭报警
+        */
+    audioPause: function audioPause() {
+      util.audioPause(this, backgroundAudioManager);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

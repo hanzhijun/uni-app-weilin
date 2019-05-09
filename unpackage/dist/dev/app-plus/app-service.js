@@ -1062,6 +1062,15 @@ if( __WXML_GLOBAL__.ops_cached.$gwx_1)return __WXML_GLOBAL__.ops_cached.$gwx_1
 __WXML_GLOBAL__.ops_cached.$gwx_1=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
 Z([3,'__l'])
+Z([3,'login-outside'])
+Z([[2,'=='],[[7],[3,'showToast']],[1,1]])
+})(__WXML_GLOBAL__.ops_cached.$gwx_1);return __WXML_GLOBAL__.ops_cached.$gwx_1
+}
+function gz$gwx_2(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_2)return __WXML_GLOBAL__.ops_cached.$gwx_2
+__WXML_GLOBAL__.ops_cached.$gwx_2=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'__l'])
 Z([3,'index_outside'])
 Z([3,'xin-outbar'])
 Z([[2,'=='],[[7],[3,'deviceStatus']],[1,4]])
@@ -1081,13 +1090,7 @@ Z([[2,'=='],[[7],[3,'deviceStatus']],[1,9]])
 Z([[2,'=='],[[7],[3,'deviceStatus']],[1,10]])
 Z(z[3])
 Z([[2,'!='],[[7],[3,'deviceStatus']],[1,4]])
-Z([[2,'=='],[[7],[3,'warning']],[1,'1']])
-})(__WXML_GLOBAL__.ops_cached.$gwx_1);return __WXML_GLOBAL__.ops_cached.$gwx_1
-}
-function gz$gwx_2(){
-if( __WXML_GLOBAL__.ops_cached.$gwx_2)return __WXML_GLOBAL__.ops_cached.$gwx_2
-__WXML_GLOBAL__.ops_cached.$gwx_2=[];
-(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([[2,'=='],[[7],[3,'warning']],[1,1]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_2);return __WXML_GLOBAL__.ops_cached.$gwx_2
 }
 function gz$gwx_3(){
@@ -1101,147 +1104,61 @@ if( __WXML_GLOBAL__.ops_cached.$gwx_4)return __WXML_GLOBAL__.ops_cached.$gwx_4
 __WXML_GLOBAL__.ops_cached.$gwx_4=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
 Z([3,'__l'])
-Z([3,'record-outside'])
-Z([[7],[3,'historyData']])
-Z([[2,'!'],[[7],[3,'historyData']]])
-Z([[2,'=='],[[7],[3,'warning']],[1,'1']])
+Z([3,'login-outside'])
+Z([[2,'=='],[[7],[3,'showToast']],[1,1]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_4);return __WXML_GLOBAL__.ops_cached.$gwx_4
 }
 function gz$gwx_5(){
 if( __WXML_GLOBAL__.ops_cached.$gwx_5)return __WXML_GLOBAL__.ops_cached.$gwx_5
 __WXML_GLOBAL__.ops_cached.$gwx_5=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'__l'])
+Z([3,'record-outside'])
+Z([[2,'!='],[[7],[3,'historyData']],[1,'']])
+Z([3,'qiun-columns'])
+Z(z[2])
+Z([[7],[3,'historyData']])
+Z([[2,'&&'],[[2,'=='],[[7],[3,'historyData']],[1,'']],[[2,'=='],[[7],[3,'firstLoad']],[1,1]]])
+Z([[2,'=='],[[7],[3,'warning']],[1,'1']])
+Z([[2,'=='],[[7],[3,'warning']],[1,1]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_5);return __WXML_GLOBAL__.ops_cached.$gwx_5
+}
+function gz$gwx_6(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_6)return __WXML_GLOBAL__.ops_cached.$gwx_6
+__WXML_GLOBAL__.ops_cached.$gwx_6=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'__l'])
+Z([3,'set-outside'])
+Z([3,'padding-top:10rpx;'])
+Z([3,'setting-auto'])
+Z([[7],[3,'device']])
+Z([[2,'!'],[[7],[3,'device']]])
+Z(z[3])
+Z([[7],[3,'heart']])
+Z([[2,'!'],[[7],[3,'heart']]])
+Z(z[3])
+Z([[7],[3,'breath']])
+Z([[2,'!'],[[7],[3,'breath']]])
+Z(z[3])
+Z([[7],[3,'motion']])
+Z([[2,'!'],[[7],[3,'motion']]])
+Z([[2,'=='],[[7],[3,'warning']],[1,1]])
+Z([[2,'=='],[[7],[3,'showToast']],[1,1]])
+})(__WXML_GLOBAL__.ops_cached.$gwx_6);return __WXML_GLOBAL__.ops_cached.$gwx_6
 }
 __WXML_GLOBAL__.ops_set.$gwx=z;
 __WXML_GLOBAL__.ops_init.$gwx=true;
 var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);console.error(e);}
 }}}()
-var x=['./pages/detail/index.wxml','./pages/index/index.wxml','./pages/login/index.wxml','./pages/record/index.wxml','./pages/setting/index.wxml'];d_[x[0]]={}
+var x=['./pages/code/index.wxml','./pages/detail/index.wxml','./pages/index/index.wxml','./pages/login/index.wxml','./pages/record/index.wxml','./pages/setting/index.wxml'];d_[x[0]]={}
 var m0=function(e,s,r,gg){
 var z=gz$gwx_1()
-cs.push("./pages/detail/index.wxml:view:1:1")
+cs.push("./pages/code/index.wxml:view:1:1")
 var oB=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
-cs.push("./pages/detail/index.wxml:view:1:44")
-var oD=_n('view')
-_rz(z,oD,'class',2,e,s,gg)
-var fE=_v()
-_(oD,fE)
-if(_oz(z,3,e,s,gg)){fE.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:151")
-cs.pop()
-}
-cs.push("./pages/detail/index.wxml:view:1:303")
-var cF=_n('view')
-_rz(z,cF,'class',4,e,s,gg)
-var hG=_v()
-_(cF,hG)
-if(_oz(z,5,e,s,gg)){hG.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:330")
-cs.pop()
-}
-var oH=_v()
-_(cF,oH)
-if(_oz(z,6,e,s,gg)){oH.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:385")
-cs.pop()
-}
-hG.wxXCkey=1
-oH.wxXCkey=1
-cs.pop()
-_(oD,cF)
-cs.push("./pages/detail/index.wxml:view:1:540")
-var cI=_n('view')
-_rz(z,cI,'class',7,e,s,gg)
-var oJ=_v()
-_(cI,oJ)
-if(_oz(z,8,e,s,gg)){oJ.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:564")
-cs.pop()
-}
-var lK=_v()
-_(cI,lK)
-if(_oz(z,9,e,s,gg)){lK.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:619")
-cs.pop()
-}
-oJ.wxXCkey=1
-lK.wxXCkey=1
-cs.pop()
-_(oD,cI)
-fE.wxXCkey=1
-cs.pop()
-_(oB,oD)
-cs.push("./pages/detail/index.wxml:view:1:811")
-var aL=_n('view')
-_rz(z,aL,'class',10,e,s,gg)
-cs.push("./pages/detail/index.wxml:view:1:836")
-var bO=_n('view')
-_rz(z,bO,'class',11,e,s,gg)
-var oP=_v()
-_(bO,oP)
-if(_oz(z,12,e,s,gg)){oP.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:860")
-cs.pop()
-}
-var xQ=_v()
-_(bO,xQ)
-if(_oz(z,13,e,s,gg)){xQ.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:922")
-cs.pop()
-}
-var oR=_v()
-_(bO,oR)
-if(_oz(z,14,e,s,gg)){oR.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:984")
-cs.pop()
-}
-var fS=_v()
-_(bO,fS)
-if(_oz(z,15,e,s,gg)){fS.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1052")
-cs.pop()
-}
-var cT=_v()
-_(bO,cT)
-if(_oz(z,16,e,s,gg)){cT.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1114")
-cs.pop()
-}
-var hU=_v()
-_(bO,hU)
-if(_oz(z,17,e,s,gg)){hU.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1185")
-cs.pop()
-}
-oP.wxXCkey=1
-xQ.wxXCkey=1
-oR.wxXCkey=1
-fS.wxXCkey=1
-cT.wxXCkey=1
-hU.wxXCkey=1
-cs.pop()
-_(aL,bO)
-var tM=_v()
-_(aL,tM)
-if(_oz(z,18,e,s,gg)){tM.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1258")
-cs.pop()
-}
-var eN=_v()
-_(aL,eN)
-if(_oz(z,19,e,s,gg)){eN.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1354")
-cs.pop()
-}
-tM.wxXCkey=1
-eN.wxXCkey=1
-cs.pop()
-_(oB,aL)
 var xC=_v()
 _(oB,xC)
-if(_oz(z,20,e,s,gg)){xC.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1896")
+if(_oz(z,2,e,s,gg)){xC.wxVkey=1
+cs.push("./pages/code/index.wxml:block:1:751")
 cs.pop()
 }
 xC.wxXCkey=1
@@ -1253,6 +1170,133 @@ e_[x[0]]={f:m0,j:[],i:[],ti:[],ic:[]}
 d_[x[1]]={}
 var m1=function(e,s,r,gg){
 var z=gz$gwx_2()
+cs.push("./pages/detail/index.wxml:view:1:1")
+var fE=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
+cs.push("./pages/detail/index.wxml:view:1:44")
+var hG=_n('view')
+_rz(z,hG,'class',2,e,s,gg)
+var oH=_v()
+_(hG,oH)
+if(_oz(z,3,e,s,gg)){oH.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:128")
+cs.pop()
+}
+cs.push("./pages/detail/index.wxml:view:1:257")
+var cI=_n('view')
+_rz(z,cI,'class',4,e,s,gg)
+var oJ=_v()
+_(cI,oJ)
+if(_oz(z,5,e,s,gg)){oJ.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:284")
+cs.pop()
+}
+var lK=_v()
+_(cI,lK)
+if(_oz(z,6,e,s,gg)){lK.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:339")
+cs.pop()
+}
+oJ.wxXCkey=1
+lK.wxXCkey=1
+cs.pop()
+_(hG,cI)
+cs.push("./pages/detail/index.wxml:view:1:471")
+var aL=_n('view')
+_rz(z,aL,'class',7,e,s,gg)
+var tM=_v()
+_(aL,tM)
+if(_oz(z,8,e,s,gg)){tM.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:495")
+cs.pop()
+}
+var eN=_v()
+_(aL,eN)
+if(_oz(z,9,e,s,gg)){eN.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:550")
+cs.pop()
+}
+tM.wxXCkey=1
+eN.wxXCkey=1
+cs.pop()
+_(hG,aL)
+oH.wxXCkey=1
+cs.pop()
+_(fE,hG)
+cs.push("./pages/detail/index.wxml:view:1:719")
+var bO=_n('view')
+_rz(z,bO,'class',10,e,s,gg)
+cs.push("./pages/detail/index.wxml:view:1:744")
+var oR=_n('view')
+_rz(z,oR,'class',11,e,s,gg)
+var fS=_v()
+_(oR,fS)
+if(_oz(z,12,e,s,gg)){fS.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:768")
+cs.pop()
+}
+var cT=_v()
+_(oR,cT)
+if(_oz(z,13,e,s,gg)){cT.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:830")
+cs.pop()
+}
+var hU=_v()
+_(oR,hU)
+if(_oz(z,14,e,s,gg)){hU.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:892")
+cs.pop()
+}
+var oV=_v()
+_(oR,oV)
+if(_oz(z,15,e,s,gg)){oV.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:960")
+cs.pop()
+}
+var cW=_v()
+_(oR,cW)
+if(_oz(z,16,e,s,gg)){cW.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1022")
+cs.pop()
+}
+var oX=_v()
+_(oR,oX)
+if(_oz(z,17,e,s,gg)){oX.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1093")
+cs.pop()
+}
+fS.wxXCkey=1
+cT.wxXCkey=1
+hU.wxXCkey=1
+oV.wxXCkey=1
+cW.wxXCkey=1
+oX.wxXCkey=1
+cs.pop()
+_(bO,oR)
+var oP=_v()
+_(bO,oP)
+if(_oz(z,18,e,s,gg)){oP.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1166")
+cs.pop()
+}
+var xQ=_v()
+_(bO,xQ)
+if(_oz(z,19,e,s,gg)){xQ.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1262")
+cs.pop()
+}
+oP.wxXCkey=1
+xQ.wxXCkey=1
+cs.pop()
+_(fE,bO)
+var cF=_v()
+_(fE,cF)
+if(_oz(z,20,e,s,gg)){cF.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1758")
+cs.pop()
+}
+cF.wxXCkey=1
+cs.pop()
+_(r,fE)
 return r
 }
 e_[x[1]]={f:m1,j:[],i:[],ti:[],ic:[]}
@@ -1265,40 +1309,177 @@ e_[x[2]]={f:m2,j:[],i:[],ti:[],ic:[]}
 d_[x[3]]={}
 var m3=function(e,s,r,gg){
 var z=gz$gwx_4()
-cs.push("./pages/record/index.wxml:view:1:1")
-var lY=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
-var aZ=_v()
-_(lY,aZ)
-if(_oz(z,2,e,s,gg)){aZ.wxVkey=1
-cs.push("./pages/record/index.wxml:block:1:1411")
-cs.pop()
-}
-var t1=_v()
-_(lY,t1)
-if(_oz(z,3,e,s,gg)){t1.wxVkey=1
-cs.push("./pages/record/index.wxml:block:1:1823")
-cs.pop()
-}
+cs.push("./pages/login/index.wxml:view:1:1")
+var t1=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 var e2=_v()
-_(lY,e2)
-if(_oz(z,4,e,s,gg)){e2.wxVkey=1
-cs.push("./pages/record/index.wxml:block:1:2016")
+_(t1,e2)
+if(_oz(z,2,e,s,gg)){e2.wxVkey=1
+cs.push("./pages/login/index.wxml:block:1:847")
 cs.pop()
 }
-aZ.wxXCkey=1
-t1.wxXCkey=1
 e2.wxXCkey=1
 cs.pop()
-_(r,lY)
+_(r,t1)
 return r
 }
 e_[x[3]]={f:m3,j:[],i:[],ti:[],ic:[]}
 d_[x[4]]={}
 var m4=function(e,s,r,gg){
 var z=gz$gwx_5()
+cs.push("./pages/record/index.wxml:view:1:1")
+var o4=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
+var x5=_v()
+_(o4,x5)
+if(_oz(z,2,e,s,gg)){x5.wxVkey=1
+cs.push("./pages/record/index.wxml:block:1:461")
+cs.push("./pages/record/index.wxml:view:1:496")
+var h9=_n('view')
+_rz(z,h9,'class',3,e,s,gg)
+var o0=_v()
+_(h9,o0)
+if(_oz(z,4,e,s,gg)){o0.wxVkey=1
+cs.push("./pages/record/index.wxml:block:1:657")
+cs.pop()
+}
+var cAB=_v()
+_(h9,cAB)
+if(_oz(z,5,e,s,gg)){cAB.wxVkey=1
+cs.push("./pages/record/index.wxml:block:1:1482")
+cs.pop()
+}
+o0.wxXCkey=1
+cAB.wxXCkey=1
+cs.pop()
+_(x5,h9)
+cs.pop()
+}
+var o6=_v()
+_(o4,o6)
+if(_oz(z,6,e,s,gg)){o6.wxVkey=1
+cs.push("./pages/record/index.wxml:block:1:1909")
+cs.pop()
+}
+var f7=_v()
+_(o4,f7)
+if(_oz(z,7,e,s,gg)){f7.wxVkey=1
+cs.push("./pages/record/index.wxml:block:1:2182")
+cs.pop()
+}
+var c8=_v()
+_(o4,c8)
+if(_oz(z,8,e,s,gg)){c8.wxVkey=1
+cs.push("./pages/record/index.wxml:block:1:2567")
+cs.pop()
+}
+x5.wxXCkey=1
+o6.wxXCkey=1
+f7.wxXCkey=1
+c8.wxXCkey=1
+cs.pop()
+_(r,o4)
 return r
 }
 e_[x[4]]={f:m4,j:[],i:[],ti:[],ic:[]}
+d_[x[5]]={}
+var m5=function(e,s,r,gg){
+var z=gz$gwx_6()
+cs.push("./pages/setting/index.wxml:view:1:1")
+var lCB=_mz(z,'view',['bind:__l',0,'class',1,'style',1],[],e,s,gg)
+cs.push("./pages/setting/index.wxml:view:1:99")
+var eFB=_n('view')
+_rz(z,eFB,'class',3,e,s,gg)
+var bGB=_v()
+_(eFB,bGB)
+if(_oz(z,4,e,s,gg)){bGB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:151")
+cs.pop()
+}
+var oHB=_v()
+_(eFB,oHB)
+if(_oz(z,5,e,s,gg)){oHB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:331")
+cs.pop()
+}
+bGB.wxXCkey=1
+oHB.wxXCkey=1
+cs.pop()
+_(lCB,eFB)
+cs.push("./pages/setting/index.wxml:view:1:2155")
+var xIB=_n('view')
+_rz(z,xIB,'class',6,e,s,gg)
+var oJB=_v()
+_(xIB,oJB)
+if(_oz(z,7,e,s,gg)){oJB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:2213")
+cs.pop()
+}
+var fKB=_v()
+_(xIB,fKB)
+if(_oz(z,8,e,s,gg)){fKB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:2392")
+cs.pop()
+}
+oJB.wxXCkey=1
+fKB.wxXCkey=1
+cs.pop()
+_(lCB,xIB)
+cs.push("./pages/setting/index.wxml:view:1:3809")
+var cLB=_n('view')
+_rz(z,cLB,'class',9,e,s,gg)
+var hMB=_v()
+_(cLB,hMB)
+if(_oz(z,10,e,s,gg)){hMB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:3870")
+cs.pop()
+}
+var oNB=_v()
+_(cLB,oNB)
+if(_oz(z,11,e,s,gg)){oNB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:4050")
+cs.pop()
+}
+hMB.wxXCkey=1
+oNB.wxXCkey=1
+cs.pop()
+_(lCB,cLB)
+cs.push("./pages/setting/index.wxml:view:1:5472")
+var cOB=_n('view')
+_rz(z,cOB,'class',12,e,s,gg)
+var oPB=_v()
+_(cOB,oPB)
+if(_oz(z,13,e,s,gg)){oPB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:5530")
+cs.pop()
+}
+var lQB=_v()
+_(cOB,lQB)
+if(_oz(z,14,e,s,gg)){lQB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:5710")
+cs.pop()
+}
+oPB.wxXCkey=1
+lQB.wxXCkey=1
+cs.pop()
+_(lCB,cOB)
+var aDB=_v()
+_(lCB,aDB)
+if(_oz(z,15,e,s,gg)){aDB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:7502")
+cs.pop()
+}
+var tEB=_v()
+_(lCB,tEB)
+if(_oz(z,16,e,s,gg)){tEB.wxVkey=1
+cs.push("./pages/setting/index.wxml:block:1:7879")
+cs.pop()
+}
+aDB.wxXCkey=1
+tEB.wxXCkey=1
+cs.pop()
+_(r,lCB)
+return r
+}
+e_[x[5]]={f:m5,j:[],i:[],ti:[],ic:[]}
 if(path&&e_[path]){
 return function(env,dd,global){$gwxc=0;var root={"tag":"wx-page"};root.children=[]
 var main=e_[path].f
@@ -1319,8 +1500,11 @@ return root;
 
 
 
-__wxAppCode__['app.json']={"pages":["pages/index/index","pages/login/index","pages/detail/index","pages/record/index","pages/setting/index"],"subPackages":[],"window":{"navigationBarTextStyle":"black","navigationBarTitleText":"微麟守护者","navigationBarBackgroundColor":"#F8F8F8","backgroundColor":"#F8F8F8"},"splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"appname":"微麟守护者","compilerVersion":"1.9.4","usingComponents":{}};
+__wxAppCode__['app.json']={"pages":["pages/index/index","pages/login/index","pages/code/index","pages/detail/index","pages/record/index","pages/setting/index"],"subPackages":[],"window":{"navigationBarTextStyle":"black","navigationBarTitleText":"微麟守护者","navigationBarBackgroundColor":"#F8F8F8","backgroundColor":"#F8F8F8"},"splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"appname":"微麟守护者","compilerVersion":"1.9.4","usingComponents":{}};
 __wxAppCode__['app.wxml']=$gwx('./app.wxml');
+
+__wxAppCode__['pages/code/index.json']={"navigationBarTitleText":"添加设备","usingComponents":{}};
+__wxAppCode__['pages/code/index.wxml']=$gwx('./pages/code/index.wxml');
 
 __wxAppCode__['pages/detail/index.json']={"navigationBarTitleText":"微麟守护","usingComponents":{}};
 __wxAppCode__['pages/detail/index.wxml']=$gwx('./pages/detail/index.wxml');
@@ -1424,7 +1608,7 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch() {
-    console.log('App Launch', " at App.vue:4");
+    // console.log('App Launch');
 
     // 锁定屏幕方向
     plus.screen.lockOrientation('portrait-primary'); //锁定
@@ -1437,7 +1621,7 @@ __webpack_require__.r(__webpack_exports__);
         imei: plus.device.imei },
 
       success: function success(res) {
-        console.log('success', res, " at App.vue:17");
+        // console.log('success', res);
         if (res.statusCode == 200 && res.data.isUpdate) {
           var openUrl = plus.os.name === 'iOS' ? res.data.iOS : res.data.Android;
           // 提醒用户更新
@@ -1456,10 +1640,10 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   onShow: function onShow() {
-    console.log('App Show', " at App.vue:36");
+    // console.log('App Show')
   },
   onHide: function onHide() {
-    console.log('App Hide', " at App.vue:39");
+    // console.log('App Hide')
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
@@ -1647,6 +1831,37 @@ define('common/vendor.js',function(require, module, exports, window, document, f
 /* WEBPACK VAR INJECTION */(function(uni) {var baseHost = 'https://api.darma.cn/mattress';
 var imgUrl = 'http://www.hanjiaxin.cn/images/';
 var deviceNos = '641743000773';
+/**
+                                 * 报警规则初始化值
+                                 */
+var warnRule = {
+  device: false, // 是否监控离床
+  deviceTimes: '10', // 离床持续时间
+  deviceStart: '00:00', // 监控时段开始
+  deviceEnd: '23:59', // 监控时段结束
+  heart: false, // 是否监控心率
+  heartUp: '120', // 心率过快峰值
+  heartDown: '40', // 心率过慢峰值
+  breath: false, // 是否监控呼吸率
+  breathUp: '30', // 呼吸过快峰值
+  breathDown: '8', // 呼吸过慢峰值
+  motion: false, // 是否监控体动值
+  motionTimes: '5', // 大幅体动持续时间
+  motionStart: '0:00', // 体动监控时段开始
+  motionEnd: '23:59' // 体动监控时段结束
+};
+/**
+    * 报警状态记录
+    */
+var warnState = {
+  warnNing: 0, // 是否正在报警
+  warnNo: null, // 报警类型 0离床、1心率、2呼吸率、3体动
+  warnDeviceTime: null, // 离床报警记录点时间戳
+  warnHeartTime: null, // 心率报警记录点时间戳
+  warnBreathTime: null, // 心率报警记录点时间戳
+  warnMotionTime: null, // 心率报警记录点时间戳
+  warningText: '' // 报警提示语
+};
 
 function formatTime(time) {
   if (typeof time !== 'number' || time < 0) {
@@ -1724,6 +1939,7 @@ var dateUtils = {
 function setCookie(key, value) {
   uni.setStorageSync(key, value);
 }
+
 function setStorage(key, value) {
   uni.setStorageSync(key, value);
 }
@@ -1736,6 +1952,7 @@ function setStorage(key, value) {
 function getCookie(key) {
   return uni.getStorageSync(key);
 }
+
 function getStorage(key) {
   return uni.getStorageSync(key);
 }
@@ -1796,8 +2013,106 @@ function myAjax2(type, url, data, res, reg) {
     } });
 
 }
+/**
+   * 获取报警规则缓存
+   * @param {Object} that
+   */
+function getWarnCookie(that) {
+  var warnRule = JSON.parse(getCookie('warnRule'));
+  that.device = warnRule.device;
+  that.deviceTimes = warnRule.deviceTimes;
+  that.deviceStart = warnRule.deviceStart;
+  that.deviceEnd = warnRule.deviceEnd;
+  that.heart = warnRule.heart;
+  that.heartUp = warnRule.heartUp;
+  that.heartDown = warnRule.heartDown;
+  that.breath = warnRule.breath;
+  that.breathUp = warnRule.breathUp;
+  that.breathDown = warnRule.breathDown;
+  that.motion = warnRule.motion;
+  that.motionTimes = warnRule.motionTimes;
+  that.motionStart = warnRule.motionStart;
+  that.motionEnd = warnRule.motionEnd;
+}
+
+/**
+   * 设置报警规则缓存
+   * @param {Object} that
+   */
+function setWarnCookie(that) {
+  var warnRule = {
+    device: that.device,
+    deviceTimes: that.deviceTimes,
+    deviceStart: that.deviceStart,
+    deviceEnd: that.deviceEnd,
+    heart: that.heart,
+    heartUp: that.heartUp,
+    heartDown: that.heartDown,
+    breath: that.breath,
+    breathUp: that.breathUp,
+    breathDown: that.breathDown,
+    motion: that.motion,
+    motionTimes: that.motionTimes,
+    motionStart: that.motionStart,
+    motionEnd: that.motionEnd };
+
+  setCookie('warnRule', JSON.stringify(warnRule));
+}
+
+/**
+   * 关闭报警
+   * @param {Object} that
+   * @param {Object} backgroundAudioManager
+   */
+function audioPause(that, backgroundAudioManager) {
+  backgroundAudioManager.pause();
+  warnState.warnNing = 0;
+  if (warnState.warnNo == 0) {
+    warnState.warnDeviceTime = null;
+  } else if (warnState.warnNo == 1) {
+    warnState.warnHeartTime = null;
+  } else if (warnState.warnNo == 2) {
+    warnState.warnBreathTime = null;
+  } else if (warnState.warnNo == 3) {
+    warnState.warnMotionTime = null;
+  }
+  warnState.warningText = '';
+  warnState.warnNo = null;
+  changeWarn(that);
+}
+/**
+   * 同步报警状态值
+   * @param {Object} that
+   */
+function changeWarn(that) {
+  that.warnNing = warnState.warnNing;
+  that.warnNo = warnState.warnNo;
+  that.warnDeviceTime = warnState.warnDeviceTime;
+  that.warnHeartTime = warnState.warnHeartTime;
+  that.warnBreathTime = warnState.warnBreathTime;
+  that.warnMotionTime = warnState.warnMotionTime;
+  that.warningText = warnState.warningText;
+}
+
+/**
+   * toast提示弹窗
+   * @param {Object} that
+   * @param {Object} text
+   */
+function showToastBox(that, text) {
+  that.toastTxt = text;
+  that.showToast = 1;
+  setTimeout(function () {
+    that.toastTxt = '';
+    that.showToast = 0;
+  }, 3000);
+}
 
 module.exports = {
+  baseHost: baseHost,
+  imgUrl: imgUrl,
+  warnRule: warnRule,
+  warnState: warnState,
   formatTime: formatTime,
   formatLocation: formatLocation,
   dateUtils: dateUtils,
@@ -1806,7 +2121,12 @@ module.exports = {
   setStorage: setStorage,
   getStorage: getStorage,
   myAjax: myAjax,
-  myAjax2: myAjax2 };
+  myAjax2: myAjax2,
+  getWarnCookie: getWarnCookie,
+  setWarnCookie: setWarnCookie,
+  audioPause: audioPause,
+  changeWarn: changeWarn,
+  showToastBox: showToastBox };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
 /***/ }),
@@ -4431,13 +4751,39 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "../../../../
 
 _vue.default.config.productionTip = false;
 
-_App.default.mpType = 'app';
+_vue.default.prototype.warningAuto = '0'; // 报警开关
+_vue.default.prototype.warningText = ''; // 报警提示语
+_vue.default.prototype.warningState = '0'; // 报警类型 0离床，1心跳，2呼吸，3体动
 
+_vue.default.prototype.$backgroundAudioData = {
+  playing: false,
+  playTime: 0,
+  formatedPlayTime: '00:00:00' };
+
+
+_App.default.mpType = 'app';
 var app = new _vue.default(_objectSpread({},
 _App.default));
 
 createApp(app).$mount();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createApp"]))
+
+/***/ }),
+
+/***/ "../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Fcode%2Findex\"}":
+/*!**********************************************************************!*\
+  !*** D:/work/uni-app-weilin/main.js?{"page":"pages%2Fcode%2Findex"} ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../work/uni-app-weilin/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/code/index.vue */ "../../../../work/uni-app-weilin/pages/code/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_index.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
@@ -11702,14 +12048,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
 var setStorage = util.setStorage;
 var getStorage = util.getStorage;var _default =
+
 {
   data: function data() {
     return {
@@ -11718,11 +12063,21 @@ var getStorage = util.getStorage;var _default =
   },
   onLoad: function onLoad() {
     var accessToken = getCookie('accessToken');
+    var deviceNos = getCookie('deviceNos');
+    var warnRule = getCookie('warnRule');
+    if (!warnRule) {
+      warnRule = util.warnRule;
+      setCookie('warnRule', JSON.stringify(warnRule));
+    }
     this.show = accessToken;
     setTimeout(function () {
       if (!accessToken) {
         uni.redirectTo({
           url: '../login/index' });
+
+      } else if (!deviceNos) {
+        uni.redirectTo({
+          url: '../code/index' });
 
       } else {
         uni.redirectTo({
@@ -11732,13 +12087,13 @@ var getStorage = util.getStorage;var _default =
     }, 5000);
   },
   onLaunch: function onLaunch() {
-    console.log('App Launch-2', " at pages\\index\\index.vue:46");
+    // console.log('App Launch-2');
   },
   onShow: function onShow() {
-    console.log('App Show-2', " at pages\\index\\index.vue:49");
+    // console.log('App Show-2');
   },
   onHide: function onHide() {
-    console.log('App Hide-2', " at pages\\index\\index.vue:52");
+    // console.log('App Hide-2');
   },
   methods: {
     linkToLogin: function linkToLogin() {
@@ -11910,6 +12265,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
@@ -11921,7 +12281,9 @@ var myAjax = util.myAjax;var _default =
   data: function data() {
     return {
       title: '登录',
-      userInfo: '',
+      showToast: 0,
+      toastTxt: '',
+      userInfo: null,
       inputValue: '',
       inputPassWords: '' };
 
@@ -11931,13 +12293,13 @@ var myAjax = util.myAjax;var _default =
     // console.log(timestamp)
   },
   onLaunch: function onLaunch() {
-    console.log('App Launch-login', " at pages\\login\\index.vue:42");
+    console.log('App Launch-login', " at pages\\login\\index.vue:49");
   },
   onShow: function onShow() {
-    console.log('App Show-login', " at pages\\login\\index.vue:45");
+    console.log('App Show-login', " at pages\\login\\index.vue:52");
   },
   onHide: function onHide() {
-    console.log('App Hide-login', " at pages\\login\\index.vue:48");
+    console.log('App Hide-login', " at pages\\login\\index.vue:55");
   },
   methods: {
     bindKeyInput: function bindKeyInput(event) {
@@ -11956,7 +12318,7 @@ var myAjax = util.myAjax;var _default =
 
       _this.inputValue,inputPassWords = _this.inputPassWords;
       if (!inputValue || !inputPassWords) {
-        console.log('请输入用户名、密码!', " at pages\\login\\index.vue:67");
+        util.showToastBox(_this, '请输入用户名、密码!');
         return false;
       }
       var obj = {
@@ -11965,23 +12327,30 @@ var myAjax = util.myAjax;var _default =
 
 
       myAjax('post', '/user/authorize', obj, function (res) {
+        var deviceNos = getCookie('deviceNos');
         if (res.retCode == '10000') {
           _this.userInfo = res.successData;
           setCookie('accessToken', res.successData.accessToken);
           setCookie('username', res.successData.username);
-          uni.redirectTo({
-            url: '../detail/index' });
+          if (!deviceNos) {
+            uni.redirectTo({
+              url: '../code/index' });
 
+          } else {
+            uni.redirectTo({
+              url: '../detail/index' });
+
+          }
         } else if (res.retCode == '10007') {
-          console.log('用户名或密码错误', " at pages\\login\\index.vue:84");
+          util.showToastBox(_this, '用户名或密码错误!');
         } else if (res.retCode == '10008') {
-          console.log('token已过期，请重新登录', " at pages\\login\\index.vue:86");
+          util.showToastBox(_this, 'token已过期，请重新登录!');
         } else {
-          console.log('未知错误，请重新登录', " at pages\\login\\index.vue:88");
+          util.showToastBox(_this, '未知错误，请重新登录!');
         }
-        console.log(JSON.stringify(res), " at pages\\login\\index.vue:90");
+        console.log(JSON.stringify(res), " at pages\\login\\index.vue:104");
       }, function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\login\\index.vue:92");
+        console.log(JSON.stringify(reg), " at pages\\login\\index.vue:106");
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
@@ -12025,6 +12394,258 @@ render._withStripped = true
 },[["../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Flogin%2Findex\"}","common/runtime","common/vendor"]]]);
 });
 require('pages/login/index.js');
+__wxRoute = 'pages/code/index';__wxRouteBegin = true;__wxAppCurrentFile__ = 'pages/code/index.js';
+
+define('pages/code/index.js',function(require, module, exports, window, document, frames, self, location, navigator, localStorage, history, Caches, screen, alert, confirm, prompt, fetch, XMLHttpRequest, WebSocket, webkit, WeixinJSCore, Reporter, print, WeixinJSBridge){
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/code/index"],{
+
+/***/ "../../../../work/uni-app-weilin/pages/code/index.vue":
+/*!***************************************************!*\
+  !*** D:/work/uni-app-weilin/pages/code/index.vue ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_vue_vue_type_template_id_570ef4fb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=570ef4fb& */ "../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=template&id=570ef4fb&");
+/* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.vue?vue&type=style&index=0&lang=css& */ "../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _index_vue_vue_type_template_id_570ef4fb___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _index_vue_vue_type_template_id_570ef4fb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "work/uni-app-weilin/pages/code/index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** D:/work/uni-app-weilin/pages/code/index.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************!*\
+  !*** D:/work/uni-app-weilin/pages/code/index.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/css-loader??ref--6-oneOf-1-2!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/postcss-loader/src??ref--6-oneOf-1-3!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=style&index=0&lang=css& */ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=template&id=570ef4fb&":
+/*!**********************************************************************************!*\
+  !*** D:/work/uni-app-weilin/pages/code/index.vue?vue&type=template&id=570ef4fb& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_570ef4fb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!../../../../软件备份/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=template&id=570ef4fb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=template&id=570ef4fb&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_570ef4fb___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_570ef4fb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!D:/work/uni-app-weilin/pages/code/index.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
+var setCookie = util.setCookie;
+var getCookie = util.getCookie;
+var setStorage = util.setStorage;
+var getStorage = util.getStorage;
+var myAjax = util.myAjax;
+var myAjax2 = util.myAjax2;var _default =
+
+{
+  data: function data() {
+    return {
+      title: '添加设备',
+      showToast: 0,
+      toastTxt: '',
+      userInfo: '',
+      inputValue: '',
+      inputPassWords: '',
+      inputCode: '' };
+
+  },
+  onLoad: function onLoad() {
+    // var timestamp = Date.parse(new Date())
+    // console.log(timestamp)
+  },
+  onLaunch: function onLaunch() {
+    console.log('App Launch-login', " at pages\\code\\index.vue:46");
+  },
+  onShow: function onShow() {
+    console.log('App Show-login', " at pages\\code\\index.vue:49");
+  },
+  onHide: function onHide() {
+    console.log('App Hide-login', " at pages\\code\\index.vue:52");
+  },
+  methods: {
+    bindScanCode: function bindScanCode() {
+      // 只允许通过相机扫码
+      var _this = this;
+      uni.scanCode({
+        onlyFromCamera: true,
+        success: function success(res) {
+          console.log('条码类型：' + res.scanType, " at pages\\code\\index.vue:61");
+          console.log('条码内容：' + res.result, " at pages\\code\\index.vue:62");
+          _this.inputCode = res.result;
+        } });
+
+    },
+    bindCodeInput: function bindCodeInput(event) {
+      this.inputCode = event.target.value;
+    },
+    /**
+        * 08. 获取设备的信息
+        */
+    toConfirm: function toConfirm() {
+      var _this = this;
+      var deviceNos = this.inputCode;
+      if (isNaN(deviceNos)) {
+        util.showToastBox(_this, '设备编码校验有误，请重新输入！');
+        return;
+      } else if ((deviceNos + '').length != 12) {
+        util.showToastBox(_this, '设备编码校验有误，请重新输入！');
+        return;
+      }
+      var obj = {
+        deviceNos: _this.inputCode };
+
+      myAjax2(
+      'post',
+      '/device/physiology/actual',
+      obj,
+      function (res) {
+        if (res.retCode == '10000' && res.successData != '') {
+          setCookie('deviceNos', _this.inputCode);
+          util.showToastBox(_this, '设备添加成功，即将跳转！');
+          setTimeout(function () {
+            uni.redirectTo({
+              url: '../detail/index' });
+
+          }, 3000);
+        } else {
+          util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
+        }
+        console.log(JSON.stringify(res), " at pages\\code\\index.vue:102");
+      },
+      function (reg) {
+        console.log(JSON.stringify(reg), " at pages\\code\\index.vue:105");
+      });
+
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
+
+/***/ }),
+
+/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/vue-loader/lib??vue-loader-options!D:/work/uni-app-weilin/pages/code/index.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!../../../../work/uni-app-weilin/pages/code/index.vue?vue&type=template&id=570ef4fb&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib??vue-loader-options!D:/work/uni-app-weilin/pages/code/index.vue?vue&type=template&id=570ef4fb& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ })
+
+},[["../../../../work/uni-app-weilin/main.js?{\"page\":\"pages%2Fcode%2Findex\"}","common/runtime","common/vendor"]]]);
+});
+require('pages/code/index.js');
 __wxRoute = 'pages/detail/index';__wxRouteBegin = true;__wxAppCurrentFile__ = 'pages/detail/index.js';
 
 define('pages/detail/index.js',function(require, module, exports, window, document, frames, self, location, navigator, localStorage, history, Caches, screen, alert, confirm, prompt, fetch, XMLHttpRequest, WebSocket, webkit, WeixinJSCore, Reporter, print, WeixinJSBridge){
@@ -12183,14 +12804,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
@@ -12200,12 +12813,13 @@ var getStorage = util.getStorage;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
 var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
+
 {
   data: function data() {
     return {
       title: '微麟守护者',
       userInfo: null,
-      deviceNos: '641743000773', // 设备号
+      deviceNos: '', // 设备号
       accessToken: null,
       breath: '--', // 呼吸值 -100_无效值，其他为正常值
       deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
@@ -12215,68 +12829,75 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       timer: null,
       toast: 0,
       toastTxt: '',
-      loading: 0,
-      warning: 0,
-      warningText: '',
-      leaveTime: null };
-
+      loading: 0
+      // warning: 1,
+      // warningText: '',
+      // leaveTime: null
+    };
   },
-  onLoad: function onLoad() {
-
-  },
+  onLoad: function onLoad() {},
   onLaunch: function onLaunch() {
-    console.log('App Launch-detail', " at pages\\detail\\index.vue:98");
+    console.log('App Launch-detail', " at pages\\detail\\index.vue:89");
   },
   onShow: function onShow() {
+    var _this = this;
     var accessToken = getCookie('accessToken');
+    var deviceNos = getCookie('deviceNos');
     var userInfo = getCookie('username');
     if (!accessToken) {
       uni.redirectTo({
         url: '../login/index' });
 
+    } else if (!deviceNos) {
+      uni.redirectTo({
+        url: '../code/index' });
+
     } else {
-      this.userInfo = userInfo;
-      this.accessToken = accessToken;
-      this.getActual();
-      this.setSocketTask();
-      var _this = this;
+      util.changeWarn(_this, backgroundAudioManager);
+      util.getWarnCookie(_this);
+      _this.userInfo = userInfo;
+      _this.accessToken = accessToken;
+      _this.deviceNos = deviceNos;
+      _this.getActual();
+      _this.setSocketTask();
       this.timer = setInterval(function () {
         _this.getActual();
       }, 10000);
-
     }
   },
   onHide: function onHide() {
-    console.log('App Hide-detail', " at pages\\detail\\index.vue:120");
+    console.log('App Hide-detail', " at pages\\detail\\index.vue:118");
   },
   methods: {
     /**
-              * 03. 获取设备当前的状态/⼼率/呼吸/体动数据
+              * 03. 获取设备当前的状态/心率/呼吸/体动数据
               */
     getActual: function getActual() {
       var obj = {
         deviceNos: this.deviceNos };
 
       var _this = this;
-      myAjax2('post', '/device/physiology/actual', obj, function (res) {
+      myAjax2(
+      'post',
+      '/device/physiology/actual',
+      obj,
+      function (res) {
         if (res.retCode == '10000') {
           if (res.successData[0].deviceStatus == 3 && _this.leaveTime) {
             var time = Date.parse(new Date());
             if (time - _this.leaveTime > 12000 && _this.warning == 0) {
-              console.log(time - _this.leaveTime, " at pages\\detail\\index.vue:136");
+              console.log(time - _this.leaveTime, " at pages\\detail\\index.vue:138");
               _this.warningText = '离床报警已触发';
               _this.warning = 1;
-              // _this.audioCtx = uni.createAudioContext('myAudio')
-              // _this.audioCtx.setSrc('http://www.hanjiaxin.cn/images/warning.mp3')
-              // _this.audioCtx.play()
+
               backgroundAudioManager.title = '报警';
               backgroundAudioManager.epname = '报警';
               backgroundAudioManager.singer = '报警';
               backgroundAudioManager.coverImgUrl = '';
               // 设置了 src 之后会自动播放
-              backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
+              backgroundAudioManager.src = '/static/warning.mp3';
               backgroundAudioManager.onEnded(function () {
-                backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
+                backgroundAudioManager.src = '/static/warning.mp3?time=' + Date.parse(new Date());
               });
             }
           }
@@ -12292,21 +12913,18 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
           uni.redirectTo({
             url: '../login/index' });
 
-
         }
-      }, function (reg) {
+      },
+      function (reg) {
         console.log(JSON.stringify(reg), " at pages\\detail\\index.vue:168");
       });
+
     },
     /**
         * 关闭报警
         */
     audioPause: function audioPause() {
-      // this.audioCtx.pause()
-      backgroundAudioManager.pause();
-      this.leaveTime = null,
-      this.warning = 0;
-
+      util.audioPause(this, backgroundAudioManager);
     },
     linkRecord: function linkRecord() {
       uni.navigateTo({
@@ -12320,28 +12938,27 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     },
     setSocketTask: function setSocketTask() {
       var accessToken = util.getCookie('accessToken');
-      var deviceNo = this.deviceNos;
       var _this = this;
       // 建立连接
-      console.log('建立连接!', " at pages\\detail\\index.vue:196");
+      console.log('建立连接!', " at pages\\detail\\index.vue:192");
       wx.connectSocket({
-        url: "ws://stream.darma.cn:17004/ws",
+        url: 'ws://stream.darma.cn:17004/ws',
         sluccess: function sluccess() {
-          console.log('连接成功...', " at pages\\detail\\index.vue:200");
+          console.log('连接成功...', " at pages\\detail\\index.vue:196");
         },
         fail: function fail() {
-          console.log('连接失败...', " at pages\\detail\\index.vue:203");
+          console.log('连接失败...', " at pages\\detail\\index.vue:199");
         } });
 
       // 连接成功
       wx.onSocketOpen(function () {
-        console.log('连接成功!', " at pages\\detail\\index.vue:208");
+        console.log('连接成功!', " at pages\\detail\\index.vue:204");
         var obj = {
-          // 消息类型msgType⽬前有 login（登录消息），deviceStatus（设备状态消息）healthData（⼼率呼吸数据消息），paramError（参数错误消息）
+          // 消息类型msgType前有 login（登录消息），deviceStatus（设备状态消息）healthData（心率呼吸数据消息），paramError（参数错误消息）
           msgType: 'login',
           data: {
             token: accessToken,
-            // 订阅类型subType有“ALL”,“SINGLETON”(区分⼤⼩写)
+            // 订阅类型subType有“ALL”,“SINGLETON”(区分大小写)
             // subType: 'SINGLETON', /*订阅所有的设备*/
             deviceNo: _this.deviceNos } };
 
@@ -12353,9 +12970,8 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       // 接收数据
       wx.onSocketMessage(function (data) {
         // heartBreathBcg、healthBreathData、deviceStatus
-        if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType ==
-        'deviceStatus') {
-          console.log(data.data, " at pages\\detail\\index.vue:228");
+        if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
+          console.log(data.data, " at pages\\detail\\index.vue:223");
           // uni.showToast({
           //     title: data.data,
           //     duration: 1000
@@ -12364,18 +12980,17 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         // 当状态发生变化会初始化时，会推送此条数据
         if (JSON.parse(data.data).msgType == 'deviceStatus') {
           if (JSON.parse(data.data).data.deviceStatus == '3') {
-            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:237");
+            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:232");
             _this.leaveTime = Date.parse(new Date());
           } else {
             _this.leaveTime = null;
-            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:241");
+            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:236");
           }
         }
-
       });
       //连接失败
       wx.onSocketError(function () {
-        console.log('websocket连接失败！', " at pages\\detail\\index.vue:248");
+        console.log('websocket连接失败！', " at pages\\detail\\index.vue:242");
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
@@ -12605,6 +13220,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _wxcharts = _interopRequireDefault(__webpack_require__(/*! ../../components/wx-charts/wxcharts.js */ "../../../../work/uni-app-weilin/components/wx-charts/wxcharts.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -12687,7 +13319,24 @@ var _wxcharts = _interopRequireDefault(__webpack_require__(/*! ../../components/
 //
 //
 //
-var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var getCookie = util.getCookie;var setCookie = util.setCookie;var setStorage = util.setStorage;var getStorage = util.getStorage;var myAjax2 = util.myAjax2;var _default = { data: function data() {return { title: '历史记录', userInfo: null, deviceNos: '641743000773', // 设备号
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var getCookie = util.getCookie;var setCookie = util.setCookie;var setStorage = util.setStorage;var getStorage = util.getStorage;var myAjax2 = util.myAjax2;var backgroundAudioManager = wx.getBackgroundAudioManager();var _default = { data: function data() {return { title: '历史记录', showToast: 0, toastTxt: '', userInfo: null, deviceNos: '', // 设备号
       accessToken: null, breath: '--', // 呼吸值 -100_无效值，其他为正常值
       deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
       heart: '--', // 心率值 65436_无效值，其他为正常值
@@ -12698,13 +13347,7 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       endTime: null, // 结束时间
       historyData: [], cWidth: '', cHeight: '', cWidth2: '', //横屏图表
       cHeight2: '', //横屏图表
-      pixelRatio: 1, serverData: '' };}, onLoad: function onLoad() {_self = this;this.cWidth = uni.upx2px(750);this.cHeight = uni.upx2px(500);this.cWidth2 = uni.upx2px(700);this.cHeight2 = uni.upx2px(1100);}, onLaunch: function onLaunch() {// console.log('App Launch-record')
-  }, onShow: function onShow() {// console.log('App Show-record')
-    var accessToken = util.getCookie('accessToken');var _this = this;if (!accessToken) {wx.redirectTo({ url: '../login/index' });} else {_this.getTime(1);_this.history();}}, onHide: function onHide() {// console.log('App Hide-record')
-  }, methods: { linkToLogin: function linkToLogin() {uni.redirectTo({ url: '../login/index' });}, changeNav: function changeNav(type) {var tabNum = this.tabNum;if (tabNum != type) {this.tabNum = type;this.getTime(type);this.history();}}, getTime: function getTime(page) {var timestamp = Date.parse(new Date());var result = null;if (page == '1') {result = this.getTodayStartTime();} else if (page == '2') {result = parseInt(timestamp / 1000) - 259200;} else if (page == '3') {
-        result = parseInt(timestamp / 1000) - 604798;
-      }
-      this.endTime = parseInt(timestamp / 1000);
+      pixelRatio: 1, serverData: '', firstLoad: 0 };}, onLoad: function onLoad() {_self = this;this.cWidth = uni.upx2px(750);this.cHeight = uni.upx2px(500);this.cWidth2 = uni.upx2px(700);this.cHeight2 = uni.upx2px(1100);setTimeout(function () {this.firstLoad = 1;}, 2000);}, onLaunch: function onLaunch() {}, onShow: function onShow() {var _this = this;var accessToken = util.getCookie('accessToken');var deviceNos = getCookie('deviceNos');if (!accessToken) {wx.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {_this.accessToken = accessToken;_this.deviceNos = deviceNos;util.changeWarn(_this, backgroundAudioManager);util.getWarnCookie(_this);_this.getTime(1);_this.history();}}, onHide: function onHide() {}, methods: { linkToLogin: function linkToLogin() {uni.redirectTo({ url: '../login/index' });}, changeNav: function changeNav(type) {var tabNum = this.tabNum;if (tabNum != type) {this.tabNum = type;this.getTime(type);this.history();}}, getTime: function getTime(page) {var timestamp = Date.parse(new Date());var result = null;if (page == '1') {result = this.getTodayStartTime();} else if (page == '2') {result = parseInt(timestamp / 1000) - 259200;} else if (page == '3') {result = parseInt(timestamp / 1000) - 604798;}this.endTime = parseInt(timestamp / 1000);
       this.startTime = result;
     },
     /**
@@ -12718,17 +13361,23 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
         endTime: this.endTime };
 
       var _this = this;
-      myAjax2('post', '/device/physiology/history', obj, function (res) {
+      myAjax2(
+      'post',
+      '/device/physiology/history',
+      obj,
+      function (res) {
         if (res.retCode == '10000') {
-          console.log('history请求成功', " at pages\\record\\index.vue:199");
+          console.log('history请求成功', " at pages\\record\\index.vue:231");
           _this.setHistoryData(res);
         } else {
-          console.log('history未知错误', " at pages\\record\\index.vue:202");
+          console.log('history未知错误', " at pages\\record\\index.vue:234");
         }
         // console.log(JSON.stringify(res))
-      }, function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\record\\index.vue:206");
+      },
+      function (reg) {
+        console.log(JSON.stringify(reg), " at pages\\record\\index.vue:239");
       });
+
     },
     /**
         * 转换列表类数据
@@ -12761,23 +13410,27 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       this.chartsTidong = chartsTidong;
       var LineA = {
         categories: chartsTime,
-        series: [{
+        series: [
+        {
           name: '心率',
           data: chartsHeart,
           color: '#1890ff' },
+
         {
           name: '呼吸率',
           data: chartsBreath,
           color: '#2fc25b' },
+
         {
           name: '体动值',
           data: chartsTidong,
           color: '#facc14' }] };
 
 
+
       if (LineA.categories.length > 0 && LineA.series.length > 0) {
-        _self.showLineB("canvasLineB", LineA);
-        _self.showArea("canvasArea", LineA);
+        _self.showLineB('canvasLineB', LineA);
+        _self.showArea('canvasArea', LineA);
       }
     },
     /**
@@ -12797,7 +13450,7 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       if (minute < 10) minute = '0' + minute;
       var second = now.getSeconds();
       if (second < 10) second = '0' + second;
-      return month + "-" + date + " " + hour + ":" + minute + ":" + second;
+      return month + '-' + date + ' ' + hour + ':' + minute + ':' + second;
     },
     /**
         * 根据当前时间获取今日开始时间点
@@ -12807,7 +13460,7 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       var year = now.getFullYear();
       var month = now.getMonth() + 1;
       var date = now.getDate();
-      var time = year + '/' + month + "/" + date + " " + '00:00:01';
+      var time = year + '/' + month + '/' + date + ' ' + '00:00:01';
       return new Date(time).getTime() / 1000;
     },
     showLineA: function showLineA(canvasId, chartData) {
@@ -12931,6 +13584,12 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
           return category + ' ' + item.name + ':' + item.data;
         } });
 
+    },
+    /**
+        * 关闭报警
+        */
+    audioPause: function audioPause() {
+      util.audioPause(this, backgroundAudioManager);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
@@ -13253,37 +13912,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 function getDate(type) {
   var date = new Date();
@@ -13297,7 +13925,7 @@ function getDate(type) {
   } else if (type === 'end') {
     year = year + 2;
   }
-  month = month > 9 ? month : '0' + month;;
+  month = month > 9 ? month : '0' + month;
   day = day > 9 ? day : '0' + day;
 
   return "".concat(year, "-").concat(month, "-").concat(day);
@@ -13307,51 +13935,65 @@ var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
 var setStorage = util.setStorage;
-var getStorage = util.getStorage;var _default =
+var getStorage = util.getStorage;
+var changeWarn = util.changeWarn;
+var getWarnCookie = util.getWarnCookie;
+var myAjax2 = util.myAjax2;
+var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
 {
   data: function data() {
     return {
       title: '系统设置',
-      device: false, // 是否监控离床
-      deviceTimes: '10', // 离床持续时间
-      deviceStart: '00:00', // 监控时段开始
-      deviceEnd: '23:59', // 监控时段结束
-      heart: false, // 是否监控心率
-      heartUp: '120', // 心率过快峰值
-      heartDown: '40', // 心率过慢峰值
-      breath: false, // 是否监控呼吸率
-      breathUp: '30', // 呼吸过快峰值
-      breathDown: '8', // 呼吸过慢峰值
-      motion: false, // 是否监控体动值
-      motionTimes: '5', // 大幅体动持续时间
-      motionStart: '0:00', // 体动监控时段开始
-      motionEnd: '23:59' // 体动监控时段结束
+      showToast: 0,
+      toastTxt: '',
+      userInfo: null,
+      deviceNos: '', // 设备号
+      accessToken: null
+      // device: true, // 是否监控离床
+      // deviceTimes: '10', // 离床持续时间
+      // deviceStart: '00:00', // 监控时段开始
+      // deviceEnd: '23:59', // 监控时段结束
+      // heart: false, // 是否监控心率
+      // heartUp: '120', // 心率过快峰值
+      // heartDown: '40', // 心率过慢峰值
+      // breath: false, // 是否监控呼吸率
+      // breathUp: '30', // 呼吸过快峰值
+      // breathDown: '8', // 呼吸过慢峰值
+      // motion: false, // 是否监控体动值
+      // motionTimes: '5', // 大幅体动持续时间
+      // motionStart: '0:00', // 体动监控时段开始
+      // motionEnd: '23:59' // 体动监控时段结束
     };
   },
-  onLoad: function onLoad() {
-
-  },
-  onLaunch: function onLaunch() {
-    console.log('App Launch-2', " at pages\\setting\\index.vue:257");
-  },
+  onLoad: function onLoad() {},
+  onLaunch: function onLaunch() {},
   onShow: function onShow() {
-    console.log('App Show-2', " at pages\\setting\\index.vue:260");
-  },
-  onHide: function onHide() {
-    console.log('App Hide-2', " at pages\\setting\\index.vue:263");
-  },
-  methods: {
-    linkToLogin: function linkToLogin() {
-      uni.redirectTo({
+    var _this = this;
+    var accessToken = util.getCookie('accessToken');
+    var deviceNos = getCookie('deviceNos');
+    if (!accessToken) {
+      wx.redirectTo({
         url: '../login/index' });
 
-    },
+    } else if (!deviceNos) {
+      uni.redirectTo({
+        url: '../code/index' });
+
+    } else {
+      _this.accessToken = accessToken;
+      _this.deviceNos = deviceNos;
+      changeWarn(_this, backgroundAudioManager);
+      getWarnCookie(_this);
+    }
+  },
+  onHide: function onHide() {},
+  methods: {
     bindPickerChange: function bindPickerChange(e) {
-      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\setting\\index.vue:272");
+      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\setting\\index.vue:255");
       this.index = e.target.value;
     },
     bindMultiPickerColumnChange: function bindMultiPickerColumnChange(e) {
-      console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value, " at pages\\setting\\index.vue:276");
+      console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value, " at pages\\setting\\index.vue:259");
       this.multiIndex[e.detail.column] = e.detail.value;
       this.$forceUpdate();
     },
@@ -13360,6 +14002,111 @@ var getStorage = util.getStorage;var _default =
     },
     bindTime02Change: function bindTime02Change(e) {
       this.deviceEnd = e.target.value;
+    },
+    /**
+        * 关闭报警
+        */
+    audioPause: function audioPause() {
+      util.audioPause(this, backgroundAudioManager);
+    },
+    switch1Change: function switch1Change(e) {
+      this.device = e.target.value;
+      util.setWarnCookie(this);
+    },
+    switch2Change: function switch2Change(e) {
+      this.heart = e.target.value;
+      util.setWarnCookie(this);
+    },
+    switch3Change: function switch3Change(e) {
+      this.breath = e.target.value;
+      util.setWarnCookie(this);
+    },
+    switch4Change: function switch4Change(e) {
+      this.motion = e.target.value;
+      util.setWarnCookie(this);
+    },
+    deviceTimesChange: function deviceTimesChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 300) {
+        value = 1;
+        util.showToastBox(this, '请输入1-300的数字');
+      }
+      this.deviceTimes = value;
+      util.setWarnCookie(this);
+    },
+    deviceStartChange: function deviceStartChange(e) {
+      this.deviceStart = e.target.value;
+      util.setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
+    },
+    deviceEndChange: function deviceEndChange(e) {
+      this.deviceEnd = e.target.value;
+      util.setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
+    },
+    heartDownChange: function heartDownChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 180) {
+        value = 1;
+        util.showToastBox(this, '请输入1-180的数字');
+      }
+      this.heartDown = value;
+      util.setWarnCookie(this);
+    },
+    heartUpChange: function heartUpChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 180) {
+        value = 1;
+        util.showToastBox(this, '请输入1-180的数字');
+      }
+      this.heartUp = value;
+      util.setWarnCookie(this);
+    },
+    breathDownChange: function breathDownChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 180) {
+        value = 1;
+        util.showToastBox(this, '请输入1-180的数字');
+      }
+      this.breathDown = value;
+      util.setWarnCookie(this);
+    },
+    breathUpChange: function breathUpChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 180) {
+        value = 1;
+        util.showToastBox(this, '请输入1-180的数字');
+      }
+      this.breathUp = value;
+      util.setWarnCookie(this);
+    },
+    motionTimesChange: function motionTimesChange(e) {
+      var value = e.target.value;
+      if (value < 1 || value > 300) {
+        value = 1;
+        util.showToastBox(this, '请输入1-300的数字');
+      }
+      this.motionTimes = value;
+      // util.warnRule.motionTimes = value;
+      util.setWarnCookie(this);
+    },
+    motionEndChange: function motionEndChange(e) {
+      this.motionEnd = e.target.value;
+      util.setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
+    },
+    motionStartChange: function motionStartChange(e) {
+      this.motionStart = e.target.value;
+      util.setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
