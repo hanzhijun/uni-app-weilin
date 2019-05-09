@@ -1,7 +1,7 @@
 <template>
 
     <view class="login-outside">
-        <view class="login-line" style="padding-top: 100rpx">
+        <view class="login-line" style="padding-top: 100upx">
             <view class="section-title">用户名：</view>
             <input class="section-input" type="text" placeholder="输入用户名" @input="bindKeyInput" v-model="inputValue"></input>
         </view>
@@ -99,13 +99,13 @@
 <style>
     .login-line {
         overflow: hidden;
-        padding: 20rpx 0;
+        padding: 20upx 0;
     }
 
     .section-title {
         display: inline-block;
-        width: 200rpx;
-        line-height: 68rpx;
+        width: 200upx;
+        line-height: 68upx;
         float: left;
         font-size: 14px;
         text-align: right;
@@ -113,24 +113,24 @@
 
     .section-input {
         display: inline-block;
-        width: 400rpx;
-        height: 66rpx;
-        line-height: 66rpx;
+        width: 400upx;
+        height: 66upx;
+        line-height: 66upx;
         border: 1px solid #0099e9;
         border-radius: 3px;
         float: left;
         font-size: 14px;
-        padding-left: 20rpx;
+        padding-left: 20upx;
     }
 
     .section-center {
         text-align: center;
-        padding-top: 50rpx;
+        padding-top: 50upx;
     }
 
     .section-post {
         display: inline-block;
-        width: 500rpx;
+        width: 500upx;
         font-size: 16px;
         background-color: #0099e9;
         color: #fff;

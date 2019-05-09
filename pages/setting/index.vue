@@ -1,5 +1,5 @@
 <template>
-    <view class="set-outside" style="padding-top: 10rpx;">
+    <view class="set-outside" style="padding-top: 10upx;">
 
         <!-- 离床提醒 -->
         <view class="setting-section">
@@ -296,38 +296,38 @@
     }
 
     .set-outside .image {
-        width: 650rpx;
-        height: 600rpx;
-        margin: 100rpx auto 0;
+        width: 650upx;
+        height: 600upx;
+        margin: 100upx auto 0;
     }
 
     .setting-section {
-        width: 730rpx;
+        width: 730upx;
         overflow: hidden;
         background-color: #fff;
-        margin: 0 10rpx 10rpx;
+        margin: 0 10upx 10upx;
     }
 
     .setting-section .setting-auto {
-        height: 80rpx;
+        height: 80upx;
         border-bottom: 1px solid #eee;
     }
 
     .setting-section .setting-auto text {
         display: inline-block;
-        height: 40rpx;
-        line-height: 40rpx;
-        font-size: 28rpx;
+        height: 40upx;
+        line-height: 40upx;
+        font-size: 28upx;
         color: #000;
         border-left: 3px solid #0099e9;
         float: left;
-        margin: 20rpx 0 0 10rpx;
-        padding-left: 20rpx;
+        margin: 20upx 0 0 10upx;
+        padding-left: 20upx;
     }
 
     .setting-section .wx-switch-input {
         float: right;
-        margin: 10rpx 20rpx 0 0;
+        margin: 10upx 20upx 0 0;
         width: 82upx !important;
         height: 40upx !important;
     }

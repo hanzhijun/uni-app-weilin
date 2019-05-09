@@ -59,7 +59,7 @@
         </ul>
 
         <ul v-if="!historyData">
-            <li style="padding: 100rpx 0; overflow: hidden; display: block; font-size: 28rpx;">此时间段没有有效数据!</li>
+            <li style="padding: 100upx 0; overflow: hidden; display: block; font-size: 28upx;">此时间段没有有效数据!</li>
         </ul>
         
         <!--报警弹窗-->
@@ -438,18 +438,18 @@
     }
 
     .tab-bar {
-        width: 750rpx;
-        height: 70rpx;
+        width: 750upx;
+        height: 70upx;
         border-bottom: 1px solid #eee;
     }
 
     .tab-bar text {
         display: inline-block;
         width: 33%;
-        line-height: 70rpx;
+        line-height: 70upx;
         float: left;
         text-align: center;
-        font-size: 28rpx;
+        font-size: 28upx;
     }
 
     .tab-bar text.thisover {
@@ -458,18 +458,18 @@
 
     .record-tit {
         display: block;
-        width: 700rpx;
-        height: 100rpx;
-        line-height: 100rpx;
+        width: 700upx;
+        height: 100upx;
+        line-height: 100upx;
         border-bottom: 1px solid #eee;
-        margin: 0 25rpx;
+        margin: 0 25upx;
         text-align: left;
-        font-size: 30rpx;
+        font-size: 30upx;
     }
 
     .record-liebiao-tit {
-        width: 700rpx;
-        height: 60rpx;
+        width: 700upx;
+        height: 60upx;
         background-color: #eee;
         margin: 20upx 25upx 0;
         border: 1px solid #eee;
@@ -478,10 +478,10 @@
 
     .record-liebiao-tit text {
         display: inline-block;
-        line-height: 60rpx;
+        line-height: 60upx;
         width: 20%;
         float: left;
-        font-size: 24rpx;
+        font-size: 24upx;
         color: #666;
     }
 
@@ -491,8 +491,8 @@
 
     .record-liebiao-ul {
         display: block;
-        width: 700rpx;
-        margin: 0 25rpx 50rpx;
+        width: 700upx;
+        margin: 0 25upx 50upx;
         overflow: hidden;
         border: 1px solid #eee;
     }
@@ -500,7 +500,7 @@
     .record-liebiao-ul li {
         display: block;
         overflow: hidden;
-        height: 50rpx;
+        height: 50upx;
         text-align: center;
     }
 
@@ -511,9 +511,9 @@
     .record-liebiao-ul li text {
         display: inline-block;
         width: 20%;
-        height: 50rpx;
-        line-height: 50rpx;
-        font-size: 24rpx;
+        height: 50upx;
+        line-height: 50upx;
+        font-size: 24upx;
         color: #666;
         float: left;
     }
@@ -676,13 +676,13 @@
     }
     
     .warn-box .box-content {
-        width: 500rpx;
+        width: 500upx;
         background: rgba(0, 153, 233, 1);
         position: absolute;
-        left: calc(50vw - 250rpx);
-        top: calc(50vh - 350rpx);
-        border-radius: 20rpx;
-        padding-bottom: 60rpx;
+        left: calc(50vw - 250upx);
+        top: calc(50vh - 350upx);
+        border-radius: 20upx;
+        padding-bottom: 60upx;
     }
     
     .warn-box .box-content .img {
@@ -691,27 +691,27 @@
     }
     
     .warn-box .box-content .img image {
-        width: 250rpx;
-        height: 250rpx;
+        width: 250upx;
+        height: 250upx;
     }
     
     .warn-box .box-content .txt {
         display: block;
         text-align: center;
-        font-size: 30rpx;
+        font-size: 30upx;
         color: #f0f0f0;
-        padding: 30rpx 20rpx 0;
+        padding: 30upx 20upx 0;
         overflow: hidden;
     }
     
     .warn-box .box-content button {
-        width: 360rpx;
-        height: 70rpx;
-        line-height: 70rpx;
+        width: 360upx;
+        height: 70upx;
+        line-height: 70upx;
         margin: 0 auto;
-        border-radius: 45rpx;
+        border-radius: 45upx;
         background-color: #dce400;
         color: #fff;
-        font-size: 30rpx;
+        font-size: 30upx;
     }
 </style>

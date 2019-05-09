@@ -64,25 +64,25 @@
 <style>
     .detail_outside .logo {
         text-align: center;
-        padding: 150rpx 0 0 0;
+        padding: 150upx 0 0 0;
     }
 
     .detail_outside image {
-        width: 120rpx;
-        height: 120rpx;
+        width: 120upx;
+        height: 120upx;
         margin: 0 auto;
     }
 
     .detail_outside ul,
     .detail_outside li {
         display: block;
-        font-size: 24rpx;
-        line-height: 40rpx;
+        font-size: 24upx;
+        line-height: 40upx;
         text-align: center;
     }
 
     .detail_outside ul {
-        padding: 460rpx 0 0 0;
+        padding: 460upx 0 0 0;
     }
     
     .text-b {

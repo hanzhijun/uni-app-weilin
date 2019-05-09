@@ -259,101 +259,101 @@
     }
 
     .xin-outbar {
-        width: 440rpx;
-        height: 440rpx;
-        margin: 120rpx auto 0;
+        width: 440px;u
+        height: 440upx;
+        margin: 120upx auto 0;
         position: relative;
     }
 
     .xin-outbar .bj-img {
-        width: 440rpx;
-        height: 440rpx;
+        width: 440upx;
+        height: 440upx;
         position: absolute;
         left: 0;
         top: 0;
     }
 
     .xin-outbar .bpm {
-        width: 440rpx;
-        line-height: 44rpx;
-        font-size: 26rpx;
+        width: 440upx;
+        line-height: 44upx;
+        font-size: 26upx;
         color: #fff;
         text-align: center;
         position: absolute;
         left: 0;
-        top: 80rpx;
+        top: 80upx;
         z-index: 2;
     }
 
     .xin-outbar .text-xintiao {
-        width: 220rpx;
-        height: 60rpx;
-        font-size: 54rpx;
+        width: 220upx;
+        height: 60upx;
+        font-size: 54upx;
         color: #fff;
         text-align: right;
         position: absolute;
         left: 0;
-        top: 118rpx;
+        top: 118upx;
         z-index: 2;
     }
 
     .xin-outbar .icon-xin {
-        width: 36rpx;
-        height: 36rpx;
+        width: 36upx;
+        height: 36upx;
         position: absolute;
-        left: 236rpx;
-        top: 135rpx;
+        left: 236upx;
+        top: 135upx;
         z-index: 2;
     }
 
     .xin-outbar .text-huxi {
-        width: 220rpx;
-        height: 60rpx;
-        font-size: 54rpx;
+        width: 220upx;
+        height: 60upx;
+        font-size: 54upx;
         color: #fff;
         text-align: right;
         position: absolute;
         left: 0;
-        top: 249rpx;
+        top: 249upx;
         z-index: 2;
     }
 
     .xin-outbar .icon-huxi {
-        width: 36rpx;
-        height: 36rpx;
+        width: 36upx;
+        height: 36upx;
         position: absolute;
-        left: 236rpx;
-        top: 264rpx;
+        left: 236upx;
+        top: 264upx;
         z-index: 2;
     }
 
     .xin-outbar .ci {
-        width: 440rpx;
-        line-height: 44rpx;
-        font-size: 26rpx;
+        width: 440upx;
+        line-height: 44upx;
+        font-size: 26upx;
         color: #fff;
         text-align: center;
         position: absolute;
         left: 0;
-        top: 315rpx;
+        top: 315upx;
         z-index: 2;
     }
 
     .bed-outbar .bed-state {
-        font-size: 30rpx;
+        font-size: 30upx;
         color: #0099e9;
-        padding: 50rpx 0 40rpx;
+        padding: 50upx 0 40upx;
         overflow: hidden;
     }
 
     .bed-outbar image {
-        width: 400rpx;
-        height: 278rpx;
+        width: 400upx;
+        height: 278upx;
     }
 
     .btn-bar {
-        width: 750rpx;
-        height: 120rpx;
+        width: 750upx;
+        height: 120upx;
         position: fixed;
         left: 0;
         bottom: 0;
@@ -361,12 +361,12 @@
     }
 
     .btn-bar .btn-k {
-        width: 300rpx;
-        height: 80rpx;
-        border-radius: 80rpx;
+        width: 300upx;
+        height: 80upx;
+        border-radius: 80upx;
         background-color: #0099e9;
         float: left;
-        margin-left: 50rpx;
+        margin-left: 50upx;
         overflow: hidden;
     }
 
@@ -375,19 +375,19 @@
     }
 
     .btn-bar .btn-k image {
-        width: 40rpx;
-        height: 40rpx;
+        width: 40upx;
+        height: 40upx;
         float: left;
-        margin: 20rpx 20rpx 0 56rpx;
+        margin: 20upx 20upx 0 56upx;
     }
 
     .btn-bar .btn-k text {
-        line-height: 40rpx;
+        line-height: 40upx;
         display: inline-block;
-        font-size: 32rpx;
+        font-size: 32upx;
         color: #ffdc9e;
         float: left;
-        margin-top: 20rpx;
+        margin-top: 20upx;
     }
 
     .base-box {
@@ -441,13 +441,13 @@
     }
 
     .warn-box .box-content {
-        width: 500rpx;
+        width: 500upx;
         background: rgba(0, 153, 233, 1);
         position: absolute;
-        left: calc(50vw - 250rpx);
-        top: calc(50vh - 350rpx);
-        border-radius: 20rpx;
-        padding-bottom: 60rpx;
+        left: calc(50vw - 250upx);
+        top: calc(50vh - 350upx);
+        border-radius: 20upx;
+        padding-bottom: 60upx;
     }
 
     .warn-box .box-content .img {
@@ -456,27 +456,27 @@
     }
 
     .warn-box .box-content .img image {
-        width: 250rpx;
-        height: 250rpx;
+        width: 250upx;
+        height: 250upx;
     }
 
     .warn-box .box-content .txt {
         display: block;
         text-align: center;
-        font-size: 30rpx;
+        font-size: 30upx;
         color: #f0f0f0;
-        padding: 30rpx 20rpx 0;
+        padding: 30upx 20upx 0;
         overflow: hidden;
     }
 
     .warn-box .box-content button {
-        width: 360rpx;
-        height: 70rpx;
-        line-height: 70rpx;
+        width: 360upx;
+        height: 70upx;
+        line-height: 70upx;
         margin: 0 auto;
-        border-radius: 45rpx;
+        border-radius: 45upx;
         background-color: #dce400;
         color: #fff;
-        font-size: 30rpx;
+        font-size: 30upx;
     }
 </style>
