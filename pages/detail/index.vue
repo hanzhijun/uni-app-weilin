@@ -190,7 +190,6 @@
             },
             setSocketTask() {
                 let accessToken = util.getCookie('accessToken')
-                let deviceNo = this.deviceNos
                 let _this = this
                 // 建立连接
                 console.log('建立连接!');
