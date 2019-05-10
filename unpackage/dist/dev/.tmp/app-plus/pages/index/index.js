@@ -116,9 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
-var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;var _default =
+var setCookie = util.setCookie;var _default =
 
 {
   data: function data() {
@@ -151,15 +149,9 @@ var getStorage = util.getStorage;var _default =
       }
     }, 5000);
   },
-  onLaunch: function onLaunch() {
-    // console.log('App Launch-2');
-  },
-  onShow: function onShow() {
-    // console.log('App Show-2');
-  },
-  onHide: function onHide() {
-    // console.log('App Hide-2');
-  },
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {},
+  onHide: function onHide() {},
   methods: {
     linkToLogin: function linkToLogin() {
       uni.redirectTo({

@@ -297,8 +297,6 @@ function getDate(type) {
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var changeWarn = util.changeWarn;
 var getWarnCookie = util.getWarnCookie;
 var myAjax2 = util.myAjax2;
@@ -307,28 +305,52 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
   data: function data() {
     return {
       title: '系统设置',
-      showToast: 0,
+      toast: 0,
       toastTxt: '',
+      loading: 0,
+
       userInfo: null,
       deviceNos: '', // 设备号
-      accessToken: null
-      // device: true, // 是否监控离床
-      // deviceTimes: '10', // 离床持续时间
-      // deviceStart: '00:00', // 监控时段开始
-      // deviceEnd: '23:59', // 监控时段结束
-      // heart: false, // 是否监控心率
-      // heartUp: '120', // 心率过快峰值
-      // heartDown: '40', // 心率过慢峰值
-      // breath: false, // 是否监控呼吸率
-      // breathUp: '30', // 呼吸过快峰值
-      // breathDown: '8', // 呼吸过慢峰值
-      // motion: false, // 是否监控体动值
-      // motionTimes: '5', // 大幅体动持续时间
-      // motionStart: '0:00', // 体动监控时段开始
-      // motionEnd: '23:59' // 体动监控时段结束
-    };
+      accessToken: null,
+
+      breathNum: '--', // 呼吸值 -100_无效值，其他为正常值
+      deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
+      heartNum: '--', // 心率值 65436_无效值，其他为正常值
+      markTime: null, // 发生的时间戳
+      motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
+      timer: null,
+
+      device: '', // 是否监控离床
+      deviceTimes: '', // 离床持续时间
+      deviceStart: '', // 监控时段开始
+      deviceEnd: '', // 监控时段结束
+      heart: '', // 是否监控心率
+      heartUp: '', // 心率过快峰值
+      heartDown: '', // 心率过慢峰值
+      breath: '', // 是否监控呼吸率
+      breathUp: '', // 呼吸过快峰值
+      breathDown: '', // 呼吸过慢峰值
+      motion: '', // 是否监控体动值
+      motionTimes: '', // 大幅体动持续时间
+      motionStart: '', // 体动监控时段开始
+      motionEnd: '', // 体动监控时段结束
+
+      warnNing: 0,
+      warningText: '',
+      warnNo: '',
+      warnDeviceTime: '',
+      warnHeartTime: '',
+      warnBreathTime: '',
+      warnMotionTime: '' };
+
   },
-  onLoad: function onLoad() {},
+  onLoad: function onLoad() {
+    var _this = this;
+    _this.timer = setInterval(function () {
+      util.changeWarn(_this);
+      console.log('setting页面同步一次报警数据', " at pages\\setting\\index.vue:251");
+    }, 1000);
+  },
   onLaunch: function onLaunch() {},
   onShow: function onShow() {
     var _this = this;
@@ -350,13 +372,16 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     }
   },
   onHide: function onHide() {},
+  onUnload: function onUnload() {
+    clearInterval(this.timer);
+  },
   methods: {
     bindPickerChange: function bindPickerChange(e) {
-      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\setting\\index.vue:255");
+      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\setting\\index.vue:280");
       this.index = e.target.value;
     },
     bindMultiPickerColumnChange: function bindMultiPickerColumnChange(e) {
-      console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value, " at pages\\setting\\index.vue:259");
+      console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value, " at pages\\setting\\index.vue:284");
       this.multiIndex[e.detail.column] = e.detail.value;
       this.$forceUpdate();
     },
@@ -365,12 +390,6 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     },
     bindTime02Change: function bindTime02Change(e) {
       this.deviceEnd = e.target.value;
-    },
-    /**
-        * 关闭报警
-        */
-    audioPause: function audioPause() {
-      util.audioPause(this, backgroundAudioManager);
     },
     switch1Change: function switch1Change(e) {
       this.device = e.target.value;
@@ -470,6 +489,12 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
       }
+    },
+    /**
+        * 关闭报警
+        */
+    audioPause: function audioPause() {
+      util.audioPause(this, backgroundAudioManager);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

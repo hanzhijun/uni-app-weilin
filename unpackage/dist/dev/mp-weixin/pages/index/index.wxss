@@ -7,6 +7,7 @@
     width: 120rpx;
     height: 120rpx;
     margin: 0 auto;
+    border-radius: 30rpx;
 }
 .detail_outside ._ul,
 .detail_outside ._li {

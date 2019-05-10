@@ -1062,7 +1062,7 @@ if( __WXML_GLOBAL__.ops_cached.$gwx_1)return __WXML_GLOBAL__.ops_cached.$gwx_1
 __WXML_GLOBAL__.ops_cached.$gwx_1=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
 Z([3,'__l'])
-Z([3,'login-outside'])
+Z([3,'code-outside'])
 Z([[2,'=='],[[7],[3,'showToast']],[1,1]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_1);return __WXML_GLOBAL__.ops_cached.$gwx_1
 }
@@ -1075,11 +1075,11 @@ Z([3,'index_outside'])
 Z([3,'xin-outbar'])
 Z([[2,'=='],[[7],[3,'deviceStatus']],[1,4]])
 Z([3,'text-xintiao'])
-Z([[2,'=='],[[7],[3,'heart']],[1,65436]])
-Z([[2,'!='],[[7],[3,'heart']],[1,65436]])
+Z([[2,'=='],[[7],[3,'heartNum']],[1,65436]])
+Z([[2,'!='],[[7],[3,'heartNum']],[1,65436]])
 Z([3,'text-huxi'])
-Z([[2,'=='],[[7],[3,'breath']],[[2,'-'],[1,100]]])
-Z([[2,'!='],[[7],[3,'breath']],[[2,'-'],[1,100]]])
+Z([[2,'=='],[[7],[3,'breathNum']],[[2,'-'],[1,100]]])
+Z([[2,'!='],[[7],[3,'breathNum']],[[2,'-'],[1,100]]])
 Z([3,'bed-outbar'])
 Z([3,'bed-state'])
 Z([[2,'=='],[[7],[3,'deviceStatus']],[1,3]])
@@ -1090,7 +1090,7 @@ Z([[2,'=='],[[7],[3,'deviceStatus']],[1,9]])
 Z([[2,'=='],[[7],[3,'deviceStatus']],[1,10]])
 Z(z[3])
 Z([[2,'!='],[[7],[3,'deviceStatus']],[1,4]])
-Z([[2,'=='],[[7],[3,'warning']],[1,1]])
+Z([[2,'=='],[[7],[3,'warnNing']],[1,1]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_2);return __WXML_GLOBAL__.ops_cached.$gwx_2
 }
 function gz$gwx_3(){
@@ -1120,7 +1120,7 @@ Z(z[2])
 Z([[7],[3,'historyData']])
 Z([[2,'&&'],[[2,'=='],[[7],[3,'historyData']],[1,'']],[[2,'=='],[[7],[3,'firstLoad']],[1,1]]])
 Z([[2,'=='],[[7],[3,'warning']],[1,'1']])
-Z([[2,'=='],[[7],[3,'warning']],[1,1]])
+Z([[2,'=='],[[7],[3,'warnNing']],[1,1]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_5);return __WXML_GLOBAL__.ops_cached.$gwx_5
 }
 function gz$gwx_6(){
@@ -1142,7 +1142,7 @@ Z([[2,'!'],[[7],[3,'breath']]])
 Z(z[3])
 Z([[7],[3,'motion']])
 Z([[2,'!'],[[7],[3,'motion']]])
-Z([[2,'=='],[[7],[3,'warning']],[1,1]])
+Z([[2,'=='],[[7],[3,'warnNing']],[1,1]])
 Z([[2,'=='],[[7],[3,'showToast']],[1,1]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_6);return __WXML_GLOBAL__.ops_cached.$gwx_6
 }
@@ -1158,7 +1158,7 @@ var oB=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 var xC=_v()
 _(oB,xC)
 if(_oz(z,2,e,s,gg)){xC.wxVkey=1
-cs.push("./pages/code/index.wxml:block:1:751")
+cs.push("./pages/code/index.wxml:block:1:722")
 cs.pop()
 }
 xC.wxXCkey=1
@@ -1193,26 +1193,26 @@ cs.pop()
 var lK=_v()
 _(cI,lK)
 if(_oz(z,6,e,s,gg)){lK.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:339")
+cs.push("./pages/detail/index.wxml:block:1:342")
 cs.pop()
 }
 oJ.wxXCkey=1
 lK.wxXCkey=1
 cs.pop()
 _(hG,cI)
-cs.push("./pages/detail/index.wxml:view:1:471")
+cs.push("./pages/detail/index.wxml:view:1:480")
 var aL=_n('view')
 _rz(z,aL,'class',7,e,s,gg)
 var tM=_v()
 _(aL,tM)
 if(_oz(z,8,e,s,gg)){tM.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:495")
+cs.push("./pages/detail/index.wxml:block:1:504")
 cs.pop()
 }
 var eN=_v()
 _(aL,eN)
 if(_oz(z,9,e,s,gg)){eN.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:550")
+cs.push("./pages/detail/index.wxml:block:1:562")
 cs.pop()
 }
 tM.wxXCkey=1
@@ -1222,46 +1222,46 @@ _(hG,aL)
 oH.wxXCkey=1
 cs.pop()
 _(fE,hG)
-cs.push("./pages/detail/index.wxml:view:1:719")
+cs.push("./pages/detail/index.wxml:view:1:737")
 var bO=_n('view')
 _rz(z,bO,'class',10,e,s,gg)
-cs.push("./pages/detail/index.wxml:view:1:744")
+cs.push("./pages/detail/index.wxml:view:1:762")
 var oR=_n('view')
 _rz(z,oR,'class',11,e,s,gg)
 var fS=_v()
 _(oR,fS)
 if(_oz(z,12,e,s,gg)){fS.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:768")
+cs.push("./pages/detail/index.wxml:block:1:786")
 cs.pop()
 }
 var cT=_v()
 _(oR,cT)
 if(_oz(z,13,e,s,gg)){cT.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:830")
+cs.push("./pages/detail/index.wxml:block:1:848")
 cs.pop()
 }
 var hU=_v()
 _(oR,hU)
 if(_oz(z,14,e,s,gg)){hU.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:892")
+cs.push("./pages/detail/index.wxml:block:1:910")
 cs.pop()
 }
 var oV=_v()
 _(oR,oV)
 if(_oz(z,15,e,s,gg)){oV.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:960")
+cs.push("./pages/detail/index.wxml:block:1:978")
 cs.pop()
 }
 var cW=_v()
 _(oR,cW)
 if(_oz(z,16,e,s,gg)){cW.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1022")
+cs.push("./pages/detail/index.wxml:block:1:1040")
 cs.pop()
 }
 var oX=_v()
 _(oR,oX)
 if(_oz(z,17,e,s,gg)){oX.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1093")
+cs.push("./pages/detail/index.wxml:block:1:1111")
 cs.pop()
 }
 fS.wxXCkey=1
@@ -1275,13 +1275,13 @@ _(bO,oR)
 var oP=_v()
 _(bO,oP)
 if(_oz(z,18,e,s,gg)){oP.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1166")
+cs.push("./pages/detail/index.wxml:block:1:1184")
 cs.pop()
 }
 var xQ=_v()
 _(bO,xQ)
 if(_oz(z,19,e,s,gg)){xQ.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1262")
+cs.push("./pages/detail/index.wxml:block:1:1280")
 cs.pop()
 }
 oP.wxXCkey=1
@@ -1291,7 +1291,7 @@ _(fE,bO)
 var cF=_v()
 _(fE,cF)
 if(_oz(z,20,e,s,gg)){cF.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1758")
+cs.push("./pages/detail/index.wxml:block:1:1776")
 cs.pop()
 }
 cF.wxXCkey=1
@@ -1314,7 +1314,7 @@ var t1=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 var e2=_v()
 _(t1,e2)
 if(_oz(z,2,e,s,gg)){e2.wxVkey=1
-cs.push("./pages/login/index.wxml:block:1:847")
+cs.push("./pages/login/index.wxml:block:1:834")
 cs.pop()
 }
 e2.wxXCkey=1
@@ -1470,7 +1470,7 @@ cs.pop()
 var tEB=_v()
 _(lCB,tEB)
 if(_oz(z,16,e,s,gg)){tEB.wxVkey=1
-cs.push("./pages/setting/index.wxml:block:1:7879")
+cs.push("./pages/setting/index.wxml:block:1:7886")
 cs.pop()
 }
 aDB.wxXCkey=1
@@ -1608,7 +1608,6 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch() {
-    // console.log('App Launch');
 
     // 锁定屏幕方向
     plus.screen.lockOrientation('portrait-primary'); //锁定
@@ -1621,7 +1620,6 @@ __webpack_require__.r(__webpack_exports__);
         imei: plus.device.imei },
 
       success: function success(res) {
-        // console.log('success', res);
         if (res.statusCode == 200 && res.data.isUpdate) {
           var openUrl = plus.os.name === 'iOS' ? res.data.iOS : res.data.Android;
           // 提醒用户更新
@@ -1639,12 +1637,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
   },
-  onShow: function onShow() {
-    // console.log('App Show')
-  },
-  onHide: function onHide() {
-    // console.log('App Hide')
-  } };exports.default = _default;
+  onShow: function onShow() {},
+  onHide: function onHide() {} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
 /***/ }),
@@ -1830,10 +1824,11 @@ define('common/vendor.js',function(require, module, exports, window, document, f
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {var baseHost = 'https://api.darma.cn/mattress';
 var imgUrl = 'http://www.hanjiaxin.cn/images/';
-var deviceNos = '641743000773';
+// var deviceNos = '641743000773'
+
 /**
-                                 * 报警规则初始化值
-                                 */
+ * 报警规则初始化值
+ */
 var warnRule = {
   device: false, // 是否监控离床
   deviceTimes: '10', // 离床持续时间
@@ -1849,10 +1844,11 @@ var warnRule = {
   motionTimes: '5', // 大幅体动持续时间
   motionStart: '0:00', // 体动监控时段开始
   motionEnd: '23:59' // 体动监控时段结束
-};
-/**
-    * 报警状态记录
-    */
+
+
+  /**
+   * 报警状态记录
+   */ };
 var warnState = {
   warnNing: 0, // 是否正在报警
   warnNo: null, // 报警类型 0离床、1心率、2呼吸率、3体动
@@ -1861,86 +1857,14 @@ var warnState = {
   warnBreathTime: null, // 心率报警记录点时间戳
   warnMotionTime: null, // 心率报警记录点时间戳
   warningText: '' // 报警提示语
-};
-
-function formatTime(time) {
-  if (typeof time !== 'number' || time < 0) {
-    return time;
-  }
-
-  var hour = parseInt(time / 3600);
-  time = time % 3600;
-  var minute = parseInt(time / 60);
-  time = time % 60;
-  var second = time;
-
-  return [hour, minute, second].map(function (n) {
-    n = n.toString();
-    return n[1] ? n : '0' + n;
-  }).join(':');
-}
-
-function formatLocation(longitude, latitude) {
-  if (typeof longitude === 'string' && typeof latitude === 'string') {
-    longitude = parseFloat(longitude);
-    latitude = parseFloat(latitude);
-  }
-
-  longitude = longitude.toFixed(2);
-  latitude = latitude.toFixed(2);
-
-  return {
-    longitude: longitude.toString().split('.'),
-    latitude: latitude.toString().split('.') };
-
-}
-var dateUtils = {
-  UNITS: {
-    '年': 31557600000,
-    '月': 2629800000,
-    '天': 86400000,
-    '小时': 3600000,
-    '分钟': 60000,
-    '秒': 1000 },
-
-  humanize: function humanize(milliseconds) {
-    var humanize = '';
-    for (var key in this.UNITS) {
-      if (milliseconds >= this.UNITS[key]) {
-        humanize = Math.floor(milliseconds / this.UNITS[key]) + key + '前';
-        break;
-      }
-    }
-    return humanize || '刚刚';
-  },
-  format: function format(dateStr) {
-    var date = this.parse(dateStr);
-    var diff = Date.now() - date.getTime();
-    if (diff < this.UNITS['天']) {
-      return this.humanize(diff);
-    }
-    var _format = function _format(number) {
-      return number < 10 ? '0' + number : number;
-    };
-    return date.getFullYear() + '/' + _format(date.getMonth() + 1) + '/' + _format(date.getDay()) + '-' +
-    _format(date.getHours()) + ':' + _format(date.getMinutes());
-  },
-  parse: function parse(str) {//将"yyyy-mm-dd HH:MM:ss"格式的字符串，转化为一个Date对象
-    var a = str.split(/[^0-9]/);
-    return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
-  }
 
 
   /**
-     * 设置添加本地local storage缓存
-     * @param key
-     * @param value
-     */ };
+   * 设置添加本地local storage缓存
+   * @param key
+   * @param value
+   */ };
 function setCookie(key, value) {
-  uni.setStorageSync(key, value);
-}
-
-function setStorage(key, value) {
   uni.setStorageSync(key, value);
 }
 
@@ -1950,10 +1874,6 @@ function setStorage(key, value) {
    * @returns {*}
    */
 function getCookie(key) {
-  return uni.getStorageSync(key);
-}
-
-function getStorage(key) {
   return uni.getStorageSync(key);
 }
 
@@ -2013,9 +1933,10 @@ function myAjax2(type, url, data, res, reg) {
     } });
 
 }
+
 /**
    * 获取报警规则缓存
-   * @param {Object} that
+   * @param {Object} that 作用域
    */
 function getWarnCookie(that) {
   var warnRule = JSON.parse(getCookie('warnRule'));
@@ -2037,7 +1958,7 @@ function getWarnCookie(that) {
 
 /**
    * 设置报警规则缓存
-   * @param {Object} that
+   * @param {Object} that 作用域
    */
 function setWarnCookie(that) {
   var warnRule = {
@@ -2061,8 +1982,8 @@ function setWarnCookie(that) {
 
 /**
    * 关闭报警
-   * @param {Object} that
-   * @param {Object} backgroundAudioManager
+   * @param {Object} that 作用域
+   * @param {Object} backgroundAudioManager 背景音乐
    */
 function audioPause(that, backgroundAudioManager) {
   backgroundAudioManager.pause();
@@ -2076,13 +1997,13 @@ function audioPause(that, backgroundAudioManager) {
   } else if (warnState.warnNo == 3) {
     warnState.warnMotionTime = null;
   }
-  warnState.warningText = '';
   warnState.warnNo = null;
   changeWarn(that);
 }
+
 /**
    * 同步报警状态值
-   * @param {Object} that
+   * @param {Object} that 作用域
    */
 function changeWarn(that) {
   that.warnNing = warnState.warnNing;
@@ -2095,9 +2016,290 @@ function changeWarn(that) {
 }
 
 /**
+   * 触发报警
+   * @param {Object} that 作用域
+   * @param {Object} backgroundAudioManager 背景音乐
+   */
+function audioStart(that, backgroundAudioManager) {
+  that.warnNing = 1;
+  warnState.warnNing = 1;
+  backgroundAudioManager.title = '报警';
+  backgroundAudioManager.epname = '报警';
+  backgroundAudioManager.singer = '报警';
+  backgroundAudioManager.coverImgUrl = '';
+  // 设置了 src 之后会自动播放
+  backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
+  backgroundAudioManager.onEnded(function () {
+    backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
+  });
+}
+
+/**
+   * 检验报警
+   * @param {Object} that 作用域
+   * @param {Object} res 数据
+   */
+function checkWarn(that, res, backgroundAudioManager) {
+
+  checkDevice(that, res, backgroundAudioManager);
+  checkHeart(that, res, backgroundAudioManager);
+  checkBreath(that, res, backgroundAudioManager);
+
+}
+
+/**
+   * 离床检测
+   * @param {Object} that 作用域
+   * @param {Object} res 数据
+   */
+function checkDevice(that, res, backgroundAudioManager) {
+  // 如果正在报警，跳出检测
+  if (warnState.warnNing == 1) return;
+  var warnRule = JSON.parse(getCookie('warnRule'));
+  var nowTime = Date.parse(new Date());
+  var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
+  var deviceStatus = res.successData[0].deviceStatus;
+  var oldDeviceStatus = that.deviceStatus;
+  // 系统设置为不监控 跳出检测
+  if (!warnRule.device) {
+    console.log('系统设置为不监控 跳出检测', " at common\\util.js:241");
+    warnState.warnDeviceTime = null;
+    return;
+  }
+  // 系统设置时间有误，跳出检测
+  if (warnRule.deviceStart > warnRule.deviceEnd) {
+    console.log('系统设置时间有误，跳出检测', " at common\\util.js:247");
+    warnState.warnDeviceTime = null;
+    return;
+  }
+  // 如果没有离床报警记录点时间戳，跳出检测
+  if (!warnState.warnDeviceTime) {
+    console.log('如果没有离床报警记录点时间戳，跳出检测', " at common\\util.js:253");
+    return;
+  }
+  // 状态为4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱，则终止离床检测倒计时
+  if (deviceStatus == 4 || deviceStatus == 5 || deviceStatus == 6 || deviceStatus == 9 || deviceStatus == 10) {
+    console.log('状态为4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱，则终止离床检测倒计时', " at common\\util.js:258");
+    warnState.warnDeviceTime = null;
+    return;
+  }
+  // 不在报警时间段内，跳出检测
+  if (warnRule.deviceStart > nowTimeHour || warnRule.deviceEnd < nowTimeHour) {
+    console.log('不在报警时间段内，跳出检测', " at common\\util.js:264");
+    warnState.warnDeviceTime = null;
+    return;
+  }
+  console.log(nowTime - warnState.warnDeviceTime, '.....', warnRule.deviceTimes * 60 * 1000, " at common\\util.js:268");
+  // 记录时间点已超出系统设置离床时间上限，触发离床报警
+  if (nowTime - warnState.warnDeviceTime > warnRule.deviceTimes * 60 * 1000) {
+    console.log('记录时间点已超出系统设置离床时间上限，触发离床报警', " at common\\util.js:271");
+    var t = new Date(warnState.warnDeviceTime);
+    that.warningText = '用户于' + t.getHours() + ':' + t.getMinutes() + '离床，并已超过' + warnRule.deviceTimes + '分钟';
+    that.warning = 1;
+    warnState.warnNing = 1;
+    warnState.warnNo = 0;
+    audioStart(that, backgroundAudioManager);
+    warnState.warnDeviceTime = null;
+  }
+}
+
+/**
+   * 心率检测
+   * @param {Object} that 作用域
+   * @param {Object} res 数据
+   */
+function checkHeart(that, res, backgroundAudioManager) {
+  // 如果正在报警，跳出检测
+  if (warnState.warnNing == 1) return;
+  var warnRule = JSON.parse(getCookie('warnRule'));
+  var nowTime = Date.parse(new Date());
+  var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
+  var deviceStatus = res.successData[0].deviceStatus;
+  // 如果不是在床状态，跳出检测
+  if (deviceStatus != 4) {
+    console.log('如果不是在床状态，跳出检测', " at common\\util.js:296");
+    warnState.warnHeartTime = null;
+    return;
+  }
+  // 系统设置为不监控 跳出检测
+  if (!warnRule.heart) {
+    console.log('系统设置为不监控 跳出检测', " at common\\util.js:302");
+    warnState.warnHeartTime = null;
+    return;
+  }
+  // 系统设置上下限规则有误，跳出检测
+  if (warnRule.heartDown > warnRule.heartUp) {
+    console.log('系统设置上下限规则有误，跳出检测', " at common\\util.js:308");
+    warnState.warnHeartTime = null;
+    return;
+  }
+  // 如果没有心率报警记录点时间戳，设置记录点并跳出检测
+  if (!warnState.warnHeartTime) {
+    console.log('如果没有心率报警记录点时间戳，跳出检测', " at common\\util.js:314");
+    warnState.warnHeartTime = Date.parse(new Date());
+    return;
+  }
+  // 心率回归正常值，初始化数据，并跳出检测
+  if (res.successData[0].heart <= warnRule.heartUp && res.successData[0].heart >= warnRule.heartDown) {
+    console.log('心率回归正常值，初始化数据，并跳出检测', " at common\\util.js:320");
+    warnState.warnHeartTime = null;
+    return;
+  }
+  // 记录时间点已超出系统默认设置心率持续异常时间上限，触发离床报警
+  if (nowTime - warnState.warnHeartTime > 30 * 1000) {
+    if (res.successData[0].heart > warnRule.heartUp) {
+      console.log('记录时间点已超出系统默认设置心率持续异常时间上限，触发心率报警', " at common\\util.js:327");
+      var t = new Date(warnState.warnHeartTime);
+      that.warningText = '用户于' + nowTimeHour + '心率持续30秒高于您设置的上限峰值!';
+      that.warning = 1;
+      warnState.warnNing = 1;
+      warnState.warnNo = 1;
+      audioStart(that, backgroundAudioManager);
+      warnState.warnHeartTime = null;
+    } else {
+      console.log('记录时间点已超出系统默认设置心率持续异常时间上限，触发心率报警', " at common\\util.js:336");
+      var _t = new Date(warnState.warnHeartTime);
+      that.warningText = '用户于' + nowTimeHour + '心率持续30秒低于您设置的下限峰值!';
+      that.warning = 1;
+      warnState.warnNing = 1;
+      warnState.warnNo = 1;
+      audioStart(that, backgroundAudioManager);
+      warnState.warnHeartTime = null;
+    }
+  }
+}
+
+/**
+   * 呼吸率检测
+   * @param {Object} that 作用域
+   * @param {Object} res 数据
+   */
+function checkBreath(that, res, backgroundAudioManager) {
+  // 如果正在报警，跳出检测
+  if (warnState.warnNing == 1) return;
+  var warnRule = JSON.parse(getCookie('warnRule'));
+  var nowTime = Date.parse(new Date());
+  var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
+  var deviceStatus = res.successData[0].deviceStatus;
+  // 如果不是在床状态，跳出检测
+  if (deviceStatus != 4) {
+    console.log('如果不是在床状态，跳出检测', " at common\\util.js:362");
+    warnState.warnBreathTime = null;
+    return;
+  }
+  // 系统设置为不监控 跳出检测
+  if (!warnRule.breath) {
+    console.log('系统设置为不监控 跳出检测', " at common\\util.js:368");
+    warnState.warnBreathTime = null;
+    return;
+  }
+  // 系统设置上下限规则有误，跳出检测
+  if (warnRule.breathDown > warnRule.breathUp) {
+    console.log('系统设置上下限规则有误，跳出检测', " at common\\util.js:374");
+    warnState.warnBreathTime = null;
+    return;
+  }
+  // 如果没有呼吸率报警记录点时间戳，设置记录点并跳出检测
+  if (!warnState.warnBreathTime) {
+    console.log('如果没有呼吸率报警记录点时间戳，跳出检测', " at common\\util.js:380");
+    warnState.warnBreathTime = Date.parse(new Date());
+    return;
+  }
+  // 呼吸率回归正常值，初始化数据，并跳出检测
+  if (res.successData[0].breath <= warnRule.breathUp && res.successData[0].breath >= warnRule.breathDown) {
+    console.log('呼吸率回归正常值，初始化数据，并跳出检测', " at common\\util.js:386");
+    warnState.warnBreathTime = null;
+    return;
+  }
+  // 记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发离床报警
+  if (nowTime - warnState.warnBreathTime > 30 * 1000) {
+    if (res.successData[0].breath > warnRule.breathUp) {
+      console.log('记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸率报警', " at common\\util.js:393");
+      var t = new Date(warnState.warnBreathTime);
+      that.warningText = '用户于' + t.getHours() + ':' + t.getMinutes() + '呼吸率持续30秒高于您设置的上限峰值!';
+      that.warning = 1;
+      warnState.warnNing = 1;
+      warnState.warnNo = 1;
+      audioStart(that, backgroundAudioManager);
+      warnState.warnBreathTime = null;
+    } else {
+      console.log('记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸率报警', " at common\\util.js:402");
+      var _t2 = new Date(warnState.warnBreathTime);
+      that.warningText = '用户于' + nowTimeHour + '呼吸率持续30秒低于您设置的下限峰值!';
+      that.warning = 1;
+      warnState.warnNing = 1;
+      warnState.warnNo = 1;
+      audioStart(that, backgroundAudioManager);
+      warnState.warnBreathTime = null;
+    }
+  }
+}
+
+/**
+   * 体动检测
+   * @param {Object} that 作用域
+   * @param {Object} res 数据
+   */
+function checkMotion(that, res, backgroundAudioManager) {
+  // 如果正在报警，跳出检测
+  if (warnState.warnNing == 1) return;
+  var warnRule = JSON.parse(getCookie('warnRule'));
+  var nowTime = Date.parse(new Date());
+  var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
+  var deviceStatus = res.successData[0].deviceStatus;
+  // 如果不是在床状态，跳出检测
+  if (deviceStatus != 4) {
+    console.log('如果不是在床状态，跳出检测', " at common\\util.js:428");
+    warnState.warnBreathTime = null;
+    return;
+  }
+  // 系统设置为不监控 跳出检测
+  if (!warnRule.motion) {
+    console.log('系统设置为不监控 跳出检测', " at common\\util.js:434");
+    warnState.warnMotionTime = null;
+    return;
+  }
+  // 系统设置时间有误，跳出检测
+  if (warnRule.motionStart > warnRule.motionEnd) {
+    console.log('系统设置时间有误，跳出检测', " at common\\util.js:440");
+    warnState.warnMotionTime = null;
+    return;
+  }
+  // 如果没有离床报警记录点时间戳，跳出检测
+  if (!warnState.warnMotionTime) {
+    console.log('如果没有离床报警记录点时间戳，跳出检测', " at common\\util.js:446");
+    return;
+  }
+  // 不在报警时间段内，跳出检测
+  if (warnRule.motionStart > nowTimeHour || warnRule.motionEnd < nowTimeHour) {
+    console.log('不在报警时间段内，跳出检测', " at common\\util.js:451");
+    warnState.warnMotionTime = null;
+    return;
+  }
+  // 体动值回复正常数据，初始化数据并跳出检测
+  if (res.successData[0].motion < 4) {
+    console.log('体动值回复正常数据，初始化数据并跳出检测', " at common\\util.js:457");
+    warnState.warnMotionTime = null;
+    return;
+  }
+  console.log(nowTime - warnState.warnMotionTime, '.....', warnRule.motionTimes * 60 * 1000, " at common\\util.js:461");
+  // 记录时间点已超出系统设置离床时间上限，触发离床报警
+  if (nowTime - warnState.warnMotionTime > warnRule.motionTimes * 60 * 1000) {
+    console.log('记录时间点已超出系统设置离床时间上限，触发离床报警', " at common\\util.js:464");
+    var t = new Date(warnState.warnMotionTime);
+    that.warningText = '用户于' + t.getHours() + ':' + t.getMinutes() + '离床，并已超过' + warnRule.motionTimes + '分钟';
+    that.warning = 1;
+    warnState.warnNing = 1;
+    warnState.warnNo = 0;
+    audioStart(that, backgroundAudioManager);
+    warnState.warnMotionTime = null;
+  }
+}
+
+/**
    * toast提示弹窗
-   * @param {Object} that
-   * @param {Object} text
+   * @param {Object} that 作用域
+   * @param {Object} text 提示文字
    */
 function showToastBox(that, text) {
   that.toastTxt = text;
@@ -2113,20 +2315,16 @@ module.exports = {
   imgUrl: imgUrl,
   warnRule: warnRule,
   warnState: warnState,
-  formatTime: formatTime,
-  formatLocation: formatLocation,
-  dateUtils: dateUtils,
   setCookie: setCookie,
   getCookie: getCookie,
-  setStorage: setStorage,
-  getStorage: getStorage,
   myAjax: myAjax,
   myAjax2: myAjax2,
   getWarnCookie: getWarnCookie,
   setWarnCookie: setWarnCookie,
   audioPause: audioPause,
   changeWarn: changeWarn,
-  showToastBox: showToastBox };
+  showToastBox: showToastBox,
+  checkWarn: checkWarn };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
 /***/ }),
@@ -12051,9 +12249,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
-var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;var _default =
+var setCookie = util.setCookie;var _default =
 
 {
   data: function data() {
@@ -12086,15 +12282,9 @@ var getStorage = util.getStorage;var _default =
       }
     }, 5000);
   },
-  onLaunch: function onLaunch() {
-    // console.log('App Launch-2');
-  },
-  onShow: function onShow() {
-    // console.log('App Show-2');
-  },
-  onHide: function onHide() {
-    // console.log('App Hide-2');
-  },
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {},
+  onHide: function onHide() {},
   methods: {
     linkToLogin: function linkToLogin() {
       uni.redirectTo({
@@ -12266,16 +12456,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
 var getCookie = util.getCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var myAjax = util.myAjax;var _default =
 {
   data: function data() {
@@ -12288,19 +12472,10 @@ var myAjax = util.myAjax;var _default =
       inputPassWords: '' };
 
   },
-  onLoad: function onLoad() {
-    // var timestamp = Date.parse(new Date())
-    // console.log(timestamp)
-  },
-  onLaunch: function onLaunch() {
-    console.log('App Launch-login', " at pages\\login\\index.vue:49");
-  },
-  onShow: function onShow() {
-    console.log('App Show-login', " at pages\\login\\index.vue:52");
-  },
-  onHide: function onHide() {
-    console.log('App Hide-login', " at pages\\login\\index.vue:55");
-  },
+  onLoad: function onLoad() {},
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {},
+  onHide: function onHide() {},
   methods: {
     bindKeyInput: function bindKeyInput(event) {
       this.inputValue = event.target.value;
@@ -12313,10 +12488,7 @@ var myAjax = util.myAjax;var _default =
         */
     toLogin: function toLogin() {
       var _this = this;var
-
-      inputValue =
-
-      _this.inputValue,inputPassWords = _this.inputPassWords;
+      inputValue = _this.inputValue,inputPassWords = _this.inputPassWords;
       if (!inputValue || !inputPassWords) {
         util.showToastBox(_this, '请输入用户名、密码!');
         return false;
@@ -12326,7 +12498,11 @@ var myAjax = util.myAjax;var _default =
         password: inputPassWords };
 
 
-      myAjax('post', '/user/authorize', obj, function (res) {
+      myAjax(
+      'post',
+      '/user/authorize',
+      obj,
+      function (res) {
         var deviceNos = getCookie('deviceNos');
         if (res.retCode == '10000') {
           _this.userInfo = res.successData;
@@ -12348,10 +12524,12 @@ var myAjax = util.myAjax;var _default =
         } else {
           util.showToastBox(_this, '未知错误，请重新登录!');
         }
-        console.log(JSON.stringify(res), " at pages\\login\\index.vue:104");
-      }, function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\login\\index.vue:106");
+        console.log(JSON.stringify(res), " at pages\\login\\index.vue:90");
+      },
+      function (reg) {
+        console.log(JSON.stringify(reg), " at pages\\login\\index.vue:93");
       });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
@@ -12520,8 +12698,6 @@ __webpack_require__.r(__webpack_exports__);
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
 var getCookie = util.getCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;var _default =
 
@@ -12537,19 +12713,10 @@ var myAjax2 = util.myAjax2;var _default =
       inputCode: '' };
 
   },
-  onLoad: function onLoad() {
-    // var timestamp = Date.parse(new Date())
-    // console.log(timestamp)
-  },
-  onLaunch: function onLaunch() {
-    console.log('App Launch-login', " at pages\\code\\index.vue:46");
-  },
-  onShow: function onShow() {
-    console.log('App Show-login', " at pages\\code\\index.vue:49");
-  },
-  onHide: function onHide() {
-    console.log('App Hide-login', " at pages\\code\\index.vue:52");
-  },
+  onLoad: function onLoad() {},
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {},
+  onHide: function onHide() {},
   methods: {
     bindScanCode: function bindScanCode() {
       // 只允许通过相机扫码
@@ -12557,8 +12724,8 @@ var myAjax2 = util.myAjax2;var _default =
       uni.scanCode({
         onlyFromCamera: true,
         success: function success(res) {
-          console.log('条码类型：' + res.scanType, " at pages\\code\\index.vue:61");
-          console.log('条码内容：' + res.result, " at pages\\code\\index.vue:62");
+          console.log('条码类型：' + res.scanType, " at pages\\code\\index.vue:50");
+          console.log('条码内容：' + res.result, " at pages\\code\\index.vue:51");
           _this.inputCode = res.result;
         } });
 
@@ -12584,24 +12751,24 @@ var myAjax2 = util.myAjax2;var _default =
 
       myAjax2(
       'post',
-      '/device/physiology/actual',
+      '/device/deviceInfo',
       obj,
       function (res) {
-        if (res.retCode == '10000' && res.successData != '') {
+        if (res.retCode == '10000' && res.successData.length > 0) {
           setCookie('deviceNos', _this.inputCode);
           util.showToastBox(_this, '设备添加成功，即将跳转！');
           setTimeout(function () {
             uni.redirectTo({
               url: '../detail/index' });
 
-          }, 3000);
+          }, 2000);
         } else {
           util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
         }
-        console.log(JSON.stringify(res), " at pages\\code\\index.vue:102");
+        console.log(JSON.stringify(res), " at pages\\code\\index.vue:91");
       },
       function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\code\\index.vue:105");
+        console.log(JSON.stringify(reg), " at pages\\code\\index.vue:94");
       });
 
     } } };exports.default = _default;
@@ -12808,38 +12975,42 @@ __webpack_require__.r(__webpack_exports__);
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
+var checkWarn = util.checkWarn;
+var warnState = util.warnState;
 var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
 
 {
   data: function data() {
     return {
       title: '微麟守护者',
+
+      toast: 0,
+      toastTxt: '',
+      loading: 0,
+
       userInfo: null,
       deviceNos: '', // 设备号
       accessToken: null,
-      breath: '--', // 呼吸值 -100_无效值，其他为正常值
+
+      breathNum: '--', // 呼吸值 -100_无效值，其他为正常值
       deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
-      heart: '--', // 心率值 65436_无效值，其他为正常值
+      heartNum: '--', // 心率值 65436_无效值，其他为正常值
       markTime: null, // 发生的时间戳
-      motion: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
+      motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
       timer: null,
-      toast: 0,
-      toastTxt: '',
-      loading: 0
-      // warning: 1,
-      // warningText: '',
-      // leaveTime: null
-    };
+
+      warnNing: 0,
+      warningText: '',
+      warnNo: '',
+      warnDeviceTime: '',
+      warnHeartTime: '',
+      warnBreathTime: '',
+      warnMotionTime: '' };
+
   },
-  onLoad: function onLoad() {},
-  onLaunch: function onLaunch() {
-    console.log('App Launch-detail', " at pages\\detail\\index.vue:89");
-  },
-  onShow: function onShow() {
+  onLoad: function onLoad() {
     var _this = this;
     var accessToken = getCookie('accessToken');
     var deviceNos = getCookie('deviceNos');
@@ -12860,14 +13031,17 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       _this.deviceNos = deviceNos;
       _this.getActual();
       _this.setSocketTask();
-      this.timer = setInterval(function () {
+      _this.timer = setInterval(function () {
         _this.getActual();
-      }, 10000);
+      }, 5000);
     }
   },
-  onHide: function onHide() {
-    console.log('App Hide-detail', " at pages\\detail\\index.vue:118");
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {
+    util.changeWarn(this);
   },
+  onHide: function onHide() {},
+  onUnload: function onUnload() {},
   methods: {
     /**
               * 03. 获取设备当前的状态/心率/呼吸/体动数据
@@ -12883,31 +13057,14 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       obj,
       function (res) {
         if (res.retCode == '10000') {
-          if (res.successData[0].deviceStatus == 3 && _this.leaveTime) {
-            var time = Date.parse(new Date());
-            if (time - _this.leaveTime > 12000 && _this.warning == 0) {
-              console.log(time - _this.leaveTime, " at pages\\detail\\index.vue:138");
-              _this.warningText = '离床报警已触发';
-              _this.warning = 1;
-
-              backgroundAudioManager.title = '报警';
-              backgroundAudioManager.epname = '报警';
-              backgroundAudioManager.singer = '报警';
-              backgroundAudioManager.coverImgUrl = '';
-              // 设置了 src 之后会自动播放
-              backgroundAudioManager.src = '/static/warning.mp3';
-              backgroundAudioManager.onEnded(function () {
-                backgroundAudioManager.src = '/static/warning.mp3?time=' + Date.parse(new Date());
-              });
-            }
-          }
-          _this.breath = res.successData[0].breath;
+          checkWarn(_this, res, backgroundAudioManager);
+          _this.breathNum = res.successData[0].breath;
           _this.deviceStatus = res.successData[0].deviceStatus;
-          _this.heart = res.successData[0].heart;
+          _this.heartNum = res.successData[0].heart;
           _this.markTime = res.successData[0].markTime;
-          _this.motion = res.successData[0].motion;
+          _this.motionNum = res.successData[0].motion;
         } else {
-          console.log('未知错误，请重新登录', " at pages\\detail\\index.vue:159");
+          console.log('未知错误，请重新登录', " at pages\\detail\\index.vue:149");
           setCookie('accessToken', '');
           setCookie('username', '');
           uni.redirectTo({
@@ -12916,15 +13073,9 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         }
       },
       function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\detail\\index.vue:168");
+        console.log(JSON.stringify(reg), " at pages\\detail\\index.vue:158");
       });
 
-    },
-    /**
-        * 关闭报警
-        */
-    audioPause: function audioPause() {
-      util.audioPause(this, backgroundAudioManager);
     },
     linkRecord: function linkRecord() {
       uni.navigateTo({
@@ -12936,23 +13087,26 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         url: '../setting/index' });
 
     },
+    /**
+        * 时时数据推送
+        */
     setSocketTask: function setSocketTask() {
       var accessToken = util.getCookie('accessToken');
       var _this = this;
       // 建立连接
-      console.log('建立连接!', " at pages\\detail\\index.vue:192");
+      console.log('建立连接!', " at pages\\detail\\index.vue:179");
       wx.connectSocket({
         url: 'ws://stream.darma.cn:17004/ws',
         sluccess: function sluccess() {
-          console.log('连接成功...', " at pages\\detail\\index.vue:196");
+          console.log('连接成功...', " at pages\\detail\\index.vue:183");
         },
         fail: function fail() {
-          console.log('连接失败...', " at pages\\detail\\index.vue:199");
+          console.log('连接失败...', " at pages\\detail\\index.vue:186");
         } });
 
       // 连接成功
       wx.onSocketOpen(function () {
-        console.log('连接成功!', " at pages\\detail\\index.vue:204");
+        console.log('连接成功!', " at pages\\detail\\index.vue:191");
         var obj = {
           // 消息类型msgType前有 login（登录消息），deviceStatus（设备状态消息）healthData（心率呼吸数据消息），paramError（参数错误消息）
           msgType: 'login',
@@ -12969,29 +13123,36 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       });
       // 接收数据
       wx.onSocketMessage(function (data) {
+        console.log('接收数据回执，warnState.warnNing = ' + warnState.warnNing, " at pages\\detail\\index.vue:208");
         // heartBreathBcg、healthBreathData、deviceStatus
         if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
-          console.log(data.data, " at pages\\detail\\index.vue:223");
-          // uni.showToast({
-          //     title: data.data,
-          //     duration: 1000
-          // })
-        }
+
+
+
+
+
+        } // console.log(data.data);
+        // uni.showToast({
+        //     title: data.data,
+        //     duration: 1000
+        // })
         // 当状态发生变化会初始化时，会推送此条数据
-        if (JSON.parse(data.data).msgType == 'deviceStatus') {
-          if (JSON.parse(data.data).data.deviceStatus == '3') {
-            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:232");
-            _this.leaveTime = Date.parse(new Date());
-          } else {
-            _this.leaveTime = null;
-            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:236");
+        if (JSON.parse(data.data).msgType == 'deviceStatus') {if (JSON.parse(data.data).data.deviceStatus == '3') {console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:220");warnState.warnDeviceTime = Date.parse(new Date());} else {
+            warnState.warnDeviceTime = null;
+            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:224");
           }
         }
       });
       //连接失败
       wx.onSocketError(function () {
-        console.log('websocket连接失败！', " at pages\\detail\\index.vue:242");
+        console.log('websocket连接失败！', " at pages\\detail\\index.vue:230");
       });
+    },
+    /**
+        * 关闭报警
+        */
+    audioPause: function audioPause() {
+      util.audioPause(this, backgroundAudioManager);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
@@ -13336,18 +13497,38 @@ var _wxcharts = _interopRequireDefault(__webpack_require__(/*! ../../components/
 //
 //
 //
-var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var getCookie = util.getCookie;var setCookie = util.setCookie;var setStorage = util.setStorage;var getStorage = util.getStorage;var myAjax2 = util.myAjax2;var backgroundAudioManager = wx.getBackgroundAudioManager();var _default = { data: function data() {return { title: '历史记录', showToast: 0, toastTxt: '', userInfo: null, deviceNos: '', // 设备号
-      accessToken: null, breath: '--', // 呼吸值 -100_无效值，其他为正常值
+var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var getCookie = util.getCookie;var setCookie = util.setCookie;var getWarnCookie = util.getWarnCookie;var changeWarn = util.changeWarn;var myAjax2 = util.myAjax2;var backgroundAudioManager = wx.getBackgroundAudioManager();var _default = { data: function data() {return { title: '历史记录', toast: 0, toastTxt: '', loading: 0, userInfo: null, deviceNos: '', // 设备号
+      accessToken: null, breathNum: '--', // 呼吸值 -100_无效值，其他为正常值
       deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
-      heart: '--', // 心率值 65436_无效值，其他为正常值
+      heartNum: '--', // 心率值 65436_无效值，其他为正常值
       markTime: null, // 发生的时间戳
-      motion: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
+      motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
       timer: null, tabNum: '1', // 导航焦点值
       startTime: null, // 开始时间
       endTime: null, // 结束时间
       historyData: [], cWidth: '', cHeight: '', cWidth2: '', //横屏图表
       cHeight2: '', //横屏图表
-      pixelRatio: 1, serverData: '', firstLoad: 0 };}, onLoad: function onLoad() {_self = this;this.cWidth = uni.upx2px(750);this.cHeight = uni.upx2px(500);this.cWidth2 = uni.upx2px(700);this.cHeight2 = uni.upx2px(1100);setTimeout(function () {this.firstLoad = 1;}, 2000);}, onLaunch: function onLaunch() {}, onShow: function onShow() {var _this = this;var accessToken = util.getCookie('accessToken');var deviceNos = getCookie('deviceNos');if (!accessToken) {wx.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {_this.accessToken = accessToken;_this.deviceNos = deviceNos;util.changeWarn(_this, backgroundAudioManager);util.getWarnCookie(_this);_this.getTime(1);_this.history();}}, onHide: function onHide() {}, methods: { linkToLogin: function linkToLogin() {uni.redirectTo({ url: '../login/index' });}, changeNav: function changeNav(type) {var tabNum = this.tabNum;if (tabNum != type) {this.tabNum = type;this.getTime(type);this.history();}}, getTime: function getTime(page) {var timestamp = Date.parse(new Date());var result = null;if (page == '1') {result = this.getTodayStartTime();} else if (page == '2') {result = parseInt(timestamp / 1000) - 259200;} else if (page == '3') {result = parseInt(timestamp / 1000) - 604798;}this.endTime = parseInt(timestamp / 1000);
+      pixelRatio: 1, serverData: '', firstLoad: 0, warnNing: 0, warningText: '', warnNo: '', warnDeviceTime: '', warnHeartTime: '', warnBreathTime: '', warnMotionTime: '' };}, onLoad: function onLoad() {_this = this;setTimeout(function () {_this.firstLoad = 1;}, 2000);_this.timer = setInterval(function () {util.changeWarn(_this);console.log('图表页面同步一次报警数据', " at pages\\record\\index.vue:162");}, 1000);_this.cWidth = uni.upx2px(750);_this.cHeight = uni.upx2px(500);_this.cWidth2 = uni.upx2px(700);_this.cHeight2 = uni.upx2px(1100);}, onLaunch: function onLaunch() {}, onShow: function onShow() {var _this = this;var accessToken = util.getCookie('accessToken');var deviceNos = getCookie('deviceNos');if (!accessToken) {wx.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {_this.accessToken = accessToken;_this.deviceNos = deviceNos;changeWarn(_this, backgroundAudioManager);getWarnCookie(_this);_this.getTime(1);_this.history();}}, onHide: function onHide() {}, onUnload: function onUnload() {clearInterval(this.timer);}, methods: { checkWarnState: function checkWarnState() {}, linkToLogin: function linkToLogin() {uni.redirectTo({ url: '../login/index' });
+    },
+    changeNav: function changeNav(type) {
+      var tabNum = this.tabNum;
+      if (tabNum != type) {
+        this.tabNum = type;
+        this.getTime(type);
+        this.history();
+      }
+    },
+    getTime: function getTime(page) {
+      var timestamp = Date.parse(new Date());
+      var result = null;
+      if (page == '1') {
+        result = this.getTodayStartTime();
+      } else if (page == '2') {
+        result = parseInt(timestamp / 1000) - 259200;
+      } else if (page == '3') {
+        result = parseInt(timestamp / 1000) - 604798;
+      }
+      this.endTime = parseInt(timestamp / 1000);
       this.startTime = result;
     },
     /**
@@ -13367,15 +13548,15 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       obj,
       function (res) {
         if (res.retCode == '10000') {
-          console.log('history请求成功', " at pages\\record\\index.vue:231");
+          console.log('history请求成功', " at pages\\record\\index.vue:251");
           _this.setHistoryData(res);
         } else {
-          console.log('history未知错误', " at pages\\record\\index.vue:234");
+          console.log('history未知错误', " at pages\\record\\index.vue:254");
         }
         // console.log(JSON.stringify(res))
       },
       function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\record\\index.vue:239");
+        console.log(JSON.stringify(reg), " at pages\\record\\index.vue:259");
       });
 
     },
@@ -13429,8 +13610,8 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
 
 
       if (LineA.categories.length > 0 && LineA.series.length > 0) {
-        _self.showLineB('canvasLineB', LineA);
-        _self.showArea('canvasArea', LineA);
+        this.showLineB('canvasLineB', LineA);
+        this.showArea('canvasArea', LineA);
       }
     },
     /**
@@ -13463,56 +13644,15 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       var time = year + '/' + month + '/' + date + ' ' + '00:00:01';
       return new Date(time).getTime() / 1000;
     },
-    showLineA: function showLineA(canvasId, chartData) {
-      canvaLineA = new _wxcharts.default({
-        $this: _self,
-        canvasId: canvasId,
-        type: 'line',
-        fontSize: 11,
-        legend: true,
-        background: '#FFFFFF',
-        pixelRatio: _self.pixelRatio,
-        categories: chartData.categories,
-        series: chartData.series,
-        animation: false,
-        enableScroll: false, //开启图表拖拽功能
-        xAxis: {
-          disableGrid: false,
-          type: 'grid',
-          gridType: 'dash',
-          itemCount: 4, //可不填写，配合enableScroll图表拖拽功能使用，x轴单屏显示数据的数量，默认为5个
-          scrollShow: true //新增是否显示滚动条，默认false
-          //scrollBackgroundColor:'#F7F7FF',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条背景颜色,默认为 #EFEBEF
-          //scrollColor:'#DEE7F7',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条颜色,默认为 #A6A6A6
-        },
-        yAxis: {
-          //disabled:true
-          gridType: 'dash',
-          splitNumber: 8,
-          min: 0,
-          max: 180,
-          format: function format(val) {
-            return val.toFixed(0);
-          } //如不写此方法，Y轴刻度默认保留两位小数
-        },
-        width: _self.cWidth * _self.pixelRatio,
-        height: _self.cHeight * _self.pixelRatio,
-        dataLabel: true,
-        dataPointShape: true,
-        extra: {
-          lineStyle: 'straight' } });
-
-
-    },
     showLineB: function showLineB(canvasId, chartData) {
       canvaLineB = new _wxcharts.default({
-        $this: _self,
+        $this: _this,
         canvasId: canvasId,
         type: 'line',
         fontSize: 11,
         legend: true,
         background: '#FFFFFF',
-        pixelRatio: _self.pixelRatio,
+        pixelRatio: _this.pixelRatio,
         rotate: true, //开启图表横屏
         categories: chartData.categories,
         animation: false,
@@ -13520,11 +13660,9 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
         xAxis: {
           disableGrid: true },
 
-        yAxis: {
-          //disabled:true
-        },
-        width: _self.cWidth2 * _self.pixelRatio,
-        height: _self.cHeight2 * _self.pixelRatio,
+        yAxis: {},
+        width: _this.cWidth2 * _this.pixelRatio,
+        height: _this.cHeight2 * _this.pixelRatio,
         dataLabel: false,
         dataPointShape: true,
         extra: {
@@ -13534,24 +13672,22 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
     },
     showArea: function showArea(canvasId, chartData) {
       canvaArea = new _wxcharts.default({
-        $this: _self,
+        $this: _this,
         canvasId: canvasId,
         type: 'area',
         fontSize: 11,
         legend: true,
         background: '#FFFFFF',
-        pixelRatio: _self.pixelRatio,
+        pixelRatio: _this.pixelRatio,
         categories: chartData.categories,
         animation: false,
         series: chartData.series,
         xAxis: {
           disableGrid: true },
 
-        yAxis: {
-          //disabled:true
-        },
-        width: _self.cWidth * _self.pixelRatio,
-        height: _self.cHeight * _self.pixelRatio,
+        yAxis: {},
+        width: _this.cWidth * _this.pixelRatio,
+        height: _this.cHeight * _this.pixelRatio,
         dataLabel: false,
         dataPointShape: true });
 
@@ -13934,8 +14070,6 @@ function getDate(type) {
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var changeWarn = util.changeWarn;
 var getWarnCookie = util.getWarnCookie;
 var myAjax2 = util.myAjax2;
@@ -13944,28 +14078,52 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
   data: function data() {
     return {
       title: '系统设置',
-      showToast: 0,
+      toast: 0,
       toastTxt: '',
+      loading: 0,
+
       userInfo: null,
       deviceNos: '', // 设备号
-      accessToken: null
-      // device: true, // 是否监控离床
-      // deviceTimes: '10', // 离床持续时间
-      // deviceStart: '00:00', // 监控时段开始
-      // deviceEnd: '23:59', // 监控时段结束
-      // heart: false, // 是否监控心率
-      // heartUp: '120', // 心率过快峰值
-      // heartDown: '40', // 心率过慢峰值
-      // breath: false, // 是否监控呼吸率
-      // breathUp: '30', // 呼吸过快峰值
-      // breathDown: '8', // 呼吸过慢峰值
-      // motion: false, // 是否监控体动值
-      // motionTimes: '5', // 大幅体动持续时间
-      // motionStart: '0:00', // 体动监控时段开始
-      // motionEnd: '23:59' // 体动监控时段结束
-    };
+      accessToken: null,
+
+      breathNum: '--', // 呼吸值 -100_无效值，其他为正常值
+      deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
+      heartNum: '--', // 心率值 65436_无效值，其他为正常值
+      markTime: null, // 发生的时间戳
+      motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
+      timer: null,
+
+      device: '', // 是否监控离床
+      deviceTimes: '', // 离床持续时间
+      deviceStart: '', // 监控时段开始
+      deviceEnd: '', // 监控时段结束
+      heart: '', // 是否监控心率
+      heartUp: '', // 心率过快峰值
+      heartDown: '', // 心率过慢峰值
+      breath: '', // 是否监控呼吸率
+      breathUp: '', // 呼吸过快峰值
+      breathDown: '', // 呼吸过慢峰值
+      motion: '', // 是否监控体动值
+      motionTimes: '', // 大幅体动持续时间
+      motionStart: '', // 体动监控时段开始
+      motionEnd: '', // 体动监控时段结束
+
+      warnNing: 0,
+      warningText: '',
+      warnNo: '',
+      warnDeviceTime: '',
+      warnHeartTime: '',
+      warnBreathTime: '',
+      warnMotionTime: '' };
+
   },
-  onLoad: function onLoad() {},
+  onLoad: function onLoad() {
+    var _this = this;
+    _this.timer = setInterval(function () {
+      util.changeWarn(_this);
+      console.log('setting页面同步一次报警数据', " at pages\\setting\\index.vue:251");
+    }, 1000);
+  },
   onLaunch: function onLaunch() {},
   onShow: function onShow() {
     var _this = this;
@@ -13987,13 +14145,16 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     }
   },
   onHide: function onHide() {},
+  onUnload: function onUnload() {
+    clearInterval(this.timer);
+  },
   methods: {
     bindPickerChange: function bindPickerChange(e) {
-      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\setting\\index.vue:255");
+      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\setting\\index.vue:280");
       this.index = e.target.value;
     },
     bindMultiPickerColumnChange: function bindMultiPickerColumnChange(e) {
-      console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value, " at pages\\setting\\index.vue:259");
+      console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value, " at pages\\setting\\index.vue:284");
       this.multiIndex[e.detail.column] = e.detail.value;
       this.$forceUpdate();
     },
@@ -14002,12 +14163,6 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     },
     bindTime02Change: function bindTime02Change(e) {
       this.deviceEnd = e.target.value;
-    },
-    /**
-        * 关闭报警
-        */
-    audioPause: function audioPause() {
-      util.audioPause(this, backgroundAudioManager);
     },
     switch1Change: function switch1Change(e) {
       this.device = e.target.value;
@@ -14107,6 +14262,12 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
       }
+    },
+    /**
+        * 关闭报警
+        */
+    audioPause: function audioPause() {
+      util.audioPause(this, backgroundAudioManager);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

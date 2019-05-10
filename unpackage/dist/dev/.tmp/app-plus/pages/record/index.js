@@ -297,18 +297,38 @@ var _wxcharts = _interopRequireDefault(__webpack_require__(/*! ../../components/
 //
 //
 //
-var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var getCookie = util.getCookie;var setCookie = util.setCookie;var setStorage = util.setStorage;var getStorage = util.getStorage;var myAjax2 = util.myAjax2;var backgroundAudioManager = wx.getBackgroundAudioManager();var _default = { data: function data() {return { title: '历史记录', showToast: 0, toastTxt: '', userInfo: null, deviceNos: '', // 设备号
-      accessToken: null, breath: '--', // 呼吸值 -100_无效值，其他为正常值
+var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var getCookie = util.getCookie;var setCookie = util.setCookie;var getWarnCookie = util.getWarnCookie;var changeWarn = util.changeWarn;var myAjax2 = util.myAjax2;var backgroundAudioManager = wx.getBackgroundAudioManager();var _default = { data: function data() {return { title: '历史记录', toast: 0, toastTxt: '', loading: 0, userInfo: null, deviceNos: '', // 设备号
+      accessToken: null, breathNum: '--', // 呼吸值 -100_无效值，其他为正常值
       deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
-      heart: '--', // 心率值 65436_无效值，其他为正常值
+      heartNum: '--', // 心率值 65436_无效值，其他为正常值
       markTime: null, // 发生的时间戳
-      motion: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
+      motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
       timer: null, tabNum: '1', // 导航焦点值
       startTime: null, // 开始时间
       endTime: null, // 结束时间
       historyData: [], cWidth: '', cHeight: '', cWidth2: '', //横屏图表
       cHeight2: '', //横屏图表
-      pixelRatio: 1, serverData: '', firstLoad: 0 };}, onLoad: function onLoad() {_self = this;this.cWidth = uni.upx2px(750);this.cHeight = uni.upx2px(500);this.cWidth2 = uni.upx2px(700);this.cHeight2 = uni.upx2px(1100);setTimeout(function () {this.firstLoad = 1;}, 2000);}, onLaunch: function onLaunch() {}, onShow: function onShow() {var _this = this;var accessToken = util.getCookie('accessToken');var deviceNos = getCookie('deviceNos');if (!accessToken) {wx.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {_this.accessToken = accessToken;_this.deviceNos = deviceNos;util.changeWarn(_this, backgroundAudioManager);util.getWarnCookie(_this);_this.getTime(1);_this.history();}}, onHide: function onHide() {}, methods: { linkToLogin: function linkToLogin() {uni.redirectTo({ url: '../login/index' });}, changeNav: function changeNav(type) {var tabNum = this.tabNum;if (tabNum != type) {this.tabNum = type;this.getTime(type);this.history();}}, getTime: function getTime(page) {var timestamp = Date.parse(new Date());var result = null;if (page == '1') {result = this.getTodayStartTime();} else if (page == '2') {result = parseInt(timestamp / 1000) - 259200;} else if (page == '3') {result = parseInt(timestamp / 1000) - 604798;}this.endTime = parseInt(timestamp / 1000);
+      pixelRatio: 1, serverData: '', firstLoad: 0, warnNing: 0, warningText: '', warnNo: '', warnDeviceTime: '', warnHeartTime: '', warnBreathTime: '', warnMotionTime: '' };}, onLoad: function onLoad() {_this = this;setTimeout(function () {_this.firstLoad = 1;}, 2000);_this.timer = setInterval(function () {util.changeWarn(_this);console.log('图表页面同步一次报警数据', " at pages\\record\\index.vue:162");}, 1000);_this.cWidth = uni.upx2px(750);_this.cHeight = uni.upx2px(500);_this.cWidth2 = uni.upx2px(700);_this.cHeight2 = uni.upx2px(1100);}, onLaunch: function onLaunch() {}, onShow: function onShow() {var _this = this;var accessToken = util.getCookie('accessToken');var deviceNos = getCookie('deviceNos');if (!accessToken) {wx.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {_this.accessToken = accessToken;_this.deviceNos = deviceNos;changeWarn(_this, backgroundAudioManager);getWarnCookie(_this);_this.getTime(1);_this.history();}}, onHide: function onHide() {}, onUnload: function onUnload() {clearInterval(this.timer);}, methods: { checkWarnState: function checkWarnState() {}, linkToLogin: function linkToLogin() {uni.redirectTo({ url: '../login/index' });
+    },
+    changeNav: function changeNav(type) {
+      var tabNum = this.tabNum;
+      if (tabNum != type) {
+        this.tabNum = type;
+        this.getTime(type);
+        this.history();
+      }
+    },
+    getTime: function getTime(page) {
+      var timestamp = Date.parse(new Date());
+      var result = null;
+      if (page == '1') {
+        result = this.getTodayStartTime();
+      } else if (page == '2') {
+        result = parseInt(timestamp / 1000) - 259200;
+      } else if (page == '3') {
+        result = parseInt(timestamp / 1000) - 604798;
+      }
+      this.endTime = parseInt(timestamp / 1000);
       this.startTime = result;
     },
     /**
@@ -328,15 +348,15 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       obj,
       function (res) {
         if (res.retCode == '10000') {
-          console.log('history请求成功', " at pages\\record\\index.vue:231");
+          console.log('history请求成功', " at pages\\record\\index.vue:251");
           _this.setHistoryData(res);
         } else {
-          console.log('history未知错误', " at pages\\record\\index.vue:234");
+          console.log('history未知错误', " at pages\\record\\index.vue:254");
         }
         // console.log(JSON.stringify(res))
       },
       function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\record\\index.vue:239");
+        console.log(JSON.stringify(reg), " at pages\\record\\index.vue:259");
       });
 
     },
@@ -390,8 +410,8 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
 
 
       if (LineA.categories.length > 0 && LineA.series.length > 0) {
-        _self.showLineB('canvasLineB', LineA);
-        _self.showArea('canvasArea', LineA);
+        this.showLineB('canvasLineB', LineA);
+        this.showArea('canvasArea', LineA);
       }
     },
     /**
@@ -424,56 +444,15 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       var time = year + '/' + month + '/' + date + ' ' + '00:00:01';
       return new Date(time).getTime() / 1000;
     },
-    showLineA: function showLineA(canvasId, chartData) {
-      canvaLineA = new _wxcharts.default({
-        $this: _self,
-        canvasId: canvasId,
-        type: 'line',
-        fontSize: 11,
-        legend: true,
-        background: '#FFFFFF',
-        pixelRatio: _self.pixelRatio,
-        categories: chartData.categories,
-        series: chartData.series,
-        animation: false,
-        enableScroll: false, //开启图表拖拽功能
-        xAxis: {
-          disableGrid: false,
-          type: 'grid',
-          gridType: 'dash',
-          itemCount: 4, //可不填写，配合enableScroll图表拖拽功能使用，x轴单屏显示数据的数量，默认为5个
-          scrollShow: true //新增是否显示滚动条，默认false
-          //scrollBackgroundColor:'#F7F7FF',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条背景颜色,默认为 #EFEBEF
-          //scrollColor:'#DEE7F7',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条颜色,默认为 #A6A6A6
-        },
-        yAxis: {
-          //disabled:true
-          gridType: 'dash',
-          splitNumber: 8,
-          min: 0,
-          max: 180,
-          format: function format(val) {
-            return val.toFixed(0);
-          } //如不写此方法，Y轴刻度默认保留两位小数
-        },
-        width: _self.cWidth * _self.pixelRatio,
-        height: _self.cHeight * _self.pixelRatio,
-        dataLabel: true,
-        dataPointShape: true,
-        extra: {
-          lineStyle: 'straight' } });
-
-
-    },
     showLineB: function showLineB(canvasId, chartData) {
       canvaLineB = new _wxcharts.default({
-        $this: _self,
+        $this: _this,
         canvasId: canvasId,
         type: 'line',
         fontSize: 11,
         legend: true,
         background: '#FFFFFF',
-        pixelRatio: _self.pixelRatio,
+        pixelRatio: _this.pixelRatio,
         rotate: true, //开启图表横屏
         categories: chartData.categories,
         animation: false,
@@ -481,11 +460,9 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
         xAxis: {
           disableGrid: true },
 
-        yAxis: {
-          //disabled:true
-        },
-        width: _self.cWidth2 * _self.pixelRatio,
-        height: _self.cHeight2 * _self.pixelRatio,
+        yAxis: {},
+        width: _this.cWidth2 * _this.pixelRatio,
+        height: _this.cHeight2 * _this.pixelRatio,
         dataLabel: false,
         dataPointShape: true,
         extra: {
@@ -495,24 +472,22 @@ var _self;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
     },
     showArea: function showArea(canvasId, chartData) {
       canvaArea = new _wxcharts.default({
-        $this: _self,
+        $this: _this,
         canvasId: canvasId,
         type: 'area',
         fontSize: 11,
         legend: true,
         background: '#FFFFFF',
-        pixelRatio: _self.pixelRatio,
+        pixelRatio: _this.pixelRatio,
         categories: chartData.categories,
         animation: false,
         series: chartData.series,
         xAxis: {
           disableGrid: true },
 
-        yAxis: {
-          //disabled:true
-        },
-        width: _self.cWidth * _self.pixelRatio,
-        height: _self.cHeight * _self.pixelRatio,
+        yAxis: {},
+        width: _this.cWidth * _this.pixelRatio,
+        height: _this.cHeight * _this.pixelRatio,
         dataLabel: false,
         dataPointShape: true });
 

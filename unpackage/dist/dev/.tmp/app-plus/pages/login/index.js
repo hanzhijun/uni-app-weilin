@@ -119,16 +119,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
 var getCookie = util.getCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var myAjax = util.myAjax;var _default =
 {
   data: function data() {
@@ -141,19 +135,10 @@ var myAjax = util.myAjax;var _default =
       inputPassWords: '' };
 
   },
-  onLoad: function onLoad() {
-    // var timestamp = Date.parse(new Date())
-    // console.log(timestamp)
-  },
-  onLaunch: function onLaunch() {
-    console.log('App Launch-login', " at pages\\login\\index.vue:49");
-  },
-  onShow: function onShow() {
-    console.log('App Show-login', " at pages\\login\\index.vue:52");
-  },
-  onHide: function onHide() {
-    console.log('App Hide-login', " at pages\\login\\index.vue:55");
-  },
+  onLoad: function onLoad() {},
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {},
+  onHide: function onHide() {},
   methods: {
     bindKeyInput: function bindKeyInput(event) {
       this.inputValue = event.target.value;
@@ -166,10 +151,7 @@ var myAjax = util.myAjax;var _default =
         */
     toLogin: function toLogin() {
       var _this = this;var
-
-      inputValue =
-
-      _this.inputValue,inputPassWords = _this.inputPassWords;
+      inputValue = _this.inputValue,inputPassWords = _this.inputPassWords;
       if (!inputValue || !inputPassWords) {
         util.showToastBox(_this, '请输入用户名、密码!');
         return false;
@@ -179,7 +161,11 @@ var myAjax = util.myAjax;var _default =
         password: inputPassWords };
 
 
-      myAjax('post', '/user/authorize', obj, function (res) {
+      myAjax(
+      'post',
+      '/user/authorize',
+      obj,
+      function (res) {
         var deviceNos = getCookie('deviceNos');
         if (res.retCode == '10000') {
           _this.userInfo = res.successData;
@@ -201,10 +187,12 @@ var myAjax = util.myAjax;var _default =
         } else {
           util.showToastBox(_this, '未知错误，请重新登录!');
         }
-        console.log(JSON.stringify(res), " at pages\\login\\index.vue:104");
-      }, function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\login\\index.vue:106");
+        console.log(JSON.stringify(res), " at pages\\login\\index.vue:90");
+      },
+      function (reg) {
+        console.log(JSON.stringify(reg), " at pages\\login\\index.vue:93");
       });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

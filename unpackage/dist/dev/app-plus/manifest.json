@@ -47,7 +47,7 @@
     "distribute": {
       "icons": {
         "ios": {
-          "appstore": "static/logo.png",
+          "appstore": "static/logo-1024-02.png",
           "ipad": {
             "app": "unpackage/res/icons/76x76.png",
             "app@2x": "unpackage/res/icons/152x152.png",

@@ -121,8 +121,6 @@ __webpack_require__.r(__webpack_exports__);
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
 var getCookie = util.getCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;var _default =
 
@@ -138,19 +136,10 @@ var myAjax2 = util.myAjax2;var _default =
       inputCode: '' };
 
   },
-  onLoad: function onLoad() {
-    // var timestamp = Date.parse(new Date())
-    // console.log(timestamp)
-  },
-  onLaunch: function onLaunch() {
-    console.log('App Launch-login', " at pages\\code\\index.vue:46");
-  },
-  onShow: function onShow() {
-    console.log('App Show-login', " at pages\\code\\index.vue:49");
-  },
-  onHide: function onHide() {
-    console.log('App Hide-login', " at pages\\code\\index.vue:52");
-  },
+  onLoad: function onLoad() {},
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {},
+  onHide: function onHide() {},
   methods: {
     bindScanCode: function bindScanCode() {
       // 只允许通过相机扫码
@@ -158,8 +147,8 @@ var myAjax2 = util.myAjax2;var _default =
       uni.scanCode({
         onlyFromCamera: true,
         success: function success(res) {
-          console.log('条码类型：' + res.scanType, " at pages\\code\\index.vue:61");
-          console.log('条码内容：' + res.result, " at pages\\code\\index.vue:62");
+          console.log('条码类型：' + res.scanType, " at pages\\code\\index.vue:50");
+          console.log('条码内容：' + res.result, " at pages\\code\\index.vue:51");
           _this.inputCode = res.result;
         } });
 
@@ -185,24 +174,24 @@ var myAjax2 = util.myAjax2;var _default =
 
       myAjax2(
       'post',
-      '/device/physiology/actual',
+      '/device/deviceInfo',
       obj,
       function (res) {
-        if (res.retCode == '10000' && res.successData != '') {
+        if (res.retCode == '10000' && res.successData.length > 0) {
           setCookie('deviceNos', _this.inputCode);
           util.showToastBox(_this, '设备添加成功，即将跳转！');
           setTimeout(function () {
             uni.redirectTo({
               url: '../detail/index' });
 
-          }, 3000);
+          }, 2000);
         } else {
           util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
         }
-        console.log(JSON.stringify(res), " at pages\\code\\index.vue:102");
+        console.log(JSON.stringify(res), " at pages\\code\\index.vue:91");
       },
       function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\code\\index.vue:105");
+        console.log(JSON.stringify(reg), " at pages\\code\\index.vue:94");
       });
 
     } } };exports.default = _default;

@@ -157,38 +157,42 @@ __webpack_require__.r(__webpack_exports__);
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
 var setCookie = util.setCookie;
-var setStorage = util.setStorage;
-var getStorage = util.getStorage;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
+var checkWarn = util.checkWarn;
+var warnState = util.warnState;
 var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
 
 {
   data: function data() {
     return {
       title: '微麟守护者',
+
+      toast: 0,
+      toastTxt: '',
+      loading: 0,
+
       userInfo: null,
       deviceNos: '', // 设备号
       accessToken: null,
-      breath: '--', // 呼吸值 -100_无效值，其他为正常值
+
+      breathNum: '--', // 呼吸值 -100_无效值，其他为正常值
       deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
-      heart: '--', // 心率值 65436_无效值，其他为正常值
+      heartNum: '--', // 心率值 65436_无效值，其他为正常值
       markTime: null, // 发生的时间戳
-      motion: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
+      motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
       timer: null,
-      toast: 0,
-      toastTxt: '',
-      loading: 0
-      // warning: 1,
-      // warningText: '',
-      // leaveTime: null
-    };
+
+      warnNing: 0,
+      warningText: '',
+      warnNo: '',
+      warnDeviceTime: '',
+      warnHeartTime: '',
+      warnBreathTime: '',
+      warnMotionTime: '' };
+
   },
-  onLoad: function onLoad() {},
-  onLaunch: function onLaunch() {
-    console.log('App Launch-detail', " at pages\\detail\\index.vue:89");
-  },
-  onShow: function onShow() {
+  onLoad: function onLoad() {
     var _this = this;
     var accessToken = getCookie('accessToken');
     var deviceNos = getCookie('deviceNos');
@@ -209,14 +213,17 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       _this.deviceNos = deviceNos;
       _this.getActual();
       _this.setSocketTask();
-      this.timer = setInterval(function () {
+      _this.timer = setInterval(function () {
         _this.getActual();
-      }, 10000);
+      }, 5000);
     }
   },
-  onHide: function onHide() {
-    console.log('App Hide-detail', " at pages\\detail\\index.vue:118");
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {
+    util.changeWarn(this);
   },
+  onHide: function onHide() {},
+  onUnload: function onUnload() {},
   methods: {
     /**
               * 03. 获取设备当前的状态/心率/呼吸/体动数据
@@ -232,31 +239,14 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       obj,
       function (res) {
         if (res.retCode == '10000') {
-          if (res.successData[0].deviceStatus == 3 && _this.leaveTime) {
-            var time = Date.parse(new Date());
-            if (time - _this.leaveTime > 12000 && _this.warning == 0) {
-              console.log(time - _this.leaveTime, " at pages\\detail\\index.vue:138");
-              _this.warningText = '离床报警已触发';
-              _this.warning = 1;
-
-              backgroundAudioManager.title = '报警';
-              backgroundAudioManager.epname = '报警';
-              backgroundAudioManager.singer = '报警';
-              backgroundAudioManager.coverImgUrl = '';
-              // 设置了 src 之后会自动播放
-              backgroundAudioManager.src = '/static/warning.mp3';
-              backgroundAudioManager.onEnded(function () {
-                backgroundAudioManager.src = '/static/warning.mp3?time=' + Date.parse(new Date());
-              });
-            }
-          }
-          _this.breath = res.successData[0].breath;
+          checkWarn(_this, res, backgroundAudioManager);
+          _this.breathNum = res.successData[0].breath;
           _this.deviceStatus = res.successData[0].deviceStatus;
-          _this.heart = res.successData[0].heart;
+          _this.heartNum = res.successData[0].heart;
           _this.markTime = res.successData[0].markTime;
-          _this.motion = res.successData[0].motion;
+          _this.motionNum = res.successData[0].motion;
         } else {
-          console.log('未知错误，请重新登录', " at pages\\detail\\index.vue:159");
+          console.log('未知错误，请重新登录', " at pages\\detail\\index.vue:149");
           setCookie('accessToken', '');
           setCookie('username', '');
           uni.redirectTo({
@@ -265,15 +255,9 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         }
       },
       function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\detail\\index.vue:168");
+        console.log(JSON.stringify(reg), " at pages\\detail\\index.vue:158");
       });
 
-    },
-    /**
-        * 关闭报警
-        */
-    audioPause: function audioPause() {
-      util.audioPause(this, backgroundAudioManager);
     },
     linkRecord: function linkRecord() {
       uni.navigateTo({
@@ -285,23 +269,26 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         url: '../setting/index' });
 
     },
+    /**
+        * 时时数据推送
+        */
     setSocketTask: function setSocketTask() {
       var accessToken = util.getCookie('accessToken');
       var _this = this;
       // 建立连接
-      console.log('建立连接!', " at pages\\detail\\index.vue:192");
+      console.log('建立连接!', " at pages\\detail\\index.vue:179");
       wx.connectSocket({
         url: 'ws://stream.darma.cn:17004/ws',
         sluccess: function sluccess() {
-          console.log('连接成功...', " at pages\\detail\\index.vue:196");
+          console.log('连接成功...', " at pages\\detail\\index.vue:183");
         },
         fail: function fail() {
-          console.log('连接失败...', " at pages\\detail\\index.vue:199");
+          console.log('连接失败...', " at pages\\detail\\index.vue:186");
         } });
 
       // 连接成功
       wx.onSocketOpen(function () {
-        console.log('连接成功!', " at pages\\detail\\index.vue:204");
+        console.log('连接成功!', " at pages\\detail\\index.vue:191");
         var obj = {
           // 消息类型msgType前有 login（登录消息），deviceStatus（设备状态消息）healthData（心率呼吸数据消息），paramError（参数错误消息）
           msgType: 'login',
@@ -318,29 +305,36 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       });
       // 接收数据
       wx.onSocketMessage(function (data) {
+        console.log('接收数据回执，warnState.warnNing = ' + warnState.warnNing, " at pages\\detail\\index.vue:208");
         // heartBreathBcg、healthBreathData、deviceStatus
         if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
-          console.log(data.data, " at pages\\detail\\index.vue:223");
-          // uni.showToast({
-          //     title: data.data,
-          //     duration: 1000
-          // })
-        }
+
+
+
+
+
+        } // console.log(data.data);
+        // uni.showToast({
+        //     title: data.data,
+        //     duration: 1000
+        // })
         // 当状态发生变化会初始化时，会推送此条数据
-        if (JSON.parse(data.data).msgType == 'deviceStatus') {
-          if (JSON.parse(data.data).data.deviceStatus == '3') {
-            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:232");
-            _this.leaveTime = Date.parse(new Date());
-          } else {
-            _this.leaveTime = null;
-            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:236");
+        if (JSON.parse(data.data).msgType == 'deviceStatus') {if (JSON.parse(data.data).data.deviceStatus == '3') {console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:220");warnState.warnDeviceTime = Date.parse(new Date());} else {
+            warnState.warnDeviceTime = null;
+            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:224");
           }
         }
       });
       //连接失败
       wx.onSocketError(function () {
-        console.log('websocket连接失败！', " at pages\\detail\\index.vue:242");
+        console.log('websocket连接失败！', " at pages\\detail\\index.vue:230");
       });
+    },
+    /**
+        * 关闭报警
+        */
+    audioPause: function audioPause() {
+      util.audioPause(this, backgroundAudioManager);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
