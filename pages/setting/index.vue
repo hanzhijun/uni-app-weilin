@@ -159,10 +159,10 @@
         </view>
 
         <!--报警弹窗-->
-        <view class="base-box warn-box" catchtouchmove="true" v-if="warning == 1">
+        <view class="base-box warn-box" catchtouchmove="true" v-if="warnNing == 1">
             <view class="gray-back"></view>
             <view class="box-content">
-                <text class="txt">111111111</text>
+                <text class="txt">{{ warningText }}</text>
                 <view class="img"><image src="/static/warning.png"></image></view>
                 <view><button @click="audioPause">已知晓!</button></view>
             </view>
@@ -205,11 +205,21 @@ export default {
     data() {
         return {
             title: '系统设置',
-            showToast: 0,
+            toast: 0,
             toastTxt: '',
+            loading: 0,
+
             userInfo: null,
             deviceNos: '', // 设备号
             accessToken: null,
+
+            breathNum: '--', // 呼吸值 -100_无效值，其他为正常值
+            deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
+            heartNum: '--', // 心率值 65436_无效值，其他为正常值
+            markTime: null, // 发生的时间戳
+            motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
+            timer: null,
+
             device: '', // 是否监控离床
             deviceTimes: '', // 离床持续时间
             deviceStart: '', // 监控时段开始
@@ -223,12 +233,26 @@ export default {
             motion: '', // 是否监控体动值
             motionTimes: '', // 大幅体动持续时间
             motionStart: '', // 体动监控时段开始
-            motionEnd: '' // 体动监控时段结束
+            motionEnd: '', // 体动监控时段结束
+
+            warnNing: 0,
+            warningText: '',
+            warnNo: '',
+            warnDeviceTime: '',
+            warnHeartTime: '',
+            warnBreathTime: '',
+            warnMotionTime: ''
         };
     },
-    onLoad() {},
-    onLaunch: function() {},
-    onShow: function() {
+    onLoad() {
+        let _this = this
+        _this.timer = setInterval(function() {
+            util.changeWarn(_this);
+            // console.log('setting页面同步一次报警数据')
+        }, 1000);
+    },
+    onLaunch() {},
+    onShow() {
         let _this = this;
         let accessToken = util.getCookie('accessToken');
         let deviceNos = getCookie('deviceNos');
@@ -247,46 +271,43 @@ export default {
             getWarnCookie(_this);
         }
     },
-    onHide: function() {},
+    onHide() {},
+    onUnload() {
+        clearInterval(this.timer);
+    },
     methods: {
-        bindPickerChange: function(e) {
-            console.log('picker发送选择改变，携带值为：' + e.target.value);
+        bindPickerChange(e) {
+            // console.log('picker发送选择改变，携带值为：' + e.target.value);
             this.index = e.target.value;
         },
-        bindMultiPickerColumnChange: function(e) {
-            console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value);
+        bindMultiPickerColumnChange(e) {
+            // console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value);
             this.multiIndex[e.detail.column] = e.detail.value;
             this.$forceUpdate();
         },
-        bindTime01Change: function(e) {
+        bindTime01Change(e) {
             this.deviceStart = e.target.value;
         },
-        bindTime02Change: function(e) {
+        bindTime02Change(e) {
             this.deviceEnd = e.target.value;
         },
-        /**
-         * 关闭报警
-         */
-        audioPause: function() {
-            util.audioPause(this, backgroundAudioManager);
-        },
-        switch1Change: function(e) {
+        switch1Change(e) {
             this.device = e.target.value;
             util.setWarnCookie(this);
         },
-        switch2Change: function(e) {
+        switch2Change(e) {
             this.heart = e.target.value;
             util.setWarnCookie(this);
         },
-        switch3Change: function(e) {
+        switch3Change(e) {
             this.breath = e.target.value;
             util.setWarnCookie(this);
         },
-        switch4Change: function(e) {
+        switch4Change(e) {
             this.motion = e.target.value;
             util.setWarnCookie(this);
         },
-        deviceTimesChange: function(e) {
+        deviceTimesChange(e) {
             let value = e.target.value;
             if (value < 1 || value > 300) {
                 value = 1;
@@ -295,21 +316,21 @@ export default {
             this.deviceTimes = value;
             util.setWarnCookie(this);
         },
-        deviceStartChange: function(e) {
+        deviceStartChange(e) {
             this.deviceStart = e.target.value;
             util.setWarnCookie(this);
             if (this.deviceStart > this.deviceEnd) {
                 util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
             }
         },
-        deviceEndChange: function(e) {
+        deviceEndChange(e) {
             this.deviceEnd = e.target.value;
             util.setWarnCookie(this);
             if (this.deviceStart > this.deviceEnd) {
                 util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
             }
         },
-        heartDownChange: function(e) {
+        heartDownChange(e) {
             let value = e.target.value;
             if (value < 1 || value > 180) {
                 value = 1;
@@ -318,7 +339,7 @@ export default {
             this.heartDown = value;
             util.setWarnCookie(this);
         },
-        heartUpChange: function(e) {
+        heartUpChange(e) {
             let value = e.target.value;
             if (value < 1 || value > 180) {
                 value = 1;
@@ -327,7 +348,7 @@ export default {
             this.heartUp = value;
             util.setWarnCookie(this);
         },
-        breathDownChange: function(e) {
+        breathDownChange(e) {
             let value = e.target.value;
             if (value < 1 || value > 180) {
                 value = 1;
@@ -336,7 +357,7 @@ export default {
             this.breathDown = value;
             util.setWarnCookie(this);
         },
-        breathUpChange: function(e) {
+        breathUpChange(e) {
             let value = e.target.value;
             if (value < 1 || value > 180) {
                 value = 1;
@@ -345,7 +366,7 @@ export default {
             this.breathUp = value;
             util.setWarnCookie(this);
         },
-        motionTimesChange: function(e) {
+        motionTimesChange(e) {
             let value = e.target.value;
             if (value < 1 || value > 300) {
                 value = 1;
@@ -355,19 +376,25 @@ export default {
             // util.warnRule.motionTimes = value;
             util.setWarnCookie(this);
         },
-        motionEndChange: function(e) {
+        motionEndChange(e) {
             this.motionEnd = e.target.value;
             util.setWarnCookie(this);
             if (this.deviceStart > this.deviceEnd) {
                 util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
             }
         },
-        motionStartChange: function(e) {
+        motionStartChange(e) {
             this.motionStart = e.target.value;
             util.setWarnCookie(this);
             if (this.deviceStart > this.deviceEnd) {
                 util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
             }
+        },
+        /**
+         * 关闭报警
+         */
+        audioPause() {
+            util.audioPause(this, backgroundAudioManager);
         }
     }
 };

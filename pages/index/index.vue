@@ -1,6 +1,6 @@
 <template>
     <view class="detail_outside">
-        <view class="logo"><image src="/static/logo-360.png" @click="linkToLogin"></image></view>
+        <view class="logo"><image src="/static/logo-1024-02.png" @click="linkToLogin"></image></view>
 
         <ul class="text">
             <li>智慧产品，24小时智慧科技保姆;</li>
@@ -72,6 +72,7 @@ export default {
     width: 120upx;
     height: 120upx;
     margin: 0 auto;
+    border-radius: 30upx;
 }
 
 .detail_outside ul,

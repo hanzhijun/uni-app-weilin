@@ -47,8 +47,8 @@ export default {
             uni.scanCode({
                 onlyFromCamera: true,
                 success: function(res) {
-                    console.log('条码类型：' + res.scanType);
-                    console.log('条码内容：' + res.result);
+                    // console.log('条码类型：' + res.scanType);
+                    // console.log('条码内容：' + res.result);
                     _this.inputCode = res.result;
                 }
             });
@@ -88,10 +88,10 @@ export default {
                     } else {
                         util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
                     }
-                    console.log(JSON.stringify(res));
+                    // console.log(JSON.stringify(res));
                 },
                 function(reg) {
-                    console.log(JSON.stringify(reg));
+                    // console.log(JSON.stringify(reg));
                 }
             );
         }

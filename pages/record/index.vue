@@ -86,10 +86,10 @@
         </view>
 
         <!--报警弹窗-->
-        <view class="base-box warn-box" catchtouchmove="true" v-if="warning == 1">
+        <view class="base-box warn-box" catchtouchmove="true" v-if="warnNing == 1">
             <view class="gray-back"></view>
             <view class="box-content">
-                <text class="txt">111111111</text>
+                <text class="txt">{{ warningText }}</text>
                 <view class="img"><image src="/static/warning.png"></image></view>
                 <view><button @click="audioPause">已知晓!</button></view>
             </view>
@@ -99,7 +99,7 @@
 
 <script>
 import wxCharts from '../../components/wx-charts/wxcharts.js';
-var _self;
+var _this;
 var canvaLineA = null;
 var canvaLineB = null;
 var canvaArea = null;
@@ -116,17 +116,21 @@ export default {
     data() {
         return {
             title: '历史记录',
-            showToast: 0,
+            toast: 0,
             toastTxt: '',
+            loading: 0,
+
             userInfo: null,
             deviceNos: '', // 设备号
             accessToken: null,
-            breath: '--', // 呼吸值 -100_无效值，其他为正常值
+
+            breathNum: '--', // 呼吸值 -100_无效值，其他为正常值
             deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
-            heart: '--', // 心率值 65436_无效值，其他为正常值
+            heartNum: '--', // 心率值 65436_无效值，其他为正常值
             markTime: null, // 发生的时间戳
-            motion: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
+            motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
             timer: null,
+
             tabNum: '1', // 导航焦点值
             startTime: null, // 开始时间
             endTime: null, // 结束时间
@@ -137,29 +141,41 @@ export default {
             cHeight2: '', //横屏图表
             pixelRatio: 1,
             serverData: '',
-            firstLoad: 0
+            firstLoad: 0,
+
+            warnNing: 0,
+            warningText: '',
+            warnNo: '',
+            warnDeviceTime: '',
+            warnHeartTime: '',
+            warnBreathTime: '',
+            warnMotionTime: ''
         };
     },
     onLoad() {
-        _self = this;
+        _this = this;
+        setTimeout(function() {
+            _this.firstLoad = 1;
+        }, 2000);
+        _this.timer = setInterval(function() {
+            util.changeWarn(_this);
+            // console.log('图表页面同步一次报警数据')
+        }, 1000);
         //#ifdef H5 || MP-ALIPAY || MP-BAIDU || MP-TOUTIAO
         uni.getSystemInfo({
             success: function(res) {
                 if (res.pixelRatio > 1) {
                     //正常这里给2就行，如果pixelRatio=3性能会降低一点
-                    //_self.pixelRatio =res.pixelRatio
-                    _self.pixelRatio = 2;
+                    //_this.pixelRatio =res.pixelRatio
+                    _this.pixelRatio = 2;
                 }
             }
         });
         //#endif
-        this.cWidth = uni.upx2px(750);
-        this.cHeight = uni.upx2px(500);
-        this.cWidth2 = uni.upx2px(700);
-        this.cHeight2 = uni.upx2px(1100);
-        setTimeout(function(){
-            this.firstLoad = 1
-        },2000);
+        _this.cWidth = uni.upx2px(750);
+        _this.cHeight = uni.upx2px(500);
+        _this.cWidth2 = uni.upx2px(700);
+        _this.cHeight2 = uni.upx2px(1100);
     },
     onLaunch() {},
     onShow() {
@@ -184,7 +200,11 @@ export default {
         }
     },
     onHide() {},
+    onUnload() {
+        clearInterval(this.timer);
+    },
     methods: {
+        checkWarnState() {},
         linkToLogin() {
             uni.redirectTo({
                 url: '../login/index'
@@ -228,15 +248,15 @@ export default {
                 obj,
                 function(res) {
                     if (res.retCode == '10000') {
-                        console.log('history请求成功');
+                        // console.log('history请求成功');
                         _this.setHistoryData(res);
                     } else {
-                        console.log('history未知错误');
+                        // console.log('history未知错误');
                     }
                     // console.log(JSON.stringify(res))
                 },
                 function(reg) {
-                    console.log(JSON.stringify(reg));
+                    // console.log(JSON.stringify(reg));
                 }
             );
         },
@@ -290,8 +310,8 @@ export default {
                 ]
             };
             if (LineA.categories.length > 0 && LineA.series.length > 0) {
-                _self.showLineB('canvasLineB', LineA);
-                _self.showArea('canvasArea', LineA);
+                this.showLineB('canvasLineB', LineA);
+                this.showArea('canvasArea', LineA);
             }
         },
         /**
@@ -326,13 +346,13 @@ export default {
         },
         showLineB(canvasId, chartData) {
             canvaLineB = new wxCharts({
-                $this: _self,
+                $this: _this,
                 canvasId: canvasId,
                 type: 'line',
                 fontSize: 11,
                 legend: true,
                 background: '#FFFFFF',
-                pixelRatio: _self.pixelRatio,
+                pixelRatio: _this.pixelRatio,
                 rotate: true, //开启图表横屏
                 categories: chartData.categories,
                 animation: false,
@@ -341,8 +361,8 @@ export default {
                     disableGrid: true
                 },
                 yAxis: {},
-                width: _self.cWidth2 * _self.pixelRatio,
-                height: _self.cHeight2 * _self.pixelRatio,
+                width: _this.cWidth2 * _this.pixelRatio,
+                height: _this.cHeight2 * _this.pixelRatio,
                 dataLabel: false,
                 dataPointShape: true,
                 extra: {
@@ -352,13 +372,13 @@ export default {
         },
         showArea(canvasId, chartData) {
             canvaArea = new wxCharts({
-                $this: _self,
+                $this: _this,
                 canvasId: canvasId,
                 type: 'area',
                 fontSize: 11,
                 legend: true,
                 background: '#FFFFFF',
-                pixelRatio: _self.pixelRatio,
+                pixelRatio: _this.pixelRatio,
                 categories: chartData.categories,
                 animation: false,
                 series: chartData.series,
@@ -366,8 +386,8 @@ export default {
                     disableGrid: true
                 },
                 yAxis: {},
-                width: _self.cWidth * _self.pixelRatio,
-                height: _self.cHeight * _self.pixelRatio,
+                width: _this.cWidth * _this.pixelRatio,
+                height: _this.cHeight * _this.pixelRatio,
                 dataLabel: false,
                 dataPointShape: true
             });
@@ -623,5 +643,4 @@ ec-canvas {
     border: 1upx solid #dc7004;
     color: #ffffff;
 }
-
 </style>
