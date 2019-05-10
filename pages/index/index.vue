@@ -72,7 +72,7 @@ export default {
     width: 120upx;
     height: 120upx;
     margin: 0 auto;
-    border-radius: 30upx;
+    border-radius: 15upx;
 }
 
 .detail_outside ul,
