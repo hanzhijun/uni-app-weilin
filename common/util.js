@@ -457,7 +457,7 @@ function checkMotion(that, res, backgroundAudioManager) {
         return
     }
     // 体动值回复正常数据，初始化数据并跳出检测
-    if (res.successData[0].motion < 2) {
+    if (res.successData[0].motion < 4) {
         // console.log('体动值回复正常数据，初始化数据并跳出检测')
         warnState.warnMotionTime = null
         return
