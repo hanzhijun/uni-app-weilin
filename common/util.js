@@ -115,21 +115,39 @@ function myAjax2(type, url, data, res, reg) {
  * @param {Object} that 作用域
  */
 function getWarnCookie(that) {
-    let warnRule = JSON.parse(getCookie('warnRule'))
-    that.device = warnRule.device
-    that.deviceTimes = warnRule.deviceTimes
-    that.deviceStart = warnRule.deviceStart
-    that.deviceEnd = warnRule.deviceEnd
-    that.heart = warnRule.heart
-    that.heartUp = warnRule.heartUp
-    that.heartDown = warnRule.heartDown
-    that.breath = warnRule.breath
-    that.breathUp = warnRule.breathUp
-    that.breathDown = warnRule.breathDown
-    that.motion = warnRule.motion
-    that.motionTimes = warnRule.motionTimes
-    that.motionStart = warnRule.motionStart
-    that.motionEnd = warnRule.motionEnd
+    let warnRuleCookie = JSON.parse(getCookie('warnRule'))
+    if (!warnRuleCookie) {
+        warnRuleCookie = warnRule
+    }
+    that.device = warnRuleCookie.device
+    that.deviceTimes = warnRuleCookie.deviceTimes
+    that.deviceStart = warnRuleCookie.deviceStart
+    that.deviceEnd = warnRuleCookie.deviceEnd
+    that.heart = warnRuleCookie.heart
+    that.heartUp = warnRuleCookie.heartUp
+    that.heartDown = warnRuleCookie.heartDown
+    that.breath = warnRuleCookie.breath
+    that.breathUp = warnRuleCookie.breathUp
+    that.breathDown = warnRuleCookie.breathDown
+    that.motion = warnRuleCookie.motion
+    that.motionTimes = warnRuleCookie.motionTimes
+    that.motionStart = warnRuleCookie.motionStart
+    that.motionEnd = warnRuleCookie.motionEnd
+    
+    warnRule.device = warnRuleCookie.device
+    warnRule.deviceTimes = warnRuleCookie.deviceTimes
+    warnRule.deviceStart = warnRuleCookie.deviceStart
+    warnRule.deviceEnd = warnRuleCookie.deviceEnd
+    warnRule.heart = warnRuleCookie.heart
+    warnRule.heartUp = warnRuleCookie.heartUp
+    warnRule.heartDown = warnRuleCookie.heartDown
+    warnRule.breath = warnRuleCookie.breath
+    warnRule.breathUp = warnRuleCookie.breathUp
+    warnRule.breathDown = warnRuleCookie.breathDown
+    warnRule.motion = warnRuleCookie.motion
+    warnRule.motionTimes = warnRuleCookie.motionTimes
+    warnRule.motionStart = warnRuleCookie.motionStart
+    warnRule.motionEnd = warnRuleCookie.motionEnd
 }
 
 /**
@@ -137,7 +155,7 @@ function getWarnCookie(that) {
  * @param {Object} that 作用域
  */
 function setWarnCookie(that) {
-    let warnRule = {
+    let warnRuleCookie = {
         device: that.device,
         deviceTimes: that.deviceTimes,
         deviceStart: that.deviceStart,
@@ -153,7 +171,7 @@ function setWarnCookie(that) {
         motionStart: that.motionStart,
         motionEnd: that.motionEnd
     }
-    setCookie('warnRule', JSON.stringify(warnRule))
+    setCookie('warnRule', JSON.stringify(warnRuleCookie))
 }
 
 /**
@@ -287,6 +305,7 @@ function checkDevice(that, res, backgroundAudioManager) {
  * @param {Object} res 数据
  */
 function checkHeart(that, res, backgroundAudioManager) {
+    // console.log('心率检测!')
     // 如果正在报警，跳出检测
     if (warnState.warnNing == 1) return
     let warnRule = JSON.parse(getCookie('warnRule'))
@@ -323,6 +342,8 @@ function checkHeart(that, res, backgroundAudioManager) {
         warnState.warnHeartTime = null
         return
     }
+    
+    console.log(nowTime - warnState.warnHeartTime, '...心率监测(有异常)..')
     // 记录时间点已超出系统默认设置心率持续异常时间上限，触发离床报警
     if ((nowTime - warnState.warnHeartTime) > (30 * 1000)) {
         if (res.successData[0].heart > warnRule.heartUp) {
@@ -353,6 +374,7 @@ function checkHeart(that, res, backgroundAudioManager) {
  * @param {Object} res 数据
  */
 function checkBreath(that, res, backgroundAudioManager) {
+    // console.log('呼吸检测!')
     // 如果正在报警，跳出检测
     if (warnState.warnNing == 1) return
     let warnRule = JSON.parse(getCookie('warnRule'))
@@ -372,7 +394,7 @@ function checkBreath(that, res, backgroundAudioManager) {
         return
     }
     // 系统设置上下限规则有误，跳出检测
-    if (warnRule.breathDown > warnRule.breathUp) {
+    if (warnRule.breathDown * 1 > warnRule.breathUp * 1) {
         // console.log('系统设置上下限规则有误，跳出检测')
         warnState.warnBreathTime = null
         return
@@ -384,11 +406,14 @@ function checkBreath(that, res, backgroundAudioManager) {
         return
     }
     // 呼吸率回归正常值，初始化数据，并跳出检测
-    if (res.successData[0].breath <= warnRule.breathUp && res.successData[0].breath >= warnRule.breathDown) {
+    if (res.successData[0].breath * 1 <= warnRule.breathUp * 1 && res.successData[0].breath * 1 >= warnRule.breathDown * 1) {
         // console.log('呼吸率回归正常值，初始化数据，并跳出检测')
         warnState.warnBreathTime = null
         return
     }
+    
+    console.log(nowTime - warnState.warnBreathTime, '...呼吸监测(有异常)..')
+    
     // 记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸报警
     if ((nowTime - warnState.warnBreathTime) > (30 * 1000)) {
         if (res.successData[0].breath > warnRule.breathUp) {
