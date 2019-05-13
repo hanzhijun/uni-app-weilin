@@ -275,6 +275,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 function getDate(type) {
   var date = new Date();
@@ -300,7 +325,9 @@ var setCookie = util.setCookie;
 var changeWarn = util.changeWarn;
 var getWarnCookie = util.getWarnCookie;
 var myAjax2 = util.myAjax2;
+var warnRule = util.warnRule;
 var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
+
 {
   data: function data() {
     return {
@@ -308,6 +335,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       toast: 0,
       toastTxt: '',
       loading: 0,
+      confirm: 0,
 
       userInfo: null,
       deviceNos: '', // 设备号
@@ -348,7 +376,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     var _this = this;
     _this.timer = setInterval(function () {
       util.changeWarn(_this);
-      console.log('setting页面同步一次报警数据', " at pages\\setting\\index.vue:251");
+      // console.log('setting页面同步一次报警数据')
     }, 1000);
   },
   onLaunch: function onLaunch() {},
@@ -376,35 +404,34 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     clearInterval(this.timer);
   },
   methods: {
-    bindPickerChange: function bindPickerChange(e) {
-      console.log('picker发送选择改变，携带值为：' + e.target.value, " at pages\\setting\\index.vue:280");
-      this.index = e.target.value;
-    },
-    bindMultiPickerColumnChange: function bindMultiPickerColumnChange(e) {
-      console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value, " at pages\\setting\\index.vue:284");
-      this.multiIndex[e.detail.column] = e.detail.value;
-      this.$forceUpdate();
-    },
-    bindTime01Change: function bindTime01Change(e) {
-      this.deviceStart = e.target.value;
-    },
-    bindTime02Change: function bindTime02Change(e) {
-      this.deviceEnd = e.target.value;
-    },
     switch1Change: function switch1Change(e) {
       this.device = e.target.value;
+      warnRule.device = e.target.value;
       util.setWarnCookie(this);
     },
     switch2Change: function switch2Change(e) {
       this.heart = e.target.value;
+      warnRule.heart = e.target.value;
       util.setWarnCookie(this);
     },
     switch3Change: function switch3Change(e) {
       this.breath = e.target.value;
+      warnRule.breath = e.target.value;
       util.setWarnCookie(this);
     },
     switch4Change: function switch4Change(e) {
       this.motion = e.target.value;
+      warnRule.motion = e.target.value;
+      util.setWarnCookie(this);
+    },
+    bindTime01Change: function bindTime01Change(e) {
+      this.deviceStart = e.target.value;
+      warnRule.deviceStart = e.target.value;
+      util.setWarnCookie(this);
+    },
+    bindTime02Change: function bindTime02Change(e) {
+      this.deviceEnd = e.target.value;
+      warnRule.deviceEnd = e.target.value;
       util.setWarnCookie(this);
     },
     deviceTimesChange: function deviceTimesChange(e) {
@@ -414,10 +441,12 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-300的数字');
       }
       this.deviceTimes = value;
+      warnRule.deviceTimes = value;
       util.setWarnCookie(this);
     },
     deviceStartChange: function deviceStartChange(e) {
       this.deviceStart = e.target.value;
+      warnRule.deviceStart = e.target.value;
       util.setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
@@ -425,6 +454,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     },
     deviceEndChange: function deviceEndChange(e) {
       this.deviceEnd = e.target.value;
+      warnRule.deviceEnd = e.target.value;
       util.setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
@@ -437,6 +467,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.heartDown = value;
+      warnRule.heartDown = value;
       util.setWarnCookie(this);
     },
     heartUpChange: function heartUpChange(e) {
@@ -446,6 +477,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.heartUp = value;
+      warnRule.heartUp = value;
       util.setWarnCookie(this);
     },
     breathDownChange: function breathDownChange(e) {
@@ -455,6 +487,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.breathDown = value;
+      warnRule.breathDown = value;
       util.setWarnCookie(this);
     },
     breathUpChange: function breathUpChange(e) {
@@ -464,6 +497,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.breathUp = value;
+      warnRule.breathUp = value;
       util.setWarnCookie(this);
     },
     motionTimesChange: function motionTimesChange(e) {
@@ -473,11 +507,12 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-300的数字');
       }
       this.motionTimes = value;
-      // util.warnRule.motionTimes = value;
+      warnRule.motionTimes = value;
       util.setWarnCookie(this);
     },
     motionEndChange: function motionEndChange(e) {
       this.motionEnd = e.target.value;
+      warnRule.motionEnd = e.target.value;
       util.setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
@@ -485,6 +520,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     },
     motionStartChange: function motionStartChange(e) {
       this.motionStart = e.target.value;
+      warnRule.motionStart = e.target.value;
       util.setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
@@ -495,6 +531,23 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         */
     audioPause: function audioPause() {
       util.audioPause(this, backgroundAudioManager);
+    },
+    openConfirmBox: function openConfirmBox() {
+      this.confirm = 1;
+    },
+    closeConfirmBox: function closeConfirmBox() {
+      this.confirm = 0;
+    },
+    loginOut: function loginOut() {
+      setCookie('accessToken', '');
+      setCookie('username', '');
+      setCookie('deviceNos', '');
+      setCookie('warnRule', '');
+      this.confirm = 0;
+      clearInterval(this.timer);
+      uni.reLaunch({
+        url: '../login/index' });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

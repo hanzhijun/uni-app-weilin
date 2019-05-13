@@ -117,6 +117,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
@@ -128,8 +138,11 @@ var myAjax2 = util.myAjax2;var _default =
   data: function data() {
     return {
       title: '添加设备',
+
       showToast: 0,
       toastTxt: '',
+      loading: 0,
+
       userInfo: '',
       inputValue: '',
       inputPassWords: '',
@@ -147,8 +160,8 @@ var myAjax2 = util.myAjax2;var _default =
       uni.scanCode({
         onlyFromCamera: true,
         success: function success(res) {
-          console.log('条码类型：' + res.scanType, " at pages\\code\\index.vue:50");
-          console.log('条码内容：' + res.result, " at pages\\code\\index.vue:51");
+          // console.log('条码类型：' + res.scanType);
+          // console.log('条码内容：' + res.result);
           _this.inputCode = res.result;
         } });
 
@@ -172,6 +185,7 @@ var myAjax2 = util.myAjax2;var _default =
       var obj = {
         deviceNos: _this.inputCode };
 
+      _this.loading = 1;
       myAjax2(
       'post',
       '/device/deviceInfo',
@@ -181,17 +195,19 @@ var myAjax2 = util.myAjax2;var _default =
           setCookie('deviceNos', _this.inputCode);
           util.showToastBox(_this, '设备添加成功，即将跳转！');
           setTimeout(function () {
+            _this.loading = 0;
             uni.redirectTo({
               url: '../detail/index' });
 
           }, 2000);
         } else {
+          _this.loading = 0;
           util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
         }
-        console.log(JSON.stringify(res), " at pages\\code\\index.vue:91");
+        // console.log(JSON.stringify(res));
       },
       function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\code\\index.vue:94");
+        // console.log(JSON.stringify(reg));
       });
 
     } } };exports.default = _default;

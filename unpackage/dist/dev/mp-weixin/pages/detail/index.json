@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "微麟守护",
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
 }

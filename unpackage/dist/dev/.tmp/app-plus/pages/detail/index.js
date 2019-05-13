@@ -98,61 +98,77 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniLoadMore = function uniLoadMore() {return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ "../../../../work/uni-app-weilin/components/uni-load-more/uni-load-more.vue"));};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
@@ -168,7 +184,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     return {
       title: '微麟守护者',
 
-      toast: 0,
+      showToast: 0,
       toastTxt: '',
       loading: 0,
 
@@ -192,6 +208,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       warnMotionTime: '' };
 
   },
+  components: { uniLoadMore: uniLoadMore },
   onLoad: function onLoad() {
     var _this = this;
     var accessToken = getCookie('accessToken');
@@ -211,7 +228,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       _this.userInfo = userInfo;
       _this.accessToken = accessToken;
       _this.deviceNos = deviceNos;
-      _this.getActual();
+      _this.getActual('loading');
       _this.setSocketTask();
       _this.timer = setInterval(function () {
         _this.getActual();
@@ -228,7 +245,10 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
     /**
               * 03. 获取设备当前的状态/心率/呼吸/体动数据
               */
-    getActual: function getActual() {
+    getActual: function getActual(loading) {
+      if (loading) {
+        this.loading = 1;
+      }
       var obj = {
         deviceNos: this.deviceNos };
 
@@ -245,8 +265,9 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
           _this.heartNum = res.successData[0].heart;
           _this.markTime = res.successData[0].markTime;
           _this.motionNum = res.successData[0].motion;
+          _this.loading = 0;
         } else {
-          console.log('未知错误，请重新登录', " at pages\\detail\\index.vue:149");
+          // console.log('未知错误，请重新登录');
           setCookie('accessToken', '');
           setCookie('username', '');
           uni.redirectTo({
@@ -255,7 +276,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         }
       },
       function (reg) {
-        console.log(JSON.stringify(reg), " at pages\\detail\\index.vue:158");
+        // console.log(JSON.stringify(reg));
       });
 
     },
@@ -276,19 +297,19 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       var accessToken = util.getCookie('accessToken');
       var _this = this;
       // 建立连接
-      console.log('建立连接!', " at pages\\detail\\index.vue:179");
+      // console.log('建立连接!');
       wx.connectSocket({
         url: 'ws://stream.darma.cn:17004/ws',
         sluccess: function sluccess() {
-          console.log('连接成功...', " at pages\\detail\\index.vue:183");
+          // console.log('连接成功...');
         },
         fail: function fail() {
-          console.log('连接失败...', " at pages\\detail\\index.vue:186");
+          // console.log('连接失败...');
         } });
 
       // 连接成功
       wx.onSocketOpen(function () {
-        console.log('连接成功!', " at pages\\detail\\index.vue:191");
+        // console.log('连接成功!');
         var obj = {
           // 消息类型msgType前有 login（登录消息），deviceStatus（设备状态消息）healthData（心率呼吸数据消息），paramError（参数错误消息）
           msgType: 'login',
@@ -305,29 +326,37 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       });
       // 接收数据
       wx.onSocketMessage(function (data) {
-        console.log('接收数据回执，warnState.warnNing = ' + warnState.warnNing, " at pages\\detail\\index.vue:208");
+        // console.log('接收数据回执，warnState.warnNing = ' + warnState.warnNing)
         // heartBreathBcg、healthBreathData、deviceStatus
+
         if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
 
 
-
-
-
         } // console.log(data.data);
-        // uni.showToast({
-        //     title: data.data,
-        //     duration: 1000
-        // })
+        // console.log('111111111111' + JSON.parse(data.data).msgType)
         // 当状态发生变化会初始化时，会推送此条数据
-        if (JSON.parse(data.data).msgType == 'deviceStatus') {if (JSON.parse(data.data).data.deviceStatus == '3') {console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:220");warnState.warnDeviceTime = Date.parse(new Date());} else {
+        // console.log('warnRule.device = ' + util.warnRule.device)
+        if (JSON.parse(data.data).msgType == 'deviceStatus' && util.warnRule.device) {console.log('222222222222---' + JSON.parse(data.data).data.deviceStatus, " at pages\\detail\\index.vue:239");
+          if (JSON.parse(data.data).data.deviceStatus == '3') {
+            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:241");
+            warnState.warnDeviceTime = Date.parse(new Date());
+            warnState.warnHeartTime = null;
+            warnState.warnBreathTime = null;
+            warnState.warnMotionTime = null;
+            _this.warnDeviceTime = warnState.warnDeviceTime;
+            _this.warnHeartTime = null;
+            _this.warnBreathTime = null;
+            _this.warnMotionTime = null;
+          } else {
             warnState.warnDeviceTime = null;
-            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:224");
+            _this.warnDeviceTime = null;
+            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:253");
           }
         }
       });
       //连接失败
       wx.onSocketError(function () {
-        console.log('websocket连接失败！', " at pages\\detail\\index.vue:230");
+        // console.log('websocket连接失败！');
       });
     },
     /**

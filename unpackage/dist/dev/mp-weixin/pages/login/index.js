@@ -119,6 +119,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
@@ -128,8 +138,11 @@ var myAjax = util.myAjax;var _default =
   data: function data() {
     return {
       title: '登录',
+
       showToast: 0,
       toastTxt: '',
+      loading: 0,
+
       userInfo: null,
       inputValue: '',
       inputPassWords: '' };
@@ -137,7 +150,9 @@ var myAjax = util.myAjax;var _default =
   },
   onLoad: function onLoad() {},
   onLaunch: function onLaunch() {},
-  onShow: function onShow() {},
+  onShow: function onShow() {
+    console.log('onShow');
+  },
   onHide: function onHide() {},
   methods: {
     bindKeyInput: function bindKeyInput(event) {
@@ -160,7 +175,7 @@ var myAjax = util.myAjax;var _default =
         username: inputValue,
         password: inputPassWords };
 
-
+      _this.loading = 1;
       myAjax(
       'post',
       '/user/authorize',
@@ -169,6 +184,7 @@ var myAjax = util.myAjax;var _default =
         var deviceNos = getCookie('deviceNos');
         if (res.retCode == '10000') {
           _this.userInfo = res.successData;
+          _this.loading = 0;
           setCookie('accessToken', res.successData.accessToken);
           setCookie('username', res.successData.username);
           if (!deviceNos) {
@@ -182,10 +198,13 @@ var myAjax = util.myAjax;var _default =
           }
         } else if (res.retCode == '10007') {
           util.showToastBox(_this, '用户名或密码错误!');
+          _this.loading = 0;
         } else if (res.retCode == '10008') {
           util.showToastBox(_this, 'token已过期，请重新登录!');
+          _this.loading = 0;
         } else {
           util.showToastBox(_this, '未知错误，请重新登录!');
+          _this.loading = 0;
         }
         // console.log(JSON.stringify(res));
       },
