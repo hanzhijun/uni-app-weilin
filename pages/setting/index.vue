@@ -1,5 +1,5 @@
 <template>
-    <view class="set-outside" style="padding-top: 10upx;">
+    <view class="set-outside">
         <!-- 离床提醒 -->
         <view class="setting-section">
             <view class="setting-auto">
@@ -41,7 +41,7 @@
                 <view class="uni-list">
                     <view class="uni-list-cell">
                         <text class="warn-note">
-                            温馨提示: 起止时间点一样说明24小时内都需要报警，例:“00:00 - 00:00”,离床持续时长为10分钟,说明在24小时内,离床超过10分钟推送离床预警
+                            温馨提示: 离床报警将只在上述时间段内,离床持续时长超过设定分钟数时执行 (结束时间需大于开始时间，否则视为错误设置，无法触发报警)
                         </text>
                     </view>
                 </view>
@@ -74,7 +74,7 @@
                 </view>
 
                 <view class="uni-list">
-                    <view class="uni-list-cell"><text class="warn-note">温馨提示: 设备采集到的心率数据, 超过了设定的上限或者低于设定的下限, 推送一条心率预警</text></view>
+                    <view class="uni-list-cell"><text class="warn-note">温馨提示: 设备采集到的心率数据, 超过了设定的上限或者低于设定的下限, 将触发心率异常报警</text></view>
                 </view>
             </view>
         </view>
@@ -105,7 +105,7 @@
                 </view>
 
                 <view class="uni-list">
-                    <view class="uni-list-cell"><text class="warn-note">温馨提示: 设备采集到的呼吸数据,超过了设定的上限或者低于设定的下限,推送一条呼吸预警</text></view>
+                    <view class="uni-list-cell"><text class="warn-note">温馨提示: 设备采集到的呼吸数据,超过了设定的上限或者低于设定的下限,将触发呼吸异常报警</text></view>
                 </view>
             </view>
         </view>
@@ -151,10 +151,18 @@
                 <view class="uni-list">
                     <view class="uni-list-cell">
                         <text class="warn-note">
-                            起止时间点一样说明24小时内都需要报警，例:“00:00 - 00:00”,体动频繁持续时长为10分钟,说明在24小时内,频繁体动超过10分钟推送体动频繁预警
+                            温馨提示: 体动频繁报警将只在上述时间段内,体动频繁持续时长超过设定分钟数时执行 (结束时间需大于开始时间，否则视为错误设置，无法触发报警)
                         </text>
                     </view>
                 </view>
+            </view>
+        </view>
+        
+        <!-- 其他设置-->
+        <view class="setting-section">
+            <view class="setting-other" @click="openConfirmBox">
+                <text class="setting-txt">退出</text>
+                <text class="setting-icon">></text>
             </view>
         </view>
 
@@ -167,10 +175,27 @@
                 <view><button @click="audioPause">已知晓!</button></view>
             </view>
         </view>
-
+        <!--居中灰色块Loading-->
+        <view class="base-box loading-box" catchtouchmove='true' v-if="loading == 1">
+            <view class="gray-back"></view>
+            <view class="box-content">
+                <view class="img">
+                    <image src="/static/loading.gif"></image>
+                </view>
+                <view class="txt">加载中...</view>
+            </view>
+        </view>
         <!--toast提示弹窗-->
         <view class="show-toast" v-if="showToast == 1">
             <text>{{ toastTxt }}</text>
+        </view>
+        <!-- 确定操作弹窗-->
+        <view class="base-box warn-box" catchtouchmove="true" v-if="confirm == 1">
+            <view class="gray-back"></view>
+            <view class="box-confirm">
+                <text class="txt">确定退出当前帐户？</text>
+                <view class="confirm-btn"><text @click="closeConfirmBox">取消</text><text class="blue" @click="loginOut">确定</text></view>
+            </view>
         </view>
     </view>
 </template>
@@ -195,12 +220,23 @@ function getDate(type) {
 }
 
 var util = require('../../common/util.js');
-var getCookie = util.getCookie;
+
+var baseHost = util.baseHost;
+var imgUrl = util.imgUrl;
+var warnRule = util.warnRule;
+var warnState = util.warnState;
 var setCookie = util.setCookie;
-var changeWarn = util.changeWarn;
-var getWarnCookie = util.getWarnCookie;
+var getCookie = util.getCookie;
+var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
+var getWarnCookie = util.getWarnCookie;
+var setWarnCookie = util.setWarnCookie;
+var audioPause = util.audioPause;
+var changeWarn = util.changeWarn;
+var checkWarn = util.checkWarn;
+
 var backgroundAudioManager = wx.getBackgroundAudioManager();
+
 export default {
     data() {
         return {
@@ -208,6 +244,7 @@ export default {
             toast: 0,
             toastTxt: '',
             loading: 0,
+            confirm: 0,
 
             userInfo: null,
             deviceNos: '', // 设备号
@@ -245,19 +282,12 @@ export default {
         };
     },
     onLoad() {
-        let _this = this
-        _this.timer = setInterval(function() {
-            util.changeWarn(_this);
-            // console.log('setting页面同步一次报警数据')
-        }, 1000);
-    },
-    onLaunch() {},
-    onShow() {
         let _this = this;
-        let accessToken = util.getCookie('accessToken');
+        let accessToken = getCookie('accessToken');
         let deviceNos = getCookie('deviceNos');
+        let userInfo = getCookie('username');
         if (!accessToken) {
-            wx.redirectTo({
+            uni.redirectTo({
                 url: '../login/index'
             });
         } else if (!deviceNos) {
@@ -265,46 +295,108 @@ export default {
                 url: '../code/index'
             });
         } else {
+            changeWarn(_this);
+            getWarnCookie(_this);
+            _this.userInfo = userInfo;
             _this.accessToken = accessToken;
             _this.deviceNos = deviceNos;
-            changeWarn(_this, backgroundAudioManager);
-            getWarnCookie(_this);
+            _this.getActual();
+            _this.timer = setInterval(function() {
+                _this.getActual();
+            }, 5000);
         }
     },
-    onHide() {},
+    onLaunch() {},
+    onShow() {},
+    onHide() {
+        clearInterval(this.timer);
+    },
     onUnload() {
         clearInterval(this.timer);
     },
     methods: {
-        bindPickerChange(e) {
-            // console.log('picker发送选择改变，携带值为：' + e.target.value);
-            this.index = e.target.value;
-        },
-        bindMultiPickerColumnChange(e) {
-            // console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value);
-            this.multiIndex[e.detail.column] = e.detail.value;
-            this.$forceUpdate();
-        },
-        bindTime01Change(e) {
-            this.deviceStart = e.target.value;
-        },
-        bindTime02Change(e) {
-            this.deviceEnd = e.target.value;
+        /**
+         * 03. 获取设备当前的状态/心率/呼吸/体动数据
+         */
+        getActual(loading) {
+            console.log('获取设备当前的状态一次(setting)!')
+            let obj = {
+                deviceNos: this.deviceNos
+            };
+            let _this = this;
+            myAjax2(
+                'post',
+                '/device/physiology/actual',
+                obj,
+                function(res) {
+                    if (res.retCode == '10000') {
+                        let deviceStatus = res.successData[0].deviceStatus;
+                        if (warnRule.device && _this.deviceStatus=='4' && deviceStatus == '3') {
+                            console.log('离床已记录，以此时间为基准开始计算报警数据');
+                            warnState.warnDeviceTime = Date.parse(new Date());
+                            warnState.warnHeartTime = null;
+                            warnState.warnBreathTime = null;
+                            warnState.warnMotionTime = null;
+                            _this.warnDeviceTime = warnState.warnDeviceTime;
+                            _this.warnHeartTime = null;
+                            _this.warnBreathTime = null;
+                            _this.warnMotionTime = null;
+                        }
+                        if (deviceStatus == '4') {
+                            warnState.warnDeviceTime = null;
+                            _this.warnDeviceTime = null;
+                            console.log('解除离床报警计算数据');
+                        }
+                        
+                        checkWarn(_this, res, backgroundAudioManager);
+                        _this.deviceStatus = deviceStatus;
+                        _this.breathNum = res.successData[0].breath;
+                        _this.heartNum = res.successData[0].heart;
+                        _this.markTime = res.successData[0].markTime;
+                        _this.motionNum = res.successData[0].motion;
+                        _this.loading = 0;
+                    } else {
+                        // console.log('未知错误，请重新登录');
+                        setCookie('accessToken', '');
+                        setCookie('username', '');
+                        uni.redirectTo({
+                            url: '../login/index'
+                        });
+                    }
+                },
+                function(reg) {
+                    // console.log(JSON.stringify(reg));
+                }
+            );
         },
         switch1Change(e) {
             this.device = e.target.value;
+            warnRule.device = e.target.value;
             util.setWarnCookie(this);
         },
         switch2Change(e) {
             this.heart = e.target.value;
+            warnRule.heart = e.target.value;
             util.setWarnCookie(this);
         },
         switch3Change(e) {
             this.breath = e.target.value;
+            warnRule.breath = e.target.value;
             util.setWarnCookie(this);
         },
         switch4Change(e) {
             this.motion = e.target.value;
+            warnRule.motion = e.target.value;
+            util.setWarnCookie(this);
+        },
+        bindTime01Change(e) {
+            this.deviceStart = e.target.value;
+            warnRule.deviceStart = e.target.value;
+            util.setWarnCookie(this);
+        },
+        bindTime02Change(e) {
+            this.deviceEnd = e.target.value;
+            warnRule.deviceEnd = e.target.value;
             util.setWarnCookie(this);
         },
         deviceTimesChange(e) {
@@ -314,10 +406,12 @@ export default {
                 util.showToastBox(this, '请输入1-300的数字');
             }
             this.deviceTimes = value;
+            warnRule.deviceTimes = value;
             util.setWarnCookie(this);
         },
         deviceStartChange(e) {
             this.deviceStart = e.target.value;
+            warnRule.deviceStart = e.target.value;
             util.setWarnCookie(this);
             if (this.deviceStart > this.deviceEnd) {
                 util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
@@ -325,6 +419,7 @@ export default {
         },
         deviceEndChange(e) {
             this.deviceEnd = e.target.value;
+            warnRule.deviceEnd = e.target.value;
             util.setWarnCookie(this);
             if (this.deviceStart > this.deviceEnd) {
                 util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
@@ -337,6 +432,7 @@ export default {
                 util.showToastBox(this, '请输入1-180的数字');
             }
             this.heartDown = value;
+            warnRule.heartDown = value;
             util.setWarnCookie(this);
         },
         heartUpChange(e) {
@@ -346,6 +442,7 @@ export default {
                 util.showToastBox(this, '请输入1-180的数字');
             }
             this.heartUp = value;
+            warnRule.heartUp = value;
             util.setWarnCookie(this);
         },
         breathDownChange(e) {
@@ -355,6 +452,7 @@ export default {
                 util.showToastBox(this, '请输入1-180的数字');
             }
             this.breathDown = value;
+            warnRule.breathDown = value;
             util.setWarnCookie(this);
         },
         breathUpChange(e) {
@@ -364,6 +462,7 @@ export default {
                 util.showToastBox(this, '请输入1-180的数字');
             }
             this.breathUp = value;
+            warnRule.breathUp = value;
             util.setWarnCookie(this);
         },
         motionTimesChange(e) {
@@ -373,11 +472,12 @@ export default {
                 util.showToastBox(this, '请输入1-300的数字');
             }
             this.motionTimes = value;
-            // util.warnRule.motionTimes = value;
+            warnRule.motionTimes = value;
             util.setWarnCookie(this);
         },
         motionEndChange(e) {
             this.motionEnd = e.target.value;
+            warnRule.motionEnd = e.target.value;
             util.setWarnCookie(this);
             if (this.deviceStart > this.deviceEnd) {
                 util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
@@ -385,6 +485,7 @@ export default {
         },
         motionStartChange(e) {
             this.motionStart = e.target.value;
+            warnRule.motionStart = e.target.value;
             util.setWarnCookie(this);
             if (this.deviceStart > this.deviceEnd) {
                 util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
@@ -395,6 +496,23 @@ export default {
          */
         audioPause() {
             util.audioPause(this, backgroundAudioManager);
+        },
+        openConfirmBox() {
+            this.confirm = 1;
+        },
+        closeConfirmBox() {
+            this.confirm = 0;
+        },
+        loginOut() {
+            setCookie('accessToken', '');
+            setCookie('username', '');
+            setCookie('deviceNos', '');
+            setCookie('warnRule', '');
+            this.confirm = 0;
+            clearInterval(this.timer);
+            uni.reLaunch({
+                url: '../login/index'
+            });
         }
     }
 };
@@ -418,7 +536,7 @@ export default {
     width: 730upx;
     overflow: hidden;
     background-color: #fff;
-    margin: 0 10upx 10upx;
+    margin: 10upx;
 }
 
 .setting-section .setting-auto {
@@ -481,4 +599,60 @@ export default {
     font-size: 24upx;
     min-width: 180upx;
 }
+
+.setting-other {
+    overflow: hidden;
+    padding: 20upx 30upx 20upx 45upx;
+}
+
+.setting-other:active {
+    opacity: .7;
+}
+
+.setting-other text {
+    display: inline-block;
+    line-height: 36upx;
+    float: left;
+}
+
+.setting-other text.setting-icon {
+    float: right;
+}
+
+.box-confirm {
+    width: 500upx;
+    height: 250upx;
+    background: #fff;
+    border-radius: 10upx;
+    position: absolute;
+    left: calc(50vw - 250upx);
+    top: calc(50vh - 350upx);
+}
+
+.box-confirm .txt {
+    display: block;
+    line-height: 150upx;
+    text-align: center;
+    font-size: 32upx;
+}
+
+.box-confirm .confirm-btn {
+    border-top: 1upx solid #eee;
+}
+
+.box-confirm .confirm-btn text {
+    display: inline-block;
+    width: 50%;
+    height: 100upx;
+    line-height: 100upx;
+    text-align: center;
+    float: left;
+}
+
+.box-confirm .confirm-btn text.blue {
+    background-color: #0099e9;
+    color: #fff;
+    border-bottom-right-radius: 10upx;
+}
+
 </style>

@@ -10,6 +10,16 @@
 
         <view class="section-center"><button class="section-post" @click="toConfirm">确定添加</button></view>
 
+        <!--居中灰色块Loading-->
+        <view class="base-box loading-box" catchtouchmove='true' v-if="loading == 1">
+            <view class="gray-back"></view>
+            <view class="box-content">
+                <view class="img">
+                    <image src="/static/loading.gif"></image>
+                </view>
+                <view class="txt">加载中...</view>
+            </view>
+        </view>
         <!--toast提示弹窗-->
         <view class="show-toast" v-if="showToast == 1">
             <text>{{ toastTxt }}</text>
@@ -28,8 +38,11 @@ export default {
     data() {
         return {
             title: '添加设备',
+            
             showToast: 0,
             toastTxt: '',
+            loading: 0,
+            
             userInfo: '',
             inputValue: '',
             inputPassWords: '',
@@ -72,6 +85,7 @@ export default {
             let obj = {
                 deviceNos: _this.inputCode
             };
+            _this.loading = 1;
             myAjax2(
                 'post',
                 '/device/deviceInfo',
@@ -81,11 +95,13 @@ export default {
                         setCookie('deviceNos', _this.inputCode);
                         util.showToastBox(_this, '设备添加成功，即将跳转！');
                         setTimeout(function() {
+                            _this.loading = 0;
                             uni.redirectTo({
                                 url: '../detail/index'
                             });
                         }, 2000);
                     } else {
+                        _this.loading = 0;
                         util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
                     }
                     // console.log(JSON.stringify(res));

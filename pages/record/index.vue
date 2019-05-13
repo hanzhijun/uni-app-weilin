@@ -76,7 +76,7 @@
         </view>
 
         <!--报警弹窗-->
-        <view class="base-box warn-box" v-if="warning == '1'" catchtouchmove="true">
+        <view class="base-box warn-box" v-if="warnNing == '1'" catchtouchmove="true">
             <view class="gray-back"></view>
             <view class="box-content">
                 <text class="txt">{{ warningText }}</text>
@@ -84,15 +84,19 @@
                 <view><button @click="audioPause">已知晓!</button></view>
             </view>
         </view>
-
-        <!--报警弹窗-->
-        <view class="base-box warn-box" catchtouchmove="true" v-if="warnNing == 1">
+        <!--居中灰色块Loading-->
+        <view class="base-box loading-box" catchtouchmove='true' v-if="loading == 1">
             <view class="gray-back"></view>
             <view class="box-content">
-                <text class="txt">{{ warningText }}</text>
-                <view class="img"><image src="/static/warning.png"></image></view>
-                <view><button @click="audioPause">已知晓!</button></view>
+                <view class="img">
+                    <image src="/static/loading.gif"></image>
+                </view>
+                <view class="txt">加载中...</view>
             </view>
+        </view>
+        <!--toast提示弹窗-->
+        <view class="show-toast" v-if="showToast == 1">
+            <text>{{ toastTxt }}</text>
         </view>
     </view>
 </template>
@@ -105,18 +109,29 @@ var canvaLineB = null;
 var canvaArea = null;
 
 var util = require('../../common/util.js');
-var getCookie = util.getCookie;
+
+var baseHost = util.baseHost;
+var imgUrl = util.imgUrl;
+var warnRule = util.warnRule;
+var warnState = util.warnState;
 var setCookie = util.setCookie;
-var getWarnCookie = util.getWarnCookie;
-var changeWarn = util.changeWarn;
+var getCookie = util.getCookie;
+var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
+var getWarnCookie = util.getWarnCookie;
+var setWarnCookie = util.setWarnCookie;
+var audioPause = util.audioPause;
+var changeWarn = util.changeWarn;
+var checkWarn = util.checkWarn;
+
 var backgroundAudioManager = wx.getBackgroundAudioManager();
 
 export default {
     data() {
         return {
             title: '历史记录',
-            toast: 0,
+            
+            showToast: 0,
             toastTxt: '',
             loading: 0,
 
@@ -142,6 +157,21 @@ export default {
             pixelRatio: 1,
             serverData: '',
             firstLoad: 0,
+            
+            device: '', // 是否监控离床
+            deviceTimes: '', // 离床持续时间
+            deviceStart: '', // 监控时段开始
+            deviceEnd: '', // 监控时段结束
+            heart: '', // 是否监控心率
+            heartUp: '', // 心率过快峰值
+            heartDown: '', // 心率过慢峰值
+            breath: '', // 是否监控呼吸率
+            breathUp: '', // 呼吸过快峰值
+            breathDown: '', // 呼吸过慢峰值
+            motion: '', // 是否监控体动值
+            motionTimes: '', // 大幅体动持续时间
+            motionStart: '', // 体动监控时段开始
+            motionEnd: '', // 体动监控时段结束
 
             warnNing: 0,
             warningText: '',
@@ -157,10 +187,6 @@ export default {
         setTimeout(function() {
             _this.firstLoad = 1;
         }, 2000);
-        _this.timer = setInterval(function() {
-            util.changeWarn(_this);
-            // console.log('图表页面同步一次报警数据')
-        }, 1000);
         //#ifdef H5 || MP-ALIPAY || MP-BAIDU || MP-TOUTIAO
         uni.getSystemInfo({
             success: function(res) {
@@ -176,14 +202,12 @@ export default {
         _this.cHeight = uni.upx2px(500);
         _this.cWidth2 = uni.upx2px(700);
         _this.cHeight2 = uni.upx2px(1100);
-    },
-    onLaunch() {},
-    onShow() {
-        let _this = this;
-        let accessToken = util.getCookie('accessToken');
+        
+        let accessToken = getCookie('accessToken');
         let deviceNos = getCookie('deviceNos');
+        let userInfo = getCookie('username');
         if (!accessToken) {
-            wx.redirectTo({
+            uni.redirectTo({
                 url: '../login/index'
             });
         } else if (!deviceNos) {
@@ -191,19 +215,80 @@ export default {
                 url: '../code/index'
             });
         } else {
+            changeWarn(_this);
+            getWarnCookie(_this);
+            _this.userInfo = userInfo;
             _this.accessToken = accessToken;
             _this.deviceNos = deviceNos;
-            changeWarn(_this, backgroundAudioManager);
-            getWarnCookie(_this);
+            _this.getActual();
+            _this.timer = setInterval(function() {
+                _this.getActual();
+            }, 5000);
             _this.getTime(1);
             _this.history();
         }
     },
+    onLaunch() {},
+    onShow() {},
     onHide() {},
     onUnload() {
         clearInterval(this.timer);
     },
     methods: {
+        /**
+         * 03. 获取设备当前的状态/心率/呼吸/体动数据
+         */
+        getActual(loading) {
+            console.log('获取设备当前的状态一次(record)!')
+            let obj = {
+                deviceNos: this.deviceNos
+            };
+            let _this = this;
+            myAjax2(
+                'post',
+                '/device/physiology/actual',
+                obj,
+                function(res) {
+                    if (res.retCode == '10000') {
+                        let deviceStatus = res.successData[0].deviceStatus;
+                        if (warnRule.device && _this.deviceStatus=='4' && deviceStatus == '3') {
+                            console.log('离床已记录，以此时间为基准开始计算报警数据');
+                            warnState.warnDeviceTime = Date.parse(new Date());
+                            warnState.warnHeartTime = null;
+                            warnState.warnBreathTime = null;
+                            warnState.warnMotionTime = null;
+                            _this.warnDeviceTime = warnState.warnDeviceTime;
+                            _this.warnHeartTime = null;
+                            _this.warnBreathTime = null;
+                            _this.warnMotionTime = null;
+                        }
+                        if (deviceStatus == '4') {
+                            warnState.warnDeviceTime = null;
+                            _this.warnDeviceTime = null;
+                            console.log('解除离床报警计算数据');
+                        }
+                        
+                        checkWarn(_this, res, backgroundAudioManager);
+                        _this.deviceStatus = deviceStatus;
+                        _this.breathNum = res.successData[0].breath;
+                        _this.heartNum = res.successData[0].heart;
+                        _this.markTime = res.successData[0].markTime;
+                        _this.motionNum = res.successData[0].motion;
+                        _this.loading = 0;
+                    } else {
+                        // console.log('未知错误，请重新登录');
+                        setCookie('accessToken', '');
+                        setCookie('username', '');
+                        uni.redirectTo({
+                            url: '../login/index'
+                        });
+                    }
+                },
+                function(reg) {
+                    // console.log(JSON.stringify(reg));
+                }
+            );
+        },
         checkWarnState() {},
         linkToLogin() {
             uni.redirectTo({
@@ -364,7 +449,7 @@ export default {
                 width: _this.cWidth2 * _this.pixelRatio,
                 height: _this.cHeight2 * _this.pixelRatio,
                 dataLabel: false,
-                dataPointShape: true,
+                dataPointShape: false,
                 extra: {
                     lineStyle: 'curve'
                 }
@@ -389,7 +474,7 @@ export default {
                 width: _this.cWidth * _this.pixelRatio,
                 height: _this.cHeight * _this.pixelRatio,
                 dataLabel: false,
-                dataPointShape: true
+                dataPointShape: false
             });
         },
         touchLineA(e) {

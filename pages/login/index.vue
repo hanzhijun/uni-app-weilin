@@ -12,6 +12,16 @@
 
         <view class="section-center"><button class="section-post" @click="toLogin">登录</button></view>
 
+        <!--居中灰色块Loading-->
+        <view class="base-box loading-box" catchtouchmove='true' v-if="loading == 1">
+            <view class="gray-back"></view>
+            <view class="box-content">
+                <view class="img">
+                    <image src="/static/loading.gif"></image>
+                </view>
+                <view class="txt">加载中...</view>
+            </view>
+        </view>
         <!--toast提示弹窗-->
         <view class="show-toast" v-if="showToast == 1">
             <text>{{ toastTxt }}</text>
@@ -28,8 +38,11 @@ export default {
     data() {
         return {
             title: '登录',
+            
             showToast: 0,
             toastTxt: '',
+            loading: 0,
+            
             userInfo: null,
             inputValue: '',
             inputPassWords: ''
@@ -37,7 +50,9 @@ export default {
     },
     onLoad() {},
     onLaunch() {},
-    onShow() {},
+    onShow() {
+        console.log('onShow');
+    },
     onHide() {},
     methods: {
         bindKeyInput(event) {
@@ -60,7 +75,7 @@ export default {
                 username: inputValue,
                 password: inputPassWords
             };
-
+            _this.loading = 1;
             myAjax(
                 'post',
                 '/user/authorize',
@@ -69,6 +84,7 @@ export default {
                     let deviceNos = getCookie('deviceNos');
                     if (res.retCode == '10000') {
                         _this.userInfo = res.successData;
+                        _this.loading = 0;
                         setCookie('accessToken', res.successData.accessToken);
                         setCookie('username', res.successData.username);
                         if (!deviceNos) {
@@ -82,10 +98,13 @@ export default {
                         }
                     } else if (res.retCode == '10007') {
                         util.showToastBox(_this, '用户名或密码错误!');
+                        _this.loading = 0;
                     } else if (res.retCode == '10008') {
                         util.showToastBox(_this, 'token已过期，请重新登录!');
+                        _this.loading = 0;
                     } else {
                         util.showToastBox(_this, '未知错误，请重新登录!');
+                        _this.loading = 0;
                     }
                     // console.log(JSON.stringify(res));
                 },

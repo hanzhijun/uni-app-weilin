@@ -50,17 +50,41 @@
                 <view><button @click="audioPause">已知晓!</button></view>
             </view>
         </view>
+        <!--居中灰色块Loading-->
+        <view class="base-box loading-box" catchtouchmove='true' v-if="loading == 1">
+            <view class="gray-back"></view>
+            <view class="box-content">
+                <view class="img">
+                    <image src="/static/loading.gif"></image>
+                </view>
+                <view class="txt">加载中...</view>
+            </view>
+        </view>
+        <!--toast提示弹窗-->
+        <view class="show-toast" v-if="showToast == 1">
+            <text>{{ toastTxt }}</text>
+        </view>
+
     </view>
 </template>
 
 <script>
 var util = require('../../common/util.js');
-var getCookie = util.getCookie;
+
+var baseHost = util.baseHost;
+var imgUrl = util.imgUrl;
+var warnRule = util.warnRule;
+var warnState = util.warnState;
 var setCookie = util.setCookie;
+var getCookie = util.getCookie;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
+var getWarnCookie = util.getWarnCookie;
+var setWarnCookie = util.setWarnCookie;
+var audioPause = util.audioPause;
+var changeWarn = util.changeWarn;
 var checkWarn = util.checkWarn;
-var warnState = util.warnState;
+
 var backgroundAudioManager = wx.getBackgroundAudioManager();
 
 export default {
@@ -68,7 +92,7 @@ export default {
         return {
             title: '微麟守护者',
 
-            toast: 0,
+            showToast: 0,
             toastTxt: '',
             loading: 0,
 
@@ -82,6 +106,21 @@ export default {
             markTime: null, // 发生的时间戳
             motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
             timer: null,
+            
+            device: '', // 是否监控离床
+            deviceTimes: '', // 离床持续时间
+            deviceStart: '', // 监控时段开始
+            deviceEnd: '', // 监控时段结束
+            heart: '', // 是否监控心率
+            heartUp: '', // 心率过快峰值
+            heartDown: '', // 心率过慢峰值
+            breath: '', // 是否监控呼吸率
+            breathUp: '', // 呼吸过快峰值
+            breathDown: '', // 呼吸过慢峰值
+            motion: '', // 是否监控体动值
+            motionTimes: '', // 大幅体动持续时间
+            motionStart: '', // 体动监控时段开始
+            motionEnd: '', // 体动监控时段结束
 
             warnNing: 0,
             warningText: '',
@@ -89,10 +128,15 @@ export default {
             warnDeviceTime: '',
             warnHeartTime: '',
             warnBreathTime: '',
-            warnMotionTime: ''
+            warnMotionTime: '',
+            
+            firstTimes: 0
         };
     },
-    onLoad() {
+    components: {uniLoadMore},
+    onLoad() {},
+    onLaunch() {},
+    onShow() {
         let _this = this;
         let accessToken = getCookie('accessToken');
         let deviceNos = getCookie('deviceNos');
@@ -106,29 +150,32 @@ export default {
                 url: '../code/index'
             });
         } else {
-            util.changeWarn(_this, backgroundAudioManager);
-            util.getWarnCookie(_this);
+            changeWarn(_this);
+            getWarnCookie(_this);
             _this.userInfo = userInfo;
             _this.accessToken = accessToken;
             _this.deviceNos = deviceNos;
             _this.getActual();
-            _this.setSocketTask();
             _this.timer = setInterval(function() {
                 _this.getActual();
             }, 5000);
         }
     },
-    onLaunch() {},
-    onShow() {
-        util.changeWarn(this);
+    onHide() {
+        clearInterval(this.timer);
     },
-    onHide() {},
-    onUnload() {},
+    onUnload() {
+        clearInterval(this.timer);
+    },
     methods: {
         /**
          * 03. 获取设备当前的状态/心率/呼吸/体动数据
          */
-        getActual() {
+        getActual(loading) {
+            console.log('获取设备当前的状态一次(detail)!')
+            if (loading) {
+                this.loading = 1
+            }
             let obj = {
                 deviceNos: this.deviceNos
             };
@@ -139,12 +186,31 @@ export default {
                 obj,
                 function(res) {
                     if (res.retCode == '10000') {
+                        let deviceStatus = res.successData[0].deviceStatus;
+                        if (warnRule.device && _this.deviceStatus=='4' && deviceStatus == '3') {
+                            console.log('离床已记录，以此时间为基准开始计算报警数据');
+                            warnState.warnDeviceTime = Date.parse(new Date());
+                            warnState.warnHeartTime = null;
+                            warnState.warnBreathTime = null;
+                            warnState.warnMotionTime = null;
+                            _this.warnDeviceTime = warnState.warnDeviceTime;
+                            _this.warnHeartTime = null;
+                            _this.warnBreathTime = null;
+                            _this.warnMotionTime = null;
+                        }
+                        if (deviceStatus == '4') {
+                            warnState.warnDeviceTime = null;
+                            _this.warnDeviceTime = null;
+                            console.log('解除离床报警计算数据');
+                        }
+                        
                         checkWarn(_this, res, backgroundAudioManager);
+                        _this.deviceStatus = deviceStatus;
                         _this.breathNum = res.successData[0].breath;
-                        _this.deviceStatus = res.successData[0].deviceStatus;
                         _this.heartNum = res.successData[0].heart;
                         _this.markTime = res.successData[0].markTime;
                         _this.motionNum = res.successData[0].motion;
+                        _this.loading = 0;
                     } else {
                         // console.log('未知错误，请重新登录');
                         setCookie('accessToken', '');
@@ -173,6 +239,7 @@ export default {
          * 时时数据推送
          */
         setSocketTask() {
+            this.firstTimes = 1;
             let accessToken = util.getCookie('accessToken');
             let _this = this;
             // 建立连接
@@ -205,19 +272,32 @@ export default {
             });
             // 接收数据
             wx.onSocketMessage(function(data) {
+                console.log('***************************detail回执')
                 // console.log('接收数据回执，warnState.warnNing = ' + warnState.warnNing)
                 // heartBreathBcg、healthBreathData、deviceStatus
-                // if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
+                
+                if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
                     // console.log(data.data);
-                // }
+                    // console.log('111111111111' + JSON.parse(data.data).msgType)
+                }
                 // 当状态发生变化会初始化时，会推送此条数据
-                if (JSON.parse(data.data).msgType == 'deviceStatus' && warnState.device) {
+                // console.log('warnRule.device = ' + util.warnRule.device)
+                if (JSON.parse(data.data).msgType == 'deviceStatus' && util.warnRule.device) {
+                    console.log('222222222222---' + JSON.parse(data.data).data.deviceStatus)
                     if (JSON.parse(data.data).data.deviceStatus == '3') {
-                        // console.log('离床已记录，以此时间为基准开始计算报警数据');
+                        console.log('离床已记录，以此时间为基准开始计算报警数据');
                         warnState.warnDeviceTime = Date.parse(new Date());
+                        warnState.warnHeartTime = null;
+                        warnState.warnBreathTime = null;
+                        warnState.warnMotionTime = null;
+                        _this.warnDeviceTime = warnState.warnDeviceTime;
+                        _this.warnHeartTime = null;
+                        _this.warnBreathTime = null;
+                        _this.warnMotionTime = null;
                     } else {
                         warnState.warnDeviceTime = null;
-                        // console.log('解除离床报警计算数据');
+                        _this.warnDeviceTime = null;
+                        console.log('解除离床报警计算数据');
                     }
                 }
             });
