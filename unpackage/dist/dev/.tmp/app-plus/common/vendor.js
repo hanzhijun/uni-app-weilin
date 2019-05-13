@@ -126,6 +126,9 @@ function myAjax2(type, url, data, res, reg) {
    */
 function getWarnCookie(that) {
   var warnRuleCookie = JSON.parse(getCookie('warnRule'));
+  if (!warnRuleCookie) {
+    warnRuleCookie = warnRule;
+  }
   that.device = warnRuleCookie.device;
   that.deviceTimes = warnRuleCookie.deviceTimes;
   that.deviceStart = warnRuleCookie.deviceStart;
@@ -224,15 +227,19 @@ function changeWarn(that) {
 function audioStart(that, backgroundAudioManager) {
   that.warnNing = 1;
   warnState.warnNing = 1;
-  backgroundAudioManager.title = '报警';
-  backgroundAudioManager.epname = '报警';
-  backgroundAudioManager.singer = '报警';
-  backgroundAudioManager.coverImgUrl = '';
-  // 设置了 src 之后会自动播放
-  backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
-  backgroundAudioManager.onEnded(function () {
-    backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
-  });
+  if (backgroundAudioManager.paused) {
+    backgroundAudioManager.play();
+  } else {
+    backgroundAudioManager.title = '报警';
+    backgroundAudioManager.epname = '报警';
+    backgroundAudioManager.singer = '报警';
+    backgroundAudioManager.coverImgUrl = '';
+    // 设置了 src 之后会自动播放
+    backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
+    backgroundAudioManager.onEnded(function () {
+      backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
+    });
+  }
 }
 
 /**
@@ -291,7 +298,7 @@ function checkDevice(that, res, backgroundAudioManager) {
     warnState.warnDeviceTime = null;
     return;
   }
-  console.log(nowTime - warnState.warnDeviceTime, '...离床监测..', warnRule.deviceTimes * 60 * 1000, " at common\\util.js:284");
+  console.log(nowTime - warnState.warnDeviceTime, '...离床监测..', warnRule.deviceTimes * 60 * 1000, " at common\\util.js:291");
   // 记录时间点已超出系统设置离床时间上限，触发离床报警
   if (nowTime - warnState.warnDeviceTime > warnRule.deviceTimes * 60 * 1000) {
     // console.log('记录时间点已超出系统设置离床时间上限，触发离床报警')
@@ -350,7 +357,7 @@ function checkHeart(that, res, backgroundAudioManager) {
     return;
   }
 
-  console.log(nowTime - warnState.warnHeartTime, '...心率监测(有异常)..', " at common\\util.js:343");
+  console.log(nowTime - warnState.warnHeartTime, '...心率监测(有异常)..', " at common\\util.js:350");
   // 记录时间点已超出系统默认设置心率持续异常时间上限，触发离床报警
   if (nowTime - warnState.warnHeartTime > 30 * 1000) {
     if (res.successData[0].heart > warnRule.heartUp) {
@@ -419,7 +426,7 @@ function checkBreath(that, res, backgroundAudioManager) {
     return;
   }
 
-  console.log(nowTime - warnState.warnBreathTime, '...呼吸监测(有异常)..', " at common\\util.js:412");
+  console.log(nowTime - warnState.warnBreathTime, '...呼吸监测(有异常)..', " at common\\util.js:419");
 
   // 记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸报警
   if (nowTime - warnState.warnBreathTime > 30 * 1000) {
@@ -494,7 +501,7 @@ function checkMotion(that, res, backgroundAudioManager) {
     warnState.warnMotionTime = null;
     return;
   }
-  console.log(nowTime - warnState.warnMotionTime, '...体动监测..', warnRule.motionTimes * 60 * 1000, " at common\\util.js:487");
+  console.log(nowTime - warnState.warnMotionTime, '...体动监测..', warnRule.motionTimes * 60 * 1000, " at common\\util.js:494");
   // 记录时间点已超出系统设置体动时间上限，触发体动报警
   if (nowTime - warnState.warnMotionTime > warnRule.motionTimes * 60 * 1000) {
     // console.log('记录时间点已超出系统设置体动时间上限，触发体动报警')

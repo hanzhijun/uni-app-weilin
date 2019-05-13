@@ -98,77 +98,76 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniLoadMore = function uniLoadMore() {return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ "../../../../work/uni-app-weilin/components/uni-load-more/uni-load-more.vue"));};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 
@@ -191,7 +190,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
 {
   data: function data() {
     return {
-      title: '微麟守护者',
+      title: 'Smater 守护',
 
       showToast: 0,
       toastTxt: '',
@@ -234,36 +233,9 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       firstTimes: 0 };
 
   },
-  components: { uniLoadMore: uniLoadMore },
-  onLoad: function onLoad() {
-    // let _this = this;
-    // let accessToken = getCookie('accessToken');
-    // let deviceNos = getCookie('deviceNos');
-    // let userInfo = getCookie('username');
-    // if (!accessToken) {
-    //     uni.redirectTo({
-    //         url: '../login/index'
-    //     });
-    // } else if (!deviceNos) {
-    //     uni.redirectTo({
-    //         url: '../code/index'
-    //     });
-    // } else {
-    //     changeWarn(_this);
-    //     getWarnCookie(_this);
-    //     _this.userInfo = userInfo;
-    //     _this.accessToken = accessToken;
-    //     _this.deviceNos = deviceNos;
-    //     _this.getActual('loading');
-    //     _this.setSocketTask();
-    //     _this.timer = setInterval(function() {
-    //         _this.getActual();
-    //     }, 5000);
-    // }
-  },
+  onLoad: function onLoad() {},
   onLaunch: function onLaunch() {},
   onShow: function onShow() {
-    // util.changeWarn(this);
     var _this = this;
     var accessToken = getCookie('accessToken');
     var deviceNos = getCookie('deviceNos');
@@ -283,9 +255,10 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       _this.accessToken = accessToken;
       _this.deviceNos = deviceNos;
       _this.getActual();
+      _this.setSocketTask();
       _this.timer = setInterval(function () {
         _this.getActual();
-      }, 5000);
+      }, 3000);
     }
   },
   onHide: function onHide() {
@@ -314,7 +287,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       function (res) {
         if (res.retCode == '10000') {
           var deviceStatus = res.successData[0].deviceStatus;
-          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3') {
+          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
             console.log('离床已记录，以此时间为基准开始计算报警数据');
             warnState.warnDeviceTime = Date.parse(new Date());
             warnState.warnHeartTime = null;
@@ -366,6 +339,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         * 时时数据推送
         */
     setSocketTask: function setSocketTask() {
+      if (this.firstTimes == 1) return;
       this.firstTimes = 1;
       var accessToken = util.getCookie('accessToken');
       var _this = this;
@@ -403,30 +377,30 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         // console.log('接收数据回执，warnState.warnNing = ' + warnState.warnNing)
         // heartBreathBcg、healthBreathData、deviceStatus
 
-        if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
-
-
-        } // console.log(data.data);
+        // if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
+        // console.log(data.data);
         // console.log('111111111111' + JSON.parse(data.data).msgType)
+        // }
         // 当状态发生变化会初始化时，会推送此条数据
         // console.log('warnRule.device = ' + util.warnRule.device)
-        if (JSON.parse(data.data).msgType == 'deviceStatus' && util.warnRule.device) {console.log('222222222222---' + JSON.parse(data.data).data.deviceStatus);
-          if (JSON.parse(data.data).data.deviceStatus == '3') {
-            console.log('离床已记录，以此时间为基准开始计算报警数据');
-            warnState.warnDeviceTime = Date.parse(new Date());
-            warnState.warnHeartTime = null;
-            warnState.warnBreathTime = null;
-            warnState.warnMotionTime = null;
-            _this.warnDeviceTime = warnState.warnDeviceTime;
-            _this.warnHeartTime = null;
-            _this.warnBreathTime = null;
-            _this.warnMotionTime = null;
-          } else {
-            warnState.warnDeviceTime = null;
-            _this.warnDeviceTime = null;
-            console.log('解除离床报警计算数据');
-          }
-        }
+        // if (JSON.parse(data.data).msgType == 'deviceStatus' && util.warnRule.device) {
+        //     console.log('222222222222---' + JSON.parse(data.data).data.deviceStatus)
+        //     if (JSON.parse(data.data).data.deviceStatus == '3') {
+        //         console.log('离床已记录，以此时间为基准开始计算报警数据');
+        //         warnState.warnDeviceTime = Date.parse(new Date());
+        //         warnState.warnHeartTime = null;
+        //         warnState.warnBreathTime = null;
+        //         warnState.warnMotionTime = null;
+        //         _this.warnDeviceTime = warnState.warnDeviceTime;
+        //         _this.warnHeartTime = null;
+        //         _this.warnBreathTime = null;
+        //         _this.warnMotionTime = null;
+        //     } else {
+        //         warnState.warnDeviceTime = null;
+        //         _this.warnDeviceTime = null;
+        //         console.log('解除离床报警计算数据');
+        //     }
+        // }
       });
       //连接失败
       wx.onSocketError(function () {

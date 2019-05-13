@@ -217,15 +217,19 @@ function changeWarn(that) {
 function audioStart(that, backgroundAudioManager) {
     that.warnNing = 1
     warnState.warnNing = 1
-    backgroundAudioManager.title = '报警'
-    backgroundAudioManager.epname = '报警'
-    backgroundAudioManager.singer = '报警'
-    backgroundAudioManager.coverImgUrl = ''
-    // 设置了 src 之后会自动播放
-    backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
-    backgroundAudioManager.onEnded(() => {
-        backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
-    });
+    if (backgroundAudioManager.paused) {
+        backgroundAudioManager.play()
+    } else {
+        backgroundAudioManager.title = '报警'
+        backgroundAudioManager.epname = '报警'
+        backgroundAudioManager.singer = '报警'
+        backgroundAudioManager.coverImgUrl = ''
+        // 设置了 src 之后会自动播放
+        backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
+        backgroundAudioManager.onEnded(() => {
+            backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
+        });
+    }
 }
 
 /**

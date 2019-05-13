@@ -113,6 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var getCookie = util.getCookie;
@@ -121,7 +122,7 @@ var setCookie = util.setCookie;var _default =
 {
   data: function data() {
     return {
-      title: '微麟守护者' };
+      title: 'Smater 守护' };
 
   },
   onLoad: function onLoad() {

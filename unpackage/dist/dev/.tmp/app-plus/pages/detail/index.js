@@ -98,91 +98,99 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniLoadMore = function uniLoadMore() {return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ "../../../../work/uni-app-weilin/components/uni-load-more/uni-load-more.vue"));};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
-var getCookie = util.getCookie;
+
+var baseHost = util.baseHost;
+var imgUrl = util.imgUrl;
+var warnRule = util.warnRule;
+var warnState = util.warnState;
 var setCookie = util.setCookie;
+var getCookie = util.getCookie;
 var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
+var getWarnCookie = util.getWarnCookie;
+var setWarnCookie = util.setWarnCookie;
+var audioPause = util.audioPause;
+var changeWarn = util.changeWarn;
 var checkWarn = util.checkWarn;
-var warnState = util.warnState;
+
 var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
 
 {
   data: function data() {
     return {
-      title: '微麟守护者',
+      title: 'Smater 守护',
 
       showToast: 0,
       toastTxt: '',
@@ -199,17 +207,35 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
       timer: null,
 
+      device: '', // 是否监控离床
+      deviceTimes: '', // 离床持续时间
+      deviceStart: '', // 监控时段开始
+      deviceEnd: '', // 监控时段结束
+      heart: '', // 是否监控心率
+      heartUp: '', // 心率过快峰值
+      heartDown: '', // 心率过慢峰值
+      breath: '', // 是否监控呼吸率
+      breathUp: '', // 呼吸过快峰值
+      breathDown: '', // 呼吸过慢峰值
+      motion: '', // 是否监控体动值
+      motionTimes: '', // 大幅体动持续时间
+      motionStart: '', // 体动监控时段开始
+      motionEnd: '', // 体动监控时段结束
+
       warnNing: 0,
       warningText: '',
       warnNo: '',
       warnDeviceTime: '',
       warnHeartTime: '',
       warnBreathTime: '',
-      warnMotionTime: '' };
+      warnMotionTime: '',
+
+      firstTimes: 0 };
 
   },
-  components: { uniLoadMore: uniLoadMore },
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {},
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {
     var _this = this;
     var accessToken = getCookie('accessToken');
     var deviceNos = getCookie('deviceNos');
@@ -223,29 +249,30 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         url: '../code/index' });
 
     } else {
-      util.changeWarn(_this, backgroundAudioManager);
-      util.getWarnCookie(_this);
+      changeWarn(_this);
+      getWarnCookie(_this);
       _this.userInfo = userInfo;
       _this.accessToken = accessToken;
       _this.deviceNos = deviceNos;
-      _this.getActual('loading');
+      _this.getActual();
       _this.setSocketTask();
       _this.timer = setInterval(function () {
         _this.getActual();
-      }, 5000);
+      }, 3000);
     }
   },
-  onLaunch: function onLaunch() {},
-  onShow: function onShow() {
-    util.changeWarn(this);
+  onHide: function onHide() {
+    clearInterval(this.timer);
   },
-  onHide: function onHide() {},
-  onUnload: function onUnload() {},
+  onUnload: function onUnload() {
+    clearInterval(this.timer);
+  },
   methods: {
     /**
               * 03. 获取设备当前的状态/心率/呼吸/体动数据
               */
     getActual: function getActual(loading) {
+      console.log('获取设备当前的状态一次(detail)!', " at pages\\detail\\index.vue:175");
       if (loading) {
         this.loading = 1;
       }
@@ -259,9 +286,27 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       obj,
       function (res) {
         if (res.retCode == '10000') {
+          var deviceStatus = res.successData[0].deviceStatus;
+          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
+            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:191");
+            warnState.warnDeviceTime = Date.parse(new Date());
+            warnState.warnHeartTime = null;
+            warnState.warnBreathTime = null;
+            warnState.warnMotionTime = null;
+            _this.warnDeviceTime = warnState.warnDeviceTime;
+            _this.warnHeartTime = null;
+            _this.warnBreathTime = null;
+            _this.warnMotionTime = null;
+          }
+          if (deviceStatus == '4') {
+            warnState.warnDeviceTime = null;
+            _this.warnDeviceTime = null;
+            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:204");
+          }
+
           checkWarn(_this, res, backgroundAudioManager);
+          _this.deviceStatus = deviceStatus;
           _this.breathNum = res.successData[0].breath;
-          _this.deviceStatus = res.successData[0].deviceStatus;
           _this.heartNum = res.successData[0].heart;
           _this.markTime = res.successData[0].markTime;
           _this.motionNum = res.successData[0].motion;
@@ -294,6 +339,8 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         * 时时数据推送
         */
     setSocketTask: function setSocketTask() {
+      if (this.firstTimes == 1) return;
+      this.firstTimes = 1;
       var accessToken = util.getCookie('accessToken');
       var _this = this;
       // 建立连接
@@ -326,33 +373,34 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       });
       // 接收数据
       wx.onSocketMessage(function (data) {
+        console.log('***************************detail回执', " at pages\\detail\\index.vue:276");
         // console.log('接收数据回执，warnState.warnNing = ' + warnState.warnNing)
         // heartBreathBcg、healthBreathData、deviceStatus
 
-        if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
-
-
-        } // console.log(data.data);
+        // if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
+        // console.log(data.data);
         // console.log('111111111111' + JSON.parse(data.data).msgType)
+        // }
         // 当状态发生变化会初始化时，会推送此条数据
         // console.log('warnRule.device = ' + util.warnRule.device)
-        if (JSON.parse(data.data).msgType == 'deviceStatus' && util.warnRule.device) {console.log('222222222222---' + JSON.parse(data.data).data.deviceStatus, " at pages\\detail\\index.vue:239");
-          if (JSON.parse(data.data).data.deviceStatus == '3') {
-            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:241");
-            warnState.warnDeviceTime = Date.parse(new Date());
-            warnState.warnHeartTime = null;
-            warnState.warnBreathTime = null;
-            warnState.warnMotionTime = null;
-            _this.warnDeviceTime = warnState.warnDeviceTime;
-            _this.warnHeartTime = null;
-            _this.warnBreathTime = null;
-            _this.warnMotionTime = null;
-          } else {
-            warnState.warnDeviceTime = null;
-            _this.warnDeviceTime = null;
-            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:253");
-          }
-        }
+        // if (JSON.parse(data.data).msgType == 'deviceStatus' && util.warnRule.device) {
+        //     console.log('222222222222---' + JSON.parse(data.data).data.deviceStatus)
+        //     if (JSON.parse(data.data).data.deviceStatus == '3') {
+        //         console.log('离床已记录，以此时间为基准开始计算报警数据');
+        //         warnState.warnDeviceTime = Date.parse(new Date());
+        //         warnState.warnHeartTime = null;
+        //         warnState.warnBreathTime = null;
+        //         warnState.warnMotionTime = null;
+        //         _this.warnDeviceTime = warnState.warnDeviceTime;
+        //         _this.warnHeartTime = null;
+        //         _this.warnBreathTime = null;
+        //         _this.warnMotionTime = null;
+        //     } else {
+        //         warnState.warnDeviceTime = null;
+        //         _this.warnDeviceTime = null;
+        //         console.log('解除离床报警计算数据');
+        //     }
+        // }
       });
       //连接失败
       wx.onSocketError(function () {

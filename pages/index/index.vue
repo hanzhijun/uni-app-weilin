@@ -1,6 +1,7 @@
 <template>
     <view class="detail_outside">
-        <view class="logo"><image src="/static/logo-1024-02.png" @click="linkToLogin"></image></view>
+        <view class="logo"><image src="/static/logo-eye-1024.png" @click="linkToLogin"></image></view>
+        <view class="name">Smater</view>
 
         <ul class="text">
             <li>智慧产品，24小时智慧科技保姆;</li>
@@ -21,7 +22,7 @@ var setCookie = util.setCookie;
 export default {
     data() {
         return {
-            title: '微麟守护者'
+            title: 'Smater 守护'
         };
     },
     onLoad() {
@@ -68,11 +69,16 @@ export default {
     padding: 150upx 0 0 0;
 }
 
+.detail_outside .name {
+    text-align: center;
+    font-size: 26upx;
+}
+
 .detail_outside image {
-    width: 120upx;
-    height: 120upx;
+    width: 150upx;
+    height: 150upx;
     margin: 0 auto;
-    border-radius: 15upx;
+    border-radius: 50%;
 }
 
 .detail_outside ul,

@@ -3,11 +3,15 @@
     text-align: center;
     padding: 150rpx 0 0 0;
 }
+.detail_outside .name {
+    text-align: center;
+    font-size: 26rpx;
+}
 .detail_outside image {
-    width: 120rpx;
-    height: 120rpx;
+    width: 150rpx;
+    height: 150rpx;
     margin: 0 auto;
-    border-radius: 15rpx;
+    border-radius: 50%;
 }
 .detail_outside ._ul,
 .detail_outside ._li {

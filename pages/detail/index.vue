@@ -90,7 +90,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();
 export default {
     data() {
         return {
-            title: '微麟守护者',
+            title: 'Smater 守护',
 
             showToast: 0,
             toastTxt: '',
@@ -106,7 +106,7 @@ export default {
             markTime: null, // 发生的时间戳
             motionNum: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_大幅体动，-100_无效值
             timer: null,
-            
+
             device: '', // 是否监控离床
             deviceTimes: '', // 离床持续时间
             deviceStart: '', // 监控时段开始
@@ -129,11 +129,10 @@ export default {
             warnHeartTime: '',
             warnBreathTime: '',
             warnMotionTime: '',
-            
+
             firstTimes: 0
         };
     },
-    components: {uniLoadMore},
     onLoad() {},
     onLaunch() {},
     onShow() {
@@ -156,9 +155,10 @@ export default {
             _this.accessToken = accessToken;
             _this.deviceNos = deviceNos;
             _this.getActual();
+            _this.setSocketTask();
             _this.timer = setInterval(function() {
                 _this.getActual();
-            }, 5000);
+            }, 3000);
         }
     },
     onHide() {
@@ -187,7 +187,7 @@ export default {
                 function(res) {
                     if (res.retCode == '10000') {
                         let deviceStatus = res.successData[0].deviceStatus;
-                        if (warnRule.device && _this.deviceStatus=='4' && deviceStatus == '3') {
+                        if (warnRule.device && _this.deviceStatus=='4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
                             console.log('离床已记录，以此时间为基准开始计算报警数据');
                             warnState.warnDeviceTime = Date.parse(new Date());
                             warnState.warnHeartTime = null;
@@ -203,7 +203,7 @@ export default {
                             _this.warnDeviceTime = null;
                             console.log('解除离床报警计算数据');
                         }
-                        
+
                         checkWarn(_this, res, backgroundAudioManager);
                         _this.deviceStatus = deviceStatus;
                         _this.breathNum = res.successData[0].breath;
@@ -239,6 +239,7 @@ export default {
          * 时时数据推送
          */
         setSocketTask() {
+            if (this.firstTimes == 1) return
             this.firstTimes = 1;
             let accessToken = util.getCookie('accessToken');
             let _this = this;
@@ -275,31 +276,31 @@ export default {
                 console.log('***************************detail回执')
                 // console.log('接收数据回执，warnState.warnNing = ' + warnState.warnNing)
                 // heartBreathBcg、healthBreathData、deviceStatus
-                
-                if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
+
+                // if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
                     // console.log(data.data);
                     // console.log('111111111111' + JSON.parse(data.data).msgType)
-                }
+                // }
                 // 当状态发生变化会初始化时，会推送此条数据
                 // console.log('warnRule.device = ' + util.warnRule.device)
-                if (JSON.parse(data.data).msgType == 'deviceStatus' && util.warnRule.device) {
-                    console.log('222222222222---' + JSON.parse(data.data).data.deviceStatus)
-                    if (JSON.parse(data.data).data.deviceStatus == '3') {
-                        console.log('离床已记录，以此时间为基准开始计算报警数据');
-                        warnState.warnDeviceTime = Date.parse(new Date());
-                        warnState.warnHeartTime = null;
-                        warnState.warnBreathTime = null;
-                        warnState.warnMotionTime = null;
-                        _this.warnDeviceTime = warnState.warnDeviceTime;
-                        _this.warnHeartTime = null;
-                        _this.warnBreathTime = null;
-                        _this.warnMotionTime = null;
-                    } else {
-                        warnState.warnDeviceTime = null;
-                        _this.warnDeviceTime = null;
-                        console.log('解除离床报警计算数据');
-                    }
-                }
+                // if (JSON.parse(data.data).msgType == 'deviceStatus' && util.warnRule.device) {
+                //     console.log('222222222222---' + JSON.parse(data.data).data.deviceStatus)
+                //     if (JSON.parse(data.data).data.deviceStatus == '3') {
+                //         console.log('离床已记录，以此时间为基准开始计算报警数据');
+                //         warnState.warnDeviceTime = Date.parse(new Date());
+                //         warnState.warnHeartTime = null;
+                //         warnState.warnBreathTime = null;
+                //         warnState.warnMotionTime = null;
+                //         _this.warnDeviceTime = warnState.warnDeviceTime;
+                //         _this.warnHeartTime = null;
+                //         _this.warnBreathTime = null;
+                //         _this.warnMotionTime = null;
+                //     } else {
+                //         warnState.warnDeviceTime = null;
+                //         _this.warnDeviceTime = null;
+                //         console.log('解除离床报警计算数据');
+                //     }
+                // }
             });
             //连接失败
             wx.onSocketError(function() {

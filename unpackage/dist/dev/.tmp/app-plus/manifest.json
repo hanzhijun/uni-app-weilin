@@ -5,9 +5,9 @@
     "iPad"
   ],
   "id": "__UNI__32DB1D4",
-  "name": "微麟守护",
+  "name": "Smater",
   "version": {
-    "name": "1.0.0",
+    "name": "1.0.3",
     "code": "100"
   },
   "description": "健康守护，智慧健康照护",
@@ -47,7 +47,7 @@
     "distribute": {
       "icons": {
         "ios": {
-          "appstore": "static/logo-1024-02.png",
+          "appstore": "static/logo-eye-1024.png",
           "ipad": {
             "app": "unpackage/res/icons/76x76.png",
             "app@2x": "unpackage/res/icons/152x152.png",

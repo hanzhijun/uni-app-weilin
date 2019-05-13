@@ -330,7 +330,7 @@ var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       motionTimes: '', // 大幅体动持续时间
       motionStart: '', // 体动监控时段开始
       motionEnd: '', // 体动监控时段结束
-      warnNing: 0, warningText: '', warnNo: '', warnDeviceTime: '', warnHeartTime: '', warnBreathTime: '', warnMotionTime: '' };}, onLoad: function onLoad() {_this = this;setTimeout(function () {_this.firstLoad = 1;}, 2000);_this.cWidth = uni.upx2px(750);_this.cHeight = uni.upx2px(500);_this.cWidth2 = uni.upx2px(700);_this.cHeight2 = uni.upx2px(1100);var accessToken = getCookie('accessToken');var deviceNos = getCookie('deviceNos');var userInfo = getCookie('username');if (!accessToken) {uni.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {changeWarn(_this);getWarnCookie(_this);_this.userInfo = userInfo;_this.accessToken = accessToken;_this.deviceNos = deviceNos;_this.getActual();_this.timer = setInterval(function () {_this.getActual();}, 5000);_this.getTime(1);_this.history();}}, onLaunch: function onLaunch() {}, onShow: function onShow() {}, onHide: function onHide() {},
+      warnNing: 0, warningText: '', warnNo: '', warnDeviceTime: '', warnHeartTime: '', warnBreathTime: '', warnMotionTime: '' };}, onLoad: function onLoad() {_this = this;setTimeout(function () {_this.firstLoad = 1;}, 2000);_this.cWidth = uni.upx2px(750);_this.cHeight = uni.upx2px(500);_this.cWidth2 = uni.upx2px(700);_this.cHeight2 = uni.upx2px(1100);var accessToken = getCookie('accessToken');var deviceNos = getCookie('deviceNos');var userInfo = getCookie('username');if (!accessToken) {uni.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {changeWarn(_this);getWarnCookie(_this);_this.userInfo = userInfo;_this.accessToken = accessToken;_this.deviceNos = deviceNos;_this.getActual();_this.timer = setInterval(function () {_this.getActual();}, 3000);_this.getTime(1);_this.history();}}, onLaunch: function onLaunch() {}, onShow: function onShow() {}, onHide: function onHide() {},
   onUnload: function onUnload() {
     clearInterval(this.timer);
   },
@@ -351,7 +351,7 @@ var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       function (res) {
         if (res.retCode == '10000') {
           var deviceStatus = res.successData[0].deviceStatus;
-          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3') {
+          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
             console.log('离床已记录，以此时间为基准开始计算报警数据');
             warnState.warnDeviceTime = Date.parse(new Date());
             warnState.warnHeartTime = null;

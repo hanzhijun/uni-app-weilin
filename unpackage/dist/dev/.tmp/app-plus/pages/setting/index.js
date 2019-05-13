@@ -320,12 +320,21 @@ function getDate(type) {
 }
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
-var getCookie = util.getCookie;
-var setCookie = util.setCookie;
-var changeWarn = util.changeWarn;
-var getWarnCookie = util.getWarnCookie;
-var myAjax2 = util.myAjax2;
+
+var baseHost = util.baseHost;
+var imgUrl = util.imgUrl;
 var warnRule = util.warnRule;
+var warnState = util.warnState;
+var setCookie = util.setCookie;
+var getCookie = util.getCookie;
+var myAjax = util.myAjax;
+var myAjax2 = util.myAjax2;
+var getWarnCookie = util.getWarnCookie;
+var setWarnCookie = util.setWarnCookie;
+var audioPause = util.audioPause;
+var changeWarn = util.changeWarn;
+var checkWarn = util.checkWarn;
+
 var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
 
 {
@@ -374,18 +383,11 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
   },
   onLoad: function onLoad() {
     var _this = this;
-    _this.timer = setInterval(function () {
-      util.changeWarn(_this);
-      // console.log('setting页面同步一次报警数据')
-    }, 1000);
-  },
-  onLaunch: function onLaunch() {},
-  onShow: function onShow() {
-    var _this = this;
-    var accessToken = util.getCookie('accessToken');
+    var accessToken = getCookie('accessToken');
     var deviceNos = getCookie('deviceNos');
+    var userInfo = getCookie('username');
     if (!accessToken) {
-      wx.redirectTo({
+      uni.redirectTo({
         url: '../login/index' });
 
     } else if (!deviceNos) {
@@ -393,17 +395,80 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         url: '../code/index' });
 
     } else {
+      changeWarn(_this);
+      getWarnCookie(_this);
+      _this.userInfo = userInfo;
       _this.accessToken = accessToken;
       _this.deviceNos = deviceNos;
-      changeWarn(_this, backgroundAudioManager);
-      getWarnCookie(_this);
+      _this.getActual();
+      _this.timer = setInterval(function () {
+        _this.getActual();
+      }, 3000);
     }
   },
-  onHide: function onHide() {},
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {},
+  onHide: function onHide() {
+    clearInterval(this.timer);
+  },
   onUnload: function onUnload() {
     clearInterval(this.timer);
   },
   methods: {
+    /**
+              * 03. 获取设备当前的状态/心率/呼吸/体动数据
+              */
+    getActual: function getActual(loading) {
+      console.log('获取设备当前的状态一次(setting)!', " at pages\\setting\\index.vue:322");
+      var obj = {
+        deviceNos: this.deviceNos };
+
+      var _this = this;
+      myAjax2(
+      'post',
+      '/device/physiology/actual',
+      obj,
+      function (res) {
+        if (res.retCode == '10000') {
+          var deviceStatus = res.successData[0].deviceStatus;
+          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
+            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\setting\\index.vue:335");
+            warnState.warnDeviceTime = Date.parse(new Date());
+            warnState.warnHeartTime = null;
+            warnState.warnBreathTime = null;
+            warnState.warnMotionTime = null;
+            _this.warnDeviceTime = warnState.warnDeviceTime;
+            _this.warnHeartTime = null;
+            _this.warnBreathTime = null;
+            _this.warnMotionTime = null;
+          }
+          if (deviceStatus == '4') {
+            warnState.warnDeviceTime = null;
+            _this.warnDeviceTime = null;
+            console.log('解除离床报警计算数据', " at pages\\setting\\index.vue:348");
+          }
+
+          checkWarn(_this, res, backgroundAudioManager);
+          _this.deviceStatus = deviceStatus;
+          _this.breathNum = res.successData[0].breath;
+          _this.heartNum = res.successData[0].heart;
+          _this.markTime = res.successData[0].markTime;
+          _this.motionNum = res.successData[0].motion;
+          _this.loading = 0;
+        } else {
+          // console.log('未知错误，请重新登录');
+          setCookie('accessToken', '');
+          setCookie('username', '');
+          uni.redirectTo({
+            url: '../login/index' });
+
+        }
+      },
+      function (reg) {
+        // console.log(JSON.stringify(reg));
+      });
+
+    },
     switch1Change: function switch1Change(e) {
       this.device = e.target.value;
       warnRule.device = e.target.value;

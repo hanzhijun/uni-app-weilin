@@ -403,7 +403,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       _this.getActual();
       _this.timer = setInterval(function () {
         _this.getActual();
-      }, 5000);
+      }, 3000);
     }
   },
   onLaunch: function onLaunch() {},
@@ -431,7 +431,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       function (res) {
         if (res.retCode == '10000') {
           var deviceStatus = res.successData[0].deviceStatus;
-          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3') {
+          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
             console.log('离床已记录，以此时间为基准开始计算报警数据');
             warnState.warnDeviceTime = Date.parse(new Date());
             warnState.warnHeartTime = null;
