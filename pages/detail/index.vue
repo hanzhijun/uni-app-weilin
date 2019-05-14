@@ -100,7 +100,7 @@
             <view class="gray-back"></view>
             <view class="box-confirm" style="width: 650upx; left: 50upx">
                 <text class="txt">请选择您要进行的操作!</text>
-                <view class="confirm-btn confirm-btn2"><text @click="closeConfirmBox">取消</text><text class="blue" @click="openConfirmBox1">退出登录</text><text class="yellow" @click="openConfirmBox2">更换设备</text></view>
+                <view class="confirm-btn confirm-btn2"><text @click="closeConfirmBox">取消</text><text class="yellow" @click="openConfirmBox2">更换设备</text><text class="blue" @click="openConfirmBox1">退出登录</text></view>
             </view>
         </view>
     </view>
@@ -558,13 +558,19 @@ export default {
     .box-confirm .confirm-btn text.blue {
         background-color: #0099e9;
         color: #fff;
+        border-bottom-right-radius: 10upx;
     }
+    
     .box-confirm .confirm-btn2 text.blue {
         width: 34%;
     }
+    
     .box-confirm .confirm-btn2 text.yellow {
         background-color: #fd6b00;
         color: #fff;
-        border-bottom-right-radius: 10upx;
     }
+    .box-confirm .confirm-btn text:active {
+        opacity: .7;
+    }
+    
 </style>

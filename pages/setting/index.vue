@@ -157,14 +157,6 @@
                 </view>
             </view>
         </view>
-        
-        <!-- 其他设置-->
-        <view class="setting-section">
-            <view class="setting-other" @click="openConfirmBox">
-                <text class="setting-txt">退出</text>
-                <text class="setting-icon">></text>
-            </view>
-        </view>
 
         <!--报警弹窗-->
         <view class="base-box warn-box" catchtouchmove="true" v-if="warnNing == 1">
