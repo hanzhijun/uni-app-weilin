@@ -189,53 +189,36 @@
         <view class="show-toast" v-if="showToast == 1">
             <text>{{ toastTxt }}</text>
         </view>
-        <!-- 确定操作弹窗-->
-        <view class="base-box warn-box" catchtouchmove="true" v-if="confirm == 1">
-            <view class="gray-back"></view>
-            <view class="box-confirm">
-                <text class="txt">确定退出当前帐户？</text>
-                <view class="confirm-btn"><text @click="closeConfirmBox">取消</text><text class="blue" @click="loginOut">确定</text></view>
-            </view>
-        </view>
     </view>
 </template>
 
 <script>
 function getDate(type) {
-    const date = new Date();
+    const date = new Date()
 
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
+    let year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
 
     if (type === 'start') {
-        year = year - 60;
+        year = year - 60
     } else if (type === 'end') {
-        year = year + 2;
+        year = year + 2
     }
-    month = month > 9 ? month : '0' + month;
-    day = day > 9 ? day : '0' + day;
+    month = month > 9 ? month : '0' + month
+    day = day > 9 ? day : '0' + day
 
-    return `${year}-${month}-${day}`;
+    return `${year}-${month}-${day}`
 }
 
-var util = require('../../common/util.js');
+var util = require('../../common/util.js')
 
-var baseHost = util.baseHost;
-var imgUrl = util.imgUrl;
-var warnRule = util.warnRule;
-var warnState = util.warnState;
-var setCookie = util.setCookie;
-var getCookie = util.getCookie;
-var myAjax = util.myAjax;
-var myAjax2 = util.myAjax2;
-var getWarnCookie = util.getWarnCookie;
-var setWarnCookie = util.setWarnCookie;
-var audioPause = util.audioPause;
-var changeWarn = util.changeWarn;
-var checkWarn = util.checkWarn;
-
-var backgroundAudioManager = wx.getBackgroundAudioManager();
+var warnRuleData = util.warnRuleData
+var setCookie = util.setCookie
+var getCookie = util.getCookie
+var getWarnCookie = util.getWarnCookie
+var setWarnCookie = util.setWarnCookie
+var changeWarnToThis = util.changeWarnToThis
 
 export default {
     data() {
@@ -244,7 +227,6 @@ export default {
             toast: 0,
             toastTxt: '',
             loading: 0,
-            confirm: 0,
 
             userInfo: null,
             deviceNos: '', // 设备号
@@ -279,380 +261,276 @@ export default {
             warnHeartTime: '',
             warnBreathTime: '',
             warnMotionTime: ''
-        };
+        }
     },
     onLoad() {
-        let _this = this;
-        let accessToken = getCookie('accessToken');
-        let deviceNos = getCookie('deviceNos');
-        let userInfo = getCookie('username');
+        let _this = this
+        _this.timer = setInterval(function() {
+            changeWarnToThis(_this)
+            // console.log('setting页面同步一次报警数据')
+        }, 1000)
+    },
+    onLaunch() {},
+    onShow() {
+        let _this = this
+        let accessToken = util.getCookie('accessToken')
+        let deviceNos = getCookie('deviceNos')
         if (!accessToken) {
-            uni.redirectTo({
+            wx.redirectTo({
                 url: '../login/index'
-            });
+            })
         } else if (!deviceNos) {
             uni.redirectTo({
                 url: '../code/index'
-            });
+            })
         } else {
-            changeWarn(_this);
-            getWarnCookie(_this);
-            _this.userInfo = userInfo;
-            _this.accessToken = accessToken;
-            _this.deviceNos = deviceNos;
-            _this.getActual();
-            _this.timer = setInterval(function() {
-                _this.getActual();
-            }, 3000);
+            _this.accessToken = accessToken
+            _this.deviceNos = deviceNos
+            changeWarnToThis(_this)
+            getWarnCookie(_this)
         }
     },
-    onLaunch() {},
-    onShow() {},
-    onHide() {
-        clearInterval(this.timer);
-    },
+    onHide() {},
     onUnload() {
-        clearInterval(this.timer);
+        clearInterval(this.timer)
     },
     methods: {
-        /**
-         * 03. 获取设备当前的状态/心率/呼吸/体动数据
-         */
-        getActual(loading) {
-            console.log('获取设备当前的状态一次(setting)!')
-            let obj = {
-                deviceNos: this.deviceNos
-            };
-            let _this = this;
-            myAjax2(
-                'post',
-                '/device/physiology/actual',
-                obj,
-                function(res) {
-                    if (res.retCode == '10000') {
-                        let deviceStatus = res.successData[0].deviceStatus;
-                        if (warnRule.device && _this.deviceStatus=='4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
-                            console.log('离床已记录，以此时间为基准开始计算报警数据');
-                            warnState.warnDeviceTime = Date.parse(new Date());
-                            warnState.warnHeartTime = null;
-                            warnState.warnBreathTime = null;
-                            warnState.warnMotionTime = null;
-                            _this.warnDeviceTime = warnState.warnDeviceTime;
-                            _this.warnHeartTime = null;
-                            _this.warnBreathTime = null;
-                            _this.warnMotionTime = null;
-                        }
-                        if (deviceStatus == '4') {
-                            warnState.warnDeviceTime = null;
-                            _this.warnDeviceTime = null;
-                            console.log('解除离床报警计算数据');
-                        }
-                        
-                        checkWarn(_this, res, backgroundAudioManager);
-                        _this.deviceStatus = deviceStatus;
-                        _this.breathNum = res.successData[0].breath;
-                        _this.heartNum = res.successData[0].heart;
-                        _this.markTime = res.successData[0].markTime;
-                        _this.motionNum = res.successData[0].motion;
-                        _this.loading = 0;
-                    } else {
-                        // console.log('未知错误，请重新登录');
-                        setCookie('accessToken', '');
-                        setCookie('username', '');
-                        uni.redirectTo({
-                            url: '../login/index'
-                        });
-                    }
-                },
-                function(reg) {
-                    // console.log(JSON.stringify(reg));
-                }
-            );
-        },
+        // 01. 离床提醒开关
         switch1Change(e) {
-            this.device = e.target.value;
-            warnRule.device = e.target.value;
-            util.setWarnCookie(this);
+            this.device = e.target.value
+            warnRuleData.device = e.target.value
+            setWarnCookie(this)
         },
-        switch2Change(e) {
-            this.heart = e.target.value;
-            warnRule.heart = e.target.value;
-            util.setWarnCookie(this);
-        },
-        switch3Change(e) {
-            this.breath = e.target.value;
-            warnRule.breath = e.target.value;
-            util.setWarnCookie(this);
-        },
-        switch4Change(e) {
-            this.motion = e.target.value;
-            warnRule.motion = e.target.value;
-            util.setWarnCookie(this);
-        },
-        bindTime01Change(e) {
-            this.deviceStart = e.target.value;
-            warnRule.deviceStart = e.target.value;
-            util.setWarnCookie(this);
-        },
-        bindTime02Change(e) {
-            this.deviceEnd = e.target.value;
-            warnRule.deviceEnd = e.target.value;
-            util.setWarnCookie(this);
-        },
+        // 01 - 1 离床持续时长设置
         deviceTimesChange(e) {
-            let value = e.target.value;
+            let value = e.target.value
             if (value < 1 || value > 300) {
-                value = 1;
-                util.showToastBox(this, '请输入1-300的数字');
+                value = 1
+                util.showToastBox(this, '请输入1-300的数字')
             }
-            this.deviceTimes = value;
-            warnRule.deviceTimes = value;
-            util.setWarnCookie(this);
+            this.deviceTimes = value
+            warnRuleData.deviceTimes = value
+            setWarnCookie(this)
         },
+        // 01 - 2 离床提醒设置时间段-开始时间
         deviceStartChange(e) {
-            this.deviceStart = e.target.value;
-            warnRule.deviceStart = e.target.value;
-            util.setWarnCookie(this);
+            this.deviceStart = e.target.value
+            warnRuleData.deviceStart = e.target.value
+            setWarnCookie(this)
             if (this.deviceStart > this.deviceEnd) {
-                util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+                util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!')
             }
         },
+        // 01 - 3 离床提醒设置时间段-结束时间
         deviceEndChange(e) {
-            this.deviceEnd = e.target.value;
-            warnRule.deviceEnd = e.target.value;
-            util.setWarnCookie(this);
+            this.deviceEnd = e.target.value
+            warnRuleData.deviceEnd = e.target.value
+            setWarnCookie(this)
             if (this.deviceStart > this.deviceEnd) {
-                util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+                util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!')
             }
         },
+        // 02. 心率提醒开关
+        switch2Change(e) {
+            this.heart = e.target.value
+            warnRuleData.heart = e.target.value
+            setWarnCookie(this)
+        },
+        // 02 - 1 心率提醒下限设置
         heartDownChange(e) {
-            let value = e.target.value;
+            let value = e.target.value
             if (value < 1 || value > 180) {
-                value = 1;
-                util.showToastBox(this, '请输入1-180的数字');
+                value = 1
+                util.showToastBox(this, '请输入1-180的数字')
             }
-            this.heartDown = value;
-            warnRule.heartDown = value;
-            util.setWarnCookie(this);
+            this.heartDown = value
+            warnRuleData.heartDown = value
+            setWarnCookie(this)
         },
+        // 02 - 2 心率提醒上限设置
         heartUpChange(e) {
-            let value = e.target.value;
+            let value = e.target.value
             if (value < 1 || value > 180) {
-                value = 1;
-                util.showToastBox(this, '请输入1-180的数字');
+                value = 1
+                util.showToastBox(this, '请输入1-180的数字')
             }
-            this.heartUp = value;
-            warnRule.heartUp = value;
-            util.setWarnCookie(this);
+            this.heartUp = value
+            warnRuleData.heartUp = value
+            setWarnCookie(this)
         },
+        // 03. 呼吸提醒开关
+        switch3Change(e) {
+            this.breath = e.target.value
+            warnRuleData.breath = e.target.value
+            setWarnCookie(this)
+        },
+        // 03 - 1 呼吸率提醒下限设置
         breathDownChange(e) {
-            let value = e.target.value;
+            let value = e.target.value
             if (value < 1 || value > 180) {
-                value = 1;
-                util.showToastBox(this, '请输入1-180的数字');
+                value = 1
+                util.showToastBox(this, '请输入1-180的数字')
             }
-            this.breathDown = value;
-            warnRule.breathDown = value;
-            util.setWarnCookie(this);
+            this.breathDown = value
+            warnRuleData.breathDown = value
+            setWarnCookie(this)
         },
+        // 03 - 2 呼吸率提醒上限设置
         breathUpChange(e) {
-            let value = e.target.value;
+            let value = e.target.value
             if (value < 1 || value > 180) {
-                value = 1;
-                util.showToastBox(this, '请输入1-180的数字');
+                value = 1
+                util.showToastBox(this, '请输入1-180的数字')
             }
-            this.breathUp = value;
-            warnRule.breathUp = value;
-            util.setWarnCookie(this);
+            this.breathUp = value
+            warnRuleData.breathUp = value
+            setWarnCookie(this)
         },
+        // 04. 体动频繁提醒开关
+        switch4Change(e) {
+            this.motion = e.target.value
+            warnRuleData.motion = e.target.value
+            setWarnCookie(this)
+        },
+        // 04 - 1 体动频繁持续时长设置
         motionTimesChange(e) {
-            let value = e.target.value;
+            let value = e.target.value
             if (value < 1 || value > 300) {
-                value = 1;
-                util.showToastBox(this, '请输入1-300的数字');
+                value = 1
+                util.showToastBox(this, '请输入1-300的数字')
             }
-            this.motionTimes = value;
-            warnRule.motionTimes = value;
-            util.setWarnCookie(this);
+            this.motionTimes = value
+            warnRuleData.motionTimes = value
+            setWarnCookie(this)
         },
-        motionEndChange(e) {
-            this.motionEnd = e.target.value;
-            warnRule.motionEnd = e.target.value;
-            util.setWarnCookie(this);
-            if (this.deviceStart > this.deviceEnd) {
-                util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
-            }
-        },
+        // 04 - 2 体动频繁提醒设置时间段-开始时间
         motionStartChange(e) {
-            this.motionStart = e.target.value;
-            warnRule.motionStart = e.target.value;
-            util.setWarnCookie(this);
+            this.motionStart = e.target.value
+            warnRuleData.motionStart = e.target.value
+            setWarnCookie(this)
             if (this.deviceStart > this.deviceEnd) {
-                util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+                util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!')
             }
         },
+        // 04 - 3 体动频繁提醒设置时间段-结束时间
+        motionEndChange(e) {
+            this.motionEnd = e.target.value
+            warnRuleData.motionEnd = e.target.value
+            setWarnCookie(this)
+            if (this.deviceStart > this.deviceEnd) {
+                util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!')
+            }
+        },
+        
         /**
          * 关闭报警
          */
         audioPause() {
-            util.audioPause(this, backgroundAudioManager);
-        },
-        openConfirmBox() {
-            this.confirm = 1;
-        },
-        closeConfirmBox() {
-            this.confirm = 0;
-        },
-        loginOut() {
-            setCookie('accessToken', '');
-            setCookie('username', '');
-            setCookie('deviceNos', '');
-            setCookie('warnRule', '');
-            this.confirm = 0;
-            clearInterval(this.timer);
-            uni.reLaunch({
-                url: '../login/index'
-            });
+            util.audioPause(this)
         }
     }
-};
+}
 </script>
 
 <style>
-.set-outside {
-    width: 100vw;
-    height: 100vh;
-    background-color: #ededed;
-    overflow-y: auto;
-}
+    .set-outside {
+        width: 100vw;
+        height: 100vh;
+        background-color: #ededed;
+        overflow-y: auto;
+    }
 
-.set-outside .image {
-    width: 650upx;
-    height: 600upx;
-    margin: 100upx auto 0;
-}
+    .set-outside .image {
+        width: 650upx;
+        height: 600upx;
+        margin: 100upx auto 0;
+    }
 
-.setting-section {
-    width: 730upx;
-    overflow: hidden;
-    background-color: #fff;
-    margin: 10upx;
-}
+    .setting-section {
+        width: 730upx;
+        overflow: hidden;
+        background-color: #fff;
+        margin: 10upx;
+    }
 
-.setting-section .setting-auto {
-    height: 80upx;
-    border-bottom: 1px solid #eee;
-}
+    .setting-section .setting-auto {
+        height: 80upx;
+        border-bottom: 1px solid #eee;
+    }
 
-.setting-section .setting-auto text {
-    display: inline-block;
-    height: 40upx;
-    line-height: 40upx;
-    font-size: 28upx;
-    color: #000;
-    border-left: 3px solid #0099e9;
-    float: left;
-    margin: 20upx 0 0 10upx;
-    padding-left: 20upx;
-}
+    .setting-section .setting-auto text {
+        display: inline-block;
+        height: 40upx;
+        line-height: 40upx;
+        font-size: 28upx;
+        color: #000;
+        border-left: 3px solid #0099e9;
+        float: left;
+        margin: 20upx 0 0 10upx;
+        padding-left: 20upx;
+    }
 
-.setting-section .wx-switch-input {
-    float: right;
-    margin: 10upx 20upx 0 0;
-    width: 82upx !important;
-    height: 40upx !important;
-}
+    .setting-section .wx-switch-input {
+        float: right;
+        margin: 10upx 20upx 0 0;
+        width: 82upx !important;
+        height: 40upx !important;
+    }
 
-.setting-section .wx-switch-input::before {
-    width: 80upx !important;
-    height: 36upx !important;
-}
+    .setting-section .wx-switch-input::before {
+        width: 80upx !important;
+        height: 36upx !important;
+    }
 
-.setting-section .wx-switch-input::after {
-    width: 38upx !important;
-    height: 36upx !important;
-}
+    .setting-section .wx-switch-input::after {
+        width: 38upx !important;
+        height: 36upx !important;
+    }
 
-.uni-list {
-    position: static;
-}
+    .uni-list {
+        position: static;
+    }
 
-.warn-note {
-    display: block;
-    padding: 10upx 12upx 10upx 26upx;
-    font-size: 22upx;
-    color: #999;
-    line-height: 36upx;
-}
+    .warn-note {
+        display: block;
+        padding: 10upx 12upx 10upx 26upx;
+        font-size: 22upx;
+        color: #999;
+        line-height: 36upx;
+    }
 
-.input-num {
-    width: 200upx;
-    height: 36upx;
-    border: 1upx solid #f5f5f5;
-    font-size: 24upx;
-    padding-left: 15upx;
-    line-height: 36upx;
-    margin-left: 15upx;
-}
+    .input-num {
+        width: 200upx;
+        height: 36upx;
+        border: 1upx solid #f5f5f5;
+        font-size: 24upx;
+        padding-left: 15upx;
+        line-height: 36upx;
+        margin-left: 15upx;
+    }
 
-.uni-list-cell-left {
-    font-size: 24upx;
-    min-width: 180upx;
-}
+    .uni-list-cell-left {
+        font-size: 24upx;
+        min-width: 180upx;
+    }
 
-.setting-other {
-    overflow: hidden;
-    padding: 20upx 30upx 20upx 45upx;
-}
+    .setting-other {
+        overflow: hidden;
+        padding: 20upx 30upx 20upx 45upx;
+    }
 
-.setting-other:active {
-    opacity: .7;
-}
+    .setting-other:active {
+        opacity: .7;
+    }
 
-.setting-other text {
-    display: inline-block;
-    line-height: 36upx;
-    float: left;
-}
+    .setting-other text {
+        display: inline-block;
+        line-height: 36upx;
+        float: left;
+    }
 
-.setting-other text.setting-icon {
-    float: right;
-}
-
-.box-confirm {
-    width: 500upx;
-    height: 250upx;
-    background: #fff;
-    border-radius: 10upx;
-    position: absolute;
-    left: calc(50vw - 250upx);
-    top: calc(50vh - 350upx);
-}
-
-.box-confirm .txt {
-    display: block;
-    line-height: 150upx;
-    text-align: center;
-    font-size: 32upx;
-}
-
-.box-confirm .confirm-btn {
-    border-top: 1upx solid #eee;
-}
-
-.box-confirm .confirm-btn text {
-    display: inline-block;
-    width: 50%;
-    height: 100upx;
-    line-height: 100upx;
-    text-align: center;
-    float: left;
-}
-
-.box-confirm .confirm-btn text.blue {
-    background-color: #0099e9;
-    color: #fff;
-    border-bottom-right-radius: 10upx;
-}
+    .setting-other text.setting-icon {
+        float: right;
+    }
 
 </style>

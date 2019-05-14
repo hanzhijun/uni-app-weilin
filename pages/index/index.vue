@@ -15,40 +15,40 @@
 </template>
 
 <script>
-var util = require('../../common/util.js');
-var getCookie = util.getCookie;
-var setCookie = util.setCookie;
+var util = require('../../common/util.js')
+var getCookie = util.getCookie
+var setCookie = util.setCookie
 
 export default {
     data() {
         return {
             title: 'Smater 守护'
-        };
+        }
     },
     onLoad() {
-        let accessToken = getCookie('accessToken');
-        let deviceNos = getCookie('deviceNos');
-        let warnRule = getCookie('warnRule');
+        let accessToken = getCookie('accessToken')
+        let deviceNos = getCookie('deviceNos')
+        let warnRule = getCookie('warnRule')
         if (!warnRule) {
-            warnRule = util.warnRule;
-            setCookie('warnRule', JSON.stringify(warnRule));
+            warnRule = util.warnRule
+            setCookie('warnRule', JSON.stringify(warnRule))
         }
-        this.show = accessToken;
+        this.show = accessToken
         setTimeout(function() {
             if (!accessToken) {
                 uni.redirectTo({
                     url: '../login/index'
-                });
+                })
             } else if (!deviceNos) {
                 uni.redirectTo({
                     url: '../code/index'
-                });
+                })
             } else {
                 uni.redirectTo({
                     url: '../detail/index'
-                });
+                })
             }
-        }, 5000);
+        }, 5000)
     },
     onLaunch() {},
     onShow() {},
@@ -57,10 +57,10 @@ export default {
         linkToLogin() {
             uni.redirectTo({
                 url: '../login/index'
-            });
+            })
         }
     }
-};
+}
 </script>
 
 <style>

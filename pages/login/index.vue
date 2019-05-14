@@ -30,10 +30,10 @@
 </template>
 
 <script>
-var util = require('../../common/util.js');
-var setCookie = util.setCookie;
-var getCookie = util.getCookie;
-var myAjax = util.myAjax;
+var util = require('../../common/util.js')
+var setCookie = util.setCookie
+var getCookie = util.getCookie
+var myAjax = util.myAjax
 export default {
     data() {
         return {
@@ -46,75 +46,75 @@ export default {
             userInfo: null,
             inputValue: '',
             inputPassWords: ''
-        };
+        }
     },
     onLoad() {},
     onLaunch() {},
     onShow() {
-        console.log('onShow');
+        console.log('onShow')
     },
     onHide() {},
     methods: {
         bindKeyInput(event) {
-            this.inputValue = event.target.value;
+            this.inputValue = event.target.value
         },
         bindPassInput(event) {
-            this.inputPassWords = event.target.value;
+            this.inputPassWords = event.target.value
         },
         /**
          * 02. 用户名密码登录
          */
         toLogin() {
-            let _this = this;
-            let { inputValue, inputPassWords } = _this;
+            let _this = this
+            let { inputValue, inputPassWords } = _this
             if (!inputValue || !inputPassWords) {
-                util.showToastBox(_this, '请输入用户名、密码!');
-                return false;
+                util.showToastBox(_this, '请输入用户名、密码!')
+                return false
             }
             let obj = {
                 username: inputValue,
                 password: inputPassWords
-            };
-            _this.loading = 1;
+            }
+            _this.loading = 1
             myAjax(
                 'post',
                 '/user/authorize',
                 obj,
                 function(res) {
-                    let deviceNos = getCookie('deviceNos');
+                    let deviceNos = getCookie('deviceNos')
                     if (res.retCode == '10000') {
-                        _this.userInfo = res.successData;
-                        _this.loading = 0;
-                        setCookie('accessToken', res.successData.accessToken);
-                        setCookie('username', res.successData.username);
+                        _this.userInfo = res.successData
+                        _this.loading = 0
+                        setCookie('accessToken', res.successData.accessToken)
+                        setCookie('username', res.successData.username)
                         if (!deviceNos) {
                             uni.redirectTo({
                                 url: '../code/index'
-                            });
+                            })
                         } else {
                             uni.redirectTo({
                                 url: '../detail/index'
-                            });
+                            })
                         }
                     } else if (res.retCode == '10007') {
-                        util.showToastBox(_this, '用户名或密码错误!');
-                        _this.loading = 0;
+                        util.showToastBox(_this, '用户名或密码错误!')
+                        _this.loading = 0
                     } else if (res.retCode == '10008') {
-                        util.showToastBox(_this, 'token已过期，请重新登录!');
-                        _this.loading = 0;
+                        util.showToastBox(_this, 'token已过期，请重新登录!')
+                        _this.loading = 0
                     } else {
-                        util.showToastBox(_this, '未知错误，请重新登录!');
-                        _this.loading = 0;
+                        util.showToastBox(_this, '未知错误，请重新登录!')
+                        _this.loading = 0
                     }
-                    // console.log(JSON.stringify(res));
+                    // console.log(JSON.stringify(res))
                 },
                 function(reg) {
-                    // console.log(JSON.stringify(reg));
+                    // console.log(JSON.stringify(reg))
                 }
-            );
+            )
         }
     }
-};
+}
 </script>
 
 <style>

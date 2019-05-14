@@ -102,29 +102,17 @@
 </template>
 
 <script>
-import wxCharts from '../../components/wx-charts/wxcharts.js';
-var _this;
-var canvaLineA = null;
-var canvaLineB = null;
-var canvaArea = null;
+import wxCharts from '../../components/wx-charts/wxcharts.js'
+let canvaLineA = null
+let canvaLineB = null
+let canvaArea = null
 
-var util = require('../../common/util.js');
+let util = require('../../common/util.js')
 
-var baseHost = util.baseHost;
-var imgUrl = util.imgUrl;
-var warnRule = util.warnRule;
-var warnState = util.warnState;
-var setCookie = util.setCookie;
-var getCookie = util.getCookie;
-var myAjax = util.myAjax;
-var myAjax2 = util.myAjax2;
-var getWarnCookie = util.getWarnCookie;
-var setWarnCookie = util.setWarnCookie;
-var audioPause = util.audioPause;
-var changeWarn = util.changeWarn;
-var checkWarn = util.checkWarn;
-
-var backgroundAudioManager = wx.getBackgroundAudioManager();
+let getCookie = util.getCookie
+let myAjax2 = util.myAjax2
+let getWarnCookie = util.getWarnCookie
+let changeWarnToThis = util.changeWarnToThis
 
 export default {
     data() {
@@ -180,200 +168,145 @@ export default {
             warnHeartTime: '',
             warnBreathTime: '',
             warnMotionTime: ''
-        };
+        }
     },
     onLoad() {
-        _this = this;
+        let _this = this
         setTimeout(function() {
-            _this.firstLoad = 1;
-        }, 2000);
+            _this.firstLoad = 1
+        }, 2000)
+        _this.timer = setInterval(function() {
+            changeWarnToThis(_this)
+            // console.log('图表页面同步一次报警数据')
+        }, 1000)
         //#ifdef H5 || MP-ALIPAY || MP-BAIDU || MP-TOUTIAO
         uni.getSystemInfo({
             success: function(res) {
                 if (res.pixelRatio > 1) {
                     //正常这里给2就行，如果pixelRatio=3性能会降低一点
                     //_this.pixelRatio =res.pixelRatio
-                    _this.pixelRatio = 2;
+                    _this.pixelRatio = 2
                 }
             }
-        });
+        })
         //#endif
-        _this.cWidth = uni.upx2px(750);
-        _this.cHeight = uni.upx2px(500);
-        _this.cWidth2 = uni.upx2px(700);
-        _this.cHeight2 = uni.upx2px(1100);
-        
-        let accessToken = getCookie('accessToken');
-        let deviceNos = getCookie('deviceNos');
-        let userInfo = getCookie('username');
+        _this.cWidth = uni.upx2px(750)
+        _this.cHeight = uni.upx2px(500)
+        _this.cWidth2 = uni.upx2px(700)
+        _this.cHeight2 = uni.upx2px(1100)
+    },
+    onLaunch() {},
+    onShow() {
+        let _this = this
+        let accessToken = util.getCookie('accessToken')
+        let deviceNos = getCookie('deviceNos')
         if (!accessToken) {
-            uni.redirectTo({
+            wx.redirectTo({
                 url: '../login/index'
-            });
+            })
         } else if (!deviceNos) {
             uni.redirectTo({
                 url: '../code/index'
-            });
+            })
         } else {
-            changeWarn(_this);
-            getWarnCookie(_this);
-            _this.userInfo = userInfo;
-            _this.accessToken = accessToken;
-            _this.deviceNos = deviceNos;
-            _this.getActual();
-            _this.timer = setInterval(function() {
-                _this.getActual();
-            }, 3000);
-            _this.getTime(1);
-            _this.history();
+            _this.accessToken = accessToken
+            _this.deviceNos = deviceNos
+            changeWarnToThis(_this)
+            getWarnCookie(_this)
+            _this.getTime(1)
+            _this.history()
         }
     },
-    onLaunch() {},
-    onShow() {},
     onHide() {},
     onUnload() {
-        clearInterval(this.timer);
+        clearInterval(this.timer)
     },
     methods: {
-        /**
-         * 03. 获取设备当前的状态/心率/呼吸/体动数据
-         */
-        getActual(loading) {
-            console.log('获取设备当前的状态一次(record)!')
-            let obj = {
-                deviceNos: this.deviceNos
-            };
-            let _this = this;
-            myAjax2(
-                'post',
-                '/device/physiology/actual',
-                obj,
-                function(res) {
-                    if (res.retCode == '10000') {
-                        let deviceStatus = res.successData[0].deviceStatus;
-                        if (warnRule.device && _this.deviceStatus=='4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
-                            console.log('离床已记录，以此时间为基准开始计算报警数据');
-                            warnState.warnDeviceTime = Date.parse(new Date());
-                            warnState.warnHeartTime = null;
-                            warnState.warnBreathTime = null;
-                            warnState.warnMotionTime = null;
-                            _this.warnDeviceTime = warnState.warnDeviceTime;
-                            _this.warnHeartTime = null;
-                            _this.warnBreathTime = null;
-                            _this.warnMotionTime = null;
-                        }
-                        if (deviceStatus == '4') {
-                            warnState.warnDeviceTime = null;
-                            _this.warnDeviceTime = null;
-                            console.log('解除离床报警计算数据');
-                        }
-                        
-                        checkWarn(_this, res, backgroundAudioManager);
-                        _this.deviceStatus = deviceStatus;
-                        _this.breathNum = res.successData[0].breath;
-                        _this.heartNum = res.successData[0].heart;
-                        _this.markTime = res.successData[0].markTime;
-                        _this.motionNum = res.successData[0].motion;
-                        _this.loading = 0;
-                    } else {
-                        // console.log('未知错误，请重新登录');
-                        setCookie('accessToken', '');
-                        setCookie('username', '');
-                        uni.redirectTo({
-                            url: '../login/index'
-                        });
-                    }
-                },
-                function(reg) {
-                    // console.log(JSON.stringify(reg));
-                }
-            );
-        },
-        checkWarnState() {},
         linkToLogin() {
             uni.redirectTo({
                 url: '../login/index'
-            });
+            })
         },
         changeNav(type) {
-            let tabNum = this.tabNum;
+            let tabNum = this.tabNum
             if (tabNum != type) {
-                this.tabNum = type;
-                this.getTime(type);
-                this.history();
+                this.tabNum = type
+                this.getTime(type)
+                this.history()
             }
         },
         getTime(page) {
-            let timestamp = Date.parse(new Date());
-            let result = null;
+            let timestamp = Date.parse(new Date())
+            let result = null
             if (page == '1') {
-                result = this.getTodayStartTime();
+                result = this.getTodayStartTime()
             } else if (page == '2') {
-                result = parseInt(timestamp / 1000) - 259200;
+                result = parseInt(timestamp / 1000) - 259200
             } else if (page == '3') {
-                result = parseInt(timestamp / 1000) - 604798;
+                result = parseInt(timestamp / 1000) - 604798
             }
-            this.endTime = parseInt(timestamp / 1000);
-            this.startTime = result;
+            this.endTime = parseInt(timestamp / 1000)
+            this.startTime = result
         },
         /**
          * 04. 获取设备的历史心率/呼吸/体动数据
          */
         history() {
-            this.loading = 1;
+            this.loading = 1
             let obj = {
                 deviceNos: this.deviceNos,
                 startTime: this.startTime,
                 endTime: this.endTime
-            };
-            let _this = this;
+            }
+            let _this = this
+            _this.loading = 1
             myAjax2(
                 'post',
                 '/device/physiology/history',
                 obj,
                 function(res) {
                     if (res.retCode == '10000') {
-                        // console.log('history请求成功');
-                        _this.setHistoryData(res);
+                        // console.log('history请求成功')
+                        _this.setHistoryData(res)
                     } else {
-                        // console.log('history未知错误');
+                        // console.log('history未知错误')
                     }
                     // console.log(JSON.stringify(res))
                 },
                 function(reg) {
-                    // console.log(JSON.stringify(reg));
+                    // console.log(JSON.stringify(reg))
                 }
-            );
+            )
         },
         /**
          * 转换列表类数据
          * @param data
          */
         setHistoryData(data) {
-            let successData = data.successData;
-            let result = [];
-            let chartsTime = [];
-            let chartsHeart = [];
-            let chartsBreath = [];
-            let chartsTidong = [];
+            let successData = data.successData
+            let result = []
+            let chartsTime = []
+            let chartsHeart = []
+            let chartsBreath = []
+            let chartsTidong = []
             for (let i = successData.length - 1; i > -1; i--) {
                 let obj = {
                     heart: successData[i].heart,
                     breath: successData[i].breath,
                     motion: successData[i].motion.substring(0, 1) * 1,
                     time: this.getLocalTime(successData[i].createTime)
-                };
-                result.push(obj);
-                chartsTime.push(this.getLocalTime(successData[i].createTime).substring(0, 11));
-                chartsHeart.push(successData[i].heart);
-                chartsBreath.push(successData[i].breath);
-                chartsTidong.push(successData[i].motion.substring(0, 1) * 1);
+                }
+                result.push(obj)
+                chartsTime.push(this.getLocalTime(successData[i].createTime).substring(0, 11))
+                chartsHeart.push(successData[i].heart)
+                chartsBreath.push(successData[i].breath)
+                chartsTidong.push(successData[i].motion.substring(0, 1) * 1)
             }
-            this.historyData = result;
-            this.chartsTime = chartsTime;
-            this.chartsHeart = chartsHeart;
-            this.chartsBreath = chartsBreath;
-            this.chartsTidong = chartsTidong;
+            this.historyData = result
+            this.chartsTime = chartsTime
+            this.chartsHeart = chartsHeart
+            this.chartsBreath = chartsBreath
+            this.chartsTidong = chartsTidong
             let LineA = {
                 categories: chartsTime,
                 series: [
@@ -393,11 +326,12 @@ export default {
                         color: '#facc14'
                     }
                 ]
-            };
-            if (LineA.categories.length > 0 && LineA.series.length > 0) {
-                this.showLineB('canvasLineB', LineA);
-                this.showArea('canvasArea', LineA);
             }
+            if (LineA.categories.length > 0 && LineA.series.length > 0) {
+                this.showLineB('canvasLineB', LineA)
+                this.showArea('canvasArea', LineA)
+            }
+            this.loading = 0
         },
         /**
          * 格式化时间
@@ -405,31 +339,32 @@ export default {
          * @returns {string}
          */
         getLocalTime(sj) {
-            let now = new Date(sj * 1000);
-            let month = now.getMonth() + 1;
-            if (month < 10) month = '0' + month;
-            let date = now.getDate();
-            if (date < 10) date = '0' + date;
-            let hour = now.getHours();
-            if (hour < 10) hour = '0' + hour;
-            let minute = now.getMinutes();
-            if (minute < 10) minute = '0' + minute;
-            let second = now.getSeconds();
-            if (second < 10) second = '0' + second;
-            return month + '-' + date + ' ' + hour + ':' + minute + ':' + second;
+            let now = new Date(sj * 1000)
+            let month = now.getMonth() + 1
+            if (month < 10) month = '0' + month
+            let date = now.getDate()
+            if (date < 10) date = '0' + date
+            let hour = now.getHours()
+            if (hour < 10) hour = '0' + hour
+            let minute = now.getMinutes()
+            if (minute < 10) minute = '0' + minute
+            let second = now.getSeconds()
+            if (second < 10) second = '0' + second
+            return month + '-' + date + ' ' + hour + ':' + minute + ':' + second
         },
         /**
          * 根据当前时间获取今日开始时间点
          */
         getTodayStartTime() {
-            let now = new Date(Date.parse(new Date()));
-            let year = now.getFullYear();
-            let month = now.getMonth() + 1;
-            let date = now.getDate();
-            let time = year + '/' + month + '/' + date + ' ' + '00:00:01';
-            return new Date(time).getTime() / 1000;
+            let now = new Date(Date.parse(new Date()))
+            let year = now.getFullYear()
+            let month = now.getMonth() + 1
+            let date = now.getDate()
+            let time = year + '/' + month + '/' + date + ' ' + '00:00:01'
+            return new Date(time).getTime() / 1000
         },
         showLineB(canvasId, chartData) {
+            let _this = this
             canvaLineB = new wxCharts({
                 $this: _this,
                 canvasId: canvasId,
@@ -453,9 +388,10 @@ export default {
                 extra: {
                     lineStyle: 'curve'
                 }
-            });
+            })
         },
         showArea(canvasId, chartData) {
+            let _this = this
             canvaArea = new wxCharts({
                 $this: _this,
                 canvasId: canvasId,
@@ -475,45 +411,45 @@ export default {
                 height: _this.cHeight * _this.pixelRatio,
                 dataLabel: false,
                 dataPointShape: false
-            });
+            })
         },
         touchLineA(e) {
-            canvaLineA.scrollStart(e);
+            canvaLineA.scrollStart(e)
         },
         moveLineA(e) {
-            canvaLineA.scroll(e);
+            canvaLineA.scroll(e)
         },
         touchEndLineA(e) {
-            canvaLineA.scrollEnd(e);
+            canvaLineA.scrollEnd(e)
             //下面是toolTip事件，如果滚动后不需要显示，可不填写
             canvaLineA.showToolTip(e, {
                 format(item, category) {
-                    return category + ' ' + item.name + ':' + item.data;
+                    return category + ' ' + item.name + ':' + item.data
                 }
-            });
+            })
         },
         touchLineB(e) {
             canvaLineB.showToolTip(e, {
                 format(item, category) {
-                    return category + ' ' + item.name + ':' + item.data;
+                    return category + ' ' + item.name + ':' + item.data
                 }
-            });
+            })
         },
         touchArea(e) {
             canvaArea.showToolTip(e, {
                 format(item, category) {
-                    return category + ' ' + item.name + ':' + item.data;
+                    return category + ' ' + item.name + ':' + item.data
                 }
-            });
+            })
         },
         /**
          * 关闭报警
          */
         audioPause() {
-            util.audioPause(this, backgroundAudioManager);
+            util.audioPause(this)
         }
     }
-};
+}
 </script>
 
 <style>

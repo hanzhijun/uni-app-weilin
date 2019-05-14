@@ -28,11 +28,9 @@
 </template>
 
 <script>
-var util = require('../../common/util.js');
-var setCookie = util.setCookie;
-var getCookie = util.getCookie;
-var myAjax = util.myAjax;
-var myAjax2 = util.myAjax2;
+var util = require('../../common/util.js')
+var setCookie = util.setCookie
+var myAjax2 = util.myAjax2
 
 export default {
     data() {
@@ -47,7 +45,7 @@ export default {
             inputValue: '',
             inputPassWords: '',
             inputCode: ''
-        };
+        }
     },
     onLoad() {},
     onLaunch() {},
@@ -56,63 +54,63 @@ export default {
     methods: {
         bindScanCode() {
             // 只允许通过相机扫码
-            let _this = this;
+            let _this = this
             uni.scanCode({
                 onlyFromCamera: true,
                 success: function(res) {
                     // console.log('条码类型：' + res.scanType);
                     // console.log('条码内容：' + res.result);
-                    _this.inputCode = res.result;
+                    _this.inputCode = res.result
                 }
-            });
+            })
         },
         bindCodeInput(event) {
-            this.inputCode = event.target.value;
+            this.inputCode = event.target.value
         },
         /**
          * 08. 获取设备的信息
          */
         toConfirm() {
-            let _this = this;
-            let deviceNos = this.inputCode;
+            let _this = this
+            let deviceNos = this.inputCode
             if (isNaN(deviceNos)) {
-                util.showToastBox(_this, '设备编码校验有误，请重新输入！');
-                return;
+                util.showToastBox(_this, '设备编码校验有误，请重新输入！')
+                return
             } else if ((deviceNos + '').length != 12) {
-                util.showToastBox(_this, '设备编码校验有误，请重新输入！');
-                return;
+                util.showToastBox(_this, '设备编码校验有误，请重新输入！')
+                return
             }
             let obj = {
                 deviceNos: _this.inputCode
-            };
-            _this.loading = 1;
+            }
+            _this.loading = 1
             myAjax2(
                 'post',
                 '/device/deviceInfo',
                 obj,
                 function(res) {
                     if (res.retCode == '10000' && res.successData.length >0) {
-                        setCookie('deviceNos', _this.inputCode);
-                        util.showToastBox(_this, '设备添加成功，即将跳转！');
+                        setCookie('deviceNos', _this.inputCode)
+                        util.showToastBox(_this, '设备添加成功，即将跳转！')
                         setTimeout(function() {
-                            _this.loading = 0;
+                            _this.loading = 0
                             uni.redirectTo({
                                 url: '../detail/index'
-                            });
-                        }, 2000);
+                            })
+                        }, 2000)
                     } else {
                         _this.loading = 0;
-                        util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
+                        util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！')
                     }
-                    // console.log(JSON.stringify(res));
+                    // console.log(JSON.stringify(res))
                 },
                 function(reg) {
-                    // console.log(JSON.stringify(reg));
+                    // console.log(JSON.stringify(reg))
                 }
-            );
+            )
         }
     }
-};
+}
 </script>
 
 <style>
