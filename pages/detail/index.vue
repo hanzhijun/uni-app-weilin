@@ -85,7 +85,7 @@
         <view class="base-box warn-box" catchtouchmove="true" v-if="confirm == 1">
             <view class="gray-back"></view>
             <view class="box-confirm">
-                <text class="txt">确定退出当前帐户？</text>
+                <text class="txt">确定退出当前账户？</text>
                 <view class="confirm-btn"><text @click="closeConfirmBox">取消</text><text class="blue" @click="loginOut1">确定</text></view>
             </view>
         </view>
