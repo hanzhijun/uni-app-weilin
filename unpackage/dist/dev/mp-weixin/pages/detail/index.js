@@ -322,7 +322,7 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
           _this.heartNum = res.successData[0].heart;
           _this.markTime = res.successData[0].markTime;
           _this.motionNum = res.successData[0].motion;
-          console.log('体动值为' + _this.motionNum);
+          // console.log('体动值为' + _this.motionNum)
         } else {
           // console.log('未知错误，请重新登录')
           setCookie('accessToken', '');
