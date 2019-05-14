@@ -292,14 +292,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 function getDate(type) {
   var date = new Date();
@@ -321,21 +313,12 @@ function getDate(type) {
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 
-var baseHost = util.baseHost;
-var imgUrl = util.imgUrl;
-var warnRule = util.warnRule;
-var warnState = util.warnState;
+var warnRuleData = util.warnRuleData;
 var setCookie = util.setCookie;
 var getCookie = util.getCookie;
-var myAjax = util.myAjax;
-var myAjax2 = util.myAjax2;
 var getWarnCookie = util.getWarnCookie;
 var setWarnCookie = util.setWarnCookie;
-var audioPause = util.audioPause;
-var changeWarn = util.changeWarn;
-var checkWarn = util.checkWarn;
-
-var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
+var changeWarnToThis = util.changeWarnToThis;var _default =
 
 {
   data: function data() {
@@ -344,7 +327,6 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       toast: 0,
       toastTxt: '',
       loading: 0,
-      confirm: 0,
 
       userInfo: null,
       deviceNos: '', // 设备号
@@ -383,11 +365,18 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
   },
   onLoad: function onLoad() {
     var _this = this;
-    var accessToken = getCookie('accessToken');
+    _this.timer = setInterval(function () {
+      changeWarnToThis(_this);
+      // console.log('setting页面同步一次报警数据')
+    }, 1000);
+  },
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {
+    var _this = this;
+    var accessToken = util.getCookie('accessToken');
     var deviceNos = getCookie('deviceNos');
-    var userInfo = getCookie('username');
     if (!accessToken) {
-      uni.redirectTo({
+      wx.redirectTo({
         url: '../login/index' });
 
     } else if (!deviceNos) {
@@ -395,110 +384,24 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         url: '../code/index' });
 
     } else {
-      changeWarn(_this);
-      getWarnCookie(_this);
-      _this.userInfo = userInfo;
       _this.accessToken = accessToken;
       _this.deviceNos = deviceNos;
-      _this.getActual();
-      _this.timer = setInterval(function () {
-        _this.getActual();
-      }, 3000);
+      changeWarnToThis(_this);
+      getWarnCookie(_this);
     }
   },
-  onLaunch: function onLaunch() {},
-  onShow: function onShow() {},
-  onHide: function onHide() {
-    clearInterval(this.timer);
-  },
+  onHide: function onHide() {},
   onUnload: function onUnload() {
     clearInterval(this.timer);
   },
   methods: {
-    /**
-              * 03. 获取设备当前的状态/心率/呼吸/体动数据
-              */
-    getActual: function getActual(loading) {
-      console.log('获取设备当前的状态一次(setting)!');
-      var obj = {
-        deviceNos: this.deviceNos };
-
-      var _this = this;
-      myAjax2(
-      'post',
-      '/device/physiology/actual',
-      obj,
-      function (res) {
-        if (res.retCode == '10000') {
-          var deviceStatus = res.successData[0].deviceStatus;
-          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
-            console.log('离床已记录，以此时间为基准开始计算报警数据');
-            warnState.warnDeviceTime = Date.parse(new Date());
-            warnState.warnHeartTime = null;
-            warnState.warnBreathTime = null;
-            warnState.warnMotionTime = null;
-            _this.warnDeviceTime = warnState.warnDeviceTime;
-            _this.warnHeartTime = null;
-            _this.warnBreathTime = null;
-            _this.warnMotionTime = null;
-          }
-          if (deviceStatus == '4') {
-            warnState.warnDeviceTime = null;
-            _this.warnDeviceTime = null;
-            console.log('解除离床报警计算数据');
-          }
-
-          checkWarn(_this, res, backgroundAudioManager);
-          _this.deviceStatus = deviceStatus;
-          _this.breathNum = res.successData[0].breath;
-          _this.heartNum = res.successData[0].heart;
-          _this.markTime = res.successData[0].markTime;
-          _this.motionNum = res.successData[0].motion;
-          _this.loading = 0;
-        } else {
-          // console.log('未知错误，请重新登录');
-          setCookie('accessToken', '');
-          setCookie('username', '');
-          uni.redirectTo({
-            url: '../login/index' });
-
-        }
-      },
-      function (reg) {
-        // console.log(JSON.stringify(reg));
-      });
-
-    },
+    // 01. 离床提醒开关
     switch1Change: function switch1Change(e) {
       this.device = e.target.value;
-      warnRule.device = e.target.value;
-      util.setWarnCookie(this);
+      warnRuleData.device = e.target.value;
+      setWarnCookie(this);
     },
-    switch2Change: function switch2Change(e) {
-      this.heart = e.target.value;
-      warnRule.heart = e.target.value;
-      util.setWarnCookie(this);
-    },
-    switch3Change: function switch3Change(e) {
-      this.breath = e.target.value;
-      warnRule.breath = e.target.value;
-      util.setWarnCookie(this);
-    },
-    switch4Change: function switch4Change(e) {
-      this.motion = e.target.value;
-      warnRule.motion = e.target.value;
-      util.setWarnCookie(this);
-    },
-    bindTime01Change: function bindTime01Change(e) {
-      this.deviceStart = e.target.value;
-      warnRule.deviceStart = e.target.value;
-      util.setWarnCookie(this);
-    },
-    bindTime02Change: function bindTime02Change(e) {
-      this.deviceEnd = e.target.value;
-      warnRule.deviceEnd = e.target.value;
-      util.setWarnCookie(this);
-    },
+    // 01 - 1 离床持续时长设置
     deviceTimesChange: function deviceTimesChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 300) {
@@ -506,25 +409,34 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-300的数字');
       }
       this.deviceTimes = value;
-      warnRule.deviceTimes = value;
-      util.setWarnCookie(this);
+      warnRuleData.deviceTimes = value;
+      setWarnCookie(this);
     },
+    // 01 - 2 离床提醒设置时间段-开始时间
     deviceStartChange: function deviceStartChange(e) {
       this.deviceStart = e.target.value;
-      warnRule.deviceStart = e.target.value;
-      util.setWarnCookie(this);
+      warnRuleData.deviceStart = e.target.value;
+      setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
       }
     },
+    // 01 - 3 离床提醒设置时间段-结束时间
     deviceEndChange: function deviceEndChange(e) {
       this.deviceEnd = e.target.value;
-      warnRule.deviceEnd = e.target.value;
-      util.setWarnCookie(this);
+      warnRuleData.deviceEnd = e.target.value;
+      setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
       }
     },
+    // 02. 心率提醒开关
+    switch2Change: function switch2Change(e) {
+      this.heart = e.target.value;
+      warnRuleData.heart = e.target.value;
+      setWarnCookie(this);
+    },
+    // 02 - 1 心率提醒下限设置
     heartDownChange: function heartDownChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 180) {
@@ -532,9 +444,10 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.heartDown = value;
-      warnRule.heartDown = value;
-      util.setWarnCookie(this);
+      warnRuleData.heartDown = value;
+      setWarnCookie(this);
     },
+    // 02 - 2 心率提醒上限设置
     heartUpChange: function heartUpChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 180) {
@@ -542,9 +455,16 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.heartUp = value;
-      warnRule.heartUp = value;
-      util.setWarnCookie(this);
+      warnRuleData.heartUp = value;
+      setWarnCookie(this);
     },
+    // 03. 呼吸提醒开关
+    switch3Change: function switch3Change(e) {
+      this.breath = e.target.value;
+      warnRuleData.breath = e.target.value;
+      setWarnCookie(this);
+    },
+    // 03 - 1 呼吸率提醒下限设置
     breathDownChange: function breathDownChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 180) {
@@ -552,9 +472,10 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.breathDown = value;
-      warnRule.breathDown = value;
-      util.setWarnCookie(this);
+      warnRuleData.breathDown = value;
+      setWarnCookie(this);
     },
+    // 03 - 2 呼吸率提醒上限设置
     breathUpChange: function breathUpChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 180) {
@@ -562,9 +483,16 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.breathUp = value;
-      warnRule.breathUp = value;
-      util.setWarnCookie(this);
+      warnRuleData.breathUp = value;
+      setWarnCookie(this);
     },
+    // 04. 体动频繁提醒开关
+    switch4Change: function switch4Change(e) {
+      this.motion = e.target.value;
+      warnRuleData.motion = e.target.value;
+      setWarnCookie(this);
+    },
+    // 04 - 1 体动频繁持续时长设置
     motionTimesChange: function motionTimesChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 300) {
@@ -572,47 +500,33 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-300的数字');
       }
       this.motionTimes = value;
-      warnRule.motionTimes = value;
-      util.setWarnCookie(this);
+      warnRuleData.motionTimes = value;
+      setWarnCookie(this);
     },
-    motionEndChange: function motionEndChange(e) {
-      this.motionEnd = e.target.value;
-      warnRule.motionEnd = e.target.value;
-      util.setWarnCookie(this);
-      if (this.deviceStart > this.deviceEnd) {
-        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
-      }
-    },
+    // 04 - 2 体动频繁提醒设置时间段-开始时间
     motionStartChange: function motionStartChange(e) {
       this.motionStart = e.target.value;
-      warnRule.motionStart = e.target.value;
-      util.setWarnCookie(this);
+      warnRuleData.motionStart = e.target.value;
+      setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
       }
     },
+    // 04 - 3 体动频繁提醒设置时间段-结束时间
+    motionEndChange: function motionEndChange(e) {
+      this.motionEnd = e.target.value;
+      warnRuleData.motionEnd = e.target.value;
+      setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
+    },
+
     /**
         * 关闭报警
         */
     audioPause: function audioPause() {
-      util.audioPause(this, backgroundAudioManager);
-    },
-    openConfirmBox: function openConfirmBox() {
-      this.confirm = 1;
-    },
-    closeConfirmBox: function closeConfirmBox() {
-      this.confirm = 0;
-    },
-    loginOut: function loginOut() {
-      setCookie('accessToken', '');
-      setCookie('username', '');
-      setCookie('deviceNos', '');
-      setCookie('warnRule', '');
-      this.confirm = 0;
-      clearInterval(this.timer);
-      uni.reLaunch({
-        url: '../login/index' });
-
+      util.audioPause(this);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 

@@ -1094,6 +1094,7 @@ Z([[2,'!='],[[7],[3,'deviceStatus']],[1,4]])
 Z([[2,'=='],[[7],[3,'warnNing']],[1,1]])
 Z([[2,'=='],[[7],[3,'loading']],[1,1]])
 Z([[2,'=='],[[7],[3,'showToast']],[1,1]])
+Z([[2,'=='],[[7],[3,'confirm']],[1,1]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_2);return __WXML_GLOBAL__.ops_cached.$gwx_2
 }
 function gz$gwx_3(){
@@ -1149,7 +1150,6 @@ Z([[2,'!'],[[7],[3,'motion']]])
 Z([[2,'=='],[[7],[3,'warnNing']],[1,1]])
 Z([[2,'=='],[[7],[3,'loading']],[1,1]])
 Z([[2,'=='],[[7],[3,'showToast']],[1,1]])
-Z([[2,'=='],[[7],[3,'confirm']],[1,1]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_6);return __WXML_GLOBAL__.ops_cached.$gwx_6
 }
 __WXML_GLOBAL__.ops_set.$gwx=z;
@@ -1185,143 +1185,150 @@ var m1=function(e,s,r,gg){
 var z=gz$gwx_2()
 cs.push("./pages/detail/index.wxml:view:1:1")
 var cF=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
-cs.push("./pages/detail/index.wxml:view:1:44")
-var oJ=_n('view')
-_rz(z,oJ,'class',2,e,s,gg)
-var lK=_v()
-_(oJ,lK)
-if(_oz(z,3,e,s,gg)){lK.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:128")
+cs.push("./pages/detail/index.wxml:view:1:141")
+var lK=_n('view')
+_rz(z,lK,'class',2,e,s,gg)
+var aL=_v()
+_(lK,aL)
+if(_oz(z,3,e,s,gg)){aL.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:225")
 cs.pop()
 }
-cs.push("./pages/detail/index.wxml:view:1:257")
-var aL=_n('view')
-_rz(z,aL,'class',4,e,s,gg)
-var tM=_v()
-_(aL,tM)
-if(_oz(z,5,e,s,gg)){tM.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:284")
-cs.pop()
-}
+cs.push("./pages/detail/index.wxml:view:1:354")
+var tM=_n('view')
+_rz(z,tM,'class',4,e,s,gg)
 var eN=_v()
-_(aL,eN)
-if(_oz(z,6,e,s,gg)){eN.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:342")
+_(tM,eN)
+if(_oz(z,5,e,s,gg)){eN.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:381")
 cs.pop()
 }
-tM.wxXCkey=1
+var bO=_v()
+_(tM,bO)
+if(_oz(z,6,e,s,gg)){bO.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:439")
+cs.pop()
+}
 eN.wxXCkey=1
+bO.wxXCkey=1
 cs.pop()
-_(oJ,aL)
-cs.push("./pages/detail/index.wxml:view:1:480")
-var bO=_n('view')
-_rz(z,bO,'class',7,e,s,gg)
-var oP=_v()
-_(bO,oP)
-if(_oz(z,8,e,s,gg)){oP.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:504")
-cs.pop()
-}
+_(lK,tM)
+cs.push("./pages/detail/index.wxml:view:1:577")
+var oP=_n('view')
+_rz(z,oP,'class',7,e,s,gg)
 var xQ=_v()
-_(bO,xQ)
-if(_oz(z,9,e,s,gg)){xQ.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:562")
+_(oP,xQ)
+if(_oz(z,8,e,s,gg)){xQ.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:601")
 cs.pop()
 }
-oP.wxXCkey=1
+var oR=_v()
+_(oP,oR)
+if(_oz(z,9,e,s,gg)){oR.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:659")
+cs.pop()
+}
 xQ.wxXCkey=1
+oR.wxXCkey=1
 cs.pop()
-_(oJ,bO)
-lK.wxXCkey=1
+_(lK,oP)
+aL.wxXCkey=1
 cs.pop()
-_(cF,oJ)
-cs.push("./pages/detail/index.wxml:view:1:737")
-var oR=_n('view')
-_rz(z,oR,'class',10,e,s,gg)
-cs.push("./pages/detail/index.wxml:view:1:762")
-var hU=_n('view')
-_rz(z,hU,'class',11,e,s,gg)
-var oV=_v()
-_(hU,oV)
-if(_oz(z,12,e,s,gg)){oV.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:786")
-cs.pop()
-}
+_(cF,lK)
+cs.push("./pages/detail/index.wxml:view:1:834")
+var fS=_n('view')
+_rz(z,fS,'class',10,e,s,gg)
+cs.push("./pages/detail/index.wxml:view:1:859")
+var oV=_n('view')
+_rz(z,oV,'class',11,e,s,gg)
 var cW=_v()
-_(hU,cW)
-if(_oz(z,13,e,s,gg)){cW.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:848")
+_(oV,cW)
+if(_oz(z,12,e,s,gg)){cW.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:883")
 cs.pop()
 }
 var oX=_v()
-_(hU,oX)
-if(_oz(z,14,e,s,gg)){oX.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:910")
+_(oV,oX)
+if(_oz(z,13,e,s,gg)){oX.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:945")
 cs.pop()
 }
 var lY=_v()
-_(hU,lY)
-if(_oz(z,15,e,s,gg)){lY.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:978")
+_(oV,lY)
+if(_oz(z,14,e,s,gg)){lY.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1007")
 cs.pop()
 }
 var aZ=_v()
-_(hU,aZ)
-if(_oz(z,16,e,s,gg)){aZ.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1040")
+_(oV,aZ)
+if(_oz(z,15,e,s,gg)){aZ.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1075")
 cs.pop()
 }
 var t1=_v()
-_(hU,t1)
-if(_oz(z,17,e,s,gg)){t1.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1111")
+_(oV,t1)
+if(_oz(z,16,e,s,gg)){t1.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1137")
 cs.pop()
 }
-oV.wxXCkey=1
+var e2=_v()
+_(oV,e2)
+if(_oz(z,17,e,s,gg)){e2.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1208")
+cs.pop()
+}
 cW.wxXCkey=1
 oX.wxXCkey=1
 lY.wxXCkey=1
 aZ.wxXCkey=1
 t1.wxXCkey=1
+e2.wxXCkey=1
 cs.pop()
-_(oR,hU)
-var fS=_v()
-_(oR,fS)
-if(_oz(z,18,e,s,gg)){fS.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1184")
-cs.pop()
-}
+_(fS,oV)
 var cT=_v()
-_(oR,cT)
-if(_oz(z,19,e,s,gg)){cT.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1280")
+_(fS,cT)
+if(_oz(z,18,e,s,gg)){cT.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1281")
 cs.pop()
 }
-fS.wxXCkey=1
-cT.wxXCkey=1
+var hU=_v()
+_(fS,hU)
+if(_oz(z,19,e,s,gg)){hU.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:1377")
 cs.pop()
-_(cF,oR)
+}
+cT.wxXCkey=1
+hU.wxXCkey=1
+cs.pop()
+_(cF,fS)
 var hG=_v()
 _(cF,hG)
 if(_oz(z,20,e,s,gg)){hG.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:1776")
+cs.push("./pages/detail/index.wxml:block:1:1873")
 cs.pop()
 }
 var oH=_v()
 _(cF,oH)
 if(_oz(z,21,e,s,gg)){oH.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:2160")
+cs.push("./pages/detail/index.wxml:block:1:2257")
 cs.pop()
 }
 var cI=_v()
 _(cF,cI)
 if(_oz(z,22,e,s,gg)){cI.wxVkey=1
-cs.push("./pages/detail/index.wxml:block:1:2429")
+cs.push("./pages/detail/index.wxml:block:1:2526")
+cs.pop()
+}
+var oJ=_v()
+_(cF,oJ)
+if(_oz(z,23,e,s,gg)){oJ.wxVkey=1
+cs.push("./pages/detail/index.wxml:block:1:2623")
 cs.pop()
 }
 hG.wxXCkey=1
 oH.wxXCkey=1
 cI.wxXCkey=1
+oJ.wxXCkey=1
 cs.pop()
 _(r,cF)
 return r
@@ -1337,23 +1344,23 @@ d_[x[3]]={}
 var m3=function(e,s,r,gg){
 var z=gz$gwx_4()
 cs.push("./pages/login/index.wxml:view:1:1")
-var o4=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
-var x5=_v()
-_(o4,x5)
-if(_oz(z,2,e,s,gg)){x5.wxVkey=1
+var x5=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
+var o6=_v()
+_(x5,o6)
+if(_oz(z,2,e,s,gg)){o6.wxVkey=1
 cs.push("./pages/login/index.wxml:block:1:834")
 cs.pop()
 }
-var o6=_v()
-_(o4,o6)
-if(_oz(z,3,e,s,gg)){o6.wxVkey=1
+var f7=_v()
+_(x5,f7)
+if(_oz(z,3,e,s,gg)){f7.wxVkey=1
 cs.push("./pages/login/index.wxml:block:1:1103")
 cs.pop()
 }
-x5.wxXCkey=1
 o6.wxXCkey=1
+f7.wxXCkey=1
 cs.pop()
-_(r,o4)
+_(r,x5)
 return r
 }
 e_[x[3]]={f:m3,j:[],i:[],ti:[],ic:[]}
@@ -1361,63 +1368,63 @@ d_[x[4]]={}
 var m4=function(e,s,r,gg){
 var z=gz$gwx_5()
 cs.push("./pages/record/index.wxml:view:1:1")
-var c8=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
-var h9=_v()
-_(c8,h9)
-if(_oz(z,2,e,s,gg)){h9.wxVkey=1
+var h9=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
+var o0=_v()
+_(h9,o0)
+if(_oz(z,2,e,s,gg)){o0.wxVkey=1
 cs.push("./pages/record/index.wxml:block:1:461")
 cs.push("./pages/record/index.wxml:view:1:496")
-var aDB=_n('view')
-_rz(z,aDB,'class',3,e,s,gg)
-var tEB=_v()
-_(aDB,tEB)
-if(_oz(z,4,e,s,gg)){tEB.wxVkey=1
+var tEB=_n('view')
+_rz(z,tEB,'class',3,e,s,gg)
+var eFB=_v()
+_(tEB,eFB)
+if(_oz(z,4,e,s,gg)){eFB.wxVkey=1
 cs.push("./pages/record/index.wxml:block:1:657")
 cs.pop()
 }
-var eFB=_v()
-_(aDB,eFB)
-if(_oz(z,5,e,s,gg)){eFB.wxVkey=1
+var bGB=_v()
+_(tEB,bGB)
+if(_oz(z,5,e,s,gg)){bGB.wxVkey=1
 cs.push("./pages/record/index.wxml:block:1:1482")
 cs.pop()
 }
-tEB.wxXCkey=1
 eFB.wxXCkey=1
+bGB.wxXCkey=1
 cs.pop()
-_(h9,aDB)
-cs.pop()
-}
-var o0=_v()
-_(c8,o0)
-if(_oz(z,6,e,s,gg)){o0.wxVkey=1
-cs.push("./pages/record/index.wxml:block:1:1909")
+_(o0,tEB)
 cs.pop()
 }
 var cAB=_v()
-_(c8,cAB)
-if(_oz(z,7,e,s,gg)){cAB.wxVkey=1
-cs.push("./pages/record/index.wxml:block:1:2182")
+_(h9,cAB)
+if(_oz(z,6,e,s,gg)){cAB.wxVkey=1
+cs.push("./pages/record/index.wxml:block:1:1909")
 cs.pop()
 }
 var oBB=_v()
-_(c8,oBB)
-if(_oz(z,8,e,s,gg)){oBB.wxVkey=1
-cs.push("./pages/record/index.wxml:block:1:2568")
+_(h9,oBB)
+if(_oz(z,7,e,s,gg)){oBB.wxVkey=1
+cs.push("./pages/record/index.wxml:block:1:2182")
 cs.pop()
 }
 var lCB=_v()
-_(c8,lCB)
-if(_oz(z,9,e,s,gg)){lCB.wxVkey=1
+_(h9,lCB)
+if(_oz(z,8,e,s,gg)){lCB.wxVkey=1
+cs.push("./pages/record/index.wxml:block:1:2568")
+cs.pop()
+}
+var aDB=_v()
+_(h9,aDB)
+if(_oz(z,9,e,s,gg)){aDB.wxVkey=1
 cs.push("./pages/record/index.wxml:block:1:2837")
 cs.pop()
 }
-h9.wxXCkey=1
 o0.wxXCkey=1
 cAB.wxXCkey=1
 oBB.wxXCkey=1
 lCB.wxXCkey=1
+aDB.wxXCkey=1
 cs.pop()
-_(r,c8)
+_(r,h9)
 return r
 }
 e_[x[4]]={f:m4,j:[],i:[],ti:[],ic:[]}
@@ -1425,7 +1432,7 @@ d_[x[5]]={}
 var m5=function(e,s,r,gg){
 var z=gz$gwx_6()
 cs.push("./pages/setting/index.wxml:view:1:1")
-var oHB=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
+var xIB=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 cs.push("./pages/setting/index.wxml:view:1:72")
 var hMB=_n('view')
 _rz(z,hMB,'class',2,e,s,gg)
@@ -1444,7 +1451,7 @@ cs.pop()
 oNB.wxXCkey=1
 cOB.wxXCkey=1
 cs.pop()
-_(oHB,hMB)
+_(xIB,hMB)
 cs.push("./pages/setting/index.wxml:view:1:2131")
 var oPB=_n('view')
 _rz(z,oPB,'class',5,e,s,gg)
@@ -1463,7 +1470,7 @@ cs.pop()
 lQB.wxXCkey=1
 aRB.wxXCkey=1
 cs.pop()
-_(oHB,oPB)
+_(xIB,oPB)
 cs.push("./pages/setting/index.wxml:view:1:3788")
 var tSB=_n('view')
 _rz(z,tSB,'class',8,e,s,gg)
@@ -1482,7 +1489,7 @@ cs.pop()
 eTB.wxXCkey=1
 bUB.wxXCkey=1
 cs.pop()
-_(oHB,tSB)
+_(xIB,tSB)
 cs.push("./pages/setting/index.wxml:view:1:5454")
 var oVB=_n('view')
 _rz(z,oVB,'class',11,e,s,gg)
@@ -1501,37 +1508,30 @@ cs.pop()
 xWB.wxXCkey=1
 oXB.wxXCkey=1
 cs.pop()
-_(oHB,oVB)
-var xIB=_v()
-_(oHB,xIB)
-if(_oz(z,14,e,s,gg)){xIB.wxVkey=1
+_(xIB,oVB)
+var oJB=_v()
+_(xIB,oJB)
+if(_oz(z,14,e,s,gg)){oJB.wxVkey=1
 cs.push("./pages/setting/index.wxml:block:1:7719")
 cs.pop()
 }
-var oJB=_v()
-_(oHB,oJB)
-if(_oz(z,15,e,s,gg)){oJB.wxVkey=1
+var fKB=_v()
+_(xIB,fKB)
+if(_oz(z,15,e,s,gg)){fKB.wxVkey=1
 cs.push("./pages/setting/index.wxml:block:1:8103")
 cs.pop()
 }
-var fKB=_v()
-_(oHB,fKB)
-if(_oz(z,16,e,s,gg)){fKB.wxVkey=1
+var cLB=_v()
+_(xIB,cLB)
+if(_oz(z,16,e,s,gg)){cLB.wxVkey=1
 cs.push("./pages/setting/index.wxml:block:1:8372")
 cs.pop()
 }
-var cLB=_v()
-_(oHB,cLB)
-if(_oz(z,17,e,s,gg)){cLB.wxVkey=1
-cs.push("./pages/setting/index.wxml:block:1:8469")
-cs.pop()
-}
-xIB.wxXCkey=1
 oJB.wxXCkey=1
 fKB.wxXCkey=1
 cLB.wxXCkey=1
 cs.pop()
-_(r,oHB)
+_(r,xIB)
 return r
 }
 e_[x[5]]={f:m5,j:[],i:[],ti:[],ic:[]}
@@ -1879,12 +1879,18 @@ define('common/vendor.js',function(require, module, exports, window, document, f
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {var baseHost = 'https://api.darma.cn/mattress';
 var imgUrl = 'http://www.hanjiaxin.cn/images/';
+var backgroundAudioManager = wx.getBackgroundAudioManager();
+backgroundAudioManager.title = '报警';
+backgroundAudioManager.epname = '报警';
+backgroundAudioManager.singer = '报警';
+backgroundAudioManager.coverImgUrl = '';
+
 // var deviceNos = '641743000773'
 
 /**
- * 报警规则初始化值
+ * 报警规则数据值
  */
-var warnRule = {
+var warnRuleData = {
   device: false, // 是否监控离床
   deviceTimes: '10', // 离床持续时间
   deviceStart: '00:00', // 监控时段开始
@@ -1902,9 +1908,9 @@ var warnRule = {
 
 
   /**
-   * 报警状态记录
+   * 报警状态数据值
    */ };
-var warnState = {
+var warnStateData = {
   warnNing: 0, // 是否正在报警
   warnNo: null, // 报警类型 0离床、1心率、2呼吸率、3体动
   warnDeviceTime: null, // 离床报警记录点时间戳
@@ -1994,9 +2000,11 @@ function myAjax2(type, url, data, res, reg) {
    * @param {Object} that 作用域
    */
 function getWarnCookie(that) {
-  var warnRuleCookie = JSON.parse(getCookie('warnRule'));
+  var warnRuleCookie;
   if (!warnRuleCookie) {
-    warnRuleCookie = warnRule;
+    warnRuleCookie = warnRuleData;
+  } else {
+    warnRuleCookie = JSON.parse(getCookie('warnRule'));
   }
   that.device = warnRuleCookie.device;
   that.deviceTimes = warnRuleCookie.deviceTimes;
@@ -2013,20 +2021,20 @@ function getWarnCookie(that) {
   that.motionStart = warnRuleCookie.motionStart;
   that.motionEnd = warnRuleCookie.motionEnd;
 
-  warnRule.device = warnRuleCookie.device;
-  warnRule.deviceTimes = warnRuleCookie.deviceTimes;
-  warnRule.deviceStart = warnRuleCookie.deviceStart;
-  warnRule.deviceEnd = warnRuleCookie.deviceEnd;
-  warnRule.heart = warnRuleCookie.heart;
-  warnRule.heartUp = warnRuleCookie.heartUp;
-  warnRule.heartDown = warnRuleCookie.heartDown;
-  warnRule.breath = warnRuleCookie.breath;
-  warnRule.breathUp = warnRuleCookie.breathUp;
-  warnRule.breathDown = warnRuleCookie.breathDown;
-  warnRule.motion = warnRuleCookie.motion;
-  warnRule.motionTimes = warnRuleCookie.motionTimes;
-  warnRule.motionStart = warnRuleCookie.motionStart;
-  warnRule.motionEnd = warnRuleCookie.motionEnd;
+  warnRuleData.device = warnRuleCookie.device;
+  warnRuleData.deviceTimes = warnRuleCookie.deviceTimes;
+  warnRuleData.deviceStart = warnRuleCookie.deviceStart;
+  warnRuleData.deviceEnd = warnRuleCookie.deviceEnd;
+  warnRuleData.heart = warnRuleCookie.heart;
+  warnRuleData.heartUp = warnRuleCookie.heartUp;
+  warnRuleData.heartDown = warnRuleCookie.heartDown;
+  warnRuleData.breath = warnRuleCookie.breath;
+  warnRuleData.breathUp = warnRuleCookie.breathUp;
+  warnRuleData.breathDown = warnRuleCookie.breathDown;
+  warnRuleData.motion = warnRuleCookie.motion;
+  warnRuleData.motionTimes = warnRuleCookie.motionTimes;
+  warnRuleData.motionStart = warnRuleCookie.motionStart;
+  warnRuleData.motionEnd = warnRuleCookie.motionEnd;
 }
 
 /**
@@ -2056,36 +2064,35 @@ function setWarnCookie(that) {
 /**
    * 关闭报警
    * @param {Object} that 作用域
-   * @param {Object} backgroundAudioManager 背景音乐
    */
-function audioPause(that, backgroundAudioManager) {
+function audioPause(that) {
   backgroundAudioManager.pause();
-  warnState.warnNing = 0;
-  if (warnState.warnNo == 0) {
-    warnState.warnDeviceTime = null;
-  } else if (warnState.warnNo == 1) {
-    warnState.warnHeartTime = null;
-  } else if (warnState.warnNo == 2) {
-    warnState.warnBreathTime = null;
-  } else if (warnState.warnNo == 3) {
-    warnState.warnMotionTime = null;
+  warnStateData.warnNing = 0;
+  if (warnStateData.warnNo == 0) {
+    warnStateData.warnDeviceTime = null;
+  } else if (warnStateData.warnNo == 1) {
+    warnStateData.warnHeartTime = null;
+  } else if (warnStateData.warnNo == 2) {
+    warnStateData.warnBreathTime = null;
+  } else if (warnStateData.warnNo == 3) {
+    warnStateData.warnMotionTime = null;
   }
-  warnState.warnNo = null;
-  changeWarn(that);
+  warnStateData.warnNo = null;
+  changeWarnToThis(that);
 }
 
 /**
    * 同步报警状态值
    * @param {Object} that 作用域
    */
-function changeWarn(that) {
-  that.warnNing = warnState.warnNing;
-  that.warnNo = warnState.warnNo;
-  that.warnDeviceTime = warnState.warnDeviceTime;
-  that.warnHeartTime = warnState.warnHeartTime;
-  that.warnBreathTime = warnState.warnBreathTime;
-  that.warnMotionTime = warnState.warnMotionTime;
-  that.warningText = warnState.warningText;
+function changeWarnToThis(that) {
+  that.warnNing = warnStateData.warnNing;
+  that.warnNo = warnStateData.warnNo;
+  that.warnDeviceTime = warnStateData.warnDeviceTime;
+  that.warnHeartTime = warnStateData.warnHeartTime;
+  that.warnBreathTime = warnStateData.warnBreathTime;
+  that.warnMotionTime = warnStateData.warnMotionTime;
+  that.warningText = warnStateData.warningText;
 }
 
 /**
@@ -2093,19 +2100,21 @@ function changeWarn(that) {
    * @param {Object} that 作用域
    * @param {Object} backgroundAudioManager 背景音乐
    */
-function audioStart(that, backgroundAudioManager) {
+function audioStart(that) {
   that.warnNing = 1;
-  warnState.warnNing = 1;
+  warnStateData.warnNing = 1;
   if (backgroundAudioManager.paused) {
+    backgroundAudioManager.title = '报警' + Date.parse(new Date());
+    backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
     backgroundAudioManager.play();
   } else {
-    backgroundAudioManager.title = '报警';
-    backgroundAudioManager.epname = '报警';
-    backgroundAudioManager.singer = '报警';
-    backgroundAudioManager.coverImgUrl = '';
     // 设置了 src 之后会自动播放
-    backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
+    if (!backgroundAudioManager.src) {
+      backgroundAudioManager.title = '报警' + Date.parse(new Date());
+      backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
+    }
     backgroundAudioManager.onEnded(function () {
+      backgroundAudioManager.title = '报警' + Date.parse(new Date());
       backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
     });
   }
@@ -2116,12 +2125,12 @@ function audioStart(that, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkWarn(that, res, backgroundAudioManager) {
+function checkWarn(that, res) {
 
-  checkDevice(that, res, backgroundAudioManager);
-  checkHeart(that, res, backgroundAudioManager);
-  checkBreath(that, res, backgroundAudioManager);
-  checkMotion(that, res, backgroundAudioManager);
+  checkDevice(that, res);
+  checkHeart(that, res);
+  checkBreath(that, res);
+  checkMotion(that, res);
 
 }
 
@@ -2130,55 +2139,55 @@ function checkWarn(that, res, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkDevice(that, res, backgroundAudioManager) {
+function checkDevice(that, res) {
   // 如果正在报警，跳出检测
-  if (warnState.warnNing == 1) return;
-  var warnRule = JSON.parse(getCookie('warnRule'));
+  if (warnStateData.warnNing == 1) return;
+  // let warnRule = JSON.parse(getCookie('warnRule'))
   var nowTime = Date.parse(new Date());
   var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
   var deviceStatus = res.successData[0].deviceStatus;
   var oldDeviceStatus = that.deviceStatus;
   // 系统设置为不监控 跳出检测
-  if (!warnRule.device) {
+  if (!warnRuleData.device) {
     // console.log('系统设置为不监控 跳出检测')
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
     return;
   }
   // 系统设置时间有误，跳出检测
-  if (warnRule.deviceStart > warnRule.deviceEnd) {
+  if (warnRuleData.deviceStart > warnRuleData.deviceEnd) {
     // console.log('系统设置时间有误，跳出检测')
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
     return;
   }
   // 如果没有离床报警记录点时间戳，跳出检测
-  if (!warnState.warnDeviceTime) {
+  if (!warnStateData.warnDeviceTime) {
     // console.log('如果没有离床报警记录点时间戳，跳出检测')
     return;
   }
   // 状态为4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱，则终止离床检测倒计时
   if (deviceStatus == 4 || deviceStatus == 5 || deviceStatus == 6 || deviceStatus == 9 || deviceStatus == 10) {
     // console.log('状态为4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱，则终止离床检测倒计时')
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
     return;
   }
   // 不在报警时间段内，跳出检测
-  if (warnRule.deviceStart > nowTimeHour || warnRule.deviceEnd < nowTimeHour) {
+  if (warnRuleData.deviceStart > nowTimeHour || warnRuleData.deviceEnd < nowTimeHour) {
     // console.log('不在报警时间段内，跳出检测')
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
     return;
   }
-  console.log(nowTime - warnState.warnDeviceTime, '...离床监测..', warnRule.deviceTimes * 60 * 1000, " at common\\util.js:291");
+  console.log(nowTime - warnStateData.warnDeviceTime, '...离床监测..', warnRuleData.deviceTimes * 60 * 1000, " at common\\util.js:300");
   // 记录时间点已超出系统设置离床时间上限，触发离床报警
-  if (nowTime - warnState.warnDeviceTime > warnRule.deviceTimes * 60 * 1000) {
+  if (nowTime - warnStateData.warnDeviceTime > warnRuleData.deviceTimes * 60 * 1000) {
     // console.log('记录时间点已超出系统设置离床时间上限，触发离床报警')
-    var t = new Date(warnState.warnDeviceTime);
+    var t = new Date(warnStateData.warnDeviceTime);
     that.warningText = '用户于' + (t.getHours() < 10 ? '0' + t.getHours() : t.getHours()) + ':' + (t.getMinutes() < 10 ?
-    '0' + t.getMinutes() : t.getMinutes()) + '离床，并已超过' + warnRule.deviceTimes + '分钟';
+    '0' + t.getMinutes() : t.getMinutes()) + '离床，并已超过' + warnRuleData.deviceTimes + '分钟';
     that.warning = 1;
-    warnState.warnNing = 1;
-    warnState.warnNo = 0;
+    warnStateData.warnNing = 1;
+    warnStateData.warnNo = 0;
     audioStart(that, backgroundAudioManager);
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
   }
 }
 
@@ -2187,66 +2196,68 @@ function checkDevice(that, res, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkHeart(that, res, backgroundAudioManager) {
+function checkHeart(that, res) {
   // console.log('心率检测!')
   // 如果正在报警，跳出检测
-  if (warnState.warnNing == 1) return;
-  var warnRule = JSON.parse(getCookie('warnRule'));
+  if (warnStateData.warnNing == 1) return;
+  // let warnRule = JSON.parse(getCookie('warnRule'))
   var nowTime = Date.parse(new Date());
   var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
   var deviceStatus = res.successData[0].deviceStatus;
   // 如果不是在床状态，跳出检测
   if (deviceStatus != 4) {
     // console.log('如果不是在床状态，跳出检测')
-    warnState.warnHeartTime = null;
+    warnStateData.warnHeartTime = null;
     return;
   }
   // 系统设置为不监控 跳出检测
-  if (!warnRule.heart) {
+  if (!warnRuleData.heart) {
     // console.log('系统设置为不监控 跳出检测')
-    warnState.warnHeartTime = null;
+    warnStateData.warnHeartTime = null;
     return;
   }
   // 系统设置上下限规则有误，跳出检测
-  if (warnRule.heartDown > warnRule.heartUp) {
+  if (warnRuleData.heartDown > warnRuleData.heartUp) {
     // console.log('系统设置上下限规则有误，跳出检测')
-    warnState.warnHeartTime = null;
+    warnStateData.warnHeartTime = null;
     return;
   }
   // 如果没有心率报警记录点时间戳，设置记录点并跳出检测
-  if (!warnState.warnHeartTime) {
+  if (!warnStateData.warnHeartTime) {
     // console.log('如果没有心率报警记录点时间戳，跳出检测')
-    warnState.warnHeartTime = Date.parse(new Date());
+    warnStateData.warnHeartTime = Date.parse(new Date());
     return;
   }
   // 心率回归正常值，初始化数据，并跳出检测
-  if (res.successData[0].heart <= warnRule.heartUp && res.successData[0].heart >= warnRule.heartDown) {
+  if (res.successData[0].heart <= warnRuleData.heartUp && res.successData[0].heart >= warnRuleData.heartDown) {
     // console.log('心率回归正常值，初始化数据，并跳出检测')
-    warnState.warnHeartTime = null;
+    warnStateData.warnHeartTime = null;
     return;
   }
 
-  console.log(nowTime - warnState.warnHeartTime, '...心率监测(有异常)..', " at common\\util.js:350");
+  console.log(nowTime - warnStateData.warnHeartTime, '...心率监测(有异常)..', " at common\\util.js:359");
   // 记录时间点已超出系统默认设置心率持续异常时间上限，触发离床报警
-  if (nowTime - warnState.warnHeartTime > 30 * 1000) {
-    if (res.successData[0].heart > warnRule.heartUp) {
+  if (nowTime - warnStateData.warnHeartTime > 30 * 1000) {
+    if (res.successData[0].heart > warnRuleData.heartUp) {
       // console.log('记录时间点已超出系统默认设置心率持续异常时间上限，触发心率报警')
-      var t = new Date(warnState.warnHeartTime);
+      var t = new Date(warnStateData.warnHeartTime);
       that.warningText = '用户于' + nowTimeHour + '心率持续30秒高于您设置的上限峰值!';
+      warnStateData.warningText = '用户于' + nowTimeHour + '心率持续30秒高于您设置的上限峰值!';
       that.warning = 1;
-      warnState.warnNing = 1;
-      warnState.warnNo = 1;
+      warnStateData.warnNing = 1;
+      warnStateData.warnNo = 1;
       audioStart(that, backgroundAudioManager);
-      warnState.warnHeartTime = null;
+      warnStateData.warnHeartTime = null;
     } else {
       // console.log('记录时间点已超出系统默认设置心率持续异常时间上限，触发心率报警')
-      var _t = new Date(warnState.warnHeartTime);
+      var _t = new Date(warnStateData.warnHeartTime);
       that.warningText = '用户于' + nowTimeHour + '心率持续30秒低于您设置的下限峰值!';
+      warnStateData.warningText = '用户于' + nowTimeHour + '心率持续30秒低于您设置的下限峰值!';
       that.warning = 1;
-      warnState.warnNing = 1;
-      warnState.warnNo = 1;
+      warnStateData.warnNing = 1;
+      warnStateData.warnNo = 1;
       audioStart(that, backgroundAudioManager);
-      warnState.warnHeartTime = null;
+      warnStateData.warnHeartTime = null;
     }
   }
 }
@@ -2256,68 +2267,69 @@ function checkHeart(that, res, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkBreath(that, res, backgroundAudioManager) {
+function checkBreath(that, res) {
   // console.log('呼吸检测!')
   // 如果正在报警，跳出检测
-  if (warnState.warnNing == 1) return;
-  var warnRule = JSON.parse(getCookie('warnRule'));
+  if (warnStateData.warnNing == 1) return;
+  // let warnRule = JSON.parse(getCookie('warnRule'))
   var nowTime = Date.parse(new Date());
   var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
   var deviceStatus = res.successData[0].deviceStatus;
   // 如果不是在床状态，跳出检测
   if (deviceStatus != 4) {
     // console.log('如果不是在床状态，跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
   // 系统设置为不监控 跳出检测
-  if (!warnRule.breath) {
+  if (!warnRuleData.breath) {
     // console.log('系统设置为不监控 跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
   // 系统设置上下限规则有误，跳出检测
-  if (warnRule.breathDown * 1 > warnRule.breathUp * 1) {
+  if (warnRuleData.breathDown * 1 > warnRuleData.breathUp * 1) {
     // console.log('系统设置上下限规则有误，跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
   // 如果没有呼吸率报警记录点时间戳，设置记录点并跳出检测
-  if (!warnState.warnBreathTime) {
+  if (!warnStateData.warnBreathTime) {
     // console.log('如果没有呼吸率报警记录点时间戳，设置记录点并跳出检测')
-    warnState.warnBreathTime = Date.parse(new Date());
+    warnStateData.warnBreathTime = Date.parse(new Date());
     return;
   }
   // 呼吸率回归正常值，初始化数据，并跳出检测
-  if (res.successData[0].breath * 1 <= warnRule.breathUp * 1 && res.successData[0].breath * 1 >= warnRule.breathDown * 1) {
+  if (res.successData[0].breath * 1 <= warnRuleData.breathUp * 1 && res.successData[0].breath * 1 >= warnRuleData.breathDown * 1) {
     // console.log('呼吸率回归正常值，初始化数据，并跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
 
-  console.log(nowTime - warnState.warnBreathTime, '...呼吸监测(有异常)..', " at common\\util.js:419");
+  console.log(nowTime - warnStateData.warnBreathTime, '...呼吸监测(有异常)..', " at common\\util.js:430");
 
   // 记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸报警
-  if (nowTime - warnState.warnBreathTime > 30 * 1000) {
-    if (res.successData[0].breath > warnRule.breathUp) {
+  if (nowTime - warnStateData.warnBreathTime > 30 * 1000) {
+    if (res.successData[0].breath > warnRuleData.breathUp) {
       // console.log('记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸率报警')
-      var t = new Date(warnState.warnBreathTime);
-      that.warningText = '用户于' + (t.getHours() < 10 ? '0' + t.getHours() : t.getHours()) + ':' + (t.getMinutes() <
-      10 ? '0' + t.getMinutes() : t.getMinutes()) + '呼吸率持续30秒高于您设置的上限峰值!';
+      var t = new Date(warnStateData.warnBreathTime);
+      that.warningText = '用户于' + nowTimeHour + '呼吸率持续30秒高于您设置的上限峰值!';
+      warnStateData.warningText = '用户于' + nowTimeHour + '呼吸率持续30秒高于您设置的上限峰值!';
       that.warning = 1;
-      warnState.warnNing = 1;
-      warnState.warnNo = 1;
-      audioStart(that, backgroundAudioManager);
-      warnState.warnBreathTime = null;
+      warnStateData.warnNing = 1;
+      warnStateData.warnNo = 1;
+      audioStart(that);
+      warnStateData.warnBreathTime = null;
     } else {
       // console.log('记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸率报警')
-      var _t2 = new Date(warnState.warnBreathTime);
+      var _t2 = new Date(warnStateData.warnBreathTime);
       that.warningText = '用户于' + nowTimeHour + '呼吸率持续30秒低于您设置的下限峰值!';
+      warnStateData.warningText = '用户于' + nowTimeHour + '呼吸率持续30秒低于您设置的下限峰值!';
       that.warning = 1;
-      warnState.warnNing = 1;
-      warnState.warnNo = 1;
-      audioStart(that, backgroundAudioManager);
-      warnState.warnBreathTime = null;
+      warnStateData.warnNing = 1;
+      warnStateData.warnNo = 1;
+      audioStart(that);
+      warnStateData.warnBreathTime = null;
     }
   }
 }
@@ -2327,61 +2339,63 @@ function checkBreath(that, res, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkMotion(that, res, backgroundAudioManager) {
+function checkMotion(that, res) {
   // console.log('时时体动数据 = ' + res.successData[0].motion)
   // 如果正在报警，跳出检测
-  if (warnState.warnNing == 1) return;
-  var warnRule = JSON.parse(getCookie('warnRule'));
+  if (warnStateData.warnNing == 1) return;
+  // let warnRule = JSON.parse(getCookie('warnRule'))
   var nowTime = Date.parse(new Date());
   var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
   var deviceStatus = res.successData[0].deviceStatus;
   // 如果不是在床状态，跳出检测
   if (deviceStatus != 4) {
     // console.log('如果不是在床状态，跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
   // 系统设置为不监控 跳出检测
-  if (!warnRule.motion) {
+  if (!warnRuleData.motion) {
     // console.log('系统设置为不监控 跳出检测')
-    warnState.warnMotionTime = null;
+    warnStateData.warnMotionTime = null;
     return;
   }
   // 系统设置时间有误，跳出检测
-  if (warnRule.motionStart > warnRule.motionEnd) {
+  if (warnRuleData.motionStart > warnRuleData.motionEnd) {
     // console.log('系统设置时间有误，跳出检测')
-    warnState.warnMotionTime = null;
+    warnStateData.warnMotionTime = null;
     return;
   }
   // 如果没有体动报警记录点时间戳，跳出检测
-  if (!warnState.warnMotionTime) {
-    warnState.warnMotionTime = Date.parse(new Date());
+  if (!warnStateData.warnMotionTime) {
+    warnStateData.warnMotionTime = Date.parse(new Date());
     return;
   }
   // 不在报警时间段内，跳出检测
-  if (warnRule.motionStart > nowTimeHour || warnRule.motionEnd < nowTimeHour) {
+  if (warnRuleData.motionStart > nowTimeHour || warnRuleData.motionEnd < nowTimeHour) {
     // console.log('不在报警时间段内，跳出检测')
-    warnState.warnMotionTime = null;
+    warnStateData.warnMotionTime = null;
     return;
   }
   // 体动值回复正常数据，初始化数据并跳出检测
   if (res.successData[0].motion < 4) {
     // console.log('体动值回复正常数据，初始化数据并跳出检测')
-    warnState.warnMotionTime = null;
+    warnStateData.warnMotionTime = null;
     return;
   }
-  console.log(nowTime - warnState.warnMotionTime, '...体动监测..', warnRule.motionTimes * 60 * 1000, " at common\\util.js:494");
+  console.log(nowTime - warnStateData.warnMotionTime, '...体动监测..', warnRuleData.motionTimes * 60 * 1000, " at common\\util.js:506");
   // 记录时间点已超出系统设置体动时间上限，触发体动报警
-  if (nowTime - warnState.warnMotionTime > warnRule.motionTimes * 60 * 1000) {
+  if (nowTime - warnStateData.warnMotionTime > warnRuleData.motionTimes * 60 * 1000) {
     // console.log('记录时间点已超出系统设置体动时间上限，触发体动报警')
-    var t = new Date(warnState.warnMotionTime);
+    var t = new Date(warnStateData.warnMotionTime);
     that.warningText = '用户于' + (t.getHours() < 10 ? '0' + t.getHours() : t.getHours()) + ':' + (t.getMinutes() < 10 ?
-    '0' + t.getMinutes() : t.getMinutes()) + '开始体动频繁，并已超过' + warnRule.motionTimes + '分钟！';
+    '0' + t.getMinutes() : t.getMinutes()) + '开始体动频繁，并已超过' + warnRuleData.motionTimes + '分钟！';
+    warnStateData.warningText = '用户于' + (t.getHours() < 10 ? '0' + t.getHours() : t.getHours()) + ':' + (t.getMinutes() < 10 ?
+    '0' + t.getMinutes() : t.getMinutes()) + '开始体动频繁，并已超过' + warnRuleData.motionTimes + '分钟！';
     that.warning = 1;
-    warnState.warnNing = 1;
-    warnState.warnNo = 0;
-    audioStart(that, backgroundAudioManager);
-    warnState.warnMotionTime = null;
+    warnStateData.warnNing = 1;
+    warnStateData.warnNo = 0;
+    audioStart(that);
+    warnStateData.warnMotionTime = null;
   }
 }
 
@@ -2402,8 +2416,8 @@ function showToastBox(that, text) {
 module.exports = {
   baseHost: baseHost,
   imgUrl: imgUrl,
-  warnRule: warnRule,
-  warnState: warnState,
+  warnRuleData: warnRuleData, // 报警规则数据值
+  warnStateData: warnStateData, // 报警状态数据值
   setCookie: setCookie,
   getCookie: getCookie,
   myAjax: myAjax,
@@ -2411,9 +2425,10 @@ module.exports = {
   getWarnCookie: getWarnCookie,
   setWarnCookie: setWarnCookie,
   audioPause: audioPause,
-  changeWarn: changeWarn,
+  changeWarnToThis: changeWarnToThis,
   showToastBox: showToastBox,
-  checkWarn: checkWarn };
+  checkWarn: checkWarn,
+  backgroundAudioManager: backgroundAudioManager };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
 /***/ }),
@@ -5549,7 +5564,7 @@ function getData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"app-plus","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -11628,7 +11643,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"app-plus","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$mp[vm.mpType];
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -11649,14 +11664,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"app-plus","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$mp[vm.mpType];
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"app-plus","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$mp[vm.mpType];
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -11725,7 +11740,7 @@ var patch = function(oldVnode, vnode) {
         });
         var diffData = diff(data, mpData);
         if (Object.keys(diffData).length) {
-            if (Object({"VUE_APP_PLATFORM":"app-plus","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+            if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"app-plus","BASE_URL":"/"}).VUE_APP_DEBUG) {
                 console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
                     ']差量更新',
                     JSON.stringify(diffData));
@@ -12633,10 +12648,10 @@ var myAjax = util.myAjax;var _default =
           util.showToastBox(_this, '未知错误，请重新登录!');
           _this.loading = 0;
         }
-        // console.log(JSON.stringify(res));
+        // console.log(JSON.stringify(res))
       },
       function (reg) {
-        // console.log(JSON.stringify(reg));
+        // console.log(JSON.stringify(reg))
       });
 
     } } };exports.default = _default;
@@ -12816,8 +12831,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
-var getCookie = util.getCookie;
-var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;var _default =
 
 {
@@ -12890,10 +12903,10 @@ var myAjax2 = util.myAjax2;var _default =
           _this.loading = 0;
           util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
         }
-        // console.log(JSON.stringify(res));
+        // console.log(JSON.stringify(res))
       },
       function (reg) {
-        // console.log(JSON.stringify(reg));
+        // console.log(JSON.stringify(reg))
       });
 
     } } };exports.default = _default;
@@ -13111,24 +13124,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 
-var baseHost = util.baseHost;
-var imgUrl = util.imgUrl;
-var warnRule = util.warnRule;
-var warnState = util.warnState;
+var warnRuleData = util.warnRuleData;
+var warnStateData = util.warnStateData;
 var setCookie = util.setCookie;
 var getCookie = util.getCookie;
-var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;
 var getWarnCookie = util.getWarnCookie;
-var setWarnCookie = util.setWarnCookie;
-var audioPause = util.audioPause;
-var changeWarn = util.changeWarn;
-var checkWarn = util.checkWarn;
-
-var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
+var changeWarnToThis = util.changeWarnToThis;var _default =
 
 {
   data: function data() {
@@ -13138,6 +13149,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       showToast: 0,
       toastTxt: '',
       loading: 0,
+      confirm: 0,
 
       userInfo: null,
       deviceNos: '', // 设备号
@@ -13176,9 +13188,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       firstTimes: 0 };
 
   },
-  onLoad: function onLoad() {},
-  onLaunch: function onLaunch() {},
-  onShow: function onShow() {
+  onLoad: function onLoad() {
     var _this = this;
     var accessToken = getCookie('accessToken');
     var deviceNos = getCookie('deviceNos');
@@ -13192,7 +13202,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         url: '../code/index' });
 
     } else {
-      changeWarn(_this);
+      changeWarnToThis(_this);
       getWarnCookie(_this);
       _this.userInfo = userInfo;
       _this.accessToken = accessToken;
@@ -13204,21 +13214,17 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       }, 3000);
     }
   },
-  onHide: function onHide() {
-    clearInterval(this.timer);
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {
+    changeWarnToThis(this);
   },
-  onUnload: function onUnload() {
-    clearInterval(this.timer);
-  },
+  onHide: function onHide() {},
+  onUnload: function onUnload() {},
   methods: {
     /**
               * 03. 获取设备当前的状态/心率/呼吸/体动数据
               */
-    getActual: function getActual(loading) {
-      console.log('获取设备当前的状态一次(detail)!', " at pages\\detail\\index.vue:175");
-      if (loading) {
-        this.loading = 1;
-      }
+    getActual: function getActual() {
       var obj = {
         deviceNos: this.deviceNos };
 
@@ -13229,33 +13235,14 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       obj,
       function (res) {
         if (res.retCode == '10000') {
-          var deviceStatus = res.successData[0].deviceStatus;
-          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
-            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:191");
-            warnState.warnDeviceTime = Date.parse(new Date());
-            warnState.warnHeartTime = null;
-            warnState.warnBreathTime = null;
-            warnState.warnMotionTime = null;
-            _this.warnDeviceTime = warnState.warnDeviceTime;
-            _this.warnHeartTime = null;
-            _this.warnBreathTime = null;
-            _this.warnMotionTime = null;
-          }
-          if (deviceStatus == '4') {
-            warnState.warnDeviceTime = null;
-            _this.warnDeviceTime = null;
-            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:204");
-          }
-
-          checkWarn(_this, res, backgroundAudioManager);
-          _this.deviceStatus = deviceStatus;
+          util.checkWarn(_this, res);
           _this.breathNum = res.successData[0].breath;
+          _this.deviceStatus = res.successData[0].deviceStatus;
           _this.heartNum = res.successData[0].heart;
           _this.markTime = res.successData[0].markTime;
           _this.motionNum = res.successData[0].motion;
-          _this.loading = 0;
         } else {
-          // console.log('未知错误，请重新登录');
+          // console.log('未知错误，请重新登录')
           setCookie('accessToken', '');
           setCookie('username', '');
           uni.redirectTo({
@@ -13264,7 +13251,7 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         }
       },
       function (reg) {
-        // console.log(JSON.stringify(reg));
+        // console.log(JSON.stringify(reg))
       });
 
     },
@@ -13282,24 +13269,22 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         * 时时数据推送
         */
     setSocketTask: function setSocketTask() {
-      if (this.firstTimes == 1) return;
-      this.firstTimes = 1;
       var accessToken = util.getCookie('accessToken');
       var _this = this;
       // 建立连接
-      // console.log('建立连接!');
-      wx.connectSocket({
+      // console.log('建立连接!')
+      ws.connectSocket({
         url: 'ws://stream.darma.cn:17004/ws',
         sluccess: function sluccess() {
-          // console.log('连接成功...');
+          // console.log('连接成功...')
         },
         fail: function fail() {
-          // console.log('连接失败...');
+          // console.log('连接失败...')
         } });
 
       // 连接成功
-      wx.onSocketOpen(function () {
-        // console.log('连接成功!');
+      ws.onSocketOpen(function () {
+        // console.log('连接成功!')
         var obj = {
           // 消息类型msgType前有 login（登录消息），deviceStatus（设备状态消息）healthData（心率呼吸数据消息），paramError（参数错误消息）
           msgType: 'login',
@@ -13310,51 +13295,91 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
             deviceNo: _this.deviceNos } };
 
 
-        wx.sendSocketMessage({
+        ws.sendSocketMessage({
           data: JSON.stringify(obj) });
 
       });
       // 接收数据
       wx.onSocketMessage(function (data) {
-        console.log('***************************detail回执', " at pages\\detail\\index.vue:276");
-        // console.log('接收数据回执，warnState.warnNing = ' + warnState.warnNing)
+        // console.log('接收数据回执，warnStateData.warnNing = ' + warnStateData.warnNing)
         // heartBreathBcg、healthBreathData、deviceStatus
-
         // if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
-        // console.log(data.data);
-        // console.log('111111111111' + JSON.parse(data.data).msgType)
+        // console.log(data.data)
         // }
         // 当状态发生变化会初始化时，会推送此条数据
-        // console.log('warnRule.device = ' + util.warnRule.device)
-        // if (JSON.parse(data.data).msgType == 'deviceStatus' && util.warnRule.device) {
-        //     console.log('222222222222---' + JSON.parse(data.data).data.deviceStatus)
-        //     if (JSON.parse(data.data).data.deviceStatus == '3') {
-        //         console.log('离床已记录，以此时间为基准开始计算报警数据');
-        //         warnState.warnDeviceTime = Date.parse(new Date());
-        //         warnState.warnHeartTime = null;
-        //         warnState.warnBreathTime = null;
-        //         warnState.warnMotionTime = null;
-        //         _this.warnDeviceTime = warnState.warnDeviceTime;
-        //         _this.warnHeartTime = null;
-        //         _this.warnBreathTime = null;
-        //         _this.warnMotionTime = null;
-        //     } else {
-        //         warnState.warnDeviceTime = null;
-        //         _this.warnDeviceTime = null;
-        //         console.log('解除离床报警计算数据');
-        //     }
-        // }
+        // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
+        var msgType = JSON.parse(data.data).msgType;
+        console.log('接收推送数据回执' + '***' + JSON.parse(data.data).msgType + '***' + Date.parse(new Date()), " at pages\\detail\\index.vue:256");
+        if (msgType == 'deviceStatus') {
+          // 状态发生变化时推送此类信息
+          console.log(data.data, " at pages\\detail\\index.vue:259");
+          var deviceStatus = JSON.parse(data.data).data.deviceStatus;
+          if (deviceStatus == '3') {
+            // 离床
+            warnStateData.warnHeartTime = null;
+            warnStateData.warnBreathTime = null;
+            warnStateData.warnMotionTime = null;
+            _this.warnHeartTime = null;
+            _this.warnBreathTime = null;
+            _this.warnMotionTime = null;
+            if (warnRuleData.device) {
+              console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:270");
+              warnStateData.warnDeviceTime = Date.parse(new Date());
+              _this.warnDeviceTime = warnStateData.warnDeviceTime;
+            }
+          } else if (deviceStatus == '4') {
+            // 在床
+            warnStateData.warnDeviceTime = null;
+            _this.warnDeviceTime = null;
+            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:278");
+          } else if (deviceStatus == '5' || deviceStatus == '6') {
+            warnStateData.warnDeviceTime = null;
+            warnStateData.warnHeartTime = null;
+            warnStateData.warnBreathTime = null;
+            warnStateData.warnMotionTime = null;
+            _this.warnDeviceTime = null;
+            _this.warnHeartTime = null;
+            _this.warnBreathTime = null;
+            _this.warnMotionTime = null;
+          }
+        }
       });
       //连接失败
       wx.onSocketError(function () {
-        // console.log('websocket连接失败！');
+        // console.log('websocket连接失败！')
+      });
+      wx.onSocketClose(function () {
+        console.log('socket连接已关闭', " at pages\\detail\\index.vue:296");
       });
     },
     /**
         * 关闭报警
         */
     audioPause: function audioPause() {
-      util.audioPause(this, backgroundAudioManager);
+      util.audioPause(this);
+    },
+    openConfirmBox: function openConfirmBox() {
+      this.confirm = 1;
+    },
+    closeConfirmBox: function closeConfirmBox() {
+      this.confirm = 0;
+    },
+    loginOut: function loginOut() {
+      console.log('我要停止推送!!!88888888888', " at pages\\detail\\index.vue:312");
+      // setCookie('accessToken', '')
+      // setCookie('username', '')
+      // setCookie('deviceNos', '')
+      // setCookie('warnRule', '')
+      // this.confirm = 0
+      // clearInterval(this.timer)
+      // uni.reLaunch({
+      //     url: '../login/index'
+      // })
+      var ws = new WebSocket("ws://stream.darma.cn:17004/ws");
+      ws.onclose = function (e) {
+        console.log(e, " at pages\\detail\\index.vue:324");
+      };
+      wx.close();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
@@ -13707,7 +13732,7 @@ var _wxcharts = _interopRequireDefault(__webpack_require__(/*! ../../components/
 //
 //
 //
-var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var baseHost = util.baseHost;var imgUrl = util.imgUrl;var warnRule = util.warnRule;var warnState = util.warnState;var setCookie = util.setCookie;var getCookie = util.getCookie;var myAjax = util.myAjax;var myAjax2 = util.myAjax2;var getWarnCookie = util.getWarnCookie;var setWarnCookie = util.setWarnCookie;var audioPause = util.audioPause;var changeWarn = util.changeWarn;var checkWarn = util.checkWarn;var backgroundAudioManager = wx.getBackgroundAudioManager();var _default = { data: function data() {return { title: '历史记录', showToast: 0, toastTxt: '', loading: 0, userInfo: null, deviceNos: '', // 设备号
+var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");var getCookie = util.getCookie;var myAjax2 = util.myAjax2;var getWarnCookie = util.getWarnCookie;var changeWarnToThis = util.changeWarnToThis;var _default = { data: function data() {return { title: '历史记录', showToast: 0, toastTxt: '', loading: 0, userInfo: null, deviceNos: '', // 设备号
       accessToken: null, breathNum: '--', // 呼吸值 -100_无效值，其他为正常值
       deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
       heartNum: '--', // 心率值 65436_无效值，其他为正常值
@@ -13732,76 +13757,8 @@ var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       motionTimes: '', // 大幅体动持续时间
       motionStart: '', // 体动监控时段开始
       motionEnd: '', // 体动监控时段结束
-      warnNing: 0, warningText: '', warnNo: '', warnDeviceTime: '', warnHeartTime: '', warnBreathTime: '', warnMotionTime: '' };}, onLoad: function onLoad() {_this = this;setTimeout(function () {_this.firstLoad = 1;}, 2000);_this.cWidth = uni.upx2px(750);_this.cHeight = uni.upx2px(500);_this.cWidth2 = uni.upx2px(700);_this.cHeight2 = uni.upx2px(1100);var accessToken = getCookie('accessToken');var deviceNos = getCookie('deviceNos');var userInfo = getCookie('username');if (!accessToken) {uni.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {changeWarn(_this);getWarnCookie(_this);_this.userInfo = userInfo;_this.accessToken = accessToken;_this.deviceNos = deviceNos;_this.getActual();_this.timer = setInterval(function () {_this.getActual();}, 3000);_this.getTime(1);_this.history();}}, onLaunch: function onLaunch() {}, onShow: function onShow() {}, onHide: function onHide() {},
-  onUnload: function onUnload() {
-    clearInterval(this.timer);
-  },
-  methods: {
-    /**
-              * 03. 获取设备当前的状态/心率/呼吸/体动数据
-              */
-    getActual: function getActual(loading) {
-      console.log('获取设备当前的状态一次(record)!', " at pages\\record\\index.vue:242");
-      var obj = {
-        deviceNos: this.deviceNos };
-
-      var _this = this;
-      myAjax2(
-      'post',
-      '/device/physiology/actual',
-      obj,
-      function (res) {
-        if (res.retCode == '10000') {
-          var deviceStatus = res.successData[0].deviceStatus;
-          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
-            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\record\\index.vue:255");
-            warnState.warnDeviceTime = Date.parse(new Date());
-            warnState.warnHeartTime = null;
-            warnState.warnBreathTime = null;
-            warnState.warnMotionTime = null;
-            _this.warnDeviceTime = warnState.warnDeviceTime;
-            _this.warnHeartTime = null;
-            _this.warnBreathTime = null;
-            _this.warnMotionTime = null;
-          }
-          if (deviceStatus == '4') {
-            warnState.warnDeviceTime = null;
-            _this.warnDeviceTime = null;
-            console.log('解除离床报警计算数据', " at pages\\record\\index.vue:268");
-          }
-
-          checkWarn(_this, res, backgroundAudioManager);
-          _this.deviceStatus = deviceStatus;
-          _this.breathNum = res.successData[0].breath;
-          _this.heartNum = res.successData[0].heart;
-          _this.markTime = res.successData[0].markTime;
-          _this.motionNum = res.successData[0].motion;
-          _this.loading = 0;
-        } else {
-          // console.log('未知错误，请重新登录');
-          setCookie('accessToken', '');
-          setCookie('username', '');
-          uni.redirectTo({
-            url: '../login/index' });
-
-        }
-      },
-      function (reg) {
-        // console.log(JSON.stringify(reg));
-      });
-
-    },
-    checkWarnState: function checkWarnState() {},
-    linkToLogin: function linkToLogin() {
-      uni.redirectTo({
-        url: '../login/index' });
-
-    },
-    changeNav: function changeNav(type) {
-      var tabNum = this.tabNum;
-      if (tabNum != type) {
-        this.tabNum = type;
-        this.getTime(type);
+      warnNing: 0, warningText: '', warnNo: '', warnDeviceTime: '', warnHeartTime: '', warnBreathTime: '', warnMotionTime: '' };}, onLoad: function onLoad() {var _this = this;setTimeout(function () {_this.firstLoad = 1;}, 2000);_this.timer = setInterval(function () {changeWarnToThis(_this); // console.log('图表页面同步一次报警数据')
+    }, 1000);_this.cWidth = uni.upx2px(750);_this.cHeight = uni.upx2px(500);_this.cWidth2 = uni.upx2px(700);_this.cHeight2 = uni.upx2px(1100);}, onLaunch: function onLaunch() {}, onShow: function onShow() {var _this = this;var accessToken = util.getCookie('accessToken');var deviceNos = getCookie('deviceNos');if (!accessToken) {wx.redirectTo({ url: '../login/index' });} else if (!deviceNos) {uni.redirectTo({ url: '../code/index' });} else {_this.accessToken = accessToken;_this.deviceNos = deviceNos;changeWarnToThis(_this);getWarnCookie(_this);_this.getTime(1);_this.history();}}, onHide: function onHide() {}, onUnload: function onUnload() {clearInterval(this.timer);}, methods: { linkToLogin: function linkToLogin() {uni.redirectTo({ url: '../login/index' });}, changeNav: function changeNav(type) {var tabNum = this.tabNum;if (tabNum != type) {this.tabNum = type;this.getTime(type);
         this.history();
       }
     },
@@ -13829,21 +13786,22 @@ var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
         endTime: this.endTime };
 
       var _this = this;
+      _this.loading = 1;
       myAjax2(
       'post',
       '/device/physiology/history',
       obj,
       function (res) {
         if (res.retCode == '10000') {
-          // console.log('history请求成功');
+          // console.log('history请求成功')
           _this.setHistoryData(res);
         } else {
 
-        } // console.log('history未知错误');
+        } // console.log('history未知错误')
         // console.log(JSON.stringify(res))
       },
       function (reg) {
-        // console.log(JSON.stringify(reg));
+        // console.log(JSON.stringify(reg))
       });
 
     },
@@ -13900,6 +13858,7 @@ var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
         this.showLineB('canvasLineB', LineA);
         this.showArea('canvasArea', LineA);
       }
+      this.loading = 0;
     },
     /**
         * 格式化时间
@@ -13932,6 +13891,7 @@ var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
       return new Date(time).getTime() / 1000;
     },
     showLineB: function showLineB(canvasId, chartData) {
+      var _this = this;
       canvaLineB = new _wxcharts.default({
         $this: _this,
         canvasId: canvasId,
@@ -13958,6 +13918,7 @@ var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
 
     },
     showArea: function showArea(canvasId, chartData) {
+      var _this = this;
       canvaArea = new _wxcharts.default({
         $this: _this,
         canvasId: canvasId,
@@ -14012,7 +13973,7 @@ var _this;var canvaLineA = null;var canvaLineB = null;var canvaArea = null;var u
         * 关闭报警
         */
     audioPause: function audioPause() {
-      util.audioPause(this, backgroundAudioManager);
+      util.audioPause(this);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
@@ -14352,14 +14313,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 function getDate(type) {
   var date = new Date();
@@ -14381,21 +14334,12 @@ function getDate(type) {
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 
-var baseHost = util.baseHost;
-var imgUrl = util.imgUrl;
-var warnRule = util.warnRule;
-var warnState = util.warnState;
+var warnRuleData = util.warnRuleData;
 var setCookie = util.setCookie;
 var getCookie = util.getCookie;
-var myAjax = util.myAjax;
-var myAjax2 = util.myAjax2;
 var getWarnCookie = util.getWarnCookie;
 var setWarnCookie = util.setWarnCookie;
-var audioPause = util.audioPause;
-var changeWarn = util.changeWarn;
-var checkWarn = util.checkWarn;
-
-var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
+var changeWarnToThis = util.changeWarnToThis;var _default =
 
 {
   data: function data() {
@@ -14404,7 +14348,6 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
       toast: 0,
       toastTxt: '',
       loading: 0,
-      confirm: 0,
 
       userInfo: null,
       deviceNos: '', // 设备号
@@ -14443,11 +14386,18 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
   },
   onLoad: function onLoad() {
     var _this = this;
-    var accessToken = getCookie('accessToken');
+    _this.timer = setInterval(function () {
+      changeWarnToThis(_this);
+      // console.log('setting页面同步一次报警数据')
+    }, 1000);
+  },
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {
+    var _this = this;
+    var accessToken = util.getCookie('accessToken');
     var deviceNos = getCookie('deviceNos');
-    var userInfo = getCookie('username');
     if (!accessToken) {
-      uni.redirectTo({
+      wx.redirectTo({
         url: '../login/index' });
 
     } else if (!deviceNos) {
@@ -14455,110 +14405,24 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         url: '../code/index' });
 
     } else {
-      changeWarn(_this);
-      getWarnCookie(_this);
-      _this.userInfo = userInfo;
       _this.accessToken = accessToken;
       _this.deviceNos = deviceNos;
-      _this.getActual();
-      _this.timer = setInterval(function () {
-        _this.getActual();
-      }, 3000);
+      changeWarnToThis(_this);
+      getWarnCookie(_this);
     }
   },
-  onLaunch: function onLaunch() {},
-  onShow: function onShow() {},
-  onHide: function onHide() {
-    clearInterval(this.timer);
-  },
+  onHide: function onHide() {},
   onUnload: function onUnload() {
     clearInterval(this.timer);
   },
   methods: {
-    /**
-              * 03. 获取设备当前的状态/心率/呼吸/体动数据
-              */
-    getActual: function getActual(loading) {
-      console.log('获取设备当前的状态一次(setting)!', " at pages\\setting\\index.vue:322");
-      var obj = {
-        deviceNos: this.deviceNos };
-
-      var _this = this;
-      myAjax2(
-      'post',
-      '/device/physiology/actual',
-      obj,
-      function (res) {
-        if (res.retCode == '10000') {
-          var deviceStatus = res.successData[0].deviceStatus;
-          if (warnRule.device && _this.deviceStatus == '4' && deviceStatus == '3' && !warnState.warnDeviceTime) {
-            console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\setting\\index.vue:335");
-            warnState.warnDeviceTime = Date.parse(new Date());
-            warnState.warnHeartTime = null;
-            warnState.warnBreathTime = null;
-            warnState.warnMotionTime = null;
-            _this.warnDeviceTime = warnState.warnDeviceTime;
-            _this.warnHeartTime = null;
-            _this.warnBreathTime = null;
-            _this.warnMotionTime = null;
-          }
-          if (deviceStatus == '4') {
-            warnState.warnDeviceTime = null;
-            _this.warnDeviceTime = null;
-            console.log('解除离床报警计算数据', " at pages\\setting\\index.vue:348");
-          }
-
-          checkWarn(_this, res, backgroundAudioManager);
-          _this.deviceStatus = deviceStatus;
-          _this.breathNum = res.successData[0].breath;
-          _this.heartNum = res.successData[0].heart;
-          _this.markTime = res.successData[0].markTime;
-          _this.motionNum = res.successData[0].motion;
-          _this.loading = 0;
-        } else {
-          // console.log('未知错误，请重新登录');
-          setCookie('accessToken', '');
-          setCookie('username', '');
-          uni.redirectTo({
-            url: '../login/index' });
-
-        }
-      },
-      function (reg) {
-        // console.log(JSON.stringify(reg));
-      });
-
-    },
+    // 01. 离床提醒开关
     switch1Change: function switch1Change(e) {
       this.device = e.target.value;
-      warnRule.device = e.target.value;
-      util.setWarnCookie(this);
+      warnRuleData.device = e.target.value;
+      setWarnCookie(this);
     },
-    switch2Change: function switch2Change(e) {
-      this.heart = e.target.value;
-      warnRule.heart = e.target.value;
-      util.setWarnCookie(this);
-    },
-    switch3Change: function switch3Change(e) {
-      this.breath = e.target.value;
-      warnRule.breath = e.target.value;
-      util.setWarnCookie(this);
-    },
-    switch4Change: function switch4Change(e) {
-      this.motion = e.target.value;
-      warnRule.motion = e.target.value;
-      util.setWarnCookie(this);
-    },
-    bindTime01Change: function bindTime01Change(e) {
-      this.deviceStart = e.target.value;
-      warnRule.deviceStart = e.target.value;
-      util.setWarnCookie(this);
-    },
-    bindTime02Change: function bindTime02Change(e) {
-      this.deviceEnd = e.target.value;
-      warnRule.deviceEnd = e.target.value;
-      util.setWarnCookie(this);
-    },
+    // 01 - 1 离床持续时长设置
     deviceTimesChange: function deviceTimesChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 300) {
@@ -14566,25 +14430,34 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-300的数字');
       }
       this.deviceTimes = value;
-      warnRule.deviceTimes = value;
-      util.setWarnCookie(this);
+      warnRuleData.deviceTimes = value;
+      setWarnCookie(this);
     },
+    // 01 - 2 离床提醒设置时间段-开始时间
     deviceStartChange: function deviceStartChange(e) {
       this.deviceStart = e.target.value;
-      warnRule.deviceStart = e.target.value;
-      util.setWarnCookie(this);
+      warnRuleData.deviceStart = e.target.value;
+      setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
       }
     },
+    // 01 - 3 离床提醒设置时间段-结束时间
     deviceEndChange: function deviceEndChange(e) {
       this.deviceEnd = e.target.value;
-      warnRule.deviceEnd = e.target.value;
-      util.setWarnCookie(this);
+      warnRuleData.deviceEnd = e.target.value;
+      setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
       }
     },
+    // 02. 心率提醒开关
+    switch2Change: function switch2Change(e) {
+      this.heart = e.target.value;
+      warnRuleData.heart = e.target.value;
+      setWarnCookie(this);
+    },
+    // 02 - 1 心率提醒下限设置
     heartDownChange: function heartDownChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 180) {
@@ -14592,9 +14465,10 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.heartDown = value;
-      warnRule.heartDown = value;
-      util.setWarnCookie(this);
+      warnRuleData.heartDown = value;
+      setWarnCookie(this);
     },
+    // 02 - 2 心率提醒上限设置
     heartUpChange: function heartUpChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 180) {
@@ -14602,9 +14476,16 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.heartUp = value;
-      warnRule.heartUp = value;
-      util.setWarnCookie(this);
+      warnRuleData.heartUp = value;
+      setWarnCookie(this);
     },
+    // 03. 呼吸提醒开关
+    switch3Change: function switch3Change(e) {
+      this.breath = e.target.value;
+      warnRuleData.breath = e.target.value;
+      setWarnCookie(this);
+    },
+    // 03 - 1 呼吸率提醒下限设置
     breathDownChange: function breathDownChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 180) {
@@ -14612,9 +14493,10 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.breathDown = value;
-      warnRule.breathDown = value;
-      util.setWarnCookie(this);
+      warnRuleData.breathDown = value;
+      setWarnCookie(this);
     },
+    // 03 - 2 呼吸率提醒上限设置
     breathUpChange: function breathUpChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 180) {
@@ -14622,9 +14504,16 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-180的数字');
       }
       this.breathUp = value;
-      warnRule.breathUp = value;
-      util.setWarnCookie(this);
+      warnRuleData.breathUp = value;
+      setWarnCookie(this);
     },
+    // 04. 体动频繁提醒开关
+    switch4Change: function switch4Change(e) {
+      this.motion = e.target.value;
+      warnRuleData.motion = e.target.value;
+      setWarnCookie(this);
+    },
+    // 04 - 1 体动频繁持续时长设置
     motionTimesChange: function motionTimesChange(e) {
       var value = e.target.value;
       if (value < 1 || value > 300) {
@@ -14632,47 +14521,33 @@ var backgroundAudioManager = wx.getBackgroundAudioManager();var _default =
         util.showToastBox(this, '请输入1-300的数字');
       }
       this.motionTimes = value;
-      warnRule.motionTimes = value;
-      util.setWarnCookie(this);
+      warnRuleData.motionTimes = value;
+      setWarnCookie(this);
     },
-    motionEndChange: function motionEndChange(e) {
-      this.motionEnd = e.target.value;
-      warnRule.motionEnd = e.target.value;
-      util.setWarnCookie(this);
-      if (this.deviceStart > this.deviceEnd) {
-        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
-      }
-    },
+    // 04 - 2 体动频繁提醒设置时间段-开始时间
     motionStartChange: function motionStartChange(e) {
       this.motionStart = e.target.value;
-      warnRule.motionStart = e.target.value;
-      util.setWarnCookie(this);
+      warnRuleData.motionStart = e.target.value;
+      setWarnCookie(this);
       if (this.deviceStart > this.deviceEnd) {
         util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
       }
     },
+    // 04 - 3 体动频繁提醒设置时间段-结束时间
+    motionEndChange: function motionEndChange(e) {
+      this.motionEnd = e.target.value;
+      warnRuleData.motionEnd = e.target.value;
+      setWarnCookie(this);
+      if (this.deviceStart > this.deviceEnd) {
+        util.showToastBox(this, '开始时间不可晚于结束时间, 错误时间段将导致无法做出提醒!');
+      }
+    },
+
     /**
         * 关闭报警
         */
     audioPause: function audioPause() {
-      util.audioPause(this, backgroundAudioManager);
-    },
-    openConfirmBox: function openConfirmBox() {
-      this.confirm = 1;
-    },
-    closeConfirmBox: function closeConfirmBox() {
-      this.confirm = 0;
-    },
-    loginOut: function loginOut() {
-      setCookie('accessToken', '');
-      setCookie('username', '');
-      setCookie('deviceNos', '');
-      setCookie('warnRule', '');
-      this.confirm = 0;
-      clearInterval(this.timer);
-      uni.reLaunch({
-        url: '../login/index' });
-
+      util.audioPause(this);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

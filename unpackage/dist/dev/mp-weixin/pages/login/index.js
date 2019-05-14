@@ -206,10 +206,10 @@ var myAjax = util.myAjax;var _default =
           util.showToastBox(_this, '未知错误，请重新登录!');
           _this.loading = 0;
         }
-        // console.log(JSON.stringify(res));
+        // console.log(JSON.stringify(res))
       },
       function (reg) {
-        // console.log(JSON.stringify(reg));
+        // console.log(JSON.stringify(reg))
       });
 
     } } };exports.default = _default;

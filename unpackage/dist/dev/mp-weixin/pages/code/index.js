@@ -130,8 +130,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 var setCookie = util.setCookie;
-var getCookie = util.getCookie;
-var myAjax = util.myAjax;
 var myAjax2 = util.myAjax2;var _default =
 
 {
@@ -204,10 +202,10 @@ var myAjax2 = util.myAjax2;var _default =
           _this.loading = 0;
           util.showToastBox(_this, '设备编码校验有误，请重新输入或与管理员联系解决！');
         }
-        // console.log(JSON.stringify(res));
+        // console.log(JSON.stringify(res))
       },
       function (reg) {
-        // console.log(JSON.stringify(reg));
+        // console.log(JSON.stringify(reg))
       });
 
     } } };exports.default = _default;

@@ -83,36 +83,5 @@
 .setting-other text.setting-icon {
     float: right;
 }
-.box-confirm {
-    width: 500rpx;
-    height: 250rpx;
-    background: #fff;
-    border-radius: 10rpx;
-    position: absolute;
-    left: calc(50vw - 250rpx);
-    top: calc(50vh - 350rpx);
-}
-.box-confirm .txt {
-    display: block;
-    line-height: 150rpx;
-    text-align: center;
-    font-size: 32rpx;
-}
-.box-confirm .confirm-btn {
-    border-top: 1rpx solid #eee;
-}
-.box-confirm .confirm-btn text {
-    display: inline-block;
-    width: 50%;
-    height: 100rpx;
-    line-height: 100rpx;
-    text-align: center;
-    float: left;
-}
-.box-confirm .confirm-btn text.blue {
-    background-color: #0099e9;
-    color: #fff;
-    border-bottom-right-radius: 10rpx;
-}
 
 

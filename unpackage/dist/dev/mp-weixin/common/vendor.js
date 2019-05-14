@@ -10,12 +10,18 @@
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {var baseHost = 'https://api.darma.cn/mattress';
 var imgUrl = 'http://www.hanjiaxin.cn/images/';
+var backgroundAudioManager = wx.getBackgroundAudioManager();
+backgroundAudioManager.title = '报警';
+backgroundAudioManager.epname = '报警';
+backgroundAudioManager.singer = '报警';
+backgroundAudioManager.coverImgUrl = '';
+
 // var deviceNos = '641743000773'
 
 /**
- * 报警规则初始化值
+ * 报警规则数据值
  */
-var warnRule = {
+var warnRuleData = {
   device: false, // 是否监控离床
   deviceTimes: '10', // 离床持续时间
   deviceStart: '00:00', // 监控时段开始
@@ -33,9 +39,9 @@ var warnRule = {
 
 
   /**
-   * 报警状态记录
+   * 报警状态数据值
    */ };
-var warnState = {
+var warnStateData = {
   warnNing: 0, // 是否正在报警
   warnNo: null, // 报警类型 0离床、1心率、2呼吸率、3体动
   warnDeviceTime: null, // 离床报警记录点时间戳
@@ -125,9 +131,11 @@ function myAjax2(type, url, data, res, reg) {
    * @param {Object} that 作用域
    */
 function getWarnCookie(that) {
-  var warnRuleCookie = JSON.parse(getCookie('warnRule'));
+  var warnRuleCookie;
   if (!warnRuleCookie) {
-    warnRuleCookie = warnRule;
+    warnRuleCookie = warnRuleData;
+  } else {
+    warnRuleCookie = JSON.parse(getCookie('warnRule'));
   }
   that.device = warnRuleCookie.device;
   that.deviceTimes = warnRuleCookie.deviceTimes;
@@ -144,20 +152,20 @@ function getWarnCookie(that) {
   that.motionStart = warnRuleCookie.motionStart;
   that.motionEnd = warnRuleCookie.motionEnd;
 
-  warnRule.device = warnRuleCookie.device;
-  warnRule.deviceTimes = warnRuleCookie.deviceTimes;
-  warnRule.deviceStart = warnRuleCookie.deviceStart;
-  warnRule.deviceEnd = warnRuleCookie.deviceEnd;
-  warnRule.heart = warnRuleCookie.heart;
-  warnRule.heartUp = warnRuleCookie.heartUp;
-  warnRule.heartDown = warnRuleCookie.heartDown;
-  warnRule.breath = warnRuleCookie.breath;
-  warnRule.breathUp = warnRuleCookie.breathUp;
-  warnRule.breathDown = warnRuleCookie.breathDown;
-  warnRule.motion = warnRuleCookie.motion;
-  warnRule.motionTimes = warnRuleCookie.motionTimes;
-  warnRule.motionStart = warnRuleCookie.motionStart;
-  warnRule.motionEnd = warnRuleCookie.motionEnd;
+  warnRuleData.device = warnRuleCookie.device;
+  warnRuleData.deviceTimes = warnRuleCookie.deviceTimes;
+  warnRuleData.deviceStart = warnRuleCookie.deviceStart;
+  warnRuleData.deviceEnd = warnRuleCookie.deviceEnd;
+  warnRuleData.heart = warnRuleCookie.heart;
+  warnRuleData.heartUp = warnRuleCookie.heartUp;
+  warnRuleData.heartDown = warnRuleCookie.heartDown;
+  warnRuleData.breath = warnRuleCookie.breath;
+  warnRuleData.breathUp = warnRuleCookie.breathUp;
+  warnRuleData.breathDown = warnRuleCookie.breathDown;
+  warnRuleData.motion = warnRuleCookie.motion;
+  warnRuleData.motionTimes = warnRuleCookie.motionTimes;
+  warnRuleData.motionStart = warnRuleCookie.motionStart;
+  warnRuleData.motionEnd = warnRuleCookie.motionEnd;
 }
 
 /**
@@ -187,36 +195,35 @@ function setWarnCookie(that) {
 /**
    * 关闭报警
    * @param {Object} that 作用域
-   * @param {Object} backgroundAudioManager 背景音乐
    */
-function audioPause(that, backgroundAudioManager) {
+function audioPause(that) {
   backgroundAudioManager.pause();
-  warnState.warnNing = 0;
-  if (warnState.warnNo == 0) {
-    warnState.warnDeviceTime = null;
-  } else if (warnState.warnNo == 1) {
-    warnState.warnHeartTime = null;
-  } else if (warnState.warnNo == 2) {
-    warnState.warnBreathTime = null;
-  } else if (warnState.warnNo == 3) {
-    warnState.warnMotionTime = null;
+  warnStateData.warnNing = 0;
+  if (warnStateData.warnNo == 0) {
+    warnStateData.warnDeviceTime = null;
+  } else if (warnStateData.warnNo == 1) {
+    warnStateData.warnHeartTime = null;
+  } else if (warnStateData.warnNo == 2) {
+    warnStateData.warnBreathTime = null;
+  } else if (warnStateData.warnNo == 3) {
+    warnStateData.warnMotionTime = null;
   }
-  warnState.warnNo = null;
-  changeWarn(that);
+  warnStateData.warnNo = null;
+  changeWarnToThis(that);
 }
 
 /**
    * 同步报警状态值
    * @param {Object} that 作用域
    */
-function changeWarn(that) {
-  that.warnNing = warnState.warnNing;
-  that.warnNo = warnState.warnNo;
-  that.warnDeviceTime = warnState.warnDeviceTime;
-  that.warnHeartTime = warnState.warnHeartTime;
-  that.warnBreathTime = warnState.warnBreathTime;
-  that.warnMotionTime = warnState.warnMotionTime;
-  that.warningText = warnState.warningText;
+function changeWarnToThis(that) {
+  that.warnNing = warnStateData.warnNing;
+  that.warnNo = warnStateData.warnNo;
+  that.warnDeviceTime = warnStateData.warnDeviceTime;
+  that.warnHeartTime = warnStateData.warnHeartTime;
+  that.warnBreathTime = warnStateData.warnBreathTime;
+  that.warnMotionTime = warnStateData.warnMotionTime;
+  that.warningText = warnStateData.warningText;
 }
 
 /**
@@ -224,19 +231,21 @@ function changeWarn(that) {
    * @param {Object} that 作用域
    * @param {Object} backgroundAudioManager 背景音乐
    */
-function audioStart(that, backgroundAudioManager) {
+function audioStart(that) {
   that.warnNing = 1;
-  warnState.warnNing = 1;
+  warnStateData.warnNing = 1;
   if (backgroundAudioManager.paused) {
+    backgroundAudioManager.title = '报警' + Date.parse(new Date());
+    backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
     backgroundAudioManager.play();
   } else {
-    backgroundAudioManager.title = '报警';
-    backgroundAudioManager.epname = '报警';
-    backgroundAudioManager.singer = '报警';
-    backgroundAudioManager.coverImgUrl = '';
     // 设置了 src 之后会自动播放
-    backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
+    if (!backgroundAudioManager.src) {
+      backgroundAudioManager.title = '报警' + Date.parse(new Date());
+      backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3';
+    }
     backgroundAudioManager.onEnded(function () {
+      backgroundAudioManager.title = '报警' + Date.parse(new Date());
       backgroundAudioManager.src = 'http://www.hanjiaxin.cn/images/warning.mp3?time=' + Date.parse(new Date());
     });
   }
@@ -247,12 +256,12 @@ function audioStart(that, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkWarn(that, res, backgroundAudioManager) {
+function checkWarn(that, res) {
 
-  checkDevice(that, res, backgroundAudioManager);
-  checkHeart(that, res, backgroundAudioManager);
-  checkBreath(that, res, backgroundAudioManager);
-  checkMotion(that, res, backgroundAudioManager);
+  checkDevice(that, res);
+  checkHeart(that, res);
+  checkBreath(that, res);
+  checkMotion(that, res);
 
 }
 
@@ -261,55 +270,55 @@ function checkWarn(that, res, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkDevice(that, res, backgroundAudioManager) {
+function checkDevice(that, res) {
   // 如果正在报警，跳出检测
-  if (warnState.warnNing == 1) return;
-  var warnRule = JSON.parse(getCookie('warnRule'));
+  if (warnStateData.warnNing == 1) return;
+  // let warnRule = JSON.parse(getCookie('warnRule'))
   var nowTime = Date.parse(new Date());
   var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
   var deviceStatus = res.successData[0].deviceStatus;
   var oldDeviceStatus = that.deviceStatus;
   // 系统设置为不监控 跳出检测
-  if (!warnRule.device) {
+  if (!warnRuleData.device) {
     // console.log('系统设置为不监控 跳出检测')
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
     return;
   }
   // 系统设置时间有误，跳出检测
-  if (warnRule.deviceStart > warnRule.deviceEnd) {
+  if (warnRuleData.deviceStart > warnRuleData.deviceEnd) {
     // console.log('系统设置时间有误，跳出检测')
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
     return;
   }
   // 如果没有离床报警记录点时间戳，跳出检测
-  if (!warnState.warnDeviceTime) {
+  if (!warnStateData.warnDeviceTime) {
     // console.log('如果没有离床报警记录点时间戳，跳出检测')
     return;
   }
   // 状态为4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱，则终止离床检测倒计时
   if (deviceStatus == 4 || deviceStatus == 5 || deviceStatus == 6 || deviceStatus == 9 || deviceStatus == 10) {
     // console.log('状态为4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱，则终止离床检测倒计时')
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
     return;
   }
   // 不在报警时间段内，跳出检测
-  if (warnRule.deviceStart > nowTimeHour || warnRule.deviceEnd < nowTimeHour) {
+  if (warnRuleData.deviceStart > nowTimeHour || warnRuleData.deviceEnd < nowTimeHour) {
     // console.log('不在报警时间段内，跳出检测')
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
     return;
   }
-  console.log(nowTime - warnState.warnDeviceTime, '...离床监测..', warnRule.deviceTimes * 60 * 1000);
+  console.log(nowTime - warnStateData.warnDeviceTime, '...离床监测..', warnRuleData.deviceTimes * 60 * 1000);
   // 记录时间点已超出系统设置离床时间上限，触发离床报警
-  if (nowTime - warnState.warnDeviceTime > warnRule.deviceTimes * 60 * 1000) {
+  if (nowTime - warnStateData.warnDeviceTime > warnRuleData.deviceTimes * 60 * 1000) {
     // console.log('记录时间点已超出系统设置离床时间上限，触发离床报警')
-    var t = new Date(warnState.warnDeviceTime);
+    var t = new Date(warnStateData.warnDeviceTime);
     that.warningText = '用户于' + (t.getHours() < 10 ? '0' + t.getHours() : t.getHours()) + ':' + (t.getMinutes() < 10 ?
-    '0' + t.getMinutes() : t.getMinutes()) + '离床，并已超过' + warnRule.deviceTimes + '分钟';
+    '0' + t.getMinutes() : t.getMinutes()) + '离床，并已超过' + warnRuleData.deviceTimes + '分钟';
     that.warning = 1;
-    warnState.warnNing = 1;
-    warnState.warnNo = 0;
+    warnStateData.warnNing = 1;
+    warnStateData.warnNo = 0;
     audioStart(that, backgroundAudioManager);
-    warnState.warnDeviceTime = null;
+    warnStateData.warnDeviceTime = null;
   }
 }
 
@@ -318,66 +327,68 @@ function checkDevice(that, res, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkHeart(that, res, backgroundAudioManager) {
+function checkHeart(that, res) {
   // console.log('心率检测!')
   // 如果正在报警，跳出检测
-  if (warnState.warnNing == 1) return;
-  var warnRule = JSON.parse(getCookie('warnRule'));
+  if (warnStateData.warnNing == 1) return;
+  // let warnRule = JSON.parse(getCookie('warnRule'))
   var nowTime = Date.parse(new Date());
   var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
   var deviceStatus = res.successData[0].deviceStatus;
   // 如果不是在床状态，跳出检测
   if (deviceStatus != 4) {
     // console.log('如果不是在床状态，跳出检测')
-    warnState.warnHeartTime = null;
+    warnStateData.warnHeartTime = null;
     return;
   }
   // 系统设置为不监控 跳出检测
-  if (!warnRule.heart) {
+  if (!warnRuleData.heart) {
     // console.log('系统设置为不监控 跳出检测')
-    warnState.warnHeartTime = null;
+    warnStateData.warnHeartTime = null;
     return;
   }
   // 系统设置上下限规则有误，跳出检测
-  if (warnRule.heartDown > warnRule.heartUp) {
+  if (warnRuleData.heartDown > warnRuleData.heartUp) {
     // console.log('系统设置上下限规则有误，跳出检测')
-    warnState.warnHeartTime = null;
+    warnStateData.warnHeartTime = null;
     return;
   }
   // 如果没有心率报警记录点时间戳，设置记录点并跳出检测
-  if (!warnState.warnHeartTime) {
+  if (!warnStateData.warnHeartTime) {
     // console.log('如果没有心率报警记录点时间戳，跳出检测')
-    warnState.warnHeartTime = Date.parse(new Date());
+    warnStateData.warnHeartTime = Date.parse(new Date());
     return;
   }
   // 心率回归正常值，初始化数据，并跳出检测
-  if (res.successData[0].heart <= warnRule.heartUp && res.successData[0].heart >= warnRule.heartDown) {
+  if (res.successData[0].heart <= warnRuleData.heartUp && res.successData[0].heart >= warnRuleData.heartDown) {
     // console.log('心率回归正常值，初始化数据，并跳出检测')
-    warnState.warnHeartTime = null;
+    warnStateData.warnHeartTime = null;
     return;
   }
 
-  console.log(nowTime - warnState.warnHeartTime, '...心率监测(有异常)..');
+  console.log(nowTime - warnStateData.warnHeartTime, '...心率监测(有异常)..');
   // 记录时间点已超出系统默认设置心率持续异常时间上限，触发离床报警
-  if (nowTime - warnState.warnHeartTime > 30 * 1000) {
-    if (res.successData[0].heart > warnRule.heartUp) {
+  if (nowTime - warnStateData.warnHeartTime > 30 * 1000) {
+    if (res.successData[0].heart > warnRuleData.heartUp) {
       // console.log('记录时间点已超出系统默认设置心率持续异常时间上限，触发心率报警')
-      var t = new Date(warnState.warnHeartTime);
+      var t = new Date(warnStateData.warnHeartTime);
       that.warningText = '用户于' + nowTimeHour + '心率持续30秒高于您设置的上限峰值!';
+      warnStateData.warningText = '用户于' + nowTimeHour + '心率持续30秒高于您设置的上限峰值!';
       that.warning = 1;
-      warnState.warnNing = 1;
-      warnState.warnNo = 1;
+      warnStateData.warnNing = 1;
+      warnStateData.warnNo = 1;
       audioStart(that, backgroundAudioManager);
-      warnState.warnHeartTime = null;
+      warnStateData.warnHeartTime = null;
     } else {
       // console.log('记录时间点已超出系统默认设置心率持续异常时间上限，触发心率报警')
-      var _t = new Date(warnState.warnHeartTime);
+      var _t = new Date(warnStateData.warnHeartTime);
       that.warningText = '用户于' + nowTimeHour + '心率持续30秒低于您设置的下限峰值!';
+      warnStateData.warningText = '用户于' + nowTimeHour + '心率持续30秒低于您设置的下限峰值!';
       that.warning = 1;
-      warnState.warnNing = 1;
-      warnState.warnNo = 1;
+      warnStateData.warnNing = 1;
+      warnStateData.warnNo = 1;
       audioStart(that, backgroundAudioManager);
-      warnState.warnHeartTime = null;
+      warnStateData.warnHeartTime = null;
     }
   }
 }
@@ -387,68 +398,69 @@ function checkHeart(that, res, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkBreath(that, res, backgroundAudioManager) {
+function checkBreath(that, res) {
   // console.log('呼吸检测!')
   // 如果正在报警，跳出检测
-  if (warnState.warnNing == 1) return;
-  var warnRule = JSON.parse(getCookie('warnRule'));
+  if (warnStateData.warnNing == 1) return;
+  // let warnRule = JSON.parse(getCookie('warnRule'))
   var nowTime = Date.parse(new Date());
   var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
   var deviceStatus = res.successData[0].deviceStatus;
   // 如果不是在床状态，跳出检测
   if (deviceStatus != 4) {
     // console.log('如果不是在床状态，跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
   // 系统设置为不监控 跳出检测
-  if (!warnRule.breath) {
+  if (!warnRuleData.breath) {
     // console.log('系统设置为不监控 跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
   // 系统设置上下限规则有误，跳出检测
-  if (warnRule.breathDown * 1 > warnRule.breathUp * 1) {
+  if (warnRuleData.breathDown * 1 > warnRuleData.breathUp * 1) {
     // console.log('系统设置上下限规则有误，跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
   // 如果没有呼吸率报警记录点时间戳，设置记录点并跳出检测
-  if (!warnState.warnBreathTime) {
+  if (!warnStateData.warnBreathTime) {
     // console.log('如果没有呼吸率报警记录点时间戳，设置记录点并跳出检测')
-    warnState.warnBreathTime = Date.parse(new Date());
+    warnStateData.warnBreathTime = Date.parse(new Date());
     return;
   }
   // 呼吸率回归正常值，初始化数据，并跳出检测
-  if (res.successData[0].breath * 1 <= warnRule.breathUp * 1 && res.successData[0].breath * 1 >= warnRule.breathDown * 1) {
+  if (res.successData[0].breath * 1 <= warnRuleData.breathUp * 1 && res.successData[0].breath * 1 >= warnRuleData.breathDown * 1) {
     // console.log('呼吸率回归正常值，初始化数据，并跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
 
-  console.log(nowTime - warnState.warnBreathTime, '...呼吸监测(有异常)..');
+  console.log(nowTime - warnStateData.warnBreathTime, '...呼吸监测(有异常)..');
 
   // 记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸报警
-  if (nowTime - warnState.warnBreathTime > 30 * 1000) {
-    if (res.successData[0].breath > warnRule.breathUp) {
+  if (nowTime - warnStateData.warnBreathTime > 30 * 1000) {
+    if (res.successData[0].breath > warnRuleData.breathUp) {
       // console.log('记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸率报警')
-      var t = new Date(warnState.warnBreathTime);
-      that.warningText = '用户于' + (t.getHours() < 10 ? '0' + t.getHours() : t.getHours()) + ':' + (t.getMinutes() <
-      10 ? '0' + t.getMinutes() : t.getMinutes()) + '呼吸率持续30秒高于您设置的上限峰值!';
+      var t = new Date(warnStateData.warnBreathTime);
+      that.warningText = '用户于' + nowTimeHour + '呼吸率持续30秒高于您设置的上限峰值!';
+      warnStateData.warningText = '用户于' + nowTimeHour + '呼吸率持续30秒高于您设置的上限峰值!';
       that.warning = 1;
-      warnState.warnNing = 1;
-      warnState.warnNo = 1;
-      audioStart(that, backgroundAudioManager);
-      warnState.warnBreathTime = null;
+      warnStateData.warnNing = 1;
+      warnStateData.warnNo = 1;
+      audioStart(that);
+      warnStateData.warnBreathTime = null;
     } else {
       // console.log('记录时间点已超出系统默认设置呼吸率持续异常时间上限，触发呼吸率报警')
-      var _t2 = new Date(warnState.warnBreathTime);
+      var _t2 = new Date(warnStateData.warnBreathTime);
       that.warningText = '用户于' + nowTimeHour + '呼吸率持续30秒低于您设置的下限峰值!';
+      warnStateData.warningText = '用户于' + nowTimeHour + '呼吸率持续30秒低于您设置的下限峰值!';
       that.warning = 1;
-      warnState.warnNing = 1;
-      warnState.warnNo = 1;
-      audioStart(that, backgroundAudioManager);
-      warnState.warnBreathTime = null;
+      warnStateData.warnNing = 1;
+      warnStateData.warnNo = 1;
+      audioStart(that);
+      warnStateData.warnBreathTime = null;
     }
   }
 }
@@ -458,61 +470,63 @@ function checkBreath(that, res, backgroundAudioManager) {
    * @param {Object} that 作用域
    * @param {Object} res 数据
    */
-function checkMotion(that, res, backgroundAudioManager) {
+function checkMotion(that, res) {
   // console.log('时时体动数据 = ' + res.successData[0].motion)
   // 如果正在报警，跳出检测
-  if (warnState.warnNing == 1) return;
-  var warnRule = JSON.parse(getCookie('warnRule'));
+  if (warnStateData.warnNing == 1) return;
+  // let warnRule = JSON.parse(getCookie('warnRule'))
   var nowTime = Date.parse(new Date());
   var nowTimeHour = new Date().getHours() + ':' + new Date().getMinutes();
   var deviceStatus = res.successData[0].deviceStatus;
   // 如果不是在床状态，跳出检测
   if (deviceStatus != 4) {
     // console.log('如果不是在床状态，跳出检测')
-    warnState.warnBreathTime = null;
+    warnStateData.warnBreathTime = null;
     return;
   }
   // 系统设置为不监控 跳出检测
-  if (!warnRule.motion) {
+  if (!warnRuleData.motion) {
     // console.log('系统设置为不监控 跳出检测')
-    warnState.warnMotionTime = null;
+    warnStateData.warnMotionTime = null;
     return;
   }
   // 系统设置时间有误，跳出检测
-  if (warnRule.motionStart > warnRule.motionEnd) {
+  if (warnRuleData.motionStart > warnRuleData.motionEnd) {
     // console.log('系统设置时间有误，跳出检测')
-    warnState.warnMotionTime = null;
+    warnStateData.warnMotionTime = null;
     return;
   }
   // 如果没有体动报警记录点时间戳，跳出检测
-  if (!warnState.warnMotionTime) {
-    warnState.warnMotionTime = Date.parse(new Date());
+  if (!warnStateData.warnMotionTime) {
+    warnStateData.warnMotionTime = Date.parse(new Date());
     return;
   }
   // 不在报警时间段内，跳出检测
-  if (warnRule.motionStart > nowTimeHour || warnRule.motionEnd < nowTimeHour) {
+  if (warnRuleData.motionStart > nowTimeHour || warnRuleData.motionEnd < nowTimeHour) {
     // console.log('不在报警时间段内，跳出检测')
-    warnState.warnMotionTime = null;
+    warnStateData.warnMotionTime = null;
     return;
   }
   // 体动值回复正常数据，初始化数据并跳出检测
   if (res.successData[0].motion < 4) {
     // console.log('体动值回复正常数据，初始化数据并跳出检测')
-    warnState.warnMotionTime = null;
+    warnStateData.warnMotionTime = null;
     return;
   }
-  console.log(nowTime - warnState.warnMotionTime, '...体动监测..', warnRule.motionTimes * 60 * 1000);
+  console.log(nowTime - warnStateData.warnMotionTime, '...体动监测..', warnRuleData.motionTimes * 60 * 1000);
   // 记录时间点已超出系统设置体动时间上限，触发体动报警
-  if (nowTime - warnState.warnMotionTime > warnRule.motionTimes * 60 * 1000) {
+  if (nowTime - warnStateData.warnMotionTime > warnRuleData.motionTimes * 60 * 1000) {
     // console.log('记录时间点已超出系统设置体动时间上限，触发体动报警')
-    var t = new Date(warnState.warnMotionTime);
+    var t = new Date(warnStateData.warnMotionTime);
     that.warningText = '用户于' + (t.getHours() < 10 ? '0' + t.getHours() : t.getHours()) + ':' + (t.getMinutes() < 10 ?
-    '0' + t.getMinutes() : t.getMinutes()) + '开始体动频繁，并已超过' + warnRule.motionTimes + '分钟！';
+    '0' + t.getMinutes() : t.getMinutes()) + '开始体动频繁，并已超过' + warnRuleData.motionTimes + '分钟！';
+    warnStateData.warningText = '用户于' + (t.getHours() < 10 ? '0' + t.getHours() : t.getHours()) + ':' + (t.getMinutes() < 10 ?
+    '0' + t.getMinutes() : t.getMinutes()) + '开始体动频繁，并已超过' + warnRuleData.motionTimes + '分钟！';
     that.warning = 1;
-    warnState.warnNing = 1;
-    warnState.warnNo = 0;
-    audioStart(that, backgroundAudioManager);
-    warnState.warnMotionTime = null;
+    warnStateData.warnNing = 1;
+    warnStateData.warnNo = 0;
+    audioStart(that);
+    warnStateData.warnMotionTime = null;
   }
 }
 
@@ -533,8 +547,8 @@ function showToastBox(that, text) {
 module.exports = {
   baseHost: baseHost,
   imgUrl: imgUrl,
-  warnRule: warnRule,
-  warnState: warnState,
+  warnRuleData: warnRuleData, // 报警规则数据值
+  warnStateData: warnStateData, // 报警状态数据值
   setCookie: setCookie,
   getCookie: getCookie,
   myAjax: myAjax,
@@ -542,9 +556,10 @@ module.exports = {
   getWarnCookie: getWarnCookie,
   setWarnCookie: setWarnCookie,
   audioPause: audioPause,
-  changeWarn: changeWarn,
+  changeWarnToThis: changeWarnToThis,
   showToastBox: showToastBox,
-  checkWarn: checkWarn };
+  checkWarn: checkWarn,
+  backgroundAudioManager: backgroundAudioManager };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
@@ -3697,7 +3712,7 @@ function getData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -9794,7 +9809,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$mp[vm.mpType];
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -9815,14 +9830,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$mp[vm.mpType];
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$mp[vm.mpType];
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -9891,7 +9906,7 @@ var patch = function(oldVnode, vnode) {
         });
         var diffData = diff(data, mpData);
         if (Object.keys(diffData).length) {
-            if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+            if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
                 console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
                     ']差量更新',
                     JSON.stringify(diffData));
