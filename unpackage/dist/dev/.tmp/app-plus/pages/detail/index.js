@@ -174,6 +174,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var util = __webpack_require__(/*! ../../common/util.js */ "../../../../work/uni-app-weilin/common/util.js");
 
@@ -229,7 +261,9 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
       warnBreathTime: '',
       warnMotionTime: '',
 
-      firstTimes: 0 };
+      firstTimes: 0,
+      motionState: false,
+      motionTimer: null };
 
   },
   onLoad: function onLoad() {
@@ -255,7 +289,10 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
       _this.setSocketTask();
       _this.timer = setInterval(function () {
         _this.getActual();
-      }, 3000);
+      }, 5000);
+      _this.motionTimer = setInterval(function () {
+        _this.motionState = !_this.motionState;
+      }, 1000);
     }
   },
   onLaunch: function onLaunch() {},
@@ -285,6 +322,8 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
           _this.heartNum = res.successData[0].heart;
           _this.markTime = res.successData[0].markTime;
           _this.motionNum = res.successData[0].motion;
+          // console.log('体动值为' + _this.motionNum)
+          console.log('一次数据获取' + warnStateData.warnDeviceTime, " at pages\\detail\\index.vue:226");
         } else {
           // console.log('未知错误，请重新登录')
           setCookie('accessToken', '');
@@ -312,23 +351,27 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
     /**
         * 时时数据推送
         */
-    setSocketTask: function setSocketTask() {
+    setSocketTask: function setSocketTask(type) {
+      if (type == 'close') {
+        wx.closeSocket();
+        return;
+      }
       var accessToken = util.getCookie('accessToken');
       var _this = this;
       // 建立连接
-      // console.log('建立连接!')
-      ws.connectSocket({
+      console.log('建立连接!', " at pages\\detail\\index.vue:262");
+      wx.connectSocket({
         url: 'ws://stream.darma.cn:17004/ws',
         sluccess: function sluccess() {
-          // console.log('连接成功...')
+          console.log('连接成功...', " at pages\\detail\\index.vue:266");
         },
         fail: function fail() {
-          // console.log('连接失败...')
+          console.log('连接失败...', " at pages\\detail\\index.vue:269");
         } });
 
       // 连接成功
-      ws.onSocketOpen(function () {
-        // console.log('连接成功!')
+      wx.onSocketOpen(function () {
+        console.log('连接成功!', " at pages\\detail\\index.vue:274");
         var obj = {
           // 消息类型msgType前有 login（登录消息），deviceStatus（设备状态消息）healthData（心率呼吸数据消息），paramError（参数错误消息）
           msgType: 'login',
@@ -339,24 +382,21 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
             deviceNo: _this.deviceNos } };
 
 
-        ws.sendSocketMessage({
+        wx.sendSocketMessage({
           data: JSON.stringify(obj) });
 
       });
       // 接收数据
       wx.onSocketMessage(function (data) {
-        // console.log('接收数据回执，warnStateData.warnNing = ' + warnStateData.warnNing)
-        // heartBreathBcg、healthBreathData、deviceStatus
-        // if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
-        // console.log(data.data)
-        // }
-        // 当状态发生变化会初始化时，会推送此条数据
         // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
         var msgType = JSON.parse(data.data).msgType;
-        console.log('接收推送数据回执' + '***' + JSON.parse(data.data).msgType + '***' + Date.parse(new Date()), " at pages\\detail\\index.vue:256");
+        // console.log('接收推送数据回执' + '***' + JSON.parse(data.data).msgType + '***' + Date.parse(new Date()))
+        // if (msgType == 'healthBreathData') {
+        //     console.log('heart=' + JSON.parse(data.data).data.heart + '***breath=' + JSON.parse(data.data).data.breath + '***motion=' + JSON.parse(data.data).data.motion)
+        // }
         if (msgType == 'deviceStatus') {
           // 状态发生变化时推送此类信息
-          console.log(data.data, " at pages\\detail\\index.vue:259");
+          console.log(data.data, " at pages\\detail\\index.vue:299");
           var deviceStatus = JSON.parse(data.data).data.deviceStatus;
           if (deviceStatus == '3') {
             // 离床
@@ -367,15 +407,16 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
             _this.warnBreathTime = null;
             _this.warnMotionTime = null;
             if (warnRuleData.device) {
-              console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:270");
+              console.log('离床已记录，以此时间为基准开始计算报警数据', " at pages\\detail\\index.vue:310");
               warnStateData.warnDeviceTime = Date.parse(new Date());
+              console.log(warnStateData.warnDeviceTime, " at pages\\detail\\index.vue:312");
               _this.warnDeviceTime = warnStateData.warnDeviceTime;
             }
           } else if (deviceStatus == '4') {
             // 在床
             warnStateData.warnDeviceTime = null;
             _this.warnDeviceTime = null;
-            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:278");
+            console.log('解除离床报警计算数据', " at pages\\detail\\index.vue:319");
           } else if (deviceStatus == '5' || deviceStatus == '6') {
             warnStateData.warnDeviceTime = null;
             warnStateData.warnHeartTime = null;
@@ -390,10 +431,10 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
       });
       //连接失败
       wx.onSocketError(function () {
-        // console.log('websocket连接失败！')
+        console.log('websocket连接失败！', " at pages\\detail\\index.vue:334");
       });
-      wx.onSocketClose(function () {
-        console.log('socket连接已关闭', " at pages\\detail\\index.vue:296");
+      wx.onSocketClose(function (res) {
+        console.log('WebSocket 已关闭！', " at pages\\detail\\index.vue:337");
       });
     },
     /**
@@ -402,28 +443,40 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
     audioPause: function audioPause() {
       util.audioPause(this);
     },
-    openConfirmBox: function openConfirmBox() {
+    openConfirmBox1: function openConfirmBox1() {
       this.confirm = 1;
+    },
+    openConfirmBox2: function openConfirmBox2() {
+      this.confirm = 2;
+    },
+    openConfirmBox3: function openConfirmBox3() {
+      this.confirm = 3;
     },
     closeConfirmBox: function closeConfirmBox() {
       this.confirm = 0;
     },
-    loginOut: function loginOut() {
-      console.log('我要停止推送!!!88888888888', " at pages\\detail\\index.vue:312");
-      // setCookie('accessToken', '')
-      // setCookie('username', '')
-      // setCookie('deviceNos', '')
-      // setCookie('warnRule', '')
-      // this.confirm = 0
-      // clearInterval(this.timer)
-      // uni.reLaunch({
-      //     url: '../login/index'
-      // })
-      var ws = new WebSocket("ws://stream.darma.cn:17004/ws");
-      ws.onclose = function (e) {
-        console.log(e, " at pages\\detail\\index.vue:324");
-      };
-      wx.close();
+    loginOut1: function loginOut1() {
+      // 停止Socket推送
+      this.setSocketTask('close');
+      setCookie('accessToken', '');
+      setCookie('username', '');
+      setCookie('deviceNos', '');
+      setCookie('warnRule', '');
+      this.confirm = 0;
+      clearInterval(this.timer);
+      uni.redirectTo({
+        url: '../login/index' });
+
+    },
+    loginOut2: function loginOut2() {
+      // 停止Socket推送
+      this.setSocketTask('close');
+      setCookie('deviceNos', '');
+      this.confirm = 0;
+      clearInterval(this.timer);
+      uni.redirectTo({
+        url: '../code/index' });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 

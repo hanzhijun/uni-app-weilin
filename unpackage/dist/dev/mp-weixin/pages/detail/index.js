@@ -323,6 +323,7 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
           _this.markTime = res.successData[0].markTime;
           _this.motionNum = res.successData[0].motion;
           // console.log('体动值为' + _this.motionNum)
+          console.log('一次数据获取' + warnStateData.warnDeviceTime);
         } else {
           // console.log('未知错误，请重新登录')
           setCookie('accessToken', '');
@@ -408,6 +409,7 @@ var changeWarnToThis = util.changeWarnToThis;var _default =
             if (warnRuleData.device) {
               console.log('离床已记录，以此时间为基准开始计算报警数据');
               warnStateData.warnDeviceTime = Date.parse(new Date());
+              console.log(warnStateData.warnDeviceTime);
               _this.warnDeviceTime = warnStateData.warnDeviceTime;
             }
           } else if (deviceStatus == '4') {
