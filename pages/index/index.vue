@@ -10,7 +10,7 @@
             <li>{{ show }}</li>
         </ul>
 
-        <view class="text-b">技术支持：成都市微麟科技有限责任公司</view>
+        <view class="text-b">技术支持：北京益泰牡丹电子工程有限责任公司智慧医疗事业部</view>
     </view>
 </template>
 
